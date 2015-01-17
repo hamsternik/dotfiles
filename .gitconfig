@@ -8,11 +8,9 @@
 	ignorecase	= false	
 	pager		= less -+$LESS -FRX
 	whitespace 	= fix,trailing-space,cr-at-eol	
-	attributesfile	= /home/hamsternik/.gitattributes
+#	attributesfile	= /home/hamsternik/.gitattributes 
 
-[credential]
-	helper 		= cache --timeout=<10800>
-
+# credential here
 [help]
 	autocorrect 	= 1
 
@@ -69,3 +67,6 @@
 	# Filter to make mild transform like: spaces<->tabs
 	smudge		= unexpand -t4 
 	clean		= expand -t4
+
+[credential]
+	helper 		= cache --timeout=14400 
