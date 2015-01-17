@@ -8,6 +8,7 @@
 	ignorecase	= false	
 	pager		= less -+$LESS -FRX
 	whitespace 	= fix,trailing-space,cr-at-eol	
+	attributesfile	= /home/hamsternik/.gitattributes
 
 [credential]
 	helper 		= cache --timeout=<10800>
@@ -53,4 +54,18 @@
 	name		= !git remote -v | head -n1 | awk '{print $2}'
 	user		= !git config --global user.name
 	email		= !git config --global user.email
-	
+
+[diff "word"]
+	# Define new filter 'word' for all *.doc files which will be add into repos
+	textconv	= catdoc
+
+[diff "odt"]
+	# Define filter for all .odt files
+	# Filter use special script: author - Philipp Kempgen
+	binary 		= true
+	textconv	= /usr/local/bin/odt-to-txt
+
+[filter "treatspaces"]
+	# Filter to make mild transform like: spaces<->tabs
+	smudge		= unexpand -t4 
+	clean		= expand -t4
