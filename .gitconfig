@@ -1,14 +1,56 @@
 [user]
-	name = hamsternik
-	email = hamsternik9@gmail.com
+	name 		= hamsternik
+	email 		= hamsternik9@gmail.com
+
 [core]
-	autocrlf = true
-	editor = vim 
+	autocrlf 	= input 	
+	safecrlf	= true
+	ignorecase	= false	
+	pager		= less -+$LESS -FRX
+	whitespace 	= fix,trailing-space,cr-at-eol	
+
+[credential]
+	helper 		= cache --timeout=<10800>
+
+[help]
+	autocorrect 	= 1
+
 [color]
-	ui = true
+	diff		= true
+	grep 		= true
+	status		= true
+	ui 		= true
+
+	[color "branch"]
+		current 	= yellow reverse
+		local 		= yellow
+		remote		= blue
+	[color "diff"]
+		meta		= normal
+		frag		= magenta bold 
+		old 		= red 
+		new 		= blue bold
+		whitespace 	= red reverse
+	[color "status"]
+		added		= yellow
+		changed		= red 
+		untracked	= cyan 
+
 [alias]
-	co = checkout
-	cm = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	# Base aliases && commands
+	cm 		= commit
+	co 		= checkout
+	br 		= branch
+	st 		= status # --short 
+	df		= diff
+	lg		= log --abbrev-commit --left-right --name-only
+	hist 		= log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+
+	# Show git commands
+	commands	= help -a
+
+	# Show current repo's name
+	name		= !git remote -v | head -n1 | awk '{print $2}'
+	user		= !git config --global user.name
+	email		= !git config --global user.email
+	
