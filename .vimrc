@@ -1,59 +1,68 @@
-"add syntax to all code files"
+""" Basic settings {{{
+set nocompatible                                    "vim automatically enable if see ~/.vimrc
+
+set number                                          "enable line numbers 
+
+set cursorline                                      "highlight current line
+
+set showcmd                                         "show a command in status line
+
+set tabstop=4                                       "number of spaces that a <Tab> in the file counts for
+set shiftwidth=4                                    "number of spaces to use for each step of (auto)indent
+set smarttab
+set et                                              "enable autocorrect by default
+
+set wrap                                            "wrap long lines
+set autoindent                                      "enable auto-indent for new lines
+set smartindent                                     "enable auto-indent in C style
+
+set showmatch
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+set textwidth=120                                   "max width of text that is being inserted,               
+                                                    "longer line will be broken
+                                                    
+set ruler                                           "show the line and column number of the cursor position,
+                                                    "separated by a coma
+
+" The order of using encodings and files formats
+set ffs=unix,dos,mac
+set fencs=utf-8,cp1251,koi8-r,ucs-2,cp-866
+
+set title                                           "enable setting title                           
+set titlestring=VIM:\ %-25.55F\ %a%r%m titlelen=70  "configure title to look like: Vim /path/to/file
+
+"set mouse=a                                        "enable mouse using
+
+set wildmenu                                        "enables a menu at the bottom of the vim/gvim window
+set wildmode=longest:list,full
+
+filetype plugin indent on
 syntax on
+"""" }}}
 
-"turn on 256 colors in vim"
-set t_Co=256
 
-"add new color sheme"
-color jellybeans
+" Navigation {{{
+nnoremap H ^                                        "start of line
+nnoremap L $                                        "end of line
 
-"transfer a very long lines"
-set wrap
+nnoremap <C-c>n :cnext<CR>
+nnoremap <C-c>p :cprevious<CR>
 
-"turn on autoindents in code files"
-set ai
+nnoremap <Enter> o<Esc>
+nnoremap <silent> <C-S> :<C-u>Update<CR>
 
-"turn on autoindents in C style"
-set cin
+inoremap <c-s> <c-o>:Update<CR>
+" }}} 
 
-"turn on line numbers"
-set number
 
-"set forward and backgorund colors"
-"highlight Normal ctermfg=red ctermbg=darkgrey"
-
-"?????"
-"filetype indent plugin on"
-
-set modeline
-
-"it doesnt work!!!"
-""""""""""""""""""""""""""
-"set background = dark
-"hi clear"
-"""""""""""""""""""""""""
-
-map <Esc><Esc> :w<CR>
-nmap <c-s> :w<CR>
-vmap <c-s> <Esc><c-s>gv
-imap <c-s> <Esc><c-s>
-
-"enter make a new line in normal mode"
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
-
-"Add pathogen for installing plugins into any folders"
-"set nocp"
-
-"execute pathogen#infect()"
-"execute pathogen#helptags()"
-"execute pathogen#runtime_append_all_bundles()"
-
-"filetype plugin indent on"
-
-"max opened insets in one window"
-set tabpagemax=20
-
-"turn on always show of tabs line"
-set showtabline=2
-
+" ColorScheme {{{
+if &t_Co < 256
+    set t_Co=256
+    set background=dark
+    color atom-dark-256
+endif
+" }}}   

@@ -8,6 +8,7 @@
 	ignorecase	= false	
 	pager		= less -+$LESS -FRX
 	whitespace 	= fix,trailing-space,cr-at-eol	
+	editor 		= vim
 #	attributesfile	= /home/hamsternik/.gitattributes 
 
 # credential here
