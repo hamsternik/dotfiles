@@ -1,0 +1,4 @@
+#!/bin/bash
+aptitude update
+aptitude safe-upgrade -y
+aptitude autoclean
