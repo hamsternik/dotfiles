@@ -1,49 +1,49 @@
 [user]
-	name								= hamsternik
-	email								= hamsternik9@gmail.com
+	name					= hamsternik
+	email					= hamsternik9@gmail.com
 
 [core]
-	autocrlf 	                        = input 	
-	safecrlf	                        = true
-	ignorecase	                        = false	
-	pager		                        = less -+$LESS -FRX
-	whitespace 	                        = fix,trailing-space,cr-at-eol	
-	editor 		                        = vim
-#	attributesfile	                    = /home/hamsternik/.gitattributes 
+	autocrlf				= input 	
+	safecrlf				= true
+	ignorecase				= false	
+	pager					= less -+$LESS -FRX
+	whitespace				= fix,trailing-space,cr-at-eol	
+	editor					= vim
+#	attributesfile				= /home/hamsternik/.gitattributes 
 
 # credential here
 [help]
-	autocorrect 	                    = 1
+	autocorrect				= 1
 
 [color]
-	diff		                        = true
-	grep 		                        = true
-	status		                        = true
-	ui 		                            = true
+	diff					= true
+	grep					= true
+	status					= true
+	ui					= true
 
 	[color "branch"]
-		current 	                    = yellow reverse
-		local 		                    = yellow
-		remote		                    = blue
+		current				= yellow reverse
+		local				= yellow
+		remote				= blue
 	[color "diff"]
-		meta		                    = normal
-		frag		                    = magenta bold 
-		old 		                    = red 
-		new 		                    = blue bold
-		whitespace 	                    = red reverse
+		meta				= normal
+		frag				= magenta bold 
+		old				= red 
+		new				= blue bold
+		whitespace			= red reverse
 	[color "status"]
-		added		                    = yellow
-		changed		                    = red 
-		untracked	                    = cyan 
+		added				= yellow
+		changed		                = red 
+		untracked	                = cyan 
 
 [alias]
 	# Base aliases && commands
-	cm 		                            = commit -m
-	co 		                            = checkout
-	br 		                            = branch
-	st 		                            = status # --short 
-	df		                            = diff
-	lg		                            = log --abbrev-commit --left-right --name-only
+	cm					= commit -m
+	co 		                        = checkout
+	br 		                        = branch
+	st 		                        = status # --short 
+	df		                        = diff
+	lg		                        = log --abbrev-commit --left-right --name-only
 	hist 		                        = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
 	# Show git commands
