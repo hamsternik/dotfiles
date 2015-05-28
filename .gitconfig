@@ -3,12 +3,12 @@
 	email 		= hamsternik9@gmail.com
 
 [core]
-	autocrlf 	= input 	
-	safecrlf	= true
-	ignorecase	= false	
-	pager		= less -+$LESS -FRX
-	whitespace 	= fix,trailing-space,cr-at-eol	
-	editor 		= vim
+	autocrlf 	    = input 	
+	safecrlf	    = true
+	ignorecase	    = false	
+	pager		    = less -+$LESS -FRX
+	whitespace 	    = fix,trailing-space,cr-at-eol	
+	editor 		    = vim
 #	attributesfile	= /home/hamsternik/.gitattributes 
 
 # credential here
@@ -16,10 +16,10 @@
 	autocorrect 	= 1
 
 [color]
-	diff		= true
-	grep 		= true
-	status		= true
-	ui 		= true
+	diff		    = true
+	grep 		    = true
+	status		    = true
+	ui 		        = true
 
 	[color "branch"]
 		current 	= yellow reverse
@@ -38,36 +38,36 @@
 
 [alias]
 	# Base aliases && commands
-	cm 		= commit
-	co 		= checkout
-	br 		= branch
-	st 		= status # --short 
-	df		= diff
-	lg		= log --abbrev-commit --left-right --name-only
-	hist 		= log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	cm 		        = commit
+	co 		        = checkout
+	br 		        = branch
+	st 		        = status # --short 
+	df		        = diff
+	lg		        = log --abbrev-commit --left-right --name-only
+	hist 		    = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
 	# Show git commands
-	commands	= help -a
+	commands	    = help -a
 
 	# Show current repo's name
-	name		= !git remote -v | head -n1 | awk '{print $2}'
-	user		= !git config --global user.name
-	email		= !git config --global user.email
+	name		    = !git remote -v | head -n1 | awk '{print $2}'
+	user		    = !git config --global user.name
+	email		    = !git config --global user.email
 
 [diff "word"]
 	# Define new filter 'word' for all *.doc files which will be add into repos
-	textconv	= catdoc
+	textconv	    = catdoc
 
 [diff "odt"]
 	# Define filter for all .odt files
 	# Filter use special script: author - Philipp Kempgen
-	binary 		= true
-	textconv	= /usr/local/bin/odt-to-txt
+	binary 		    = true
+	textconv	    = /usr/local/bin/odt-to-txt
 
 [filter "treatspaces"]
 	# Filter to make mild transform like: spaces<->tabs
-	smudge		= unexpand -t4 
-	clean		= expand -t4
+	smudge		    = unexpand -t4 
+	clean		    = expand -t4
 
 [credential]
-	helper 		= cache --timeout=14400 
+	helper 		    = cache --timeout=14400 
