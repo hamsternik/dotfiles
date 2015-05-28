@@ -1,6 +1,6 @@
 [user]
-	name                                = hamsternik
-	email 		                        = hamsternik9@gmail.com
+	name								= hamsternik
+	email								= hamsternik9@gmail.com
 
 [core]
 	autocrlf 	                        = input 	
