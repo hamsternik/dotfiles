@@ -1,0 +1,27 @@
+# Binary files
+	
+# 'binary' is equal to '-crlf -diff'
+	*.a		binary
+	*.o		binary
+	*.a.out		binary
+	*.exe		binary
+	*.tar		binary
+	*.iso		binary
+	*.jar		binary
+	*.class		binary
+	*.gzip		binary
+
+# Filters
+
+# filter to get normal 'diff' processing MS Word files
+	*.doc		diff=word 	
+
+# Filter get normal form (changing spaces<->tabs) in specified files
+	*.c		    filter=treatspaces
+	*.cpp		filter=treatspaces
+	*.java		filter=treatspaces
+	*.py		filter=treatspaces
+	*.html		filter=treatspaces
+	*.css		filter=treatspaces
+	*.js		filter=treatspaces
+
