@@ -22,7 +22,7 @@ set incsearch
 set ignorecase
 set smartcase
 
-set textwidth=120                                   "max width of text that is being inserted,               
+set textwidth=130                                   "max width of text that is being inserted,               
                                                     "longer line will be broken
                                                     
 set ruler                                           "show the line and column number of the cursor position,
@@ -46,8 +46,8 @@ syntax on
 
 
 " Navigation {{{
-nnoremap H ^                                        "start of line
-nnoremap L $                                        "end of line
+"nnoremap H ^                                        "start of line
+"nnoremap L $                                        "end of line
 
 nnoremap <C-c>n :cnext<CR>
 nnoremap <C-c>p :cprevious<CR>
@@ -62,6 +62,9 @@ inoremap <c-s> <c-o>:Update<CR>
 " ColorScheme {{{
 if &t_Co < 256
     set t_Co=256
+    set background=dark
+    color atom-dark-256
+else
     set background=dark
     color atom-dark-256
 endif
