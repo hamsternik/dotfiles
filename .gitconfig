@@ -6,7 +6,7 @@
 	email					= hamsternik9@gmail.com
 
 [core]
-	autocrlf				= input 	
+	autocrlf				= false 	
 	safecrlf				= true
 	ignorecase				= false	
 	pager					= less -+$LESS -FRX
