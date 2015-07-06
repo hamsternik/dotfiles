@@ -48,10 +48,14 @@ if [ "$color_prompt" = yes ]; then
     if [ -d ".git" ]; then
         PS1='${debian_chroot:+($debian_chroot)}\[\033[1;32m\]\u:\[\033[0;35m\]\w \[\033[1;36m\]$(__git_ps1 "(%s)") \[\033[00m\]\$ '
     else
-        PS1='${debian_chroot:+($debian_chroot)}\[\033[0;36m\]\h\[\033[1;31m\]@\[\033[1;32m\]\u:\[\033[0;35m\]\w\[\033[00m\]\$ '
+        if [[ ${USER} == "root" ]]; then
+            PS1='${debian_chroot:+($debian_chroot)}\[\033[0;36m\]\h\[\033[1;31m\]@\[\033[1;31m\]\u:\[\033[0;35m\]\w\[\033[00m\]\$ '
+        else
+             PS1='${debian_chroot:+($debian_chroot)}\[\033[0;36m\]\h\[\033[1;31m\]@\[\033[1;32m\]\u:\[\033[0;35m\]\w\[\033[00m\]\$ '
+        fi 
     fi
 
-    else
+else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
