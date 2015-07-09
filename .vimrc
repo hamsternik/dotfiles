@@ -56,6 +56,14 @@ nnoremap <Enter> o<Esc>
 nnoremap <silent> <C-S> :<C-u>Update<CR>
 
 inoremap <c-s> <c-o>:Update<CR>
+
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+inoremap <S-Tab> <C-D>
+vnoremap > >gv
+vnoremap < <gv
+vnoremap <Tab> >
+vnoremap <S-Tab> <
 " }}} 
 
 
