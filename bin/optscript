@@ -1,0 +1,10 @@
+#!/bin/bash
+
+OPT_PATH="/opt"
+
+echo "Enter user's name: "
+read user
+
+chgrp -R ${user} ${OPT_PATH}
+chown -R ${user} ${OPT_PATH}
+chmod -R 755 ${OPT_PATH}
