@@ -85,6 +85,16 @@ alias cl='clear'
 # Extended 'gdb' aliases
 alias gdb='gdb -q'
 
+alias dmesg='dmesg -T'
+
+# Quick-Edit
+alias bashrc='vim ~/.bashrc'
+alias vimrc='vim ~/.vimrc'
+
+# Reload the shell
+alias reload='exec $SHELL -l'
+
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
