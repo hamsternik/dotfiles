@@ -1,20 +1,20 @@
 """ Basic settings {{{
-set nocompatible                                    "vim automatically enable if see ~/.vimrc
+set nocompatible
 
-set number                                          "enable line numbers 
+set number
 
-set cursorline                                      "highlight current line
+set cursorline
 
-set showcmd                                         "show a command in status line
+set showcmd
 
-set tabstop=4                                       "number of spaces that a <Tab> in the file counts for
-set shiftwidth=4                                    "number of spaces to use for each step of (auto)indent
+set tabstop=4
+set shiftwidth=4
 set smarttab
-set et                                              "enable autocorrect by default
+set et
 
-set wrap                                            "wrap long lines
-set autoindent                                      "enable auto-indent for new lines
-set smartindent                                     "enable auto-indent in C style
+set wrap
+set autoindent
+set smartindent
 
 set showmatch
 set hlsearch
@@ -22,11 +22,9 @@ set incsearch
 set ignorecase
 set smartcase
 
-set textwidth=130                                   "max width of text that is being inserted,               
-                                                    "longer line will be broken
+set textwidth=130
                                                     
-set ruler                                           "show the line and column number of the cursor position,
-                                                    "separated by a coma
+set ruler
 
 " The order of using encodings and files formats
 set ffs=unix,dos,mac
@@ -35,9 +33,9 @@ set fencs=utf-8,cp1251,koi8-r,ucs-2,cp-866
 set title                                           "enable setting title                           
 set titlestring=VIM:\ %-25.55F\ %a%r%m titlelen=70  "configure title to look like: Vim /path/to/file
 
-"set mouse=a                                        "enable mouse using
+"set mouse=a
 
-set wildmenu                                        "enables a menu at the bottom of the vim/gvim window
+set wildmenu
 set wildmode=longest:list,full
 
 filetype plugin indent on
