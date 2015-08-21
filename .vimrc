@@ -53,6 +53,11 @@
 
 
 """ Navigation & Mapping {{{
+    let mapleader = ","
+
+    nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+    nnoremap <silent> <leader>sv :e $MYVIMRC<CR>
+
     nnoremap <C-c>n :cnext<CR>
     nnoremap <C-c>p :cprevious<CR>
 
