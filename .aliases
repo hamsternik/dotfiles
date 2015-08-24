@@ -1,3 +1,5 @@
+### General system's aliases {
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -9,16 +11,27 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# Extended 'ls' aliases
+# `ls` and `cd` aliases
 alias ll='ls -AFl'
 alias la='ls -A'
 alias l='ls -CF'
-
-# Extended 'cd' aliases
+alias ...='cd ../..'
 alias ..='cd ..'
 
 # Extended (optional) aliases
 alias cl='clear'
+
+# }
+
+### Network {
+
+alias ping1='ping -c 4 google.com'
+alias mac='ifconfig | grep HWaddr'
+
+# }
+
+# Reload the shell
+alias reload='exec $SHELL -l'
 
 # Extended 'gdb' aliases
 alias gdb='gdb -q'
@@ -29,7 +42,6 @@ alias dmesg='dmesg -T'
 alias bashrc='vim ~/.bashrc'
 alias vimrc='vim ~/.vimrc'
 
-# Reload the shell
-alias reload='exec $SHELL -l'
-
+# Quick access to dev. environment 
 alias Code='cd ~/Development/Code'
+
