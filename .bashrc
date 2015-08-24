@@ -60,40 +60,10 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+# ALIASES HERE
+if [ -f "$HOME/.aliases" ]; then
+    . "$HOME/.aliases" 
 fi
-
-# Extended 'ls' aliases
-alias ll='ls -AFl'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Extended 'cd' aliases
-alias ..='cd ..'
-
-# Extended (optional) aliases
-alias cl='clear'
-
-# Extended 'gdb' aliases
-alias gdb='gdb -q'
-
-alias dmesg='dmesg -T'
-
-# Quick-Edit
-alias bashrc='vim ~/.bashrc'
-alias vimrc='vim ~/.vimrc'
-
-# Reload the shell
-alias reload='exec $SHELL -l'
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -117,12 +87,13 @@ vim()
     stty "$STTYOPTS"
 }
 
+# Set JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre
+
 # _____Hadoop configurations______ #
 
 # Set Hadoop-related environment variables
 export HADOOP_HOME=/opt/hadoop-1.2.1
-# Set JAVA_HOME
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre
 
 # Add Hadoop bin/ directory to PATH
 export PATH=/$PATH:$HADOOP_HOME/bin
