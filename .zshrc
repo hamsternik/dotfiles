@@ -1,3 +1,19 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# @info     .zshrc configuration file
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# @author   Nikita Khomitsevich <hamsternik9@gmail.com>
+# @licence  GNU General Public License, version 3.0 (GPL-3.0)
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# included aliases in `zsh` environment 
+source $HOME/.aliases
+
+
 autoload -U compinit promptinit
 autoload -U colors
 compinit
@@ -15,7 +31,6 @@ setopt prompt_subst
 PROMPT='%B%F{green}%n %B%F{blue}%1~%b %B%F{blue}%# %b%f%k'
 RPROMPT='[$(git_promt)%~]'
 
-source $HOME/.aliases
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -v
