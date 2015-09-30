@@ -87,26 +87,6 @@ vim()
     stty "$STTYOPTS"
 }
 
-# Set JAVA_HOME
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/jre
-
-# _____Hadoop configurations______ #
-
-# Set Hadoop-related environment variables
-export HADOOP_HOME=/opt/hadoop-1.2.1
-
-# Add Hadoop bin/ directory to PATH
-export PATH=/$PATH:$HADOOP_HOME/bin
-
-# Some convenient aliases for working with Hadoop comands
-unalias fs &> /dev/null
-alias fs="hadoop fs"
-unalias hls &> /dev/null
-alias hls="fs -ls"
-
-# _____Mahout Configuration_____ #
-
-#Set Mahout-related environment varibles 
-export MAHOUT_HOME=/opt/mahout-distribution-0.10.0
-# Add Mahout bin/ directory to PATH
-export PATH=/$PATH:$MAHOUT_HOME/bin
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export CATALINA=/opt/apache-tomcat-8.0.15
+export PATH=$JAVA_HOME/bin:${PATH}
