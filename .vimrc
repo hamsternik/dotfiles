@@ -1,3 +1,6 @@
+set exrc
+set secure
+
 """ Basic settings {{{
     set nocompatible
 
@@ -24,7 +27,7 @@
         set smartcase
     "}
 
-    set cursorline
+    set cursorbind
 
     set showcmd
     set ruler
@@ -81,10 +84,20 @@
 """ ColorScheme {{{
     if &t_Co < 256
         set t_Co=256
-        set background=dark
-        color atom-dark-256
+        
+        let g:molokai_original = 1
+        let g:rehash256 = 1
+
+        set cursorline 
+
+        colorscheme molokai
     else
-        set background=dark
-        color atom-dark-256
+        
+        let g:molokai_original = 1
+        let g:rehash256 = 1
+
+        set cursorline 
+
+        colorscheme molokai
     endif
 """ }}}   
