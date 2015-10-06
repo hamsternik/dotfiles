@@ -1,0 +1,19 @@
+! load configured shell
+x-terminal-emulator*loginShell: true
+
+! display kirilica symbols
+x-terminal-emulator*utf8Title: true
+
+! setup good font and const size
+x-terminal-emulator*renderFont: true;
+x-terminal-emulator*faceName: Terminus
+x-terminal-emulator*faceSize: 14
+
+! setup colors
+x-terminal-emulator*foreground: lightgray
+!x-terminal-emulator*CursorColor: green
+x-terminal-emulator*background: black
+
+! 256 colors support
+export TERM=xterm-256color
+
