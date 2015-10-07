@@ -7,7 +7,9 @@ xterm*termName: screen-256color
 xterm*geometry: 240x85
 xterm*saveLines: 65535
 
+xterm*cursorBlink: false
 xterm*scrollBar: false
+xterm*secondaryScroll: true
 xterm*jumpScroll: false
 xterm*multiSroll: true
 xterm*fastScroll: true
@@ -19,6 +21,15 @@ xterm*locale: true
 ! fix the 'Alt' key
 xterm*metaSendsEscape: true
 
+xterm*VT100.translations: #override <BtnUp>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+
+xterm*faceName: DejaVu Sans Monoa:style=Book:antialias=false
+xterm*faceNameDoublesize: WenQuanYi Bitmap Song
+xterm*faceSize: 10
+! xterm*font: 7x13
+
+xterm*borderLess: true
+xterm*borderWidth: false
 
 ! Molokai colorscheme
 *xterm*background: #101010
