@@ -6,6 +6,9 @@ set secure
 
     set number
 
+    set exrc
+    set secure
+
     " Tabulation 
     set tabstop=4
     set softtabstop=4
@@ -26,8 +29,6 @@ set secure
         set ignorecase
         set smartcase
     "}
-
-    set cursorbind
 
     set showcmd
     set ruler
