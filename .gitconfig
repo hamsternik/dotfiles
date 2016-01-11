@@ -41,7 +41,8 @@
 
 [alias]
 	# Base aliases && commands
-	cm					= commit -m
+	c					= commit -m
+	p								= push
 	co 		                        = checkout
 	br 		                        = branch
 	st 		                        = status # --short 
