@@ -78,6 +78,11 @@ set secure
     vnoremap < <gv
     vnoremap <Tab> >
     vnoremap <S-Tab> <
+
+    nnoremap gr :grep <cword> *<CR>
+    nnoremap Gr :grep <cword> %:p:h/*<CR>
+    nnoremap gR :grep '\b<cword>\b' *<CR>
+    nnoremap GR :grep '\b<cword>\b' %:p:h/*<CR>
 """ }}} 
 
 
@@ -102,29 +107,6 @@ set secure
     endif
 """ }}}   
 
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py
-  endif
-endfunction
-
 """ vim-plug {{{
-call plug#begin('~/.vim/bundle')
-
-    Plug 'junegunn/vim-github-dashboard'
-
-    " Plug 'Valloric/YouCompleteMe', { 'for' : 'cpp' }    
-    " autocmd! User YouCompleteMe call youcompleteme#Enable()
-
-    " let g:ycm_min_num_of_chars_for_completion = 2
-
-
-" add plugins to &runtimepath
-call plug#end()
-
 """ }}}
 
