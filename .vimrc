@@ -1,3 +1,26 @@
+" Put this at the top of your .vimrc to use Vundle. (c)
+""" Vundle {{{
+    set nocompatible
+    filetype off
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+
+        " let Vundle manage itself
+        Plugin 'VundleVim/Vundle.vim'
+    
+        "other plugins
+        Plugin 'Valloric/YouCompleteMe'
+        Plugin 'scrooloose/nerdtree'
+        Plugin 'bling/vim-airline'
+        Plugin 'klen/python-mode'
+
+
+    call vundle#end()
+
+    filetype plugin on
+    filetype indent plugin on
+""" }}}
+
 """ Basic settings {{{
     set nocompatible
 
@@ -100,7 +123,4 @@
         colorscheme molokai
     endif
 """ }}}   
-
-""" vim-plug {{{
-""" }}}
 
