@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CLion Community Edition
+Icon=/opt/clion-1.2.4/bin/clion.svg
+Exec="/opt/clion-1.2.4/bin/clion.sh" %f
+Comment=Develop with pleasure!
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-clion-ce

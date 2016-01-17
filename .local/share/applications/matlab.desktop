@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Matlab 2013
+Icon=/opt/Matlab2013/bin/matlab-logo.svg
+Exec="/usr/bin/matlab -desktop"
+Comment=Matlab educational tool
+Categories=Education;Science;Math
+Terminal=false
