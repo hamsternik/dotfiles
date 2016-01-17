@@ -34,9 +34,6 @@ set secure
     set ruler
     set rulerformat=%-13.(%l,%c%V%)\ %P
 
-    set title
-    set titlestring=VIM:\ %-25.55F\ %a%r%m titlelen=70
-
     set wildmenu
     set wildmode=longest:list,full
 
