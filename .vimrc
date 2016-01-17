@@ -1,6 +1,3 @@
-set exrc
-set secure
-
 """ Basic settings {{{
     set nocompatible
 
