@@ -1,5 +1,6 @@
 " Put this at the top of your .vimrc to use Vundle. (c)
 """ Vundle {{{
+
     set nocompatible
     filetype off
     set rtp+=~/.vim/bundle/Vundle.vim
@@ -21,7 +22,16 @@
     filetype indent plugin on
 """ }}}
 
+
+""" Plugin setting {{{
+
+    " vim-airline
+    let g:airline#extensions#tabline#enabled = 1
+""" }}}
+
+
 """ Basic settings {{{
+
     set nocompatible
 
     set number
@@ -68,11 +78,12 @@
     endif
 
     syntax on
+
 """ }}}
 
 
-
 """ Navigation & Mapping {{{
+
     let mapleader = ","
 
     nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -83,8 +94,6 @@
 
     nnoremap <Enter> o<Esc>
     nnoremap <silent> <C-S> :<C-u>Update<CR>
-
-    nnoremap <F2> :set hlsearch!<CR>
 
     inoremap <c-s> <c-o>:Update<CR>
     inoremap <S-Tab> <C-D>
@@ -100,10 +109,17 @@
     nnoremap Gr :grep <cword> %:p:h/*<CR>
     nnoremap gR :grep '\b<cword>\b' *<CR>
     nnoremap GR :grep '\b<cword>\b' %:p:h/*<CR>
+
+    " select ALL
+    map <C-A> ggVG 
+
+    " cancel searching highlight
+    nnoremap ; :nohlsearch<CR>
 """ }}} 
 
 
 """ ColorScheme {{{
+
     if &t_Co < 256
         set t_Co=256
         
