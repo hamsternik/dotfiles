@@ -26,6 +26,8 @@
 """ Plugin setting {{{
 
     " vim-airline
+    set noshowmode
+    set laststatus=2
     let g:airline#extensions#tabline#enabled = 1
 """ }}}
 
@@ -75,6 +77,11 @@
 
     if has('mouse')
         set mouse=a
+    endif
+
+    " if need
+    if has("mac") || has("macunix")
+        set ambiwidth=double
     endif
 
     syntax on
