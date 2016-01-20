@@ -1,4 +1,7 @@
-" Put this at the top of your .vimrc to use Vundle. (c)
+" Use space as leader key
+nnoremap <space> <nop>
+let mapleader = "\<space>"
+
 """ Vundle {{{
 
     set nocompatible
@@ -92,11 +95,9 @@
 
 """ Navigation & Mapping {{{
 
-    let mapleader = ","
-
-    nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-    nnoremap <silent> <leader>sv :e $MYVIMRC<CR>
-
+	nnoremap <leader>s :split<cr>
+	nnoremap <leader>v :vsplit<cr>
+	
     nnoremap <C-c>n :cnext<CR>
     nnoremap <C-c>p :cprevious<CR>
 
