@@ -17,7 +17,20 @@ let mapleader = "\<space>"
         Plugin 'scrooloose/nerdtree'
         Plugin 'bling/vim-airline'
         Plugin 'klen/python-mode'
+
         Plugin 'lervag/vimtex'
+		let g:vimtex_quickfix_open_on_warning = 0
+		let g:vimtex_index_split_pos = 'below'
+		let g:vimtex_fold_enabled = 1
+		let g:vimtex_view_method = 'okular'
+		let g:vimtex_complete_img_use_tail = 1
+		let g:vimtex_imaps_leader = ','
+
+		let g:tex_stylish = 1
+		let g:tex_conceal = ''
+		let g:tex_flavor = 'latex'
+		let g:tex_isk='48-57,a-z,A-Z,192-255,:'
+
 
 		Plugin 'luochen1990/rainbow'
 		let g:rainbow_active = 1
