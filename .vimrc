@@ -14,6 +14,7 @@
         Plugin 'scrooloose/nerdtree'
         Plugin 'bling/vim-airline'
         Plugin 'klen/python-mode'
+        Plugin 'lervag/vimtex'
 
 
     call vundle#end()
