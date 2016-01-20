@@ -41,6 +41,7 @@
 
 [alias]
 	# Base aliases && commands
+	a					= add
 	c					= commit -m
 	p								= push
 	co 		                        = checkout
