@@ -18,6 +18,14 @@ let mapleader = "\<space>"
         Plugin 'bling/vim-airline'
         Plugin 'klen/python-mode'
 
+        Plugin 'godlygeek/tabular'
+        Plugin 'plasticboy/vim-markdown'
+        let g:vim_markdown_folding_disable = 1
+        " let g:vim_markdown_folding_style_pythonic = 1
+        " let g:vim_markdown_folding_level = 3
+        let g:vim_markdown_frontmatter = 1 "YAML Front Matter
+        set nofoldenable "Enable/Disable Folding 
+
         Plugin 'lervag/vimtex'
 		let g:vimtex_quickfix_open_on_warning = 0
 		let g:vimtex_index_split_pos = 'below'
