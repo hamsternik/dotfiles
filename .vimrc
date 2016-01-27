@@ -12,12 +12,11 @@ let mapleader = "\<space>"
         " let Vundle manage itself
         Plugin 'VundleVim/Vundle.vim'
     
-        "other plugins
         Plugin 'Valloric/YouCompleteMe'
         Plugin 'scrooloose/nerdtree'
-        Plugin 'bling/vim-airline'
         Plugin 'klen/python-mode'
 
+        "" Markdown {{
         Plugin 'godlygeek/tabular'
         Plugin 'plasticboy/vim-markdown'
         let g:vim_markdown_folding_disable = 1
@@ -25,21 +24,23 @@ let mapleader = "\<space>"
         " let g:vim_markdown_folding_level = 3
         let g:vim_markdown_frontmatter = 1 "YAML Front Matter
         set nofoldenable "Enable/Disable Folding 
+        "" }}
 
+        "" LaTeX {{
         Plugin 'lervag/vimtex'
-		let g:vimtex_quickfix_open_on_warning = 0
-		let g:vimtex_index_split_pos = 'below'
-		let g:vimtex_fold_enabled = 1
-		let g:vimtex_view_method = 'okular'
-		let g:vimtex_complete_img_use_tail = 1
-		let g:vimtex_imaps_leader = ','
+        let g:vimtex_latexmk_enable=1
+		" let g:vimtex_imaps_leader = ','
 
-		let g:tex_stylish = 1
-		let g:tex_conceal = ''
 		let g:tex_flavor = 'latex'
-		let g:tex_isk='48-57,a-z,A-Z,192-255,:'
+        let g:vimtex_latexmk_options='-pdfdvi'
+		" let g:vimtex_view_method = "okular"
+        " let g:vimtex_view_general_viewer="okular --unique"
+        let g:vimtex_latexmk_continuous = 1
+        let g:vimtex_latexmk_background = 1
+        let g:vimtex_latexmk_callback = 0
+        "" }}
 
-
+        "" Rainbow {{
 		Plugin 'luochen1990/rainbow'
 		let g:rainbow_active = 1
 		let g:rainbow_conf = {
@@ -57,20 +58,19 @@ let mapleader = "\<space>"
     \			},
     \		}
 	\	}
+        "" }}
+        
+        "" Airline bar {{
+        Plugin 'bling/vim-airline'
+        set noshowmode
+        set laststatus=2
+        let g:airline#extensions#tabline#enabled = 1
+        "" }}
 
     call vundle#end()
 
     filetype plugin on
     filetype indent plugin on
-""" }}}
-
-
-""" Plugin setting {{{
-
-    " vim-airline
-    set noshowmode
-    set laststatus=2
-    let g:airline#extensions#tabline#enabled = 1
 """ }}}
 
 
