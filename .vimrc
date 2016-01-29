@@ -13,8 +13,19 @@ let mapleader = "\<space>"
         Plugin 'VundleVim/Vundle.vim'
     
         Plugin 'Valloric/YouCompleteMe'
-        Plugin 'scrooloose/nerdtree'
         Plugin 'klen/python-mode'
+
+        "" NERDTree {{
+        Plugin 'scrooloose/nerdtree'
+        silent! nnoremap <F2> :NERDTreeToggle<CR>
+        silent! nnoremap <F3> :NERDTreeFind<CR>
+
+        " let NERDTreeShowHidden=1
+        autocmd VimEnter * NERDTree
+        autocmd VimEnter * wincmd p
+
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+        "" }}
 
         "" Markdown {{
         Plugin 'godlygeek/tabular'
