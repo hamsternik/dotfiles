@@ -180,6 +180,10 @@ let mapleader = "\<space>"
 
     " cancel searching highlight
     nnoremap ; :nohlsearch<CR>
+    
+    map nn :next<CR>
+    map bb :previous<CR>
+
 """ }}} 
 
 
