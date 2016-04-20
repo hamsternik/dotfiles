@@ -12,7 +12,6 @@ let mapleader = "\<space>"
         " let Vundle manage itself
         Plugin 'VundleVim/Vundle.vim'
     
-        Plugin 'Valloric/YouCompleteMe'
         Plugin 'klen/python-mode'
 
         "" R-plugin {{
@@ -84,6 +83,10 @@ let mapleader = "\<space>"
         set laststatus=2
         let g:airline#extensions#tabline#enabled = 1
         "" }}
+
+        "" Fugitive -- git plugin {{
+        Plugin 'tpope/vim-fugitive'
+        "" }} 
 
     call vundle#end()
 
