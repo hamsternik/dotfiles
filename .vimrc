@@ -182,7 +182,7 @@ let mapleader = "\<space>"
     nnoremap ; :nohlsearch<CR>
     
     map nn :next<CR>
-    map bb :previous<CR>
+    map nb :previous<CR>
 
 """ }}} 
 
