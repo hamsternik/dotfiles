@@ -50,5 +50,5 @@ alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 
 # Quick access to dev. environment 
-alias dev="${$(alias_for_user "hamsternik" "cd ~/Development/Code")}"
+alias dev="${$(alias_for_user "hamsternik" "cd ~/Developer/Code")}"
 
