@@ -59,7 +59,7 @@
 	p           = push
     pl          = pull
 	lg          = log --abbrev-commit --left-right --name-only
-	hi          = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	hist        = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     show-last   = show --pretty="format:" --name-only # `git describe --always`
     show-prev   = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
 
