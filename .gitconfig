@@ -48,7 +48,7 @@
     a           = add
     c           = commit 
     cm          = commit -m
-    ca          = commit --ammend
+    ca          = commit --amend
     sh          = show
 	br          = branch
 	co          = checkout
@@ -57,11 +57,14 @@
     rh          = reset --hard
 	df          = diff
     s           = stash
+    sl          = stash list
+    ss          = stash show
+    sp          = stash pop
 	p           = push
     pl          = pull
 	st          = status # --short 
 	lg          = log --abbrev-commit --left-right --name-only
-	hi          = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	hist          = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     show-last   = show --pretty="format:" --name-only # `git describe --always`
     show-prev   = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
 
