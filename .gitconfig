@@ -54,6 +54,8 @@
     r           = reset
     rs          = reset --soft
     rh          = reset --hard
+	rb			= rebase
+	rc			= rebase --continue
 	df          = diff
     s           = stash
     sl          = stash list
