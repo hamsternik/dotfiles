@@ -49,16 +49,17 @@
     c           = commit 
     cm          = commit -m
     ca          = commit --ammend
-    sw          = show
+    sh          = show
 	br          = branch
 	co          = checkout
-	st          = status # --short 
-	df          = diff
     r           = reset
     rs          = reset --soft
     rh          = reset --hard
+	df          = diff
+    s           = stash
 	p           = push
     pl          = pull
+	st          = status # --short 
 	lg          = log --abbrev-commit --left-right --name-only
 	hi          = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     show-last   = show --pretty="format:" --name-only # `git describe --always`
