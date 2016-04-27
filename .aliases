@@ -1,54 +1,42 @@
-# @function: alias for concrete user
-# @1_arg - username
-# @2_arg - alias
-function alias_for_user() {
-    if [[ $USER == $1 ]]; then
-        echo "${2}"
-    fi
-}
+## General 
+alias cl="clear"
 
-### General {
-# colour support
-    if [ -x /usr/bin/dircolors ]; then
-        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-        alias ls="ls --color=auto"
-        alias dir="dir --color=auto"
+alias ..="cd .."
+alias ...="cd ../.."
 
-        alias grep="grep --color=auto"
-        alias fgrep="fgrep --color=auto"
-        alias egrep="egrep --color=auto"
-    fi
+alias l="ls -CF"
+alias la="ls -A"
+alias ll="ls -AFl"
 
-# `ls` and `cd` aliases
-    alias ll="ls -AFl"
-    alias la="ls -A"
-    alias l="ls -CF"
-    alias ...="cd ../.."
-    alias ..="cd .."
+alias g="git"
+alias df="df -h"
+alias gdb="gdb -q"
+alias dmesg="dmesg -T"
 
-# Optional
-    alias cl="clear"
-    
-    alias g="git"
-    alias gdb="gdb -q"
-    alias dmesg="dmesg -T"
-    alias df="df -h"
-# }
-
-### Network {
-    alias ping1="ping -c 4 google.com"
-    alias mac="${$(alias_for_user "root" "ifconfig | grep HWaddr")}"
-# }
-
-# Reload the shell
 alias reload="exec $SHELL -l"
-
-# Extended "gdb" aliases
 
 # Quick-Edit
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 
-# Quick access to dev. environment 
-alias dev="${$(alias_for_user "hamsternik" "cd ~/Developer/Code")}"
+## Network 
+alias ping1="ping -c 4 google.com"
+alias mac="${$(alias_for_user "root" "ifconfig | grep HWaddr")}"
+
+## Colour Support
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls="ls --color=auto"
+    alias dir="dir --color=auto"
+
+    alias grep="grep --color=auto"
+    alias fgrep="fgrep --color=auto"
+    alias egrep="egrep --color=auto"
+fi
+
+## Custom
+cuser=`whoami` 
+if [ -d "/home/${cuser}/Developer" ]; then
+    alias dev="cd /home/${cuser}/Developer"
+fi
 
