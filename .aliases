@@ -21,7 +21,9 @@ alias vimrc="vim ~/.vimrc"
 
 ## Network 
 alias ping1="ping -c 4 google.com"
-alias mac="${$(alias_for_user "root" "ifconfig | grep HWaddr")}"
+if [ `whoami` = "root" ]; then
+	alias mac="ifconfig | grep HWaddr"
+fi
 
 ## Colour Support
 if [ -x /usr/bin/dircolors ]; then
