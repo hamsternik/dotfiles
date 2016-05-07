@@ -36,9 +36,9 @@ for FILE in $FILES ; do
 	sleep 0.1
 done
 
-read -r -p "Are you want to copy system folders? [y/n]: " resp
+read -r -p "Are you want to copy system folders? [yes]: " resp
 case $resp in 
-	[yY][eE][sS])
+	[yY]|[eE]|[sS])
 		for FOLDER in $FOLDERS ; do
 			echo "Copy $FOLDER into $HOMEPATH catalog"
 			cp -r $FOLDER $HOMEPATH
