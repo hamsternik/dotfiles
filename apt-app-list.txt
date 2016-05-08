@@ -1,4 +1,5 @@
 auto-apt
+awesome awesome-extra
 bluetooth bluedevil bluez-firmware
 git
 gdisk
