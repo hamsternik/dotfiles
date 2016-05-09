@@ -9,6 +9,7 @@ hddtemp
 iceweasel xul-ext-adblock-plus
 firmware-linux firmware-linux-free
 kde-standard kde-config-touchpad
+kdemultimedia
 okular-extra-backends
 lm-sensors
 pulseaudio
