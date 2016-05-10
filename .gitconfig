@@ -1,6 +1,5 @@
 [user]
-    name = Khomitsevich Nikita
-	email = hamsternik9@gmail.com
+    email = hamsternik9@gmail.com
 
 [core]
     editor = vim
@@ -64,7 +63,7 @@
     pl          = pull
 	st          = status # --short 
 	lg          = log --abbrev-commit --left-right --name-only
-	hist          = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    hist          = log --pretty=format:\"%h %ad (%ar) | %s%d [author: %an]\" --graph --date=short
     show-last   = show --pretty="format:" --name-only # `git describe --always`
     show-prev   = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
 
