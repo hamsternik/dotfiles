@@ -1,0 +1,24 @@
+# env vars
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
+
+# cocoapods
+export LC_ALL="en_US.UTF-8"
+
+# java
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+# export PATH=${PATH}:${JAVA_HOME}/bin
+
+# android
+export ANDROID_HOME=/Users/hamsternik/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+
+# ZooKeeper
+export ZOOKEEPER_HOME=/Users/hamsternik/Developer/sensa-deploy/zookeeper-3.4.8
+export PATH=${PATH}:${ZOOKEEPER_HOME}/bin
+
+# cassandra
+export CASSANDRA_HOME=/Users/hamsternik/Developer/sensa-deploy/apache-cassandra-3.6
+export PATH=${PATH}:${HOME_BIN}:$CASSANDRA_HOME/bin
+
