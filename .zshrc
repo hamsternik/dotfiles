@@ -21,6 +21,10 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
 
+# Menu Selection
+zstyle ':completion*:default' menu 'select=0'
+zstyle ':completion*:windows' menu on=0
+
 export SAVEHIST=$HISTFILE
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=2000
