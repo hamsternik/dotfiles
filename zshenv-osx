@@ -3,16 +3,22 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 
+export ZLS_COLORS_CUSTOM='di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+
 # cocoapods
 export LC_ALL="en_US.UTF-8"
 
 # java
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-# export PATH=${PATH}:${JAVA_HOME}/bin
+export PATH=${PATH}:${JAVA_HOME}/bin
 
 # android
 export ANDROID_HOME=/Users/hamsternik/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+
+# maven
+export MAVEN_HOME=/Users/hamsternik/Developer/sensa-deploy/apache-maven-3.3.9
+export PATH=${PATH}:${MAVEN_HOME}/bin
 
 # ZooKeeper
 export ZOOKEEPER_HOME=/Users/hamsternik/Developer/sensa-deploy/zookeeper-3.4.8

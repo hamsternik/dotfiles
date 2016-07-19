@@ -15,6 +15,7 @@ setopt hist_ignore_space
 setopt prompt_subst
 setopt autocd
 
+zstyle ':completion:*' list-colors $ZLS_COLORS_CUSTOM 
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
