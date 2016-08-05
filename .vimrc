@@ -88,6 +88,11 @@ let mapleader = "\<space>"
         Plugin 'tpope/vim-fugitive'
         "" }} 
 
+        "" vim-velocity {{
+        Plugin 'lepture/vim-velocity'
+        "au BufNewFile,BufRead *.vm,*.html,*.htm,*.shtml,*.stm set ft=velocity
+        "" }}
+
     call vundle#end()
 
     filetype plugin on
@@ -103,6 +108,8 @@ let mapleader = "\<space>"
 
     set exrc
     set secure
+
+    set autoread
 
     " Tabulation 
     set tabstop=4
