@@ -210,23 +210,13 @@ let mapleader = "\<space>"
 
 """ ColorScheme {{{
 
+    colorscheme molokai
+    set cursorline 
+
     if &t_Co < 256
         set t_Co=256
-        
-        let g:molokai_original = 1
-        let g:rehash256 = 1
-
-        set cursorline 
-
-        colorscheme molokai
-    else
-        
-        let g:molokai_original = 1
-        let g:rehash256 = 1
-
-        set cursorline 
-
-        colorscheme molokai
+        " let g:molokai_original = 1  " Original monokai bg scheme
+        let g:rehash256 = 1       " Alternative 256 colors scheme
     endif
 """ }}}   
 
