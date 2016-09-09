@@ -1,3 +1,11 @@
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+    platform='linux'
+elif [[ "$unamestr" == 'FreeBSD' ]]; then
+    platform='freebsd'
+fi
+
 # @function: alias for concrete user
 # @1_arg - username
 # @2_arg - alias
@@ -6,6 +14,7 @@ function alias_for_user() {
         echo "${2}"
     fi
 }
+
 
 ### General {
 # colour support
@@ -20,7 +29,10 @@ function alias_for_user() {
     fi
 
 # `ls` and `cd` aliases
-    alias ls="ls -G"
+    if [[ $platform == 'freebsd' ]]; then
+        #alias ls='ls -G'
+    fi
+
     alias l="ls -CF"
     alias ll="l -Al"
     alias la="l -A"
