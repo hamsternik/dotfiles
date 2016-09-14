@@ -1,11 +1,9 @@
 PROMPT='%B%F{green}%n %B%F{blue}%1~%b %B%F{blue}%# %b%f%k'
 RPROMPT='[$(git_promt)%~]'
 
-autoload -U compinit promptinit
-autoload -U colors
-compinit
-promptinit
-colors
+autoload -U compinit && compinit
+autoload -U promptinit && promptinit
+autoload -U colors && colors
 
 setopt correctall
 setopt prompt_subst
@@ -14,6 +12,7 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt prompt_subst
 setopt autocd
+setopt completealiases
 
 zstyle ':completion:*' list-colors $ZLS_COLORS_CUSTOM 
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
@@ -38,3 +37,4 @@ git_promt() {
 
 # IMPORTS
 source $HOME/.aliases
+
