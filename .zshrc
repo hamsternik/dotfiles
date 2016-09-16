@@ -12,7 +12,6 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt prompt_subst
 setopt autocd
-setopt completealiases
 
 zstyle ':completion:*' list-colors $ZLS_COLORS_CUSTOM 
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
