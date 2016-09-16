@@ -1,0 +1,6 @@
+[submodule ".zsh/git-prompt"]
+	path = .zsh/git-prompt
+	url = https://github.com/olivierverdier/zsh-git-prompt.git
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim
