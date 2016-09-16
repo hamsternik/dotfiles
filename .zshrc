@@ -30,11 +30,10 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=2000
 SAVEHIST=1000
 
-git_promt() {
-    temp=`git symbolic-ref HEAD 2>/dev/null | cut -d / -f 3`
-    if [ "$temp" != "" ]; then echo "$temp:"; fi
-}
+# Imports
+source ${HOME}/.zsh/zsh-git-prompt/zshrc.sh
+source ${HOME}/.aliases
 
-# IMPORTS
-source $HOME/.aliases
-
+# Prompt
+PROMPT='%B%F{green}%n %B%F{blue}%1~%b %B%F{blue}%# %b%f%k'
+RPROMPT='%B%m%~%b$(git_super_status) %# '
