@@ -194,8 +194,8 @@ let mapleader = "\<space>"
     " cancel searching highlight
     nnoremap ; :nohlsearch<CR>
     
-    map nn :next<CR>
-    map nb :previous<CR>
+    "" map nn :next<CR> map nb :previous<CR>
+    "" map nb :previous<CR>
 
 
     "" Commenting blocks of code
