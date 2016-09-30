@@ -1,5 +1,10 @@
-PROMPT='%B%F{green}%n %B%F{blue}%1~%b %B%F{blue}%# %b%f%k'
-RPROMPT='[$(git_promt)%~]'
+# Imports
+source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+source $HOME/.aliases
+
+# Prompt
+PROMPT='%B%F{green}%n %B%F{blue}%1~%b$(git_super_status) %B%F{blue}%# '
+RPROMPT=''
 
 autoload -U compinit && compinit
 autoload -U promptinit && promptinit
@@ -24,15 +29,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:
 zstyle ':completion*:default' menu 'select=0'
 zstyle ':completion*:windows' menu on=0
 
-export SAVEHIST=$HISTFILE
-HISTFILE="$HOME/.zsh_history"
+HISTFILE="~/.zsh_history"
 HISTSIZE=2000
-SAVEHIST=1000
+SAVEHIST=2000
 
-# Imports
-source ${HOME}/.zsh/zsh-git-prompt/zshrc.sh
-source ${HOME}/.aliases
-
-# Prompt
-PROMPT='%B%F{green}%n %B%F{blue}%1~%b %B%F{blue}%# %b%f%k'
-RPROMPT='%B%m%~%b$(git_super_status) %# '
