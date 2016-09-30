@@ -1,31 +1,23 @@
-platform='unknown'
-
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
-    platform='linux'
-elif [[ "$unamestr" == 'FreeBSD' ]]; then
-    platform='freebsd'
-fi
-
-### General {
     alias ls="ls --color=auto"
     alias dir="dir --color=auto"
-
-    #if [ $platform == 'freebsd' ]; then
-        #alias ls='ls -G'
-    #fi
-
-    alias l="ls -CF"
-    alias ll="l -Al"
-    alias la="l -A"
-    alias ...="cd ../.."
-    alias ..="cd .."
 
     alias grep="grep --color=auto"
     alias fgrep="fgrep --color=auto"
     alias egrep="egrep --color=auto"
+elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
+        alias ls='ls -G'
+fi
 
 # Optional
+    alias l="ls -CF"
+    alias ll="l -Al"
+    alias la="l -A"
+
+    alias ...="cd ../.."
+    alias ..="cd .."
+
     alias cl="clear"
     
     alias g="git"
