@@ -1,4 +1,5 @@
 platform='unknown'
+
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
     platform='linux'
@@ -6,38 +7,23 @@ elif [[ "$unamestr" == 'FreeBSD' ]]; then
     platform='freebsd'
 fi
 
-# @function: alias for concrete user
-# @1_arg - username
-# @2_arg - alias
-function alias_for_user() {
-    if [[ $USER == $1 ]]; then
-        echo "${2}"
-    fi
-}
-
-
 ### General {
-# colour support
-    if [ -x /usr/bin/dircolors ]; then
-        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-        alias ls="ls --color=auto"
-        alias dir="dir --color=auto"
+    alias ls="ls --color=auto"
+    alias dir="dir --color=auto"
 
-        alias grep="grep --color=auto"
-        alias fgrep="fgrep --color=auto"
-        alias egrep="egrep --color=auto"
-    fi
-
-# `ls` and `cd` aliases
-    if [[ $platform == 'freebsd' ]]; then
+    #if [ $platform == 'freebsd' ]; then
         #alias ls='ls -G'
-    fi
+    #fi
 
     alias l="ls -CF"
     alias ll="l -Al"
     alias la="l -A"
     alias ...="cd ../.."
     alias ..="cd .."
+
+    alias grep="grep --color=auto"
+    alias fgrep="fgrep --color=auto"
+    alias egrep="egrep --color=auto"
 
 # Optional
     alias cl="clear"
@@ -50,7 +36,7 @@ function alias_for_user() {
 
 ### Network {
     alias ping1="ping -c 4 google.com"
-    alias mac="${$(alias_for_user "root" "ifconfig | grep HWaddr")}"
+    #alias mac="${$(alias_for_user "root" "ifconfig | grep HWaddr")}"
 # }
 
 # Reload the shell
@@ -61,8 +47,4 @@ alias reload="exec $SHELL -l"
 # Quick-Edit
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
-
-# Quick access to dev. environment 
-alias dev="${$(alias_for_user "hamsternik" "cd ~/Development/Code")}"
-
 
