@@ -3,7 +3,7 @@ source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 source $HOME/.aliases
 
 # Prompt
-PROMPT='%B%F{green}%n %B%F{blue}%1~%b$(git_super_status) %B%F{blue}%# '
+PROMPT='%B%F{green}%n%B %{$fg_no_bold[yellow]%}[%1~] $(git_super_status) $fg[magenta]%# %{$reset_color%}'
 RPROMPT=''
 
 autoload -U compinit && compinit
