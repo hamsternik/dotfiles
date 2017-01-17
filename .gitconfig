@@ -67,6 +67,7 @@
     hist          = log --pretty=format:\"%h %ad (%ar) | %s%d [author: %an]\" --graph --date=short
     show-last   = show --pretty="format:" --name-only # `git describe --always`
     show-prev   = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
+    files-commited = log --graph --name-only--oneline
 
 	# Show git commands
 	commands    = help -a
