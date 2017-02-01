@@ -8,6 +8,7 @@
     ignorecase = false	
 	whitespace = fix,trailing-space,cr-at-eol	
     excludesfile = ~/.gitignore_global
+    pager = diff-so-fancy | less --tabs=4 -RFX
 
 [credential]
 	helper = cache --timeout=14400 
