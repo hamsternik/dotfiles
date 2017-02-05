@@ -56,10 +56,12 @@
     rs          = reset --soft
     rh          = reset --hard
 	df          = diff
-    s           = stash
+    s           = stash save
+    sa          = stash apply
+    sp          = stash pop
     sl          = stash list
     ss          = stash show
-    sp          = stash pop
+    sd          = stash drop
     f           = fetch
 	p           = push
     pl          = pull
@@ -68,7 +70,7 @@
     hist          = log --pretty=format:\"%h %ad (%ar) | %s%d [author: %an]\" --graph --date=short
     show-last   = show --pretty="format:" --name-only # `git describe --always`
     show-prev   = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
-    files-commited = log --graph --name-only--oneline
+    files-commited = log --graph --name-only --oneline
 
 	# Show git commands
 	commands    = help -a
