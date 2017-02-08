@@ -22,12 +22,8 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=${PATH}:${JAVA_HOME}/bin
 
-# maven
-export MAVEN_HOME=/Users/hamsternik/Developer/sensa-deploy/apache-maven-3.3.9
-export PATH=${PATH}:${MAVEN_HOME}/bin
-
 # android
-export ANDROID_HOME=/Users/hamsternik/Library/Android/sdk
+export ANDROID_HOME=${HOME}/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME
 
 # OpenSSL
@@ -39,5 +35,4 @@ export PATH=$OPENSSL_BREW:$PATH
 # .NET Core + CLI
 export C_SHARP=/usr/local/share/dotnet
 export PATH=$PATH:$C_SHARP
-
 

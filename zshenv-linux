@@ -1,8 +1,0 @@
-# env vars
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
-
-export HOME_BIN=${HOME}/bin:${HOME}/.local/bin
-export PATH=${PATH}:${HOME_BIN}
-
