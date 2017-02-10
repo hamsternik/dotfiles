@@ -40,3 +40,5 @@ alias reload="exec $SHELL -l"
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 
+# Emacs
+alias emacs="/usr/local/Cellar/emacs/25.1/bin/emacs"
