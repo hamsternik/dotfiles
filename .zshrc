@@ -1,4 +1,4 @@
-PROMPT='%B%F{green}%n: %B%F{blue}%1~%b$(git_super_status) %B%F{blue}%# %b%f%k'
+PROMPT='%B%F{blue}%n%B%F{white}: %B%F{green}%1~%b$(git_super_status) %B%F{white}$ %b%f%k'
 RPROMPT=''
 
 HISTFILE="~/.zsh_history"
