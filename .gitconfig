@@ -7,6 +7,7 @@
     br          = branch
     co          = checkout
     f           = fetch
+    fa          = fetch --all
     p           = push
     pl          = pull
     df          = diff
@@ -51,6 +52,18 @@
     excludesfile = ~/.gitignore_global
     pager = diff-so-fancy | less --tabs=4 -RFX
 
+[status]
+    submoduleSummary = true
+
+[push]
+    default = simple
+
+[pull]
+    ff = only
+
+[rebase]
+    autostash = true
+
 [color]
 	  ui = true
 [color "branch"]
@@ -72,5 +85,5 @@
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 [mergetool "sourcetree"]
-	  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
