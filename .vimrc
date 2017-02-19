@@ -43,6 +43,14 @@ let mapleader = "\<space>"
         set nofoldenable "Enable/Disable Folding 
         "" }}
 
+        "" Markdown Preview {{
+        Plugin 'JamshedVesuna/vim-markdown-preview'
+        let vim_markdown_preview_github=1 " GitHub flavoured markdown
+        let vim_markdown_preview_toggle=1
+        let vim_markdown_preview_hotkey='<C-p>' " Default: <C-p>
+        let vim_markdown_preview_browser='Google Chrome'
+        "" }}
+
         "" LaTeX {{
         Plugin 'lervag/vimtex'
         let g:vimtex_latexmk_enable=1
