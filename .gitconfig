@@ -1,82 +1,75 @@
-[user]
-    email = hamsternik9@gmail.com
-
-[core]
-    editor = vim
-    safecrlf = true
-	autocrlf = false 	
-    ignorecase = false	
-	whitespace = fix,trailing-space,cr-at-eol	
-    excludesfile = ~/.gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -RFX
-
-[credential]
-	helper = cache --timeout=14400 
-
-###  Source Tree ###
-
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
-
-[color]
-	ui = true
-
-    [color "branch"]
-		current	= yellow reverse
-		local	= yellow
-		remote	= blue
-
-	[color "diff"]
-        old = red 
-        new	= blue bold
-		frag = magenta bold 
-		meta = normal
-		whitespace = red reverse
-
-	[color "status"]
-        added = yellow
-		changed = red 
-		untracked = cyan 
-
 [alias]
     cl          = clone
     a           = add
-    c           = commit 
     cm          = commit -m
     ca          = commit --amend
     sh          = show
-	br          = branch
-	co          = checkout
+    br          = branch
+    co          = checkout
+    f           = fetch
+    p           = push
+    pl          = pull
+    df          = diff
+#[reset]
     r           = reset
     rs          = reset --soft
     rh          = reset --hard
-	df          = diff
+#[stash]
     s           = stash save
     sa          = stash apply
     sp          = stash pop
     sl          = stash list
     ss          = stash show
     sd          = stash drop
-    f           = fetch
-	p           = push
-    pl          = pull
-	st          = status # --short 
-	lg          = log --abbrev-commit --left-right --name-only
-    hist          = log --pretty=format:\"%h %ad (%ar) | %s%d [author: %an]\" --graph --date=short
+#[log]
+    st          = status # --short
+    lg          = log --abbrev-commit --left-right --name-only
+    hist        = log --pretty=format:\"%h %ad (%ar) | %s%d [author: %an]\" --graph --date=short
     show-last   = show --pretty="format:" --name-only # `git describe --always`
     show-prev   = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
     files-commited = log --graph --name-only --oneline
+# Show git commands
+    commands    = help -a
+# Show current repo's name
+    name        = !git remote -v | head -n1 | awk '{print $2}'
 
-	# Show git commands
-	commands    = help -a
 
-	# Show current repo's name
-	name        = !git remote -v | head -n1 | awk '{print $2}'
-    user        = !git config --global user.name
-	email       = !git config --global user.email
 
+[user]
+    email = hamsternik9@gmail.com
+
+[credential]
+    helper = cache --timeout=14400 
+
+[core]
+    editor = vim
+    safecrlf = true
+    autocrlf = false 	
+    ignorecase = false
+    whitespace = fix,trailing-space,cr-at-eol	
+    excludesfile = ~/.gitignore_global
+    pager = diff-so-fancy | less --tabs=4 -RFX
+
+[color]
+	  ui = true
+[color "branch"]
+		current	= yellow reverse
+		local	= yellow
+		remote	= blue
+[color "diff"]
+    old = red 
+    new	= blue bold
+		frag = magenta bold 
+		meta = normal
+		whitespace = red reverse
+[color "status"]
+    added = yellow
+		changed = red 
+		untracked = cyan 
+
+###  Source Tree ###
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
