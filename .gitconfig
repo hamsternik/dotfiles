@@ -1,5 +1,5 @@
 [alias]
-    cl          = clone
+    cl          = clone --recursive
     a           = add
     cm          = commit -m
     ca          = commit --amend
@@ -36,6 +36,7 @@
 
 
 [user]
+    name  = Nikita Khomitsevich
     email = hamsternik9@gmail.com
 
 [credential]
