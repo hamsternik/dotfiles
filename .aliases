@@ -1,3 +1,6 @@
+# Main alias for today
+alias vim='emacs'
+
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
     alias ls="ls --color=auto"
