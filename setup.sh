@@ -2,11 +2,12 @@
 
 #============ SETUP ============#
 
-HOMEPATH="${HOME}/test"
+HOMEPATH="${HOME}"
 FILES="
 .aliases
 .gitattributes
 .gitconfig
+.gemrc
 .vim
 .vimrc
 .zsh
@@ -20,8 +21,6 @@ function deploy {
         SOURCE=$(pwd)/$ITEM
         TARGET=$HOMEPATH/$ITEM
 
-        echo "$ITEM: Start to deploy"
-
         if [[ -e $TARGET ]]; then
             echo "$ITEM is exist. Skipping...\n"
         else
@@ -33,6 +32,15 @@ function deploy {
 
 #============ MAIN ============#
 
-echo "Start deploy..."
+echo "Start to create @bin folder localy."
+if [[ ! -d $HOME/.bin ]]; then
+    mkdir $HOME/.bin
+    echo "@.bin directory was created successfuly.\n"
+else
+    echo "@.bin directory was created before. Aborted\n"
+fi
+
+
+echo "Start to deploy...\n"
 deploy "$FILES"
 
