@@ -24,7 +24,8 @@ export PATH=${PATH}:${JAVA_HOME}/bin
 
 # android
 export ANDROID_HOME=${HOME}/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME
+export PATH=$PATH:${ANDROID_HOME}/tools
+export PATH=$PATH:${ANDROID_HOME}/platform-tools
 
 # OpenSSL
 # before make ln -s /path/to/openssl-by-brew /usr/local/openssl
