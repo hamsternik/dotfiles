@@ -125,6 +125,7 @@ let mapleader = "\<space>"
 		let g:NERDTrimTrailingWhitespace = 1
 		"" }}
 
+    Bundle 'vim-ruby/vim-ruby'
 
     call vundle#end()
 
