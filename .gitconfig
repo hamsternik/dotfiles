@@ -49,7 +49,7 @@
     safecrlf = true
     autocrlf = false 	
     ignorecase = false
-    whitespace = fix,trailing-space,cr-at-eol	
+	whitespace = trailing-space,space-before-tab
     excludesfile = ~/.gitignore_global
     pager = diff-so-fancy | less --tabs=4 -RFX
 
@@ -66,21 +66,21 @@
     autostash = true
 
 [color]
-	  ui = true
+    ui = true
 [color "branch"]
-		current	= yellow reverse
-		local	= yellow
-		remote	= blue
+    current	= yellow reverse
+	local	= yellow
+	remote	= blue
 [color "diff"]
     old = red 
     new	= blue bold
-		frag = magenta bold 
-		meta = normal
-		whitespace = red reverse
+	frag = magenta bold 
+	meta = normal
+	whitespace = red reverse
 [color "status"]
     added = yellow
-		changed = red 
-		untracked = cyan 
+	changed = red 
+	untracked = cyan 
 
 ###  Source Tree ###
 [difftool "sourcetree"]
@@ -88,3 +88,5 @@
 [mergetool "sourcetree"]
     cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
+[apply]
+	whitespace = fix
