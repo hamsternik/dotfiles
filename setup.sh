@@ -13,6 +13,7 @@ FILES="
 .zsh
 .zshenv
 .zshrc
+.ssh/config
 "
 
 function deploy {
