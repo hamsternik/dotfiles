@@ -5,6 +5,7 @@
 HOMEPATH="${HOME}"
 FILES="
 .aliases
+.emacs.d
 .gitattributes
 .gitconfig
 .gemrc

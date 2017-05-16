@@ -6,17 +6,26 @@ brew update
 # Make upgrade of all already-installed formulae
 brew upgrade --all
 
+# Emacs installation
+brew install --with-cocoa --srgb emacs
+# brew linkapp emacs    ### Don't use it! It disturbs to install Emacs.app into Application
+
 # Installation
 brew install appledoc \
      carthage \
-     emacs \
      htop \
+     tree \
      maven \
      mono \
      openssl \
      python3 \
-     tree \
      watchman
+
+# Adding Taps
+brew tap caskroom/cask
+
+# Cask install
+brew cask install emacs
 
 # Remove outdate data
 brew cleanup

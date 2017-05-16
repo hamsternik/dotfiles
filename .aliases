@@ -1,6 +1,3 @@
-# Main alias for today
-alias vim='emacs'
-
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
     alias ls="ls --color=auto"
@@ -43,5 +40,3 @@ alias reload="exec $SHELL -l"
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 
-# Emacs
-alias emacs="/usr/local/Cellar/emacs/25.1/bin/emacs"
