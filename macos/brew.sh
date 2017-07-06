@@ -13,6 +13,7 @@ brew install --with-cocoa --srgb emacs
 # Installation
 brew install appledoc \
      carthage \
+     diff-so-fancy \
      gradle \
      htop \
      tree \
