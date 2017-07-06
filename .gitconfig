@@ -12,6 +12,7 @@
     pl          = pull
     df          = diff
     rb          = rebase
+    patch       = !git --no-pager diff --no-color
 #[reset]
     r           = reset
     rs          = reset --soft
