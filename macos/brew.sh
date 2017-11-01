@@ -27,7 +27,7 @@ brew install appledoc \
 brew tap caskroom/cask
 
 # Cask install
-brew cask install emacs
+#brew cask install emacs
 
 # Remove outdate data
 brew cleanup
