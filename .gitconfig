@@ -94,6 +94,13 @@
     stash = bold yellow black # by default: bold magent
     HEAD = bold red black # by default: bold cyan
 
+### Diff mechanism
+[diff]
+    tool = opendiff
+
+[merge]
+    tool = opendiff
+
 ###  Source Tree ###
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
