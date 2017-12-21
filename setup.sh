@@ -8,6 +8,7 @@ FILES="
 .emacs.d
 .gitattributes
 .gitconfig
+.gitignore_global
 .gemrc
 .vim
 .vimrc

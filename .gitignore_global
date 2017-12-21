@@ -1,0 +1,8 @@
+*~
+*.orig
+*.rej
+*.swp
+.#*
+*.obj
+*.o
+.DS_Store
