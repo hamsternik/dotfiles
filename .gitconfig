@@ -69,19 +69,30 @@
 [color]
     ui = true
 [color "branch"]
-    current	= yellow reverse
+    current	= bold reverse red
 	local	= yellow
-	remote	= blue
+    remote	= blue
+    plain = white
 [color "diff"]
+    plain = white
+	meta = bold blue black
+    frag = magenta bold 
+    func = cyan
     old = red 
     new	= blue bold
-	frag = magenta bold 
-	meta = normal
-	whitespace = red reverse
+	whitespace = reverse black
+    commit = bold black
 [color "status"]
-    added = yellow
+    header = dim white black
+    added = yellow 
 	changed = red 
-	untracked = cyan 
+    untracked = cyan 
+    unmerged = red 
+[color "decorate"]
+    branch = bold green black # by default: bold gree
+    tag = bold yellow black # by default: bold yellow
+    stash = bold yellow black # by default: bold magent
+    HEAD = bold red black # by default: bold cyan
 
 ###  Source Tree ###
 [difftool "sourcetree"]
