@@ -66,6 +66,9 @@
 [rebase]
     autostash = true
 
+[rerere]
+    enabled = true
+
 [color]
     ui = true
 [color "branch"]
@@ -100,6 +103,7 @@
 
 [merge]
     tool = opendiff
+    conflictstyle = diff3
 
 ###  Source Tree ###
 [difftool "sourcetree"]
