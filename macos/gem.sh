@@ -1,3 +1,6 @@
 #!/bin/bash
 
-gem install xcpretty cocoapods-playgrounds
+gem install \
+    xcpretty \
+    cocoapods \
+    cocoapods-playgrounds
