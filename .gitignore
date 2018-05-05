@@ -1,2 +1,4 @@
+.vim/bundle*
+!.vim/bundle/Vundle.com
 .vim/.netrwlist
 .directory
