@@ -17,6 +17,7 @@ brew install appledoc \
     mono \
     openssl \
     python3 \
+    kotlin \
     watchman
 
 # Adding Taps
