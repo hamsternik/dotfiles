@@ -11,6 +11,8 @@ let mapleader = "\<space>"
 
         " let Vundle manage itself
         Plugin 'VundleVim/Vundle.vim'
+
+        Plugin 'keith/swift.vim'
     
         Plugin 'klen/python-mode'
 
