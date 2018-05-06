@@ -25,18 +25,21 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'klen/python-mode'
 Plugin 'jcfaria/Vim-R-plugin'
 Plugin 'keith/swift.vim'
+Plugin 'dart-lang/dart-vim-plugin'
 
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'lervag/vimtex'
 Plugin 'luochen1990/rainbow'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'lepture/vim-velocity'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-
+Plugin 'danro/rename.vim'
+ 
 call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -170,12 +173,17 @@ map <C-A> ggVG
 " cancel searching highlight
 nnoremap ; :nohlsearch<CR>
 
-"" map nn :next<CR> map nb :previous<CR>
-"" map nb :previous<CR>
+map <leader>n :next<CR> 
+map <leader>p :previous<CR>
 
 "noremap <silent> <leader>/ :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 "noremap <silent> <leader>\ :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
+" Fast saving
+nnoremap <leader>w :w!<cr>
+
+" <leader>V reloads it and makes all changes active (file has to be saved first)
+noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -255,6 +263,7 @@ let g:rainbow_conf = {
 set noshowmode
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'tomorrow'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
