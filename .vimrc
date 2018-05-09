@@ -58,6 +58,8 @@ augroup vimrc
     autocmd!
 augroup END
 
+autocmd! vimrc bufwritepost .vimrc source %
+
 "" Commenting blocks of code
 autocmd FileType c,cpp,m,java,scala,swift   let b:comment_leader = '// '
 autocmd FileType sh,ruby,python             let b:comment_leader = '# '
@@ -83,12 +85,15 @@ set autoread
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab!
+set shiftround
+set expandtab
 
 " Indentation
 set nowrap
 set autoindent
 set smartindent
+set colorcolumn=120
+highlight ColorColumn ctermbg=222
 
 set showmatch
 
@@ -143,11 +148,21 @@ endif
 "                               Keybindings                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Fast saving
+nnoremap <leader>w :w!<cr>
+
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
 
-nnoremap <C-c>n :cnext<CR>
-nnoremap <C-c>p :cprevious<CR>
+" easier moving between tabs, include tabs creating
+nnoremap <silent> <leader>t :tabnew<cr>
+nnoremap <silent> m :tabnext<cr>
+nnoremap <silent> M :tabprevious<cr>
+
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
 
 nnoremap <Enter> o<Esc>
 nnoremap <silent> <C-S> :<C-u>Update<CR>
@@ -167,24 +182,21 @@ nnoremap Gr :grep <cword> %:p:h/*<CR>
 nnoremap gR :grep '\b<cword>\b' *<CR>
 nnoremap GR :grep '\b<cword>\b' %:p:h/*<CR>
 
+" manual formatting of paragraphs
+vmap Q gq
+nmap Q gqap
+
 " select ALL
-map <C-A> ggVG 
+map <silent> <C-A> ggVG 
 
 " cancel searching highlight
 nnoremap ; :nohlsearch<CR>
 
-map <leader>n :next<CR> 
-map <leader>p :previous<CR>
-
 "noremap <silent> <leader>/ :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 "noremap <silent> <leader>\ :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
-" Fast saving
-nnoremap <leader>w :w!<cr>
-
 " <leader>V reloads it and makes all changes active (file has to be saved first)
 noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           *** PLUGINS SETUP ***                       "
@@ -195,8 +207,11 @@ noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '
 "                               python-mode                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:pymode_python = 'python3'
-
+let ropevim_enable_shortcuts = 1
+"let g:pymode_python = 'python3'
+let g:pymode_syntax = 1
+let g:pymode_syntax_builtin_objs = 0
+let g:pymode_syntax_builtin_funcs = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               vim-markdown                            "
