@@ -18,6 +18,8 @@ FILES="
 .ssh/config
 "
 
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
 function deploy {
     ITEMS=$1
     for ITEM in $ITEMS; do
@@ -31,6 +33,11 @@ function deploy {
             echo "$ITEM symlink was created successfully!\n"
         fi
     done
+
+    if [[ -f $SCRIPT_DIR/xterm-256color.terminfo ]]; then
+        echo "TERMINFO for xterm will be compiled."
+        tic $SCRIPT_DIR/xterm-256color.terminfo
+    fi
 }
 
 #============ MAIN ============#
@@ -42,7 +49,6 @@ if [[ ! -d $HOME/.bin ]]; then
 else
     echo "@.bin directory was created before. Aborted\n"
 fi
-
 
 echo "Start to deploy...\n"
 deploy "$FILES"
