@@ -1,5 +1,11 @@
 #!/bin/bash
 
+brew_readlink=`readlink $(which brew)`
+if ! [[ $brew_readlink ]] ; then 
+    echo "Will install Homebrew for local user."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
 # Make Homebrew update
 brew update
 
@@ -16,6 +22,7 @@ brew install \
     htop \
     kotlin \
     tree \
+    mas \
     maven \
     mono \
     mosh \
@@ -29,6 +36,6 @@ brew install \
 brew cleanup
 
 ### Ruby
-brew unlink ruby && brew link ruby # Link the latest ruby version
+# brew unlink ruby && brew link ruby # Link the latest ruby version
 # brew link --overwrite ruby # If ruby won't be linked and setuped as default in the system, run this
 
