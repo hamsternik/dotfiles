@@ -1,11 +1,9 @@
 #!/bin/bash
 
-#============ SETUP ============#
-
+# ---------------------- INPUT SCOPE ---------------------- #
 HOMEPATH="${HOME}"
 FILES="
 .aliases
-.emacs.d
 .gitattributes
 .gitconfig
 .gitignore_global
@@ -15,10 +13,16 @@ FILES="
 .zsh
 .zshenv
 .zshrc
-.ssh/config
 "
+#.ssh/config
+# ---------------------- END SCOPE ---------------------- #
 
+# ---------------------- FUNCTION SCOPE ---------------------- #
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+function echo_finish {
+    echo "---------------------- END SCOPE ----------------------"; echo
+}
 
 function deploy {
     ITEMS=$1
@@ -34,22 +38,52 @@ function deploy {
         fi
     done
 
-    if [[ -f $SCRIPT_DIR/xterm-256color.terminfo ]]; then
-        echo "TERMINFO for xterm will be compiled."
-        tic $SCRIPT_DIR/xterm-256color.terminfo
-    fi
+    # TODO: Should be deployed only for OS X system.
+    # if [[ -f $SCRIPT_DIR/xterm-256color.terminfo ]]; then
+        # echo "TERMINFO for xterm will be compiled."
+        # tic $SCRIPT_DIR/xterm-256color.terminfo
+    # fi
 }
 
-#============ MAIN ============#
+function packages_deploy {
+    echo "Run deploy packages for $OSTYPE" 
+    case "$OSTYPE" in
+        darwin*) 
+            ./macos/brew.sh
+            ./macos/brew-cask.sh
+            ./macos/gem.sh
+        ;;
+        linux*) 
+            bash debian/*.sh 
+        ;;
+    esac
+    echo_finish
+}
 
-echo "Start to create @bin folder localy."
-if [[ ! -d $HOME/.bin ]]; then
-    mkdir $HOME/.bin
-    echo "@.bin directory was created successfuly.\n"
-else
-    echo "@.bin directory was created before. Aborted\n"
-fi
+function binary_deploy {
+    echo "Run deploy custom scripts/binaries. Store into HOME/.bin directory."
+    if [[ ! -d $HOME/.bin ]]; then
+        mkdir $HOME/.bin
+        echo "@.bin directory was created successfuly.\n"
+    else
+        echo "@.bin directory was created before.\n"
+    fi
 
-echo "Start to deploy...\n"
-deploy "$FILES"
+    # TODO: Add code to create symlinks for all .sh scripts.
+    # TODO: Should be installed with depending on the platform.
+    echo_finish
+}
+
+function config_deploy {
+    echo "Run deploy all dotfiles/config files.\n"
+    deploy "$FILES"
+    echo_finish
+}
+# ---------------------- END SCOPE ---------------------- #
+
+
+# ---------------------- MAIN SCOPE ---------------------- #
+packages_deploy
+binary_deploy
+config_deploy
 
