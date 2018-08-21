@@ -14,6 +14,7 @@ mosh
 openssl
 watchman
 wget
+zsh
 "
 
 LANGS="
