@@ -37,3 +37,5 @@ export PATH=$OPENSSL_BREW:$PATH
 export C_SHARP=/usr/local/share/dotnet
 export PATH=$PATH:$C_SHARP
 
+export GIT_PROMPT_EXECUTABLE="haskell"
+export PATH=$PATH:$GIT_PROMPT_EXECUTABLE
