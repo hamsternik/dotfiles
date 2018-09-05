@@ -18,12 +18,14 @@ zsh
 "
 
 LANGS="
+cocoapods
 python3 
 mono 
 rbenv
 ruby
 ruby-build
 " 
+
 JAVA_DEPEND="
 gradle
 maven
