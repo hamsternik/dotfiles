@@ -37,5 +37,11 @@ export PATH=$OPENSSL_BREW:$PATH
 export C_SHARP=/usr/local/share/dotnet
 export PATH=$PATH:$C_SHARP
 
+<<<<<<< Updated upstream
 export GIT_PROMPT_EXECUTABLE="haskell"
 export PATH=$PATH:$GIT_PROMPT_EXECUTABLE
+||||||| merged common ancestors
+=======
+export HASKELL_BIN=~/Dropbox/ghc-7.8.3-stepic/bin
+export PATH=$PATH:$HASKELL_BIN
+>>>>>>> Stashed changes
