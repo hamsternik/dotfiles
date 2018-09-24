@@ -24,6 +24,9 @@ mono
 rbenv
 ruby
 ruby-build
+ghc
+cabal-install
+stack
 " 
 
 JAVA_DEPEND="

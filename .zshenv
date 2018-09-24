@@ -37,5 +37,5 @@ export PATH=$OPENSSL_BREW:$PATH
 export C_SHARP=/usr/local/share/dotnet
 export PATH=$PATH:$C_SHARP
 
-export HASKELL_BIN=~/Dropbox/ghc-7.8.3-stepic/bin
-export PATH=$PATH:$HASKELL_BIN
+#export HASKELL_BIN=~/Dropbox/ghc-7.8.3-stepic/bin
+#export PATH=$PATH:$HASKELL_BIN
