@@ -38,6 +38,7 @@ kotlin
 CASK_APPS="
 docker
 dropbox
+fastlane
 google-chrome
 iterm2
 java

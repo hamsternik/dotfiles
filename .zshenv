@@ -39,3 +39,6 @@ export PATH=$PATH:$C_SHARP
 
 #export HASKELL_BIN=~/Dropbox/ghc-7.8.3-stepic/bin
 #export PATH=$PATH:$HASKELL_BIN
+
+export FASTLANE="$HOME/.fastlane/bin"
+export PATH=$PATH:$FASTLANE
