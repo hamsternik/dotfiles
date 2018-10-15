@@ -137,14 +137,13 @@ endif
 "                               Color Scheme                            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme molokai
-set cursorline 
+set t_Co=256
+" set cursorline 
 
-if &t_Co < 256
-    set t_Co=256
-    " let g:molokai_original = 1  " Original monokai bg scheme
-    let g:rehash256 = 1       " Alternative 256 colors scheme
-endif
+colorscheme molokai
+let g:molokai_original = 1  " Original monokai bg scheme
+let g:rehash256 = 1       " Alternative 256 colors scheme
+set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Keybindings                             "
@@ -157,9 +156,9 @@ nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
 
 " easier moving between tabs, include tabs creating
-nnoremap <silent> <leader>t :tabnew<cr>
-nnoremap <silent> m :tabnext<cr>
-nnoremap <silent> M :tabprevious<cr>
+nnoremap <silent> <C-t> :tabnew<cr>
+nnoremap <silent> <C-]> :tabnext<cr>
+nnoremap <silent> <C-[> :tabprevious<cr>
 
 map <c-j> <c-w>j
 map <c-k> <c-w>k
@@ -280,6 +279,8 @@ let g:rainbow_conf = {
 set noshowmode
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme = 'tomorrow'
 
 
