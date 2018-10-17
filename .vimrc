@@ -246,7 +246,7 @@ set nofoldenable "Enable/Disable Folding
 let vim_markdown_preview_github=1 " GitHub flavoured markdown
 let vim_markdown_preview_toggle=1
 let vim_markdown_preview_hotkey='<C-p>' " Default: <C-p>
-let vim_markdown_preview_browser='Google Chrome'
+" let vim_markdown_preview_browser='Google Chrome'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

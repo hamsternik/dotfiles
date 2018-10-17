@@ -19,15 +19,16 @@ zsh
 
 LANGS="
 cocoapods
-python3 
-mono 
+grip
+python3
+mono
 rbenv
 ruby
 ruby-build
 ghc
 cabal-install
 stack
-" 
+"
 
 JAVA_DEPEND="
 gradle
@@ -57,7 +58,7 @@ function brew_install {
             brew install $ITEM
         else
             echo "[$ITEM] binary already installed via brew."
-        fi  
+        fi
     done
 }
 
@@ -73,17 +74,17 @@ function brew_cask_install {
 
 # ---------------------- MAIN SCOPE ---------------------- #
 brew_readlink=`readlink $(which brew)`
-if ! [[ $brew_readlink ]] ; then 
+if ! [[ $brew_readlink ]] ; then
     echo "Will install Homebrew for local user."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-else 
+else
     brew update
     brew upgrade --all
 fi
 
 brew_cask_install "$CASK_APPS"
 
-brew_install "$CORE_APPS" 
+brew_install "$CORE_APPS"
 brew_install "$LANGS"
 brew_install "$JAVA_DEPEND"
 

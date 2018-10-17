@@ -2,3 +2,4 @@
 !.vim/bundle/Vundle.com
 .vim/.netrwlist
 .directory
+vim-markdown-preview.html

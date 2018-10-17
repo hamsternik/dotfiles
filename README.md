@@ -1,8 +1,8 @@
-** Installation
+## Installation
 
 `git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git`
 
-** TERMINFO
+#### TERMINFO
 
 An `xterm-256color` TERMINFO file adds escape sequence for italic and overwrite conflicting sequence for standout text.
 
