@@ -41,7 +41,7 @@ Plugin 'lervag/vimtex'
 Plugin 'luochen1990/rainbow'
 Plugin 'lepture/vim-velocity'
 Plugin 'danro/rename.vim'
- 
+
 call vundle#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -57,10 +57,11 @@ filetype indent plugin on
 
 " TODO: This custom group should use more precisely
 augroup vimrc
-    autocmd!
+    " Automatically delete trailing DOS-returns and whitespace on file open and write.
+    autocmd BufRead,BufWritePre,FileWritePre * silent! %s/[\r \t]\+$//
 augroup END
 
-autocmd! vimrc bufwritepost .vimrc source %
+" autocmd! vimrc bufwritepost .vimrc source %
 
 "" Commenting blocks of code
 autocmd FileType c,cpp,m,java,scala,swift   let b:comment_leader = '// '
@@ -75,7 +76,21 @@ autocmd FileType vim                        let b:comment_leader = '" '
 
 set number
 
-set clipboard=unnamed
+if has('unnamedplus')
+        " By default, Vim will not use the system clipboard when yanking/pasting to
+    " the default register. This option makes Vim use the system default
+    " clipboard.
+    " Note that on X11, there are _two_ system clipboards: the "standard" one, and
+    " the selection/mouse-middle-click one. Vim sees the standard one as register
+    " '+' (and this option makes Vim use it by default) and the selection one as
+    " '*'.
+    " See :h 'clipboard' for details.
+    set clipboard=unnamedplus,unnamed
+else
+    " Vim now also uses the selection system clipboard for default yank/paste.
+    set clipboard+=unnamed
+endif
+
 set backspace=indent,eol,start
 
 set exrc
@@ -83,7 +98,7 @@ set secure
 
 set autoread
 
-" Tabulation 
+" Tabulation
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -138,7 +153,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256
-" set cursorline 
+" set cursorline
 
 colorscheme molokai
 let g:molokai_original = 1  " Original monokai bg scheme
@@ -188,7 +203,7 @@ vmap Q gq
 nmap Q gqap
 
 " select ALL
-map <silent> <C-A> ggVG 
+map <silent> <C-A> ggVG
 
 " cancel searching highlight
 nnoremap ; :nohlsearch<CR>
@@ -222,7 +237,7 @@ let g:vim_markdown_folding_disable = 1
 " let g:vim_markdown_folding_style_pythonic = 1
 " let g:vim_markdown_folding_level = 3
 let g:vim_markdown_frontmatter = 1 "YAML Front Matter
-set nofoldenable "Enable/Disable Folding 
+set nofoldenable "Enable/Disable Folding
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           vim-markdown-preview                        "
