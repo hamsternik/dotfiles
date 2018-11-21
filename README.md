@@ -37,6 +37,13 @@ Vim Plugin Manager | Vundle
     - [lepture/vim-velocity](https://github.com/lepture/vim-velocity) - Velocity syntax for vim.
     - [danro/rename.vim](https://github.com/danro/rename.vim) - Rename the current file in the vim buffer + retain relative path.
 
+## Want To Change
+
+- [ ] Set up Travis CI for all README links validation.
+- [ ] Move to `zplug` on Zsh (instead of git submodules).
+- [ ] Made one-line deploying script to install ALL necessary configs & dependencies.
+- [ ] Move to [yadm](https://thelocehiliosan.github.io/yadm/). Maybe this point covers could cover the previous one.
+
 #### TERMINFO
 
 An `xterm-256color` TERMINFO file adds escape sequence for italic and overwrite conflicting sequence for standout text.
