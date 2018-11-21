@@ -1,3 +1,1 @@
-if [ -f ${HOME}/.profile ]; then
-    . ${HOME}/.profile
-fi
+[[ -f ~/.profile ]] && . ~/.profile
