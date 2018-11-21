@@ -31,6 +31,7 @@ is_osx () {
 
 check_and_exec () {
     if [[ -e $1 ]]; then source $1; fi
+}
 
 if is_osx; then
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
