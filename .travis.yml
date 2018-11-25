@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+    - 2.5
+before_scirpt:
+    - gem install awesome_bot
+script:
+    - awesome_bot --skip-save-results README.md
