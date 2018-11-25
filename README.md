@@ -39,7 +39,7 @@ Vim Plugin Manager | Vundle
 
 ## Want To Change
 
-- [ ] Set up Travis CI for all README links validation.
+- [x] Set up Travis CI for all README links validation.
 - [ ] Move to `zplug` on Zsh (instead of git submodules).
 - [ ] Made one-line deploying script to install ALL necessary configs & dependencies.
 - [ ] Move to [yadm](https://thelocehiliosan.github.io/yadm/). Maybe this point covers could cover the previous one.
