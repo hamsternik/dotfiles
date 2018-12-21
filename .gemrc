@@ -1,5 +1,5 @@
 # Default: store at home dir
-gem: --user-install -n~/.bin
+# gem: --user-install -n~/.bin
 
 # Default: store global
 #gem: -n/usr/local/bin

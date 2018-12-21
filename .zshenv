@@ -42,3 +42,8 @@ export PATH=$PATH:$C_SHARP
 
 export FASTLANE="$HOME/.fastlane/bin"
 export PATH=$PATH:$FASTLANE
+
+export RBENV_SHIMS="$HOME/.rbenv/shims"
+export PATH=$PATH:$RBENV_SHIMS
+
+export RBENV_SHELL=zsh
