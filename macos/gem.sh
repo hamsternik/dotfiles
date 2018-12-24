@@ -3,6 +3,5 @@
 gem install \
     xcpretty \
     cocoapods \
-    cocoapods-playgrounds \
     bundler
 
