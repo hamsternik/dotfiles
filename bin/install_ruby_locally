@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ ! -z "$1" ]]; then
+    echo "Ooops. Can't install ruby. You need to pass a specific ruby version as argument."
+    exit 1
+fi
+
+# should be checked, if rbenv is installed in the syste
+# which rbenv
+
+# check that bash/zsh *rc config contains `rvenv init` command result
+# rbenv init >> ~/.bashrc || ~/.zshrc
+
+# install ruby with specific version, passed as argument to that script
+# rbenv install $1
+
+# and make this version global
+# rbenv global $1
+
+### TODO: as add feature, passed version shouldn't be setup as global bu default
+### instead, there should be a flag `--global` to make passed ruby version global
+
+# run gem update after that
+# gem update --system
