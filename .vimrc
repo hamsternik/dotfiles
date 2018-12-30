@@ -21,10 +21,10 @@ call vundle#begin()
 " let Vundle manage itself
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'jph00/swift-apple'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'klen/python-mode'
 Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'keith/swift.vim'
 Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'neovimhaskell/haskell-vim'
 
