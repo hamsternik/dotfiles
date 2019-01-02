@@ -34,19 +34,15 @@ export OPENSSL_BREW=/usr/local/Cellar/openssl/1.0.2j/bin
 export PATH=$OPENSSL_BREW:$PATH
 
 # .NET Core + CLI
-export C_SHARP=/usr/local/share/dotnet
-export PATH=$PATH:$C_SHARP
+export DOTNET=/usr/local/share/dotnet
+export PATH=$PATH:$DOTNET
 
 #export HASKELL_BIN=~/Dropbox/ghc-7.8.3-stepic/bin
 #export PATH=$PATH:$HASKELL_BIN
 
-export FASTLANE="$HOME/.fastlane/bin"
-export PATH=$PATH:$FASTLANE
-
 export RBENV_SHIMS="$HOME/.rbenv/shims"
 export PATH=$PATH:$RBENV_SHIMS
-
 export RBENV_SHELL=zsh
 
 export FASTLANE="$HOME/.fastlane/bin"
-export PATH="$PATH:$FASTLANE"
+export PATH=$PATH:$FASTLANE
