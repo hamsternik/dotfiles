@@ -164,6 +164,8 @@ set background=dark
 "                               Keybindings                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+
 " Fast saving
 nnoremap <leader>w :w!<cr>
 
@@ -212,7 +214,14 @@ noremap <silent> <leader>/ :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'
 noremap <silent> <leader>\ :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " <leader>V reloads it and makes all changes active (file has to be saved first)
-noremap <silent> <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+noremap <silent> <leader>R :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+map <leader>0 :NERDTreeToggle<CR>
+
+" Map +/- keys with leader to change vertical window size
+" `=` symbol is easier to type rather that `+`
+map <leader>=  :vertical res +1<CR>
+map <leader>- :vertical res -1<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           *** PLUGINS SETUP ***                       "
