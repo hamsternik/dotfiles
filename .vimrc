@@ -41,6 +41,7 @@ Plugin 'lervag/vimtex'
 Plugin 'luochen1990/rainbow'
 Plugin 'lepture/vim-velocity'
 Plugin 'danro/rename.vim'
+Plugin 'kana/vim-submode'
 
 call vundle#end()
 
@@ -216,7 +217,6 @@ noremap <silent> <leader>\ :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,
 " <leader>V reloads it and makes all changes active (file has to be saved first)
 noremap <silent> <leader>R :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-map <leader>0 :NERDTreeToggle<CR>
 
 " Map +/- keys with leader to change vertical window size
 " `=` symbol is easier to type rather that `+`
@@ -307,13 +307,13 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme = 'tomorrow'
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   nerd-tree                           "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-silent! nnoremap <F2> :NERDTreeToggle<CR>
-silent! nnoremap <F3> :NERDTreeFind<CR>
+" silent! nnoremap <F2> :NERDTreeToggle<CR>
+" silent! nnoremap <F3> :NERDTreeFind<CR>
+silent! map <leader>0 :NERDTreeToggle<CR>
 
 "let NERDTreeShowHidden=1
 autocmd VimEnter * NERDTree
@@ -374,3 +374,23 @@ let g:cabal_indent_section = 2
 
 " Source: https://www.vim.org/scripts/script.php?script_id=739
 au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               vim submode                             "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"disable submode timeouts:
+let g:submode_timeout = 0
+
+" don't consume submode-leaving key
+let g:submode_keep_leaving_key = 1
+
+let g:submode_leave_with_key = 1
+
+" map <leader>=  :vertical res +1<CR>
+call submode#enter_with('grow/shrink', 'n', '', '<leader>=', ':vertical res +1<CR>')
+call submode#map('grow/shrink', 'n', '', '=', ':vertical res +1<CR>')
+
+" map <leader>- :vertical res -1<CR>
+call submode#enter_with('grow/shrink', 'n', '', '<leader>-', ':vertical res -1<CR>')
+call submode#map('grow/shrink', 'n', '', '-', ':vertical res -1<CR>')
