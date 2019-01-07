@@ -8,8 +8,10 @@
     co          = checkout
     f           = fetch
     fa          = fetch --all
+    fpr         = fetch --prune
     p           = push
     pl          = pull
+    prune       = pull --prune
     df          = diff
     rb          = rebase
     patch       = !git --no-pager diff --no-color
@@ -17,6 +19,7 @@
     r           = reset
     rs          = reset --soft
     rh          = reset --hard
+    undo        = reset --soft HEAD^
 #[stash]
     s           = stash save
     sa          = stash apply
@@ -43,12 +46,12 @@
     email = hamsternik9@gmail.com
 
 [credential]
-    helper = cache --timeout=14400 
+    helper = cache --timeout=14400
 
 [core]
     editor = vim
     safecrlf = true
-    autocrlf = false 	
+    autocrlf = false
     ignorecase = false
 	whitespace = trailing-space,space-before-tab
     excludesfile = ~/.gitignore_global
@@ -79,18 +82,18 @@
 [color "diff"]
     plain = white
 	meta = bold blue black
-    frag = magenta bold 
+    frag = magenta bold
     func = cyan
-    old = red 
+    old = red
     new	= blue bold
 	whitespace = reverse black
     commit = bold black
 [color "status"]
     header = dim white black
-    added = yellow 
-	changed = red 
-    untracked = cyan 
-    unmerged = red 
+    added = yellow
+	changed = red
+    untracked = cyan
+    unmerged = red
 [color "decorate"]
     branch = bold green black # by default: bold gree
     tag = bold yellow black # by default: bold yellow
@@ -108,7 +111,7 @@
 ###  Source Tree ###
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 
 [mergetool "sourcetree"]
 	cmd = ~/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
