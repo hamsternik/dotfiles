@@ -82,3 +82,6 @@ man() {
 		    LESS_TERMCAP_us=$(printf "\e[1;32m") \
 			  man "$@"
 }
+
+# added by travis gem
+[ -f /Users/khomitsevich/.travis/travis.sh ] && source /Users/khomitsevich/.travis/travis.sh
