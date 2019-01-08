@@ -1,24 +1,39 @@
 #!/bin/bash
 
-if [[ ! -z "$1" ]]; then
+function rbenv_global() { rbenv global $1; }
+function rbenv_local() { rbenv local $1; }
+
+# ---{ MAIN }--- #
+
+if [[ -z "$1" ]]; then
     echo "Ooops. Can't install ruby. You need to pass a specific ruby version as argument."
     exit 1
 fi
 
-# should be checked, if rbenv is installed in the syste
-# which rbenv
+while [[ "$#" > 0 ]]; do case $1 in
 
-# check that bash/zsh *rc config contains `rvenv init` command result
-# rbenv init >> ~/.bashrc || ~/.zshrc
+    -g|--global) RBENV_GLOBAL="$2"; shift; shift;;
+    -l|--local) RBENV_LOCAL="$2"; shift; shift;;
+    [0-9]) RUBY_VERSION="$2"; shift; shift;;
+    *) echo "@... unknown parameter passed"; echo "while iteration: $1 @arg, $2 @arg"; exit 1; shift; shift;;
+esac; done
 
-# install ruby with specific version, passed as argument to that script
-# rbenv install $1
+# TODO: check that bash/zsh *rc config contains `rvenv init` command result
+if ! hash rbenv 2>/dev/null; then
+    brew install rbenv
+    rbenv init >> ~/.bashrc || ~/.zshrc
+else
+    echo "@... rbenv has already been installed."
+fi
 
-# and make this version global
-# rbenv global $1
+# Install Ruby with specific version, passed as argument
+# rbenv install $0
 
-### TODO: as add feature, passed version shouldn't be setup as global bu default
-### instead, there should be a flag `--global` to make passed ruby version global
+if [  -z "$RBENV_GLOBAL" ]; then echo "RBENV_GLOBAL"; fi;
+if [  -z "$RBENV_LOCAL" ]; then "RBENV_LOCAL"; fi;
+if [  -z "$RUBY_VERSION" ]; then "RUBY_VERSION"; fi;
 
-# run gem update after that
+# if [ -z "$RBENV_GLOBAL" ]; then rbenv_global $1; fi;
+# if [ -z "$RBENV_LOCAL" ]; then rbenv_local $1; fi;
+
 # gem update --system
