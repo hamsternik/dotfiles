@@ -165,37 +165,41 @@ set background=dark
 "                               Keybindings                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Enter (make new line and get into `insert` mode)
+nnoremap <Enter> o<Esc>
 
+"
+" Ctrl+s (fast saving)
+nnoremap <silent> <C-s> <esc>:w<CR>
+inoremap <silent> <C-s> <esc>:w<CR>
+"
 
-" Fast saving
-nnoremap <leader>w :w!<cr>
-
+" leader+s/+v (Horizontal/Vertical window split)
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
 
-" easier moving between tabs, include tabs creating
+" Ctrl+t/+[/+] (easier moving between tabs, include tabs creating)
 nnoremap <silent> <C-t> :tabnew<cr>
 nnoremap <silent> <C-]> :tabnext<cr>
 nnoremap <silent> <C-[> :tabprevious<cr>
 
+" Jump to bottom/top/left/rigth split
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-nnoremap <Enter> o<Esc>
-nnoremap <silent> <C-S> :<C-u>Update<CR>
+nnoremap <silent> <C-u> :<C-u>Update<CR>
+" inoremap <c-s> <c-o>:Update<CR>
 
-inoremap <c-s> <c-o>:Update<CR>
-inoremap <S-Tab> <C-D>
-
+" Tab/Shift-Tab mapping for each Vim mode
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
-vnoremap > >gv
-vnoremap < <gv
-vnoremap <Tab> >
-vnoremap <S-Tab> <
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+inoremap <S-Tab> <C-D>
 
+" basic Vim grep
 nnoremap gr :grep <cword> *<CR>
 nnoremap Gr :grep <cword> %:p:h/*<CR>
 nnoremap gR :grep '\b<cword>\b' *<CR>

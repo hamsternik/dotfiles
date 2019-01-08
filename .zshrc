@@ -1,6 +1,8 @@
 PROMPT='%B%F{blue}%n%B%F{white}: %B%F{green}%1~%b$(git_super_status) %B%F{white}$ %b%f%k'
 RPROMPT=''
 
+stty -ixon
+
 eval "$(rbenv init -)"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

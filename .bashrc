@@ -4,6 +4,8 @@ case $- in
       *) return;;
 esac
 
+stty -ixon
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
@@ -52,7 +54,7 @@ if [ "$color_prompt" = yes ]; then
             PS1='${debian_chroot:+($debian_chroot)}\[\033[0;36m\]\h\[\033[1;31m\]@\[\033[1;31m\]\u:\[\033[0;35m\]\w\[\033[00m\]\$ '
         else
              PS1='${debian_chroot:+($debian_chroot)}\[\033[0;36m\]\h\[\033[1;31m\]@\[\033[1;32m\]\u:\[\033[0;35m\]\w\[\033[00m\]\$ '
-        fi 
+        fi
     fi
 
 else
@@ -62,7 +64,7 @@ unset color_prompt force_color_prompt
 
 # ALIASES HERE
 if [ -f "$HOME/.aliases" ]; then
-    . "$HOME/.aliases" 
+    . "$HOME/.aliases"
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -72,7 +74,7 @@ if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
         # show in .git folder your current branch
-        #export PS1='\W$(__git_ps1 "(%s)")>'                    
+        #export PS1='\W$(__git_ps1 "(%s)")>'
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
