@@ -315,7 +315,8 @@ let g:airline_theme = 'tomorrow'
 " silent! nnoremap <F3> :NERDTreeFind<CR>
 silent! map <leader>0 :NERDTreeToggle<CR>
 
-"let NERDTreeShowHidden=1
+let NERDTreeShowHidden=1
+let g:NERDTreeIgnore = ['\.swp$', '\~$']
 autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 
