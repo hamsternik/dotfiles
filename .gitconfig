@@ -11,7 +11,7 @@
     fpr         = fetch --prune
     p           = push
     pl          = pull
-    prune       = pull --prune
+    prune       = pull origin --prune
     df          = diff
     rb          = rebase
     patch       = !git --no-pager diff --no-color
