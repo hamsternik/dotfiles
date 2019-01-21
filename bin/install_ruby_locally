@@ -2,23 +2,33 @@
 
 function rbenv_global() { rbenv global $1; }
 function rbenv_local() { rbenv local $1; }
+RUBY_VERSION=""
+RBENV_GLOBAL=""
+RBENV_LOCAL=""
 
 # ---{ MAIN }--- #
 
+#TODO: validate input - should be matched with kind of version number, as `2.5.0`
 if [[ -z "$1" ]]; then
     echo "Ooops. Can't install ruby. You need to pass a specific ruby version as argument."
     exit 1
 fi
 
-while [[ "$#" > 0 ]]; do case $1 in
+version_regex="([0-9]{1,3}\.)+([0-9]{1,3})"
+for param in "$@"; do
+    if [[ "$param" =~ $version_regex ]]; then
+        RUBY_VERSION=$1
+    elif [[ "$param" == "-g" || "$param" == "--global" ]]; then
+        if [[ -z "$RBENV_LOCAL" ]]; then RBENV_GLOBAL=$1; fi
+    elif [[ "$param" == "-l" || "$param" == "--local" ]]; then
+        if [[ -z "$RBENV_GLOBAL" ]]; then RBENV_LOCAL=$1; fi
+    else
+        echo "Parsed unknown parameter."
+        exit 1
+    fi
+done
 
-    -g|--global) RBENV_GLOBAL="$2"; shift; shift;;
-    -l|--local) RBENV_LOCAL="$2"; shift; shift;;
-    [0-9]) RUBY_VERSION="$2"; shift; shift;;
-    *) echo "@... unknown parameter passed"; echo "while iteration: $1 @arg, $2 @arg"; exit 1; shift; shift;;
-esac; done
-
-# TODO: check that bash/zsh *rc config contains `rvenv init` command result
+#TODO: check that bash/zsh *rc config contains `rvenv init` command result
 if ! hash rbenv 2>/dev/null; then
     brew install rbenv
     rbenv init >> ~/.bashrc || ~/.zshrc
@@ -27,13 +37,9 @@ else
 fi
 
 # Install Ruby with specific version, passed as argument
-# rbenv install $0
+rbenv install $0
 
-if [  -z "$RBENV_GLOBAL" ]; then echo "RBENV_GLOBAL"; fi;
-if [  -z "$RBENV_LOCAL" ]; then "RBENV_LOCAL"; fi;
-if [  -z "$RUBY_VERSION" ]; then "RUBY_VERSION"; fi;
+if [ -n "$RBENV_GLOBAL" ]; then rbenv_global $1; fi;
+if [ -n "$RBENV_LOCAL" ]; then rbenv_local $1; fi;
 
-# if [ -z "$RBENV_GLOBAL" ]; then rbenv_global $1; fi;
-# if [ -z "$RBENV_LOCAL" ]; then rbenv_local $1; fi;
-
-# gem update --system
+gem update --system
