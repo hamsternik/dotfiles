@@ -4,6 +4,7 @@ gem install \
     xcpretty \
     cocoapods \
     bundler \
+    mdless \
 
 ### TODO: `gem install fastlane-plugin-update_provisioning_profile_specifier`
 ### TODO: `gem install fastlane-plugin-versioning`
