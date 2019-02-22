@@ -45,6 +45,7 @@ brew "yarn"
 brew "zsh"
 brew "dart-lang/dart/dart"
 brew "swagger-codegen"
+brew "mdp"
 
 cask "google-chrome"
 cask "iterm2"
