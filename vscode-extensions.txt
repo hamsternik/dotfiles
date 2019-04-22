@@ -9,7 +9,7 @@ Dart-Code.flutter
 DavidAnson.vscode-markdownlint
 dbaeumer.jshint
 dbaeumer.vscode-eslint
-franzsilva.fs-flutter-snippets
+GitHub.vscode-pull-request-github
 HookyQR.beautify
 justusadam.language-haskell
 kumar-harsh.graphql-for-vscode
@@ -19,7 +19,6 @@ ms-vscode.cpptools
 ms-vscode.csharp
 PeterJausovec.vscode-docker
 rebornix.ruby
-rlovelett.vscode-swift-language
 sbrink.elm
 toba.vsfire
 vscodevim.vim
