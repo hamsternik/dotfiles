@@ -1,0 +1,18 @@
+cask_args appdir: "/Applications"
+
+cask "font-roboto"
+
+cask "google-chrome"
+cask "provisionql"
+cask "charles"
+
+cask "phinze/cask/java"
+cask "phinze/cask/fastlane"
+cask "phinze/cask/qlmarkdown"
+cask "phinze/cask/reveal"
+cask "phinze/cask/soundcleod"
+cask "phinze/cask/vlc"
+cask "phinze/cask/xquartz"
+cask "phinze/cask/zeplin"
+
+cask "homebrew/cask-versions/java8"
