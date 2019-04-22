@@ -27,6 +27,7 @@ Plugin 'klen/python-mode'
 Plugin 'jcfaria/Vim-R-plugin'
 Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'neovimhaskell/haskell-vim'
+Plugin 'xu-cheng/brew.vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
