@@ -46,3 +46,8 @@ export RBENV_SHELL=zsh
 
 export FASTLANE="$HOME/.fastlane/bin"
 export PATH=$PATH:$FASTLANE
+
+export GOPATH=$HOME/Developer/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
