@@ -16,3 +16,8 @@ cask "phinze/cask/xquartz"
 cask "phinze/cask/zeplin"
 
 cask "homebrew/cask-versions/java8"
+
+cask "calibre"
+cask "postman"
+cask "skype"
+cask "visual-studio-code"
