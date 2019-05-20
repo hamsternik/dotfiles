@@ -23,3 +23,4 @@ brew "wget", args: ['--with-iri']
 brew "xz"
 brew "zsh"
 brew "tmux"
+brew "reattach-to-user-namespace"

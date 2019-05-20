@@ -8,6 +8,7 @@ FILES="
 .gitconfig
 .gitignore_global
 .gemrc
+.tmux.conf
 .vim
 .vimrc
 .zsh
@@ -46,15 +47,15 @@ function deploy {
 }
 
 function packages_deploy {
-    echo "Run deploy packages for $OSTYPE" 
+    echo "Run deploy packages for $OSTYPE"
     case "$OSTYPE" in
-        darwin*) 
+        darwin*)
             ./macos/brew.sh
             ./macos/brew-cask.sh
             ./macos/gem.sh
         ;;
-        linux*) 
-            bash debian/*.sh 
+        linux*)
+            bash debian/*.sh
         ;;
     esac
     echo_finish
