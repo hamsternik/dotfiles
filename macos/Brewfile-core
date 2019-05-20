@@ -22,3 +22,4 @@ brew "screen"
 brew "wget", args: ['--with-iri']
 brew "xz"
 brew "zsh"
+brew "tmux"
