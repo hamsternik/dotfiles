@@ -1,20 +1,24 @@
 [alias]
     cl          = clone --recursive
     a           = add
-    cm          = commit -m
+    c           = commit -m
     ca          = commit --amend
+    co          = checkout
+    cb          = checkout -b
     sh          = show
     br          = branch
-    co          = checkout
     f           = fetch
     fa          = fetch --all
     fpr         = fetch --prune
     p           = push
     pl          = pull
-    prune       = pull origin --prune
     df          = diff
-    rb          = rebase
     patch       = !git --no-pager diff --no-color
+#[rebase]
+    rb          = rebase
+    rbi         = rebase -i
+    rbc         = rebase --continue
+    rba         = rebase --abort
 #[reset]
     r           = reset
     rs          = reset --soft
