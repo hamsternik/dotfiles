@@ -18,6 +18,9 @@ export LC_ALL="en_US.UTF-8"
 export PATH=""
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
 
+export DOTFILES="$HOME/Developer/dotfiles"
+export PATH=$PATH:$DOTFILES
+
 # java
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=${PATH}:${JAVA_HOME}/bin
@@ -40,13 +43,16 @@ export PATH=$PATH:$DOTNET
 #export HASKELL_BIN=~/Dropbox/ghc-7.8.3-stepic/bin
 #export PATH=$PATH:$HASKELL_BIN
 
+# Ruby | rbenv
 export RBENV_SHIMS="$HOME/.rbenv/shims"
 export PATH=$PATH:$RBENV_SHIMS
 export RBENV_SHELL=zsh
 
+# Fastlane
 export FASTLANE="$HOME/.fastlane/bin"
 export PATH=$PATH:$FASTLANE
 
+# Go
 export GOPATH=$HOME/Developer/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin

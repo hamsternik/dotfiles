@@ -5,7 +5,6 @@ Title | Description
 Operation System | macOS Mojave (10.14.6)
 Text Editors | Vim/VS Code
 Unix Shell | Zsh
-Promt | spaceship-prompt
 Vim Plugin Manager | Vundle
 
 ## Install
@@ -17,6 +16,8 @@ Vim Plugin Manager | Vundle
 1. macos/gem.sh
 2. macos/brew.sh
 3. setup.sh
+
+Now I have a new way to install several dependecies: via `Makefile`.
 
 ## CLI Details
 
@@ -38,6 +39,10 @@ Vim Plugin Manager | Vundle
         configuration.
   - [lepture/vim-velocity](https://github.com/lepture/vim-velocity) - Velocity syntax for vim.
   - [danro/rename.vim](https://github.com/danro/rename.vim) - Rename the current file in the vim buffer + retain relative path.
+
+### ZSH package manager
+
+For today I'm using [antibody](https://getantibody.github.io) as a default PM for all available third-parties. Expect, actually, my `aliases` and `git-promt`.
 
 ### Fonts
 
