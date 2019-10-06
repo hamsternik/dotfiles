@@ -1,4 +1,5 @@
-.PHONY : vscode-extensions-install brew-core brew-tools brew-cask
+SHELL := /bin/zsh
+.PHONY : vscode-extensions-install brew-core brew-tools brew-cask antibody
 
 vscode-extensions = "vscode-extensions.txt"
 
@@ -18,3 +19,10 @@ brew:
 	make brew-core
 	make brew-tools
 	make brew-cask
+
+antibody:
+	@echo "Check is antibody installed. Install all packages..."
+	${SHELL} ${DOTFILES}/antibody/install.sh
+	@echo "\nIntegrate installed packages via Zsh..."
+	${SHELL} `source ${HOME}/.zshrc`
+	@exit

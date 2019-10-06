@@ -1,4 +1,4 @@
-PROMPT='%B%F{blue}%n%B%F{white}: %B%F{green}%1~%b$(git_super_status) %B%F{white}$ %b%f%k'
+PROMPT='%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_super_status) %B%F{magenta}~❯ %b%f%k'
 RPROMPT=''
 
 stty -ixon
@@ -43,14 +43,15 @@ if is_osx; then
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
     # TODO: There're should be validated and installed brew/gem packages
 elif is_linux; then
+echo "[TBD] Add some action for Linux..."
 fi
 
-# TODO: Should be installed better way: zplug is most preffered candidate
-# https://github.com/zplug/zplug
+# [local] third-parties
 check_and_exec $HOME/.aliases
 check_and_exec $HOME/.zsh/zsh-git-prompt/zshrc.sh
-check_and_exec $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-check_and_exec $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# [antibody] third-parties
+source ~/.zsh_plugins.sh
 
 # -------------------------------------------------------------------------------------------------------
 
