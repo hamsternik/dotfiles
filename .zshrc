@@ -1,6 +1,8 @@
 PROMPT='%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_super_status) %B%F{magenta}~❯ %b%f%k'
 RPROMPT=''
 
+GIT_PROMPT_EXECUTABLE="haskell"
+
 stty -ixon
 
 eval "$(rbenv init -)"
