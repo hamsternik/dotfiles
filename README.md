@@ -44,6 +44,9 @@ Now I have a new way to install several dependecies: via `Makefile`.
 
 For today I'm using [antibody](https://getantibody.github.io) as a default PM for all available third-parties. Expect, actually, my `aliases` and `git-promt`.
 
+I use CleanMyMac app to eventually clean my disk from any sort of trash. But due to the cleaning CleanMyMac removes all antibody plugins cache.
+So, when it's time to re-install all Zsh plugins, go to `~/dotfiles/antibody` and run `install.sh`.
+
 ### Fonts
 
 I'm using `spaceship-prompt` as a default Zsh prompt after a long time trying to customize it on my own.
