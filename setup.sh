@@ -7,7 +7,6 @@ FILES="
 .gitattributes
 .gitconfig
 .gitignore_global
-.gemrc
 .tmux.conf
 .vim
 .vimrc
