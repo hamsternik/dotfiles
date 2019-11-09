@@ -1,12 +1,6 @@
 [submodule ".zsh/zsh-git-prompt"]
 	path = .zsh/zsh-git-prompt
 	url = https://github.com/olivierverdier/zsh-git-prompt.git
-[submodule ".zsh/zsh-autosuggestions"]
-    path = .zsh/zsh-autosuggestions
-    url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule ".zsh/zsh-syntax-highlighting"]
-    path = .zsh/zsh-syntax-highlighting
-    url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
