@@ -11,15 +11,16 @@ dbaeumer.jshint
 dbaeumer.vscode-eslint
 GitHub.vscode-pull-request-github
 HookyQR.beautify
+James-Yu.latex-workshop
 justusadam.language-haskell
 kumar-harsh.graphql-for-vscode
 magicstack.MagicPython
 ms-python.python
 ms-vscode.cpptools
 ms-vscode.csharp
-PeterJausovec.vscode-docker
 rebornix.ruby
 sbrink.elm
 toba.vsfire
 vscodevim.vim
+wingrunr21.vscode-ruby
 yzhang.markdown-all-in-one
