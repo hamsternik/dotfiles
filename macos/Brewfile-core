@@ -2,27 +2,38 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "dart-lang/dart"
 tap "phinze/cask"
 
+### Third-partiy Packages
+
+# 🍻 A CLI workflow for the administration of macOS applications distributed as binaries
 brew "cask"
+
+# Zsh plugin manager
+brew "getantibody/tap/antibody"
+
+# terminal multiplexer
+brew "tmux"
+
+# Good-lookin' diffs. Actually… nah… The best-lookin' diffs. 🎉
+brew "diff-so-fancy"
+
+# A command-line tool that makes git easier to use with GitHub.
+brew "hub"
+
+# 📦 Mac App Store command line interface
+brew "mas"
+
+# General-purpose data compression with high compression ratio
+brew "xz"
+
+# macOs wrapper, needs for tmux
+brew "reattach-to-user-namespace"
+
 brew "cloc"
 brew "cmake"
-brew "diff-so-fancy"
-brew "ffmpeg"
-brew "gifsicle"
-brew "grep"
 brew "htop"
-brew "hub"
-brew "mas"
-brew "mdp"
-brew "minicom"
+brew "grep"
 brew "openssh"
-brew "screen"
-brew "wget", args: ['--with-iri']
-brew "xz"
-brew "zsh"
-brew "tmux"
-brew "reattach-to-user-namespace"
+brew "ffmpeg"
 brew "watch"
-brew "getantibody/tap/antibody"
