@@ -1,4 +1,0 @@
-#!/bin/bash
-
-clear
-sensors && hddtemp /dev/sd[a-z]
