@@ -1,25 +1,19 @@
 cask_args appdir: "/Applications"
 
-cask "font-roboto"
-
 cask "google-chrome"
-cask "provisionql"
-cask "charles"
-
-cask "adoptopenjdk"
-cask "phinze/cask/fastlane"
-cask "phinze/cask/qlmarkdown"
-cask "phinze/cask/reveal"
-cask "phinze/cask/soundcleod"
-cask "phinze/cask/vlc"
-cask "phinze/cask/xquartz"
-cask "phinze/cask/zeplin"
-
 cask "telegram"
 cask "slack"
-cask "calibre"
-cask "postman"
 cask "skype"
-cask "visual-studio-code"
-cask "transmission"
+
+cask "font-roboto"
+cask "calibre"
+
 cask "typora"
+cask "visual-studio-code"
+cask "provisionql"
+
+cask "charles"
+cask "postman"
+
+cask "phinze/cask/vlc"
+cask "phinze/cask/zeplin"
