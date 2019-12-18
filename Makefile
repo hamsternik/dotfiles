@@ -1,19 +1,19 @@
 SHELL := /bin/zsh
 .PHONY : vscode-extensions-install brew-core brew-tools brew-cask antibody
 
-vscode-extensions = "vscode-extensions.txt"
+vscode-extensions = ".vscode-extensions"
 
 vscode-extensions-install:
 	@if [ -e "$(vscode-extensions)" ]; then cat $(vscode-extensions) | xargs -L 1 code --install-extension; fi
 
 brew-core:
-	brew bundle --file=macos/Brewfile-core
+	brew bundle --file=brew/Brewfile-core
 
 brew-tools:
-	brew bundle --file=macos/Brewfile-tools
+	brew bundle --file=brew/Brewfile-tools
 
 brew-cask:
-	brew bundle --file=macos/Brewfile-cask
+	brew bundle --file=brew/Brewfile-cask
 
 brew:
 	make brew-core
