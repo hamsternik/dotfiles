@@ -7,6 +7,7 @@ FILES="
 .gitattributes
 .gitconfig
 .gitignore_global
+.lfrc
 .tmux.conf
 .vim
 .vimrc
@@ -14,7 +15,6 @@ FILES="
 .zshenv
 .zshrc
 "
-#.ssh/config
 # ---------------------- END SCOPE ---------------------- #
 
 # ---------------------- FUNCTION SCOPE ---------------------- #
@@ -32,17 +32,16 @@ function deploy {
 
         if [[ -e $TARGET ]]; then
             echo "$ITEM is exist. Skipping...\n"
+        elif [[ "$ITEM" == ".lfrc" ]]; then
+            if [[ ! -d "$HOMEPATH/.config/lf" ]]; then
+                mkdir -p $HOMEPATH/.config/lf
+            fi
+            ln -v -s "$SOURCE" "$HOMEPATH/.config/lf/lfrc"
         else
             ln -v -s "$SOURCE" "$TARGET"
             echo "$ITEM symlink was created successfully!\n"
         fi
     done
-
-    # TODO: Should be deployed only for OS X system.
-    # if [[ -f $SCRIPT_DIR/xterm-256color.terminfo ]]; then
-        # echo "TERMINFO for xterm will be compiled."
-        # tic $SCRIPT_DIR/xterm-256color.terminfo
-    # fi
 }
 
 function packages_deploy {

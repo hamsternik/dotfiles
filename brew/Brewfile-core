@@ -4,36 +4,46 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "phinze/cask"
 
-### Third-partiy Packages
+### Core Apps 📦 🎉
 
-# 🍻 A CLI workflow for the administration of macOS applications distributed as binaries
-brew "cask"
-
-# Zsh plugin manager
+# Antibody -- Zsh plugin manager
 brew "getantibody/tap/antibody"
 
-# terminal multiplexer
-brew "tmux"
+# Caks -- A CLI workflow for the administration of macOS applications distributed as binaries 🍻
+brew "cask"
 
-# Good-lookin' diffs. Actually… nah… The best-lookin' diffs. 🎉
+# CLoC -- Count Lines of Code
+brew "cloc"
+
+# Cmake -- family of tools designed to build, test and package software
+brew "cmake"
+
+# Differ -- Good-lookin' diffs. Actually… nah… The best-lookin' diffs.
 brew "diff-so-fancy"
 
-# A command-line tool that makes git easier to use with GitHub.
-brew "hub"
+# Grep -- GNU grep app
+brew "grep"
 
-# 📦 Mac App Store command line interface
+# HTop -- interactive process viewer for Unix systems
+brew "htop"
+
+# LF -- terminal file manager
+brew "lf"
+
+# Mas -- Mac App Store command line interface
 brew "mas"
 
-# General-purpose data compression with high compression ratio
-brew "xz"
+# OpenSSH -- suite of secure networking utilities based on the Secure Shell (SSH) protocol
+brew "openssh"
 
-# macOs wrapper, needs for tmux
+# Reattach -- macOS wrapper, needs for tmux
 brew "reattach-to-user-namespace"
 
-brew "cloc"
-brew "cmake"
-brew "htop"
-brew "grep"
-brew "openssh"
-brew "ffmpeg"
+# Tmux -- terminal multiplexer
+brew "tmux"
+
+# Watch -- Runs the specified command repeatedly and displays the results on standard output
 brew "watch"
+
+# XZ -- General-purpose data compression with high compression ratio
+brew "xz"

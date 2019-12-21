@@ -43,6 +43,9 @@ Plugin 'luochen1990/rainbow'
 Plugin 'lepture/vim-velocity'
 Plugin 'danro/rename.vim'
 Plugin 'kana/vim-submode'
+" BClose -- deleting a buffer without closing the window (for NeoVim). Need for LF below.
+Plugin 'rbgrouleff/bclose.vim'
+Plugin 'ptzz/lf.vim'
 
 call vundle#end()
 
@@ -400,3 +403,13 @@ call submode#map('grow/shrink', 'n', '', '=', ':vertical res +1<CR>')
 " map <leader>- :vertical res -1<CR>
 call submode#enter_with('grow/shrink', 'n', '', '<leader>-', ':vertical res -1<CR>')
 call submode#map('grow/shrink', 'n', '', '-', ':vertical res -1<CR>')
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                           LF -- terminal file manager                 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lf_map_keys = 0
+map <leader>l :LfNewTab<CR>
+
+" Opening `lf` instead of netrw when you open a directory
+let g:NERDTreeHijackNetrw = 0 "" add this line if you use NERDTree
+let g:lf_replace_netrw = 1 "" open lf when vim open a directory

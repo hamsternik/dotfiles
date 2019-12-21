@@ -48,13 +48,6 @@ elif is_linux; then
 echo "[TBD] Add some action for Linux..."
 fi
 
-# [local] third-parties
-check_and_exec $HOME/.aliases
-check_and_exec $HOME/.zsh/zsh-git-prompt/zshrc.sh
-
-# [antibody] third-parties
-source ~/.zsh_plugins.sh
-
 # -------------------------------------------------------------------------------------------------------
 
 zstyle ":completion:*" auto-description "specify: %d"
@@ -85,6 +78,53 @@ man() {
 		    LESS_TERMCAP_us=$(printf "\e[1;32m") \
 			  man "$@"
 }
+
+# -------------------------------------------------------------------------------------------------------
+
+# Change cursor shape for different vi modes.
+# [Source](https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52).
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# Use lf to switch directories and bind it to ctrl-o.
+# [Soure](https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52).
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
+bindkey -s '^l' 'lf\n'
+
+### Install Zsh Plugins
+
+# [local] third-parties
+check_and_exec $HOME/.aliases
+check_and_exec $HOME/.zsh/zsh-git-prompt/zshrc.sh
+
+# [antibody] third-parties
+source ~/.zsh_plugins.sh
 
 # added by travis gem
 [ -f /Users/khomitsevich/.travis/travis.sh ] && source /Users/khomitsevich/.travis/travis.sh
