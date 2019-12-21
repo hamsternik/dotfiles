@@ -1,13 +1,30 @@
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                                Prompt & Colors                           "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autoload -U colors && colors
+
 PROMPT='%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_super_status) %B%F{magenta}~❯ %b%f%k'
 RPROMPT=''
 
-GIT_PROMPT_EXECUTABLE="haskell"
+# check if Haskell already installed in system
+if hash ghc 2>/dev/null; then
+    GIT_PROMPT_EXECUTABLE="haskell"
+else
+    GIT_PROMPT_EXECUTABLE="python"
+fi
+
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                                Global Functions                          "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+check_and_exec () {
+    if [[ -e $1 ]]; then source $1; fi
+}
+
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                                Zsh -- Options                            "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 stty -ixon
-
-eval "$(rbenv init -)"
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
 setopt autocd
 setopt prompt_subst
@@ -18,37 +35,30 @@ setopt histignorealldups
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
-autoload -U compinit && compinit
-autoload -U promptinit && promptinit
-autoload -U colors && colors
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                                Zsh -- History                            "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # Ignore interactive commands from history
 export HISTORY_IGNORE="(ls|bg|fg|pwd|exit|cd ..)"
 
+# Zsh -- History setup
+# TODO: due deploy process create `.zsh_history` file inside $HOME directory
 HISTFILE="~/.zsh_history"
 HISTSIZE=2000
 SAVEHIST=2000
 
-is_linux () {
-    [[ $('uname') == 'Linux' ]];
-}
+# Ruby -- rbenv configuration
+eval "$(rbenv init -)"
 
-is_osx () {
-    [[ $('uname') == 'Darwin' ]]
-}
-
-check_and_exec () {
-    if [[ -e $1 ]]; then source $1; fi
-}
-
-if is_osx; then
-    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-    # TODO: There're should be validated and installed brew/gem packages
-elif is_linux; then
-echo "[TBD] Add some action for Linux..."
-fi
-
-# -------------------------------------------------------------------------------------------------------
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                          Zsh -- Auto/Tab Completion                      "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autoload -U compinit && compinit
+autoload -U promptinit && promptinit
 
 zstyle ":completion:*" auto-description "specify: %d"
 zstyle ":completion:*" completer _expand _complete _correct _approximate
@@ -79,7 +89,9 @@ man() {
 			  man "$@"
 }
 
-# -------------------------------------------------------------------------------------------------------
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                          Zsh -- Shell functions                          "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # Change cursor shape for different vi modes.
 # [Source](https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52).
@@ -117,14 +129,20 @@ lfcd () {
 bindkey -s '^o' 'lfcd\n'
 bindkey -s '^l' 'lf\n'
 
-### Install Zsh Plugins
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                              Zsh -- Plugins                              "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# [local] third-parties
+# [local]
 check_and_exec $HOME/.aliases
 check_and_exec $HOME/.zsh/zsh-git-prompt/zshrc.sh
 
-# [antibody] third-parties
+# [antibody]
 source ~/.zsh_plugins.sh
+
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                               Travis CI                                  "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # added by travis gem
 [ -f /Users/khomitsevich/.travis/travis.sh ] && source /Users/khomitsevich/.travis/travis.sh
