@@ -1,10 +1,12 @@
 SHELL := /bin/zsh
-.PHONY : vscode-extensions-install brew-core brew-tools brew-cask antibody
+.PHONY : install uninstall vscode-extensions-install brew-core brew-tools brew-cask antibody
 
-vscode-extensions = ".vscode-extensions"
+install:
+	.dotfiles.sh --install
+	make brew
 
-vscode-extensions-install:
-	@if [ -e "$(vscode-extensions)" ]; then cat $(vscode-extensions) | xargs -L 1 code --install-extension; fi
+uninstall:
+	.dotfiles.sh --uninstall
 
 brew-core:
 	brew bundle --file=brew/Brewfile-core
@@ -19,6 +21,10 @@ brew:
 	make brew-core
 	make brew-tools
 	make brew-cask
+
+vscode-extensions = ".vscode-extensions"
+vscode-extensions-install:
+	@if [ -e "$(vscode-extensions)" ]; then cat $(vscode-extensions) | xargs -L 1 code --install-extension; fi
 
 antibody:
 	@echo "Check is antibody installed. Install all packages..."
