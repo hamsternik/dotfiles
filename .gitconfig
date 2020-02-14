@@ -112,18 +112,13 @@
 [diff]
     tool = opendiff
 
+[diff "localizablestrings"]
+    textconv = "iconv -f utf-16 -t utf-8"
+    binary = false
+
 [merge]
     tool = opendiff
     conflictstyle = diff3
-
-###  Source Tree ###
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-
-[mergetool "sourcetree"]
-	cmd = ~/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 
 [apply]
 	whitespace = fix
