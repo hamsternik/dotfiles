@@ -26,3 +26,5 @@ cask "figma"
 
 cask "vlc"
 cask "flume"
+
+cask "daisydisk"
