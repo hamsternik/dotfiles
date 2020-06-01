@@ -28,3 +28,5 @@ cask "vlc"
 cask "flume"
 
 cask "daisydisk"
+
+cask "rectangle"
