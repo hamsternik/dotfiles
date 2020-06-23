@@ -30,3 +30,4 @@ cask "flume"
 cask "daisydisk"
 
 cask "rectangle"
+cask "meetingbar"
