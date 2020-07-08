@@ -31,3 +31,5 @@ cask "daisydisk"
 
 cask "rectangle"
 cask "meetingbar"
+
+cask "airtable"
