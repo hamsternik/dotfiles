@@ -1,10 +1,5 @@
-mafredri/zsh-async
-#olivierverdier/zsh-git-prompt
-# zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-history-substring-search
-
-# Custom Zsh prompt
-#sindresorhus/pure
-#denysdovhan/spaceship-prompt
+mafredri/zsh-async
+lukechilds/zsh-nvm
