@@ -34,3 +34,5 @@ cask "meetingbar"
 
 cask "airtable"
 cask "obsidian"
+
+cask "icons8"
