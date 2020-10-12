@@ -1,4 +1,5 @@
 brew "appledoc"
+brew "bat"
 brew "brew-cask-completion"
 brew "ghc"
 brew "ctags"
