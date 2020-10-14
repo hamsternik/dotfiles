@@ -1,3 +1,7 @@
+tap "mongodb/brew"
+
+### Developer Tools
+
 brew "appledoc"
 brew "bat"
 brew "brew-cask-completion"
@@ -8,6 +12,7 @@ brew "grip"
 brew "haskell-stack"
 brew "kotlin"
 brew "mergepbx"
+brew "mongodb-community"
 brew "mosh"
 brew "node"
 brew "numpy"
