@@ -65,3 +65,21 @@ To check that the terminal could display the text italic, type:
 ```
 echo `tput sitm`italics`tput ritm` `tput smso`standout`tput rmso`
 ```
+
+### MongoDB
+
+Basically, I am not a cloud engineer, so I really need some space to recall the basic information about i.e. how to run
+a mongoDB service localy. Here it is!
+
+- to run MongoDB process
+
+```
+brew services start mongodb-community
+```
+
+- to stop MongoDB as macOS service
+```
+brew services stop mongodb-community
+```
+
+More info how to install and work with the latest version of MongoDB Community take a look in the [documentation page](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/#run-mongodb-community-edition).
