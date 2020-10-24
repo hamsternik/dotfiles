@@ -1,7 +1,7 @@
 SHELL := /bin/zsh
 .zshrc: .SHELLFLAGS := --rcfile zshrc -ic --
 
-bold := $(shell tput bold)
+bold := $(shell tput bold) # use as $(tput bold)
 yellow := $(shell tput setaf 3)
 tput_off := $(shell tput sgr0)
 
@@ -38,7 +38,6 @@ vscode-extensions-install:
 .PHONY: vscode-extensions-install
 
 antibody:
-	$(info $(bold)$(yellow)Install antibody. Install all zsh packages.$(tput_off))
 	$(shell ${DOTFILES}/antibody/install.sh)
 .PHONY: antibody
 
