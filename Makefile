@@ -1,4 +1,9 @@
 SHELL := /bin/zsh
+.zshrc: .SHELLFLAGS := --rcfile zshrc -ic --
+
+bold := $(shell tput bold)
+yellow := $(shell tput setaf 3)
+tput_off := $(shell tput sgr0)
 
 install:
 	.dotfiles.sh --install
@@ -33,9 +38,7 @@ vscode-extensions-install:
 .PHONY: vscode-extensions-install
 
 antibody:
-	@echo "Check is antibody installed. Install all packages..."
-	${SHELL} ${DOTFILES}/antibody/install.sh
-	@echo "\nIntegrate installed packages via Zsh..."
-	${SHELL} `source ${HOME}/.zshrc`
-	@exit
+	$(info $(bold)$(yellow)Install antibody. Install all zsh packages.$(tput_off))
+	$(shell ${DOTFILES}/antibody/install.sh)
 .PHONY: antibody
+
