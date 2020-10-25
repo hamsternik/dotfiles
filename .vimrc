@@ -46,6 +46,7 @@ Plugin 'kana/vim-submode'
 " BClose -- deleting a buffer without closing the window (for NeoVim). Need for LF below.
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'ptzz/lf.vim'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 
