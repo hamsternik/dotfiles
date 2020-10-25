@@ -4,6 +4,7 @@
 HOMEPATH="${HOME}"
 FILES="
 .aliases
+.editorconfig
 .gitattributes
 .gitconfig
 .gitignore_global
