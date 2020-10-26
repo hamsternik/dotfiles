@@ -1,4 +1,4 @@
-<h1 align="center">dotfiles 💻 ~/</h1>
+gh1 align="center">dotfiles 💻 ~/</h1>
 
 Title | Description
 ----- | ----------
@@ -56,15 +56,11 @@ I have [a link](https://github.com/hamsternik/dotfiles/tree/master/fonts) to tha
 
 On macOS system you actually can find all installed fonts by `~/Library/Fonts` path.
 
-### TERMINFO
+### True Color Supporting
 
-An `xterm-256color` TERMINFO file adds escape sequence for italic and overwrite conflicting sequence for standout text.
+I switched from the default Terminal.app macOS application to the [cross-platform, GPU-accelerated and popular terminal emulator](https://github.com/alacritty/alacritty). Say hello, alacritty 👋🏻
 
-To check that the terminal could display the text italic, type:
-
-```
-echo `tput sitm`italics`tput ritm` `tput smso`standout`tput rmso`
-```
+The topmost reason of doing that is that [the Terminal.app does not support true colors](https://gist.github.com/XVilka/8346728#not-supporting-true-color) and I **basically can not** make my vim so much brilliant as I can do, obviously.
 
 ### MongoDB
 
