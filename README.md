@@ -62,6 +62,8 @@ I switched from the default Terminal.app macOS application to the [cross-platfor
 
 The topmost reason of doing that is that [the Terminal.app does not support true colors](https://gist.github.com/XVilka/8346728#not-supporting-true-color) and I **basically can not** make my vim so much brilliant as I can do, obviously.
 
+Right now I am using [onedark](https://github.com/joshdick/onedark.vim) colorscheme paired with the [lightline](https://github.com/itchyny/lightline.vim) which [is veeery sweety](https://www.sainnhe.dev/post/status-line-config/) yeah!
+
 ### MongoDB
 
 Basically, I am not a cloud engineer, so I really need some space to recall the basic information about i.e. how to run
