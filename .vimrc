@@ -1,3 +1,4 @@
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                preamble                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -21,6 +22,12 @@ call vundle#begin()
 " let Vundle manage itself
 Plugin 'VundleVim/Vundle.vim'
 
+" A dark Vim/Neovim color scheme inspired by Atoms's syntax theme.
+Plugin 'joshdick/onedark.vim'
+
+" A light and configurable statusline/tabline plugin for Vim
+Plugin 'itchyny/lightline.vim'
+
 Plugin 'jph00/swift-apple'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'klen/python-mode'
@@ -32,8 +39,6 @@ Plugin 'xu-cheng/brew.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
@@ -42,13 +47,35 @@ Plugin 'lervag/vimtex'
 Plugin 'luochen1990/rainbow'
 Plugin 'lepture/vim-velocity'
 Plugin 'danro/rename.vim'
-Plugin 'kana/vim-submode'
-" BClose -- deleting a buffer without closing the window (for NeoVim). Need for LF below.
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'ptzz/lf.vim'
 Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               Color Scheme                            "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+syntax enable
+set t_Co=256
+colorscheme onedark
+
+" Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+" (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors "use native true colors (only supported starting vim v8)
+  endif
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                        turn on filetype plugins                         "
@@ -142,29 +169,15 @@ set fencs=utf-8,cp1251,koi8-r,ucs-2,cp-866
 
 " Set up mouse in all vim modes
 if has('mouse')
-    set mouse=a
+set mouse=a
 endif
 
 " macOS only
 if has("mac") || has("macunix")
-    set ambiwidth=double
+set ambiwidth=double
 endif
 
-if &t_Co > 2 || has("gui_running")
-    syntax on
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               Color Scheme                            "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set t_Co=256
-" set cursorline
-
-colorscheme molokai
-let g:molokai_original = 1  " Original monokai bg scheme
-let g:rehash256 = 1       " Alternative 256 colors scheme
-set background=dark
+set cursorline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Keybindings                             "
@@ -236,6 +249,23 @@ map <leader>- :vertical res -1<CR>
 "                           *** PLUGINS SETUP ***                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               lightline                               "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set laststatus=2
+set noshowmode
+
+let g:lightline = {
+    \ 'colorscheme': 'onedark',
+    \ 'separator': { 'left': '/', 'right': '\' },
+    \ 'subseparator': { 'left': '', 'right': '' },
+    \ 'tabline': { 'left': [ [ 'buffers'] ], 'right': [ [ 'tabs' ] ] },
+    \ 'component_expand': { 'buffers': 'lightline#bufferline#buffers' },
+    \ 'component_type': { 'buffers': 'tabsel' },
+    \ 'component_raw': { 'buffers': 1 }
+    \ }
+let g:lightline#bufferline#clickable = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               python-mode                             "
@@ -306,17 +336,6 @@ let g:rainbow_conf = {
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   vim-airline                         "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set noshowmode
-set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_theme = 'tomorrow'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   nerd-tree                           "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -326,8 +345,12 @@ silent! map <leader>0 :NERDTreeToggle<CR>
 
 let NERDTreeShowHidden=1
 let g:NERDTreeIgnore = ['\.swp$', '\~$']
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+
+" Start NERDTree automatically
+" autocmd VimEnter * NERDTree
+
+" Jump to the main window
+" autocmd VimEnter * wincmd p
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -398,12 +421,12 @@ let g:submode_keep_leaving_key = 1
 let g:submode_leave_with_key = 1
 
 " map <leader>=  :vertical res +1<CR>
-call submode#enter_with('grow/shrink', 'n', '', '<leader>=', ':vertical res +1<CR>')
-call submode#map('grow/shrink', 'n', '', '=', ':vertical res +1<CR>')
+" call submode#enter_with('grow/shrink', 'n', '', '<leader>=', ':vertical res +1<CR>')
+" call submode#map('grow/shrink', 'n', '', '=', ':vertical res +1<CR>')
 
 " map <leader>- :vertical res -1<CR>
-call submode#enter_with('grow/shrink', 'n', '', '<leader>-', ':vertical res -1<CR>')
-call submode#map('grow/shrink', 'n', '', '-', ':vertical res -1<CR>')
+" call submode#enter_with('grow/shrink', 'n', '', '<leader>-', ':vertical res -1<CR>')
+" call submode#map('grow/shrink', 'n', '', '-', ':vertical res -1<CR>')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           LF -- terminal file manager                 "
