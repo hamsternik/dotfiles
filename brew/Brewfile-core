@@ -9,12 +9,6 @@ tap "phinze/cask"
 # Antibody -- Zsh plugin manager
 brew "getantibody/tap/antibody"
 
-# Caks -- A CLI workflow for the administration of macOS applications distributed as binaries 🍻
-brew "cask"
-
-# CLoC -- Count Lines of Code
-brew "cloc"
-
 # Cmake -- family of tools designed to build, test and package software
 brew "cmake"
 
