@@ -1,39 +1,25 @@
 cask_args appdir: "/Applications"
-
+#
 # Ask root privileges
+#
 cask "basictex"
-cask "java"
-
+cask "bettertouchtool"
+cask "bitwarden"
+cask "calibre"
+cask "charles"
+cask "daisydisk"
+cask "figma"
+cask "font-roboto"
 cask "google-chrome"
 cask "google-backup-and-sync"
-cask "telegram"
+cask "java"
+cask "meetingbar"
+cask "obsidian"
+cask "postman"
+cask "provisionql"
+cask "rectangle"
 cask "slack"
 cask "skype"
-
-cask "font-roboto"
-cask "calibre"
-
-cask "typora"
+cask "telegram"
 cask "visual-studio-code"
-cask "provisionql"
-
-cask "bitwarden"
-cask "charles"
-cask "postman"
-
 cask "zeplin"
-cask "figma"
-
-cask "vlc"
-cask "flume"
-
-cask "daisydisk"
-
-cask "rectangle"
-cask "meetingbar"
-
-cask "airtable"
-cask "obsidian"
-
-cask "icons8"
-cask "bettertouchtool"
