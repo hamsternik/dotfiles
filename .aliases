@@ -10,7 +10,15 @@ elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
         alias ls='ls -G'
 fi
 
-# Optional
+# Routing {
+    alias dev="cd ~/Developer/hamsternik"
+    alias blog="cd ~/Developer/hamsternik/blog"
+    alias d="cd ~/Developer/hamsternik/dotfiles"
+    alias course="cd ~/Developer/hamsternik/ios-course"
+    alias life="cd ~/Developer/life360"
+# }
+
+# Optional {
     alias l="ls -CF"
     alias ll="l -Al"
     alias la="l -A"
@@ -19,7 +27,7 @@ fi
     alias ..="cd .."
 
     alias cl="clear"
-    
+
     alias g="git"
     alias gdb="gdb -q"
     alias dmesg="dmesg -T"
