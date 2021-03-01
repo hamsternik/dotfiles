@@ -58,12 +58,13 @@ Run `make antibody` command in the root directory. Another option: open `~/dotfi
 
 ### Fonts
 
-I'm using `spaceship-prompt` as a default Zsh prompt after a long time trying to customize it on my own.
-It required `zsh` to be installed and [Powerline Font](https://github.com/powerline/fonts) as well.
+I'm using `spaceship-prompt` as a default Zsh prompt after a long time trying to customize it on my own. It required `zsh` to be installed and [Powerline Font](https://github.com/powerline/fonts) as well.
 
-I have [a link](https://github.com/hamsternik/dotfiles/tree/master/fonts) to that repo, which you can find in `fonts` directory.
+#### Deploy
 
-On macOS system you actually can find all installed fonts by `~/Library/Fonts` path.
+- download the [repo](https://github.com/hamsternik/dotfiles/tree/master/fonts)
+- cd to the `fonts` directory
+- copy fonts to the `~/Library/Fonts` directory
 
 ### True Color Supporting
 
