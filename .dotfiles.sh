@@ -47,7 +47,7 @@ function install_dotfiles {
     log_start "${FUNCNAME[0]}"
     ITEMS=$1
     for ITEM in $ITEMS; do
-        SOURCE=$(pwd)/$ITEM
+        SOURCE=$(pwd)/configs/$ITEM
         TARGET=$HOMEPATH/$ITEM
 
         if [[ -e $TARGET ]]; then

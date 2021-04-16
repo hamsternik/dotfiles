@@ -6,12 +6,11 @@ yellow := $(shell tput setaf 3)
 tput_off := $(shell tput sgr0)
 
 install:
-	.dotfiles.sh --install
-	make brew
+	${shell} ./.dotfiles.sh --install
 .PHONY: install
 
 uninstall:
-	.dotfiles.sh --uninstall
+	$(shell) .dotfiles.sh --uninstall
 .PHONY: uninstall
 
 brew-core:
