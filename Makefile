@@ -32,7 +32,7 @@ brew:
 	make brew-cask
 .PHONY: brew
 
-vscode-extensions = ".vscode-extensions"
+vscode-extensions = "vscode/.vscode-extensions"
 vscode-extensions-install:
 	@if [ -e "$(vscode-extensions)" ]; then cat $(vscode-extensions) | xargs -L 1 code --install-extension; fi
 .PHONY: vscode-extensions-install
