@@ -38,6 +38,6 @@ vscode-extensions-install:
 .PHONY: vscode-extensions-install
 
 antibody:
-	$(shell ${DOTFILES}/antibody/install.sh)
+	$(shell) antibody/install.sh
 .PHONY: antibody
 
