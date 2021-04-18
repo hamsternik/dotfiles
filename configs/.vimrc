@@ -196,20 +196,22 @@ set cursorline
 " Enter (make new line and get into `insert` mode)
 nnoremap <Enter> o<Esc>
 
-"
 " Ctrl+s (fast saving)
 nnoremap <silent> <C-s> <esc>:w<CR>
 inoremap <silent> <C-s> <esc>:w<CR>
-"
 
 " leader+s/+v (Horizontal/Vertical window split)
-nnoremap <leader>s :split<cr>
-nnoremap <leader>v :vsplit<cr>
+nnoremap <leader>s :split<CR>
+nnoremap <leader>v :vsplit<CR>
 
-" Ctrl+t/+[/+] (easier moving between tabs, include tabs creating)
-nnoremap <silent> <C-t> :tabnew<cr>
-nnoremap <silent> <C-]> :tabnext<cr>
-nnoremap <silent> <C-[> :tabprevious<cr>
+" Create / Navigate through Tabs
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-]> :tabnext<CR>
+"nnoremap <C-[> :tabprevious<CR>
+
+inoremap <C-t> <Esc>:tabnew<CR>
+inoremap <C-]> <Esc>:tabnext<CR>i
+"inoremap <C-[> <Esc>:tabprevious<CR>i
 
 " Jump to bottom/top/left/rigth split
 map <c-j> <c-w>j
@@ -248,7 +250,6 @@ noremap <silent> <leader>\ :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,
 
 " <leader>V reloads it and makes all changes active (file has to be saved first)
 noremap <silent> <leader>R :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
 
 " Map +/- keys with leader to change vertical window size
 " `=` symbol is easier to type rather that `+`
