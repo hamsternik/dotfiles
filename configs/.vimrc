@@ -206,11 +206,14 @@ nnoremap <leader>v :vsplit<CR>
 
 " Create / Navigate through Tabs
 nnoremap <C-t> :tabnew<CR>
-nnoremap <C-]> :tabnext<CR>
-"nnoremap <C-[> :tabprevious<CR>
-
 inoremap <C-t> <Esc>:tabnew<CR>
+
+nnoremap <C-]> :tabnext<CR>
 inoremap <C-]> <Esc>:tabnext<CR>i
+
+" `Ctrl-[` in ViM the same as `Esc`.
+" see comments: https://vi.stackexchange.com/questions/31004/vim-shortcut-for-tabprevious-change-opened-file-on-start
+"nnoremap <C-[> :tabprevious<CR>
 "inoremap <C-[> <Esc>:tabprevious<CR>i
 
 " Jump to bottom/top/left/rigth split
