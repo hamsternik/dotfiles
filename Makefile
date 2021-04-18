@@ -40,3 +40,5 @@ antibody:
 	$(shell) antibody/install.sh
 .PHONY: antibody
 
+# References
+# https://github.com/webpro/dotfiles/blob/master/Makefile

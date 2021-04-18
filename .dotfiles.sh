@@ -102,5 +102,5 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-# Sources:
-# 1. https://github.com/samoshkin/dotfiles/blob/master/install.sh
+# References
+# https://github.com/webpro/dotfiles/blob/master/bin/dotfiles
