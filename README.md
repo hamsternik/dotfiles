@@ -2,7 +2,8 @@
 
 ## ⛏ Install
 
-`git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git`
+- `git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git` – first "raw" setup
+- `git submodule update --init --recursive` – already downloaded repo w/o initialized submodules
 
 ## 🗿 Deploy
 
@@ -13,8 +14,9 @@ There're plenty of nice-to-havae commands that facilitates my every dotfiles set
 - install
 - uninstall
 - brew
-- vscode-extensions-install
 - antibody
+- vscode-extensions-export
+- vscode-extensions-install
 
 Type `make %command name%` and you will repro one part of my daily configuration.
 
