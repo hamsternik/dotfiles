@@ -15,8 +15,7 @@ fi
     alias blog="cd ~/Developer/hamsternik/blog"
     alias d="cd ~/Developer/hamsternik/dotfiles"
     alias n="cd ~/Developer/hamsternik/notes"
-    alias course="cd ~/Developer/hamsternik/ios-course"
-    alias life="cd ~/Developer/life360"
+    alias work="cd ~/Developer/life360"
 # }
 
 # Optional {
