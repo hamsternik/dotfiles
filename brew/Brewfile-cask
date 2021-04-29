@@ -2,6 +2,8 @@ cask_args appdir: "/Applications"
 #
 # Ask root privileges
 #
+
+cask "alacritty"
 cask "basictex"
 cask "bettertouchtool"
 cask "bitwarden"

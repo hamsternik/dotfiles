@@ -1,8 +1,6 @@
 tap "mongodb/brew"
 
 ### Developer Tools
-brew "alacritty"
-brew "appledoc"
 brew "bat"
 brew "brew-cask-completion"
 brew "ctags"
@@ -17,10 +15,8 @@ brew "mergepbx"
 brew "mongodb-community"
 brew "node"
 brew "procs"
-brew "python"
 brew "rbenv"
 brew "rust", link: false
-brew "sourcery"
 brew "tree"
 brew "swiftformat"
 brew "swiftlint"
