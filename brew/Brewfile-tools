@@ -23,5 +23,6 @@ brew "rust", link: false
 brew "sourcery"
 brew "tree"
 brew "swiftformat"
+brew "swiftlint"
 brew "watchman"
 brew "yarn"
