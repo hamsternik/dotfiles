@@ -3,6 +3,7 @@ cask_args appdir: "/Applications"
 # Ask root privileges
 #
 
+cask "homebrew/cask-versions/adoptopenjdk8"
 cask "alacritty"
 cask "basictex"
 cask "bettertouchtool"
