@@ -1,9 +1,3 @@
 [submodule "fonts/fonts"]
 	path = fonts/fonts
 	url = https://github.com/powerline/fonts
-[submodule "configs/.zsh/zsh-git-prompt"]
-	path = configs/.zsh/zsh-git-prompt
-	url = https://github.com/olivierverdier/zsh-git-prompt
-[submodule "configs/.vim/bundle/Vundle.vim"]
-	path = configs/.vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim
