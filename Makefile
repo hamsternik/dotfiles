@@ -1,15 +1,11 @@
 SHELL := /bin/zsh
 .zshrc: .SHELLFLAGS := --rcfile zshrc -ic --
 
-bold := $(shell tput bold) # use as $(tput bold)
-yellow := $(shell tput setaf 3)
-tput_off := $(shell tput sgr0)
-
-install:
+dotfiles-install:
 	${shell} ./.dotfiles.sh --install
 .PHONY: install
 
-uninstall:
+dotfiles-uninstall:
 	$(shell) .dotfiles.sh --uninstall
 .PHONY: uninstall
 
@@ -21,14 +17,14 @@ brew-tools:
 	brew bundle --file=brew/Brewfile-tools
 .PHONY: brew-tools
 
-brew-cask:
-	brew bundle --file=brew/Brewfile-cask
+brew-casks:
+	brew bundle --file=brew/Brewfile-casks
 .PHONY: brew-cask
 
 brew:
 	make brew-core
 	make brew-tools
-	make brew-cask
+	make brew-casks
 .PHONY: brew
 
 antibody:
