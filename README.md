@@ -31,9 +31,12 @@ The basic case – your Macbook is new and so empty. And you need to settle down
 - `make antibody`
 - last step is to install all configs in my user's root directory
 - `make dotfiles-install`
-- go to the `configs/.zsh/zsh-git-prompt` to install haskell version of the tool ([more details in the README](https://github.com/hamsternik/zsh-git-prompt?organization=hamsternik&organization=hamsternik))
+- create `~/.zsh` and `~/.vim/bundle` directories manually (will automate due the [#29](https://github.com/hamsternik/dotfiles/issues/29) and [#30](https://github.com/hamsternik/dotfiles/issues/30) issues)
+- go to the `~/.zsh` dir and run `git clone git@github.com:hamsternik/zsh-git-prompt.git`
+- `cd` into the `zsh-git-prompt` and run 2 commands ([read more details](https://github.com/hamsternik/zsh-git-prompt?organization=hamsternik&organization=hamsternik))
 - `stack setup`
 - `stack build && stack install`
+- go to the `~/.vim/bundle` and run `git clone git@github.com:VundleVim/Vundle.vim.git`
 - open vim and use `PluginInstall` command to install all the plugins
 
 #### Troubleshooting
