@@ -3,33 +3,19 @@ SHELL := /bin/zsh
 
 dotfiles-install:
 	${shell} ./.dotfiles.sh --install
-.PHONY: install
+.PHONY: dotfiles-install
 
 dotfiles-uninstall:
 	$(shell) .dotfiles.sh --uninstall
-.PHONY: uninstall
+.PHONY: dotfiles-uninstall
 
-brew-core:
-	brew bundle --file=brew/Brewfile-core
-.PHONY: brew-core
+brew-install:
+	brew bundle --file=Brewfile
+.PHONY: brew-install
 
-brew-tools:
-	brew bundle --file=brew/Brewfile-tools
-.PHONY: brew-tools
-
-brew-casks:
-	brew bundle --file=brew/Brewfile-casks
-.PHONY: brew-cask
-
-brew:
-	make brew-core
-	make brew-tools
-	make brew-casks
-.PHONY: brew
-
-antibody:
+antibody-install:
 	$(shell) antibody/install.sh
-.PHONY: antibody
+.PHONY: antibody-install
 
 vscode-extensions = "vscode/.vscode-extensions"
 vscode-extensions-install:
@@ -39,7 +25,6 @@ vscode-extensions-install:
 vscode-extensions-export:
 	@if [ -e "$(vscode-extensions)" ]; then code --list-extensions | xargs -L 1 echo > $(vscode-extensions); fi
 .PHONY: vscode-extensions-export
-
 
 # References
 # https://github.com/webpro/dotfiles/blob/master/Makefile

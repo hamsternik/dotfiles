@@ -24,11 +24,9 @@ The basic case – your Macbook is new and so empty. And you need to settle down
 - `pbcopy < ~/.ssh/github-hamsternik.pub`
 - download the `dotfiles` repository on your machine, clone the repo (see [Install](#-install) section)
 - cd into the local repo
-- first install `brew` and then install all necessary tools each Brewfile*
+- install Homebrew and all my daily tools within 🍻
 - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-- `make brew-core`
-- `make brew-tools`
-- `make brew-casks`
+- `make brew-install`
 - next install `antibody` for the `zsh`
 - `make antibody`
 - last step is to install all configs in my user's root directory
