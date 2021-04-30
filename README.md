@@ -1,5 +1,9 @@
 <h1 align="center">~/.dotfiles 💻</h1>
 
+Hi there 👋
+
+The basic case – your Macbook is new and so empty. And you need to settle down all basic programs, tools, configs, etc to configure as it should be actually.
+
 ## ⛏ Install
 
 - `git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git` – first "raw" setup
@@ -7,18 +11,38 @@
 
 ## 🗿 Deploy
 
-`Makefile` is the source of truth for all of scripts/gems/etc that I need in today.
+- open the Terminal.app (as I am preferred [alacritty](https://github.com/alacritty/alacritty) but for the right start it's enough)
+- generate new ssh key, details [on the GitHub doc](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- `ssh-keygen -t ed25519 -C "hamsternik9@gmail.com"`
+- use the name `github-hamsternik` for public / private key
+- start the ssh-agent in the background
+- `eval "$(ssh-agent -s)"`
+- add the ssh private key to the ssh-agent
+- `ssh-add -K ~/.ssh/github-hamsternik`
+- copy paste `ssh/config` on the local machine by the pass `~/.ssh/config`
+- go into your [account settings](https://github.com/settings/keys) to add your public key
+- `pbcopy < ~/.ssh/github-hamsternik.pub`
+- download the `dotfiles` repository on your machine, clone the repo (see [Install](#-install) section)
+- cd into the local repo
+- first install `brew` and then install all necessary tools each Brewfile*
+- `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+- `make brew-core`
+- `make brew-tools`
+- `make brew-casks`
+- next install `antibody` for the `zsh`
+- `make antibody`
+- last step is to install all configs in my user's root directory
+- `make dotfiles-install`
+- go to the `configs/.zsh/zsh-git-prompt` to install haskell version of the tool ([more details in the README](https://github.com/hamsternik/zsh-git-prompt?organization=hamsternik&organization=hamsternik))
+- `stack setup`
+- `stack build && stack install`
+- open vim and use `PluginInstall` command to install all the plugins
 
-There're plenty of nice-to-havae commands that facilitates my every dotfiles setup:
+#### Troubleshooting
 
-- install
-- uninstall
-- brew
-- antibody
-- vscode-extensions-export
-- vscode-extensions-install
+- error due terminal init `zsh compinit: insecure directories`
 
-Type `make %command name%` and you will repro one part of my daily configuration.
+You can find the solution [here on stackoverflow](https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories).
 
 ## 📑 Zsh Configuration
 
@@ -37,24 +61,6 @@ My one and only OS is *macOS* and also I am the active user of the `CleanMyMac` 
 After finishing basic `CleanMyMac` clean up it is a good time to re-install all Zsh plugins.
 
 Run `make antibody` command in the root directory. Another option: open `~/dotfiles/antibody` directory and manually run `install.sh`.
-
-## 📑 ViM Configuration
-
-**All Plugins**
-
-- [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree) - A tree explorer plugin for vim.
-- [scrooloose/nerdcommenter](https://github.com/scrooloose/nerdcommenter) - Vim plugin for intensely orgasmic commenting.
-- [Xuyuanp/nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin) - A plugin of NERDTree showing git status.
-- [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline) - Lean & mean status/tabline for vim that's light as air.
-- [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes) - A collection of themes for vim-airline.
-- [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive) - A Git wrapper so awesome, it should be illegal.
-- [godlygeek/tabular](https://github.com/godlygeek/tabular) - Vim script for text filtering and alignment.
-- [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown) - Markdown Vim Mode.
-- [JamshedVesuna/vim-markdown-preview](https://github.com/JamshedVesuna/vim-markdown-preview) - A light Vim plugin for previewing markdown files in a browser.
-- [luochen1990/rainbow](https://github.com/luochen1990/rainbow) - Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast, powerful
-      configuration.
-- [lepture/vim-velocity](https://github.com/lepture/vim-velocity) - Velocity syntax for vim.
-- [danro/rename.vim](https://github.com/danro/rename.vim) - Rename the current file in the vim buffer + retain relative path.
 
 ## 👀 Miscellaneous
 
