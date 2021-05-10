@@ -15,6 +15,8 @@ tap "mongodb/brew"
 brew "getantibody/tap/antibody"
 # Cmake -- family of tools designed to build, test and package software
 brew "cmake"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # Differ -- Good-lookin' diffs. Actually… nah… The best-lookin' diffs.
 brew "diff-so-fancy"
 # Grep -- GNU grep app
