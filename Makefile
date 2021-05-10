@@ -1,20 +1,19 @@
 SHELL := /bin/zsh
-.zshrc: .SHELLFLAGS := --rcfile zshrc -ic --
 
 dotfiles-install:
-	${shell} ./.dotfiles.sh --install
+	@./.dotfiles.sh --install
 .PHONY: dotfiles-install
 
 dotfiles-uninstall:
-	$(shell) .dotfiles.sh --uninstall
+	@./.dotfiles.sh --uninstall
 .PHONY: dotfiles-uninstall
 
 brew-install:
-	brew bundle --file=Brewfile
+	@brew bundle --file=Brewfile
 .PHONY: brew-install
 
 antibody-install:
-	$(shell) antibody/install.sh
+	@./antibody/install.sh
 .PHONY: antibody-install
 
 vscode-extensions = "vscode/.vscode-extensions"
@@ -28,3 +27,4 @@ vscode-extensions-export:
 
 # References
 # https://github.com/webpro/dotfiles/blob/master/Makefile
+# https://xs-labs.com/en/blog/2020/11/07/introduction-to-makefiles/
