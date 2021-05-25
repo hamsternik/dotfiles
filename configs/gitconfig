@@ -3,10 +3,13 @@
     a           = add
     c           = commit -m
     ca          = commit --amend
-    co          = checkout
-    cb          = checkout -b
+    sw          = switch
+    swc         = switch -c
+    #co          = checkout
+    #cb          = checkout -b
     sh          = show
     br          = branch
+    brd         = branch -D
     f           = fetch
     fa          = fetch --all
     fpr         = fetch --prune
