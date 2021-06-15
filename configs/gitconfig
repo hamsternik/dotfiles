@@ -50,8 +50,6 @@
 # Show current repo's name
     name        = !git remote -v | head -n1 | awk '{print $2}'
 
-
-
 [user]
     name  = Nikita Khomitsevich
     email = hamsternik9@gmail.com
@@ -66,7 +64,6 @@
     ignorecase = false
 	whitespace = trailing-space,space-before-tab
     excludesfile = ~/.gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -RFX
     quotepath = false
 
 [status]
@@ -112,14 +109,6 @@
     stash = bold yellow black # by default: bold magent
     HEAD = bold red black # by default: bold cyan
 
-### Diff mechanism
-[diff]
-    tool = opendiff
-
-[diff "localizablestrings"]
-    textconv = "iconv -f utf-16 -t utf-8"
-    binary = false
-
 [merge]
     tool = opendiff
     conflictstyle = diff3
@@ -132,3 +121,30 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+
+# Diff mechanism / Delta
+# Source: https://github.com/dandavison/delta
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[diff "localizablestrings"]
+    textconv = "iconv -f utf-16 -t utf-8"
+    binary = false
+
+[delta]
+    whitespace-error-style = 22 reverse
+    line-numbers = true
+    side-by-side = true
+    decorations = true
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none

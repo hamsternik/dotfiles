@@ -18,7 +18,9 @@ brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Differ -- Good-lookin' diffs. Actually… nah… The best-lookin' diffs.
-brew "diff-so-fancy"
+#brew "diff-so-fancy"
+# A viewer for git and diff output
+brew "git-delta"
 # Grep -- GNU grep app
 brew "grep"
 # HTop -- interactive process viewer for Unix systems
