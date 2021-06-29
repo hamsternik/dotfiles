@@ -51,7 +51,7 @@
     name        = !git remote -v | head -n1 | awk '{print $2}'
 
 [user]
-    name  = Nikita Khomitsevich
+	name = Nikita Khomitsevych
     email = hamsternik9@gmail.com
 
 [credential]
