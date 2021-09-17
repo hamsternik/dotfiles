@@ -82,7 +82,6 @@ cask "obsidian"
 cask "postman"
 cask "rectangle"
 cask "slack"
-cask "skype"
 cask "telegram"
 cask "visual-studio-code"
 
