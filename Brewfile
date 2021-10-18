@@ -68,6 +68,7 @@ brew "yarn"
 # homebrew-cask
 # https://github.com/caskroom/homebrew-cask
 cask "alacritty"
+cask "altserver"
 cask "basictex"
 cask "bitwarden"
 cask "cleanmymac"
