@@ -1,21 +1,5 @@
 {
-    "workbench.iconTheme": "vscode-icons",
-    "[dart]": {
-        "editor.formatOnSave": true,
-        "editor.formatOnType": true,
-        "editor.rulers": [
-            80
-        ],
-        "editor.selectionHighlight": false,
-        "editor.suggest.snippetsPreventQuickSuggestions": false,
-        "editor.suggestSelection": "first",
-        "editor.tabCompletion": "onlySnippets",
-        "editor.wordBasedSuggestions": false
-    },
-    "dart.checkForSdkUpdates": false,
-    "vsicons.presets.jsonOfficial": true,
-    "git.autofetch": true,
-    "explorer.confirmDragAndDrop": false,
-    "vsicons.dontShowNewVersionMessage": true,
-    "macros": { "commentLine": ["editor.action.commentLine","cursorDown"] },
+    "sourcekit-lsp.trace.server": "messages",
+    "sourcekit-lsp.serverPath": "/Applications/Xcode-12.5.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+    "sourcekit-lsp.toolchainPath": "/Applications/Xcode-12.5.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain"
 }

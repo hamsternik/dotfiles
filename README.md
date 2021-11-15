@@ -100,3 +100,38 @@ brew services stop mongodb-community
 ```
 
 More info how to install and work with the latest version of MongoDB Community take a look in the [documentation page](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/#run-mongodb-community-edition).
+
+### SourceKit-LSP ❤️ VSCode
+
+The SourceKit-LSP server is included with the Swift toolchain. Currently my single workflow is using the latest Xcode app within macOS.
+Starting from Xcode 11.4+ `sourcekit-lsp` is included as the part of Swift toolchain.
+
+The extension stored in the repo, follow the `vscode/extensions` path and run
+
+```sh
+code --install-extension sourcekit-lsp-development.vsix
+```
+
+Launch the VSCode with any Xcode project to verify wether `sourcekit-lsp` works without errors.
+Then open `Settings (cmd+,) -> Extensions -> SourceKit-LSP` and configure both the `Server Path` and `Toolchain Path`.
+Example of predefined settings for the plugin in the `vscode/settings.json`.
+
+Unfortunately, `sourcekit-lsp` does not support standard iOS projects, including these I'm working day-to-day on my work. The pipeline to tackle Swift project together with LSP is using Swift Package Manager to build the project. If you have such type of project, e.g. CLI application builded on Swift just run `swift build` in terminal / VSCode.
+
+To know more about what's sourcekit-lsp and how it can be bind together with VSCode follow the [official README on sourcekit-lsp GitHub page](https://github.com/apple/sourcekit-lsp).
+
+#### [OPTIONAL] How to build VSCode extension from scratch?
+
+Download the [sourcekit-lsp repo](https://github.com/apple/sourcekit-lsp) first. As I'm have `sourcekit-lsp` already as the part of Xcode toolchain the only thing what I need to do is build sourcekit-lsp extension for VScode. In terminal go into `sourcekit-lsp/Editors/vscode` directory and run the following commands to build the VSCode extension.
+
+```sh
+$ cd Editors/vscode
+$ npm install
+$ npm run dev-package
+```
+
+Install the package from the command-line
+
+```sh
+code --install-extension sourcekit-lsp-development.vsix
+```
