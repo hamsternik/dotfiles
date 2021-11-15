@@ -22,6 +22,10 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
 export GITSTATUS=$DOTFILES/.zsh/zsh-git-prompt/src
 export PATH=$PATH:$GITSTATUS/.bin
 
+# Xcode default path to the SoucreKit-LSP binary (Swift)
+export SOURCEKIT_TOOLCHAIN_PATH=`xcrun --find sourcekit-lsp`
+export PATH=$PATH:$SOURCEKIT_TOOLCHAIN_PATH
+
 # java
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=${PATH}:${JAVA_HOME}/bin
