@@ -7,44 +7,35 @@ if [[ "$unamestr" == 'Linux' ]]; then
     alias fgrep="fgrep --color=auto"
     alias egrep="egrep --color=auto"
 elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
-        alias ls='ls -G'
+    alias ls='ls -G'
 fi
-
-# Routing {
-    alias dev="cd ~/Developer/hamsternik"
-    alias blog="cd ~/Developer/hamsternik/blog"
-    alias d="cd ~/Developer/hamsternik/dotfiles"
-    alias n="cd ~/Developer/hamsternik/notes"
-    alias work="cd ~/Developer/life360"
-# }
-
-# Optional {
-    alias l="ls -CF"
-    alias ll="l -Al"
-    alias la="l -A"
-
-    alias ...="cd ../.."
-    alias ..="cd .."
-
-    alias cl="clear"
-
-    alias g="git"
-    alias gdb="gdb -q"
-    alias dmesg="dmesg -T"
-    alias df="df -h"
-# }
-
-### Network {
-    alias ping1="ping -c 4 google.com"
-    #alias mac="${$(alias_for_user "root" "ifconfig | grep HWaddr")}"
-# }
 
 # Reload the shell
 alias reload="exec $SHELL -l"
-
-# Extended "gdb" aliases
 
 # Quick-Edit
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 
+# Navigation
+alias l="ls -CF"
+alias ll="l -Al"
+alias la="l -A"
+alias ...="cd ../.."
+alias ..="cd .."
+
+alias g="git"
+alias df="df -h"
+alias cl="clear"
+alias gdb="gdb -q"
+alias ping1="ping -c 4 google.com"
+
+
+# Routing
+alias dev="cd ~/Developer"
+alias work="cd ~/Developer/life360"
+alias nn="cd ~/Developer/nasnaga"
+
+alias d="cd ~/Developer/hamsternik/dotfiles"
+alias n="cd ~/Developer/hamsternik/notes"
+alias blog="cd ~/Developer/hamsternik/blog"
