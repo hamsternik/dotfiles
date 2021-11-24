@@ -8,6 +8,12 @@ tap "homebrew/cask-versions"
 tap "mongodb/brew"
 tap "dart-lang/dart"
 
+# prerequisites
+
+### Download with resuming and segmented downloading
+### Need for `xcodes` CLI tool to download Xcodes faster
+brew "aria2"
+
 # Toolchain: iOS, macOS
 brew "fastlane"
 brew "rbenv"
@@ -57,6 +63,8 @@ brew "subversion"
 brew "tmux"
 ### Display directories as trees (with optional color/HTML output)
 brew "tree"
+### Install and switch between multiple versions of Xcode
+brew "xcodes"
 ### XZ -- General-purpose data compression with high compression ratio
 brew "xz"
 ### Watch -- Runs the specified command repeatedly and displays the results on standard output
@@ -100,6 +108,8 @@ cask "slack"
 cask "telegram"
 ### MS Open-source code editor
 cask "visual-studio-code"
+### Install and switch between multiple versions of Xcode // UI Application
+cask "xcodes"
 
 # adoptopenjdk8 fixes warning in terminal and also provides a correct jdk version for Android
 # https://stackoverflow.com/questions/41993431/unable-to-find-any-jvms-matching-version-1-8-0-40-when-open-terminal-on-macos
