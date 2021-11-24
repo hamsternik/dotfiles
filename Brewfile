@@ -17,9 +17,7 @@ brew "getantibody/tap/antibody"
 brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# Differ -- Good-lookin' diffs. Actually… nah… The best-lookin' diffs.
-#brew "diff-so-fancy"
-# A viewer for git and diff output
+# A syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Grep -- GNU grep app
 brew "grep"
