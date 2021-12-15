@@ -114,3 +114,7 @@ cask "xcodes"
 # adoptopenjdk8 fixes warning in terminal and also provides a correct jdk version for Android
 # https://stackoverflow.com/questions/41993431/unable-to-find-any-jvms-matching-version-1-8-0-40-when-open-terminal-on-macos
 cask "homebrew/cask-versions/adoptopenjdk8"
+
+# Mac App Store
+## https://github.com/mas-cli/mas
+mas "Bear", id: 1091189122
