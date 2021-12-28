@@ -53,6 +53,8 @@ brew "lf"
 ### OpenSSH -- suite of secure networking utilities based on the Secure Shell (SSH) protocol
 brew "openssh"
 brew "openssl@1.1" # wget dependency
+# A static site generator for Swift developers
+brew "publish"
 ### Modern replacement for ps written by Rust
 brew "procs"
 ### Reattach -- macOS wrapper, needs for tmux
