@@ -44,6 +44,8 @@ brew "cmake"
 brew "coreutils"
 # A syntax-highlighting pager for git and diff output
 brew "git-delta"
+# GNU Pretty Good Privacy (PGP) package. Formerly known as: gnupg2. See more on https://gnupg.org/
+brew "gnupg"
 ### Grep -- GNU grep app
 brew "grep"
 ### HTop -- interactive process viewer for Unix systems
