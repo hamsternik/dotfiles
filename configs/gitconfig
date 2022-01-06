@@ -53,6 +53,10 @@
 [user]
 	name = Nikita Khomitsevych
     email = hamsternik9@gmail.com
+    signingkey = FDCD59C5CACAC84CC041AEEA13D93172F0DBB189
+
+[commit]
+	gpgsign = true
 
 [credential]
     helper = cache --timeout=14400
