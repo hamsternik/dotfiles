@@ -11,6 +11,8 @@ The basic case – your Macbook is new and so empty. And you need to settle down
 
 # Deploy
 
+### before clone
+
 - open preferred terminal (you use daily)
 - generate new ssh key with concrete email: `$ ssh-keygen -t ed25519 -C "hamsternik9@gmail.com"`
 - for more information about SSH generation see details [on the GitHub doc](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
@@ -20,6 +22,9 @@ The basic case – your Macbook is new and so empty. And you need to settle down
 - copy `ssh/config` text from the repo to your local machine by the `~/.ssh/config` path
 - go into your [account settings](https://github.com/settings/keys) to add your public key
 - save into the buffer public ssh key text: `$ pbcopy < ~/.ssh/github-hamsternik.pub`
+
+### tools setup
+
 - clone the repo (first setup): `$ git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git`
 - install Homebrew on the pretty fresh machine: `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 - install all tools and application within Homebrew (via Make command): `$ make brew-install`
@@ -33,11 +38,39 @@ The basic case – your Macbook is new and so empty. And you need to settle down
 - go to the `~/.vim/bundle` and run `$ git clone git@github.com:VundleVim/Vundle.vim.git`
 - open vim and use `PluginInstall` command to install all the plugins
 
-## Troubleshooting
+If you see such zsh error:
 
-- error due terminal init `zsh compinit: insecure directories`
+> error due terminal init `zsh compinit: insecure directories`
 
-You can find the solution [here on stackoverflow](https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories).
+Please check out this [stackoverflow solution](https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories).
+
+### configs setup
+
+To be able to commit with `commit.gpgsign true` setting in your git configuration, you have to set up GPG unique key on the machine.
+Check more information about signing commits and git configuration on the [official GitHub doc page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
+
+To generate new GPG key you should install `gnupg` command-line tool first. Verify whether you have the app on your machine after full Homebrew settings file installation. Otherwithe use `$ brew install gnupg` command to install the app first. Then open the terminal. Generate a GPG key pair.
+
+```bash
+$ gpg --full-generate-key
+```
+
+Your key must be at least 4096 bits.
+Enter your user ID information. I used `hamsternik` GitHub account username for that.
+Use your GitHub account verified email. For more information about email verification on GitHub check [this doc](https://docs.github.com/en/get-started/signing-up-for-github/verifying-your-email-address) out.
+Type a secure passphrase... but I don't use any passphrases right now actually 🤷🏻‍♂️
+Use the next command to list the long form of the GPG keys for which you have both a public and private key:
+
+```bash
+$ gpg --list-secret-keys --keyid-format=long
+```
+
+From the list of GPG keys, copy the long form of the GPG key ID you'd like to use. E.g. in line `sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]` the long form of the GPG generated key is `3AA5C34371567BD2` part. Copy that text from the terminal and insert into your `.gitconfig` file. You can find configuration file by the `configs/gitconfig` path.
+
+All the details about signing generated GPG key see on [official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key).
+
+To disable signing your git commits just off the `commit.gpgsign` option into your git configuration file.
+More information about that see on [official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
 ## Antibody. Zsh Plugins
 
