@@ -82,7 +82,7 @@ brew "watchman"
 ### iOS App Store alternative
 cask "altserver"
 ### Compact TeX distribution as alternative to the full TeX Live / MacTeX
-cask "basictex"
+#cask "basictex"
 ### Desktop password and login vault
 cask "bitwarden"
 ### Tool to remove unnecessary files and folders from disk
@@ -102,6 +102,8 @@ cask "google-drive"
 cask "oracle-jdk"
 ### Shows the next meeting in the menu bar
 cask "meetingbar"
+### TeX distribution
+cask "miktex-console"
 ### Collaboration platform for API development
 cask "postman"
 ### Move and resize windows using keyboard shortcuts or snap areas
