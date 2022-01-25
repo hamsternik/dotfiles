@@ -124,3 +124,6 @@ cask "homebrew/cask-versions/adoptopenjdk8"
 # Mac App Store
 ## https://github.com/mas-cli/mas
 mas "Bear", id: 1091189122
+
+# Flow. A pomodoro based work timer to help you get things done
+mas "Flow", id: 1423210932
