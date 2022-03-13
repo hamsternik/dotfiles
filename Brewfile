@@ -89,6 +89,8 @@ cask "bitwarden"
 cask "cleanmymac"
 ### Disk space visualizer
 cask "daisydisk"
+### VPN client for secure internet access and private browsing
+cask "expressvpn"
 ### Collaborative team software
 cask "figma"
 ### Google Font: https://fonts.google.com/specimen/Roboto
