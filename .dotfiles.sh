@@ -16,22 +16,24 @@ config_files=(
 dotfiles_echo() {
   local fmt="$1"; shift
   # shellcheck disable=SC2059
-  printf "[dotfiles] ${fmt}\\n" "$@"
+  printf "[dotfiles] ${fmt}" "$@"
 }
 
 function install_dotfiles {
-    dotfiles_echo "-> 🚀🚀🚀 Linking basic dotfiles."
+    dotfiles_echo "🚀🚀🚀 Linking configs into ${HOME}"
     sleep 1 ### personal UI decision.
     for file in "${config_files[@]}"; do
         SOURCE=$(pwd)/configs/${file}
-        dotfiles_echo "✅ Linking .${file}"
+        dotfiles_echo "Linking .${file}...\n"
         if [[ "${file}" == "lfrc" ]]; then
             if [[ ! -d "${HOME}/.config/lf" ]]; then
                 mkdir -p "${HOME}"/.config/lf
             fi
             ln -nfs "${SOURCE}" "${HOME}/.config/lf/.${file}"
+            dotfiles_echo "Symlink created ✅\n\n"
         else
             ln -nfs "${SOURCE}" "${HOME}/.${file}"
+            dotfiles_echo "Symlink created ✅\n\n"
         fi
     done
 }

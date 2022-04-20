@@ -33,9 +33,9 @@ alias ping1="ping -c 4 google.com"
 
 # Routing
 alias dev="cd ~/Developer"
+alias public="cd ~/Developer/github"
 alias work="cd ~/Developer/life360"
 alias nn="cd ~/Developer/nasnaga"
 
-alias d="cd ~/Developer/hamsternik/dotfiles"
-alias n="cd ~/Developer/hamsternik/notes"
-alias blog="cd ~/Developer/hamsternik/blog"
+alias d="cd ~/Developer/github/dotfiles"
+alias blog="cd ~/Developer/github/blog"
