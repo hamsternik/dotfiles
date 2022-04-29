@@ -13,10 +13,6 @@ fi
 # Reload the shell
 alias reload="exec $SHELL -l"
 
-# Quick-Edit
-alias bashrc="vim ~/.bashrc"
-alias vimrc="vim ~/.vimrc"
-
 # Navigation
 alias l="ls -CF"
 alias ll="l -Al"
@@ -30,12 +26,17 @@ alias cl="clear"
 alias gdb="gdb -q"
 alias ping1="ping -c 4 google.com"
 
+DEVELOPER="~/Developer"
+PUBLIC="${DEVELOPER}/public"
 
-# Routing
-alias dev="cd ~/Developer"
-alias public="cd ~/Developer/github"
-alias work="cd ~/Developer/life360"
-alias nn="cd ~/Developer/nasnaga"
+# dir routing: 1st and 2nd levels, cd ~/Developer
+alias dev="cd ${DEVELOPER}"
+alias public="cd ${PUBLIC}"
+alias private="cd ${DEVELOPER}/private"
+alias remote="cd ${DEVELOPER}/remote"
 
-alias d="cd ~/Developer/github/dotfiles"
-alias blog="cd ~/Developer/github/blog"
+# dir routing: public project, cd ~/Developer/public/
+alias b="cd ${PUBLIC}/blog"
+alias d="cd ${PUBLIC}/dotfiles"
+alias w="cd ${PUBLIC}/work"
+alias wi="cd ${PUBLIC}/work/ios-develop"
