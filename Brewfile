@@ -48,6 +48,8 @@ brew "git-delta"
 brew "gnupg"
 ### Grep -- GNU grep app
 brew "grep"
+### Easy plain text accounting with command-line, terminal and web UIs, https://hledger.org/
+brew "hledger"
 ### HTop -- interactive process viewer for Unix systems
 brew "htop"
 ### LF -- terminal file manager
