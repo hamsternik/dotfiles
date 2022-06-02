@@ -42,6 +42,8 @@ brew "getantibody/tap/antibody"
 brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# GitHub command-line tool
+brew "gh"
 # A syntax-highlighting pager for git and diff output
 brew "git-delta"
 # GNU Pretty Good Privacy (PGP) package. Formerly known as: gnupg2. See more on https://gnupg.org/
