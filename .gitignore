@@ -8,3 +8,5 @@ configs/vim/bundle/*/
 
 # awesome-bot
 ab-results-README.*
+
+.vscode/*
