@@ -87,6 +87,12 @@ In 2022 I had switched from macOS default shell 'Zsh' to the brand-new eye-candy
 Before I had Zsh with custom configuration and small set of scripts onboard, but that is all a history right now.
 The one thing you have to do is to install `fish` via Homebrew where the `brew-install` command already did that for you!
 
+There are multiple things that need to be comprehended, but SO so blessed to speed the process up.
+Here are some answers how to deal with $PATH variables and aliases:
+
+- [Modifying PATH with fish shell [closed]. Command to add / modify PATH vars](https://stackoverflow.com/a/34401308/3527499);
+- [Modifying PATH with fish shell [closed]. Basic variables for popular programming languages & tools](https://stackoverflow.com/a/63655568/3527499);
+
 ## Fonts
 
 I'm using `spaceship-prompt` as a default Zsh prompt after a long time trying to customize it on my own. It required `zsh` to be installed and [Powerline Font](https://github.com/powerline/fonts) as well.
