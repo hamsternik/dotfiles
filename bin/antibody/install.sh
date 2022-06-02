@@ -9,8 +9,9 @@ ABSOLUTE_PATH=$PWD
 CURRENT_DIR=`basename $ABSOLUTE_PATH`
 
 if [[ $CURRENT_DIR != "antibody" ]]; then
-    ABSOLUTE_PATH="$ABSOLUTE_PATH/antibody"
+    ABSOLUTE_PATH="$ABSOLUTE_PATH/bin/antibody"
 fi
+
 
 antibody bundle < "$ABSOLUTE_PATH/plugins.txt" > ~/.zsh_plugins.sh
 antibody update

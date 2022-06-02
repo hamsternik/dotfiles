@@ -13,7 +13,7 @@ brew-install:
 .PHONY: brew-install
 
 antibody-install:
-	@./antibody/install.sh
+	@./bin/antibody/install.sh
 .PHONY: antibody-install
 
 vscode-extensions = "vscode/.vscode-extensions"
