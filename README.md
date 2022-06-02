@@ -72,21 +72,11 @@ All the details about signing generated GPG key see on [official GitHub page](ht
 To disable signing your git commits just off the `commit.gpgsign` option into your git configuration file.
 More information about that see on [official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
-## Antibody. Zsh Plugins
+## Fish shell
 
-[Antibody](https://getantibody.github.io) - my main shell plugin manager for all Zsh plugins:
-
-- [zsh-git-prompt](https://github.com/olivierverdier/zsh-git-prompt) - Informative git prompt for zsh.
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) - Fish-like autosuggestions for zsh.
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) - Fish shell like syntax highlighting for Zsh.
-
-### Antibody + Clean My Mac
-
-My one and only OS is *macOS* and also I am the active user of the `CleanMyMac` app to eventually clean my disk from any sort of trash. But due to the cleaning CleanMyMac removes all antibody plugins cache 😞
-
-After finishing basic `CleanMyMac` clean up it is a good time to re-install all Zsh plugins.
-
-Run `make antibody` command in the root directory. Another option: open `~/dotfiles/antibody` directory and manually run `install.sh`.
+In 2022 I had switched from macOS default shell 'Zsh' to the brand-new eye-candy [fish shell](https://fishshell.com).
+Before I had Zsh with custom configuration and small set of scripts onboard, but that is all a history right now.
+The one thing you have to do is to install `fish` via Homebrew where the `brew-install` command already did that for you!
 
 ## Fonts
 
