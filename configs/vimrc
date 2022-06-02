@@ -22,34 +22,19 @@ call vundle#begin()
 " let Vundle manage itself
 Plugin 'VundleVim/Vundle.vim'
 
-" A dark Vim/Neovim color scheme inspired by Atoms's syntax theme.
-Plugin 'joshdick/onedark.vim'
-
-" A light and configurable statusline/tabline plugin for Vim
-Plugin 'itchyny/lightline.vim'
-
+Plugin 'xu-cheng/brew.vim'
 Plugin 'jph00/swift-apple'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'klen/python-mode'
-Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'dart-lang/dart-vim-plugin'
-Plugin 'neovimhaskell/haskell-vim'
-Plugin 'xu-cheng/brew.vim'
-
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tpope/vim-fugitive'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'lervag/vimtex'
-Plugin 'luochen1990/rainbow'
-Plugin 'lepture/vim-velocity'
-Plugin 'danro/rename.vim'
-Plugin 'rbgrouleff/bclose.vim'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'iamcco/markdown-preview.nvim'
+
 Plugin 'ptzz/lf.vim'
-Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'luochen1990/rainbow'
+Plugin 'itchyny/lightline.vim' "light and configurable statusline/tabline plugin for Vim
+Plugin 'joshdick/onedark.vim' " dark Vim/Neovim color scheme inspired by Atoms's syntax theme.
 
 call vundle#end()
 
@@ -301,15 +286,43 @@ let g:vim_markdown_folding_disable = 1
 let g:vim_markdown_frontmatter = 1 "YAML Front Matter
 set nofoldenable "Enable/Disable Folding
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           vim-markdown-preview                        "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let vim_markdown_preview_github=1 " GitHub flavoured markdown
-let vim_markdown_preview_toggle=1
-let vim_markdown_preview_hotkey='<C-p>' " Default: <C-p>
-" let vim_markdown_preview_browser='Google Chrome'
+""" markdown-preview.nvim
+""" ====================================================================
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 0
 
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 1
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 1
+
+" use a custom port to start server or empty for random
+let g:mkdp_port = '3001'
+
+" specify browser to open preview page
+" for path with space
+" valid: `/path/with\ space/xxx`
+" invalid: `/path/with\\ space/xxx`
+" default: ''
+let g:mkdp_browser = '/Applications/Safari.app'
+
+
+nmap <C-s> <Plug>MarkdownPreview
+nmap <M-s> <Plug>MarkdownPreviewStop
+nmap <C-p> <Plug>MarkdownPreviewToggle
+
+"" Troubleshooting
+"" MarkdownPreview command initially does not work, produce and error into console.
+"" To fix that launch commands `yarn install && yarn upgrade` inside 'markdown-preview.nvim' plugin folder
+"" More in the issue https://github.com/iamcco/markdown-preview.nvim/issues/319
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   vimtex                              "
@@ -347,100 +360,6 @@ let g:rainbow_conf = {
 \			},
 \		}
 \	}
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   nerd-tree                           "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" silent! nnoremap <F2> :NERDTreeToggle<CR>
-" silent! nnoremap <F3> :NERDTreeFind<CR>
-silent! map <leader>0 :NERDTreeToggle<CR>
-
-let NERDTreeShowHidden=1
-let g:NERDTreeIgnore = ['\.swp$', '\~$']
-
-" Start NERDTree automatically
-" autocmd VimEnter * NERDTree
-
-" Jump to the main window
-" autocmd VimEnter * wincmd p
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               nerd-commenter                          "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              haskell-vim                              "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:haskell_classic_highlighting = 1
-let g:haskell_indent_if = 3
-let g:haskell_indent_case = 2
-let g:haskell_indent_let = 4
-let g:haskell_indent_where = 6
-let g:haskell_indent_before_where = 2
-let g:haskell_indent_after_bare_where = 2
-let g:haskell_indent_do = 3
-let g:haskell_indent_in = 1
-let g:haskell_indent_guard = 2
-let g:haskell_indent_case_alternative = 1
-let g:cabal_indent_section = 2
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              yaml plugin                              "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Source: https://www.vim.org/scripts/script.php?script_id=739
-au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               vim submode                             "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"disable submode timeouts:
-let g:submode_timeout = 0
-
-" don't consume submode-leaving key
-let g:submode_keep_leaving_key = 1
-
-let g:submode_leave_with_key = 1
-
-" map <leader>=  :vertical res +1<CR>
-" call submode#enter_with('grow/shrink', 'n', '', '<leader>=', ':vertical res +1<CR>')
-" call submode#map('grow/shrink', 'n', '', '=', ':vertical res +1<CR>')
-
-" map <leader>- :vertical res -1<CR>
-" call submode#enter_with('grow/shrink', 'n', '', '<leader>-', ':vertical res -1<CR>')
-" call submode#map('grow/shrink', 'n', '', '-', ':vertical res -1<CR>')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           LF -- terminal file manager                 "

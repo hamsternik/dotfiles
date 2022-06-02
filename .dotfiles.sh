@@ -36,13 +36,15 @@ function install_dotfiles {
             dotfiles_echo "Symlink created ✅\n\n"
         fi
     done
+    ln -nfs "$(pwd)/configs/vim" "${HOME}/.vim"
+    dotfiles_echo ".vim folder symlink created ✅\n"
 }
 
 function uninstall_dotfiles {
     dotfiles_echo "-> 🚀🚀🚀 Linking basic dotfiles."
     sleep 1 ### personal UI decision.
     for file in "${config_files[@]}"; do
-        if [[ -L "${HOME}/.${file}" ]]; then    
+        if [[ -L "${HOME}/.${file}" ]]; then
             dotfiles_echo "☑️  Symbolic link detected. Removing..."
             rm -rf "${HOME}/.${file}"
         elif [[ -L "${HOME}/.config/lf/.${file}" ]]; then
