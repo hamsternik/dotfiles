@@ -93,6 +93,10 @@ Here are some answers how to deal with $PATH variables and aliases:
 - [Modifying PATH with fish shell [closed]. Command to add / modify PATH vars](https://stackoverflow.com/a/34401308/3527499);
 - [Modifying PATH with fish shell [closed]. Basic variables for popular programming languages & tools](https://stackoverflow.com/a/63655568/3527499);
 
+Furthermore, there are some official document pages from fish shell addressing issues:
+- [add path variable in fish shell](https://fishshell.com/docs/current/cmds/fish_add_path.html);
+- [alias -- create a function](https://fishshell.com/docs/current/cmds/alias.html?highlight=alias);
+
 ## Fonts
 
 I'm using `spaceship-prompt` as a default Zsh prompt after a long time trying to customize it on my own. It required `zsh` to be installed and [Powerline Font](https://github.com/powerline/fonts) as well.
