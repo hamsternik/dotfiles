@@ -42,6 +42,8 @@ brew "getantibody/tap/antibody"
 brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
 # GitHub command-line tool
 brew "gh"
 # A syntax-highlighting pager for git and diff output
