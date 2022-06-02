@@ -65,9 +65,18 @@ Use the next command to list the long form of the GPG keys for which you have bo
 $ gpg --list-secret-keys --keyid-format=long
 ```
 
-From the list of GPG keys, copy the long form of the GPG key ID you'd like to use. E.g. in line `sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]` the long form of the GPG generated key is `3AA5C34371567BD2` part. Copy that text from the terminal and insert into your `.gitconfig` file. You can find configuration file by the `configs/gitconfig` path.
+From the list of GPG keys, copy the long form of the GPG key ID you'd like to use.
+E.g. in line `sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]` the long form of the GPG generated key is `3AA5C34371567BD2` part.
+Copy that text from the terminal and insert into your `.gitconfig` file. You can find configuration file by the `configs/gitconfig` path.
+Then run the next command to to copy paste into buffer your public GPG key:
 
-All the details about signing generated GPG key see on [official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key).
+```bash
+gpg --armor --export %long for of GPG key copied from the preious command%%
+```
+
+Paste copied public key on [GPG keys page](https://github.com/settings/keys) on GitHub.
+
+If you have any questions please refer [the official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key).
 
 To disable signing your git commits just off the `commit.gpgsign` option into your git configuration file.
 More information about that see on [official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).

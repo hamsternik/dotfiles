@@ -53,7 +53,7 @@
 [user]
 	name = Nikita Khomitsevych
     email = hamsternik9@gmail.com
-    signingkey = FDCD59C5CACAC84CC041AEEA13D93172F0DBB189
+    signingkey = 865F72B8A202E22B6442683F3E189B8734BB344D
 
 [commit]
 	gpgsign = true
