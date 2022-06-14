@@ -44,6 +44,8 @@ brew "cmake"
 brew "coreutils"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Plugin manager for the Fish shell
+brew "fisher"
 # GitHub command-line tool
 brew "gh"
 # A syntax-highlighting pager for git and diff output
