@@ -1,17 +1,13 @@
-#SHELL := /bin/sh
-VSCODE_APP = vscodium
-VSCODE_EXTENSIONS_PATH = "vscode/extensions.txt"
-
 dotfiles-install:
-	@./.dotfiles.sh --install
+	@./bin/env/dotfiles.sh --install
 .PHONY: dotfiles-install
 
 dotfiles-uninstall:
-	@./.dotfiles.sh --uninstall
+	@./bin/env/dotfiles.sh --uninstall
 .PHONY: dotfiles-uninstall
 
 brew-install:
-	@brew bundle --file=Brewfile
+	@brew bundle --file=configs/Brewfile
 .PHONY: brew-install
 
 antibody-install:
