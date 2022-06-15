@@ -21,7 +21,7 @@ dotfiles_echo() {
 
 function install_dotfiles {
     dotfiles_echo "🚀🚀🚀 Linking configs into ${HOME}"
-    sleep 1 ### personal UI decision.
+    sleep 1 ### for better UI perception
     for file in "${config_files[@]}"; do
         SOURCE=$(pwd)/configs/${file}
         dotfiles_echo "Linking .${file}...\n"
