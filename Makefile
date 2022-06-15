@@ -1,4 +1,6 @@
-SHELL := /bin/zsh
+#SHELL := /bin/sh
+VSCODE_APP = vscodium
+VSCODE_EXTENSIONS_PATH = "vscode/extensions.txt"
 
 dotfiles-install:
 	@./.dotfiles.sh --install
@@ -16,14 +18,13 @@ antibody-install:
 	@./bin/antibody/install.sh
 .PHONY: antibody-install
 
-vscode-extensions = "vscode/.vscode-extensions"
-vscode-extensions-install:
-	@if [ -e "$(vscode-extensions)" ]; then cat $(vscode-extensions) | xargs -L 1 code --install-extension; fi
-.PHONY: vscode-extensions-install
+vscode-ext-install:
+	@./bin/vscode/vscode-extensions-install
+.PHONY: vscode-ext-install
 
-vscode-extensions-export:
-	@if [ -e "$(vscode-extensions)" ]; then code --list-extensions | xargs -L 1 echo > $(vscode-extensions); fi
-.PHONY: vscode-extensions-export
+vscode-ext-list-export:
+	@./bin/vscode/vscode-extensions-list-export
+.PHONY: vscode-ext-list-export
 
 # References
 # https://github.com/webpro/dotfiles/blob/master/Makefile
