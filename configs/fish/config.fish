@@ -17,6 +17,7 @@ function piing  ; command ping -c 4 google.com ; end
 # Developer Paths Navigation
 set -gx DEVELOPER ~/Developer
 set -gx PUBLIC $DEVELOPER/public
+set -gx REMOTE $DEVELOPER/remote
 
 function dev;       cd $DEVELOPER;          end
 function public;    cd $PUBLIC;             end
@@ -25,7 +26,7 @@ function remote;    cd $DEVELOPER/remote;   end
 
 function b;         cd $PUBLIC/blog;        end
 function d;         cd $PUBLIC/dotfiles;    end
-function work;      cd $PUBLIC/remote/fluxon; end
+function work;      cd $REMOTE/fluxon;      end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
