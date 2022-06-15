@@ -21,10 +21,7 @@ brew "swiftformat"
 brew "swiftlint"
 
 # Toolchain: languages
-brew "dart"
-brew "ghc"
 brew "golang"
-brew "haskell-stack"
 brew "kotlin"
 brew "mongodb-community"
 brew "node"
