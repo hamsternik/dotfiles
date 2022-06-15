@@ -136,8 +136,10 @@ cask "sf-symbols"
 cask "slack"
 ### Messaging app with a focus on speed and security
 cask "telegram"
-### MS Open-source code editor
-cask "visual-studio-code"
+# Tool to install Linux/BSD distributions to a partition or USB drive
+cask "unetbootin"
+# Binary releases of VS Code without MS branding/telemetry/licensing
+cask "vscodium"
 ### Install and switch between multiple versions of Xcode // UI Application
 cask "xcodes"
 # Video communication and virtual meeting platform
