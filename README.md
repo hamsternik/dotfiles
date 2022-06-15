@@ -97,6 +97,19 @@ Furthermore, there are some official document pages from fish shell addressing i
 - [add path variable in fish shell](https://fishshell.com/docs/current/cmds/fish_add_path.html);
 - [alias -- create a function](https://fishshell.com/docs/current/cmds/alias.html?highlight=alias);
 
+### Fisher
+
+I am using [fisher](http://git.io/fisher) fish plugin manager to handle all my programming stuff around.
+See below certain plugins.
+
+### Node.js and NVM
+
+Brew officially provide [node.js](https://formulae.brew.sh/formula/node#default) and [NVM](https://formulae.brew.sh/formula/nvm#default) as node.js versions manager.
+But unfortunatelly for any kind of shell you have settled you need to make extra steps to run nvm up the right way.
+To enable NVM for fish you need to export NVM_DIR into your PATH, e.g. `$fish_complete_path` variable.
+Another thing I have done to load `nvm` dynamically on each shell session is to load NVM somehome.
+I am using [nvm.fish](git.io/nvm.fish) plugin for that purpose because it handles all the things around for me.
+
 ## Fonts
 
 I'm using `spaceship-prompt` as a default Zsh prompt after a long time trying to customize it on my own. It required `zsh` to be installed and [Powerline Font](https://github.com/powerline/fonts) as well.

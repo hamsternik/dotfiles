@@ -15,8 +15,8 @@ function ip     ; curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g' ; end
 function piing  ; command ping -c 4 google.com ; end
 
 # Developer Paths Navigation
-set -x DEVELOPER ~/Developer
-set -x PUBLIC $DEVELOPER/public
+set -gx DEVELOPER ~/Developer
+set -gx PUBLIC $DEVELOPER/public
 
 function dev;       cd $DEVELOPER;          end
 function public;    cd $PUBLIC;             end
@@ -25,9 +25,12 @@ function remote;    cd $DEVELOPER/remote;   end
 
 function b;         cd $PUBLIC/blog;        end
 function d;         cd $PUBLIC/dotfiles;    end
-function work;      cd remote/fluxon;       end
+function work;      cd $PUBLIC/remote/fluxon; end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
     status --is-interactive; and rbenv init - fish | source
 end
+
+# Programming Env
+set -x NVM_DIR $HOME/.nvm ## put NVM to the fish PATH
