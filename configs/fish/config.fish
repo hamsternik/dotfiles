@@ -11,6 +11,10 @@ set -gx REMOTE $DEVELOPER/remote
 ## PATH Overriding. Programming Environment
 set -x NVM_DIR $HOME/.nvm ## put NVM to the fish PATH
 
+# prerequisite: brew install --cask android-studio
+set -gx ANDROID_HOME $HOME/Library/Android/sdk
+fish_add_path $ANDROID_HOME/platform-tools ## add android `adb` and `fastboot` to the PATH
+
 ## Aliases. Navigation
 function ..     ; cd .. ; end
 function ...    ; cd ../.. ; end
