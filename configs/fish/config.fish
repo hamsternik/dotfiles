@@ -10,6 +10,10 @@ set -gx REMOTE $DEVELOPER/remote
 
 ## PATH Overriding. Programming Environment
 set -x NVM_DIR $HOME/.nvm ## put NVM to the fish PATH
+fish_add_path $NVM_DIR
+
+# right now settle from shell by command `set --universal nvm_default_version lts`
+# set -gx nvm_default_version lts
 
 # prerequisite: brew install --cask android-studio
 # HOW TO SET JAVA_HOME IN MAC OS X HIGH SIERRA WITH FISH SHELL
