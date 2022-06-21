@@ -12,7 +12,12 @@ set -gx REMOTE $DEVELOPER/remote
 set -x NVM_DIR $HOME/.nvm ## put NVM to the fish PATH
 
 # prerequisite: brew install --cask android-studio
-set -gx ANDROID_HOME $HOME/Library/Android/sdk
+# HOW TO SET JAVA_HOME IN MAC OS X HIGH SIERRA WITH FISH SHELL
+# https://www.alex-arriaga.com/how-to-set-java_home-in-mac-os-x-high-sierra-with-fish-shell/
+export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jre/Contents/Home
+fish_add_path $JAVA_HOME
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
 fish_add_path $ANDROID_HOME/platform-tools ## add android `adb` and `fastboot` to the PATH
 
 ## Aliases. Navigation
