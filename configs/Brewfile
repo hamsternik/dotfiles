@@ -104,6 +104,8 @@ cask "daisydisk"
 cask "expressvpn"
 ### Collaborative team software
 cask "figma"
+### Utility for customizing which browser to start
+cask "finicky"
 ### Google Font: https://fonts.google.com/specimen/Roboto
 ### Address svn to download fonts: https://github.com/Homebrew/homebrew-cask-fonts/issues/2039
 cask "font-roboto"
