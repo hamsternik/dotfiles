@@ -16,10 +16,15 @@ module.exports = {
     },
     {
       match: [
-        "www.notion.so/superlayer*"
-        //"notion.so/superlayer/*" // match only Fluxon::Gambit project in Notion
+        "www.notion.so/superlayer*" // match only Fluxon::Gambit project in Notion
       ],
       browser: "Google Chrome"
-    }
+    },
+    {
+      match: [
+        "127.0.0.1"
+      ],
+      browser: "Google Chrome"
+    },
   ]
 }
