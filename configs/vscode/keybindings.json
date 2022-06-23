@@ -1,8 +1,23 @@
-// Place your key bindings in this file to override the defaults
+// Place your key bindings in this file to override the defaultsauto[]
 [
     {
-        "key": "cmd+/",
-        "command": "macros.commentLine",
-        "when": "editorTextFocus && !editorReadonly"
+        "key": "shift+cmd+o",
+        "command": "workbench.action.quickOpen"
     },
+    {
+        "key": "cmd+p",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "cmd+p",
+        "command": "workbench.action.gotoSymbol"
+    },
+    {
+        "key": "shift+cmd+o",
+        "command": "-workbench.action.gotoSymbol"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "git-graph.view"
+    }
 ]
