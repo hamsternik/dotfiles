@@ -1,5 +1,6 @@
 #!/bin/bash
 
+CONF_PREFIX="configs"
 config_files=(
 "aliases"
 "editorconfig"
@@ -11,6 +12,7 @@ config_files=(
 "vimrc"
 "zshenv"
 "zshrc"
+"vscode/keybindings.json"
 )
 
 dotfiles_echo() {
@@ -23,21 +25,31 @@ function install_dotfiles {
     dotfiles_echo "🚀🚀🚀 Linking configs into ${HOME}"
     sleep 1 ### for better UI perception
     for file in "${config_files[@]}"; do
-        SOURCE=$(pwd)/configs/${file}
+        SOURCE=$(pwd)/$CONF_PREFIX/${file}
         dotfiles_echo "Linking .${file}...\n"
         if [[ "${file}" == "lfrc" ]]; then
             if [[ ! -d "${HOME}/.config/lf" ]]; then
                 mkdir -p "${HOME}"/.config/lf
             fi
             ln -nfs "${SOURCE}" "${HOME}/.config/lf/.${file}"
-            dotfiles_echo "Symlink created ✅\n\n"
+            dotfiles_echo "Symlink created ✅\n"
         else
             ln -nfs "${SOURCE}" "${HOME}/.${file}"
-            dotfiles_echo "Symlink created ✅\n\n"
+            dotfiles_echo "Symlink created ✅\n"
         fi
     done
+
+    # Make .vim folder symlink
     ln -nfs "$(pwd)/configs/vim" "${HOME}/.vim"
     dotfiles_echo ".vim folder symlink created ✅\n"
+
+    # Make `.lfrc` symlink
+    #ln -s -f -n "$(pwd)/$CONF_PREFIX/"
+
+    # Make `keybindings.json` VSCodium symlink
+    ln -s -f -n "$(pwd)/$CONF_PREFIX/vscode/keybindings.json" "${HOME}/Library/Application\
+        Support/VSCodium/User/keybindings.json"
+    dotfiles_echo "VSCode::keybindings.json file symlink created ✅\n"
 }
 
 function uninstall_dotfiles {
