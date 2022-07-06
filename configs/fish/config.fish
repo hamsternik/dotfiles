@@ -9,6 +9,13 @@ set -gx PUBLIC $DEVELOPER/public
 set -gx REMOTE $DEVELOPER/remote
 
 ## PATH Overriding. Programming Environment
+
+## Node.js
+fish_add_path /opt/homebrew/opt/node@16/bin
+set -gx LDFLAGS "-L/opt/homebrew/opt/node@16/lib"
+set -gx CPPFLAGS "-I/opt/homebrew/opt/node@16/include"
+
+## NVM
 set -x NVM_DIR $HOME/.nvm ## put NVM to the fish PATH
 fish_add_path $NVM_DIR
 
