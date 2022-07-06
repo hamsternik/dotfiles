@@ -8,6 +8,12 @@ module.exports = {
   },
   handlers: [
     {
+      match: [
+        "127.0.0.1"
+      ],
+      browser: "Google Chrome"
+    },
+    {
       match: [ // Open google.com and *.google.com urls in Google Chrome
         "google.com*", // match google.com urls
         finicky.matchDomains(/.*\.google.com/) // use helper function to match on domain only
@@ -22,7 +28,7 @@ module.exports = {
     },
     {
       match: [
-        "127.0.0.1"
+        "https://dory.app/c/fluxon.com*"
       ],
       browser: "Google Chrome"
     },
