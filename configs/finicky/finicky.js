@@ -32,5 +32,11 @@ module.exports = {
       ],
       browser: "Google Chrome"
     },
+    {
+        match: [
+            "https://fluxon.latticehq.com/*"
+        ],
+        browser: "Google Chrome"
+    },
   ]
 }
