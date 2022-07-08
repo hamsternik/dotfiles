@@ -10,6 +10,9 @@ set -gx REMOTE $DEVELOPER/remote
 
 ## PATH Overriding. Programming Environment
 
+## Doom Emacs
+fish_add_path ~/.emacs.d/bin
+
 ## Node.js
 fish_add_path /opt/homebrew/opt/node@16/bin
 set -gx LDFLAGS "-L/opt/homebrew/opt/node@16/lib"
