@@ -128,6 +128,50 @@ The topmost reason of doing that is that [the Terminal.app does not support true
 
 Right now I am using [onedark](https://github.com/joshdick/onedark.vim) colorscheme paired with the [lightline](https://github.com/itchyny/lightline.vim) which [is veeery sweety](https://www.sainnhe.dev/post/status-line-config/) yeah!
 
+## Emacs
+
+The whole Emacs installation & system configuration I got by these links
+
+- [Doom Emacs. Installation section](https://github.com/doomemacs/doomemacs#install)
+- [Emacs Deamon Mode on macos](https://briansunter.com/blog/emacs-daemon-macos/)
+
+To install Emacs Client with Doom configuration framework just run these 2 commands and give 3-5 min:
+
+```sh
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+```
+
+To launch `emacs` daemon within every user login create the next file by the pass
+`~/Library/LaunchAgents/gnu.emacs.daemon.plist`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>gnu.emacs.daemon</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/emacs</string>
+    <string>--daemon</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>ServiceDescription</key>
+  <string>GNU Emacs Daemon</string>
+</dict>
+</plist>
+```
+
+and use `launchctl` commands to load the script due the startup:
+
+```sh
+launchctl unload ~/Library/LaunchAgents/gnu.emacs.daemon.plist
+launchctl load -w ~/Library/LaunchAgents/gnu.emacs.daemon.plist
+```
+
 ## MongoDB
 
 Basically, I am not a cloud engineer, so I really need some space to recall the basic information about i.e. how to run
