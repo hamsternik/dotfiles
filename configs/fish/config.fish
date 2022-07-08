@@ -12,6 +12,7 @@ set -gx REMOTE $DEVELOPER/remote
 
 ## Doom Emacs
 fish_add_path ~/.emacs.d/bin
+alias emacs="emacsclient -c -a 'emacs'"
 
 ## Node.js
 fish_add_path /opt/homebrew/opt/node@16/bin
