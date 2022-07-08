@@ -39,6 +39,9 @@ brew "getantibody/tap/antibody"
 brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Simple, fast and user-friendly alternative to find
+# *emacs*: improves file indexing performance for some commands
+brew "fd"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
 # Plugin manager for the Fish shell
