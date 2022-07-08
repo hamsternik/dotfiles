@@ -172,6 +172,14 @@ launchctl unload ~/Library/LaunchAgents/gnu.emacs.daemon.plist
 launchctl load -w ~/Library/LaunchAgents/gnu.emacs.daemon.plist
 ```
 
+**[UPD]** Both of these commands are [deprecated by Apple starting from 10.10](https://babodee.wordpress.com/2016/04/09/launchctl-2-0-syntax/).
+Instead use new `bootstrap` and `bootout` commands with appropriate user's UID and service-name:
+
+``` bash
+id -u "Nikita Khomitsevych" # To know current user UID
+sudo launchctl bootstrap gui/<user's UID> ~/Library/LaunchAgents/gnu.emacs.daemon.plist # Use `sudo` to get more detailed error
+```
+
 ## MongoDB
 
 Basically, I am not a cloud engineer, so I really need some space to recall the basic information about i.e. how to run
