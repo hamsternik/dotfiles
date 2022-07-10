@@ -122,6 +122,8 @@ cask "google-chrome"
 cask "google-drive"
 # Interface for reading and syncing eBooks
 cask "kindle"
+# Minimal browser that protects privacy, https://minbrowser.github.io/min/
+cask "min"
 ### JDK from Oracle
 cask "oracle-jdk"
 ### Shows the next meeting in the menu bar
