@@ -38,5 +38,11 @@ module.exports = {
         ],
         browser: "Google Chrome"
     },
+    {
+        match: [
+            "https://github.com/superlayer*"
+        ],
+        browser: "Google Chrome"
+    }
   ]
 }
