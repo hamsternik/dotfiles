@@ -73,33 +73,38 @@ function b;         cd $PUBLIC/www.hamsternik.com;          end
 # name: sashimi
 function fish_prompt
   set -l last_status $status
-  set -l cyan (set_color -o cyan)
-  set -l yellow (set_color -o yellow)
-  set -g red (set_color -o red)
-  set -g blue (set_color -o blue)
-  set -l green (set_color -o green)
-  set -g normal (set_color normal)
 
-  set -l ahead (_git_ahead)
+  set -l red (set_color red)
+  set -l green (set_color green)
+  set -l blue (set_color blue)
+  set -l cyan (set_color cyan)
+  set -l yellow (set_color yellow)
+  set -l magenta (set_color magenta)
+  set -l normal (set_color normal)
+
   set -g whitespace ' '
 
+  set -l ahead (_git_ahead)
+  set -l user "$blue$USER"
+  set -l at {$normal}"at"
+  set -l on {$normal}"on"
+
   if test $last_status = 0
-    set initial_indicator "$green◆"
     set status_indicator "$normal❯$cyan❯$green❯"
   else
-    set initial_indicator "$red✖ $last_status"
-    set status_indicator "$red❯$red❯$red❯"
+    set status_indicator "[$last_status] $red❯$red❯$red❯"
   end
-  set -l cwd $cyan(basename (prompt_pwd))
+
+  set -l pwd_prefix $green(basename (prompt_pwd))
 
   if [ (_git_branch_name) ]
-
-    if test (_git_branch_name) = 'master'
+    set -l branch (_git_branch_name)
+    if test "$branch" = 'master' -o "$branch" = 'main'
       set -l git_branch (_git_branch_name)
-      set git_info "$normal git:($red$git_branch$normal)"
+      set git_info "$on $red$git_branch$normal"
     else
       set -l git_branch (_git_branch_name)
-      set git_info "$normal git:($blue$git_branch$normal)"
+      set git_info "$on $magenta$git_branch$normal"
     end
 
     if [ (_is_git_dirty) ]
@@ -113,7 +118,11 @@ function fish_prompt
     echo The last command took (math "$CMD_DURATION/1000") seconds.
   end
 
-  echo -n -s $initial_indicator $whitespace $cwd $git_info $whitespace $ahead $status_indicator $whitespace
+  echo -n -s $user $whitespace \
+    $at $whitespace \
+    $pwd_prefix $whitespace \
+    $git_info $whitespace \
+    $ahead $status_indicator $whitespace
 end
 
 function _git_ahead
@@ -122,6 +131,7 @@ function _git_ahead
     return
   end
   set -l behind (count (for arg in $commits; echo $arg; end | grep '^<'))
+
   set -l ahead  (count (for arg in $commits; echo $arg; end | grep -v '^<'))
   switch "$ahead $behind"
     case ''     # no upstream
