@@ -19,5 +19,9 @@
     {
         "key": "ctrl+g",
         "command": "git-graph.view"
+    },
+    {
+        "key": "cmd+k cmd+f",
+        "command": "workbench.files.action.collapseExplorerFolders"
     }
 ]
