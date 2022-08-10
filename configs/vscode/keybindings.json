@@ -23,5 +23,13 @@
     {
         "key": "cmd+k cmd+f",
         "command": "workbench.files.action.collapseExplorerFolders"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "browser-preview.openPreview"
+    },
+    {
+        "key": "cmd+k cmd+i",
+        "command": "workbench.view.extension.browser-preview"
     }
 ]
