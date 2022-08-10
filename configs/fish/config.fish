@@ -40,6 +40,10 @@ fish_add_path $JAVA_HOME
 export ANDROID_HOME=$HOME/Library/Android/sdk
 fish_add_path $ANDROID_HOME/platform-tools ## add android `adb` and `fastboot` to the PATH
 
+# bun.sh (https://bun.sh/)
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
+
 ### Aliases
 
 # Navigation
@@ -153,3 +157,4 @@ end
 function _is_git_dirty
   echo (command git status -s --ignore-submodules=dirty 2>/dev/null)
 end
+
