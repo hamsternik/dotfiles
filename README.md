@@ -233,3 +233,7 @@ Install the package from the command-line
 ```bash
 $ code --install-extension sourcekit-lsp-development.vsix
 ```
+
+### macOS daily apps
+
+- [rectangle | Move and resize windows on macOS with keyboard shortcuts and snap areas](https://github.com/rxhanson/Rectangle)
