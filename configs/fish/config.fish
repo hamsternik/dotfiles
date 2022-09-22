@@ -44,6 +44,9 @@ fish_add_path $ANDROID_HOME/platform-tools ## add android `adb` and `fastboot` t
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
+# Python 3.10
+fish_add_path ~/Library/Python/3.10/bin
+
 ### Aliases
 
 # Navigation
