@@ -1,3 +1,3 @@
 #!/bin/bash
 
-codium --list-extensions > configs/vscode/extensions.txt
+code --list-extensions > configs/vscode/extensions.txt
