@@ -4,6 +4,11 @@ Hi there 👋
 
 The basic case – your Macbook is new and so empty. And you need to settle down all basic programs, tools, configs, etc to configure as it should be actually.
 
+### Your Next Issue
+
+- [create unified bash script for all VSCode commands in use #36](https://github.com/hamsternik/dotfiles/issues/36)
+- [create symlinks to macOS binaries from the dotfiles.sh #35](https://github.com/hamsternik/dotfiles/issues/35)
+
 # Clone
 
 - `git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git` – first "raw" setup
