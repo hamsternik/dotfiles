@@ -1,3 +1,6 @@
+help:
+	cat Makefile
+
 dotfiles-install:
 	@./bin/env/dotfiles.sh --install
 .PHONY: dotfiles-install
