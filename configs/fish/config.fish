@@ -13,6 +13,12 @@ set -gx REMOTE $DEVELOPER/remote
 
 ### PATH | Overriding
 
+# ~/dotfiles macos bin
+# alias ports=`$(pwd)/bin/macos/lports`
+if test -d $HOME/.bin
+  fish_add_path $HOME/.bin
+end
+
 # Doom Emacs
 fish_add_path ~/.emacs.d/bin
 alias e="emacsclient -c -a 'emacs'"
@@ -23,7 +29,7 @@ set -gx LDFLAGS "-L/opt/homebrew/opt/node@16/lib"
 set -gx CPPFLAGS "-I/opt/homebrew/opt/node@16/include"
 
 # NVM
-set -x NVM_DIR $HOME/.nvm ## put NVM to the fish PATH
+set -x NVM_DIR $HOME/.nvm
 fish_add_path $NVM_DIR
 
 # right now settle from shell by command `set --universal nvm_default_version lts`
@@ -41,8 +47,9 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 fish_add_path $ANDROID_HOME/platform-tools ## add android `adb` and `fastboot` to the PATH
 
 # bun.sh (https://bun.sh/)
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
+fish_add_path "$HOME/.bun/bin"
+# set --export BUN_INSTALL "$HOME/.bun"
+# set --export PATH $BUN_INSTALL/bin $PATH
 
 # Python 3.10
 fish_add_path ~/Library/Python/3.10/bin

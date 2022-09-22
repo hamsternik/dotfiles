@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#lsof -nP -i 4TCP:$PORT | grep LISTEN
+lsof -i -P | grep LISTEN
