@@ -8,8 +8,8 @@ set EDITOR "emacsclient -t -a ''"       # $EDITOR use Emacs in terminal
 set VISUAL "emacsclient -c -a emacs"    # $VISUAL use Emacs in GUI mode
 
 set -gx DEVELOPER ~/Developer
+set -gx PRIVATE $DEVELOPER/private
 set -gx PUBLIC $DEVELOPER/public
-set -gx REMOTE $DEVELOPER/remote
 
 ### PATH | Overriding
 
@@ -75,13 +75,13 @@ function ping1  ; command ping -c 4 google.com ;        end
 # Work Environment
 function dev;       cd $DEVELOPER;          end
 function public;    cd $PUBLIC;             end
-function private;   cd $DEVELOPER/private;  end
-function remote;    cd $DEVELOPER/remote;   end
+function private;   cd $PRIVATE;            end
 
 # Most Active Projects
-function work;      cd $REMOTE/work;                        end
-function d;         cd $PUBLIC/dotfiles;                    end
-function b;         cd $PUBLIC/www.hamsternik.com;          end
+function work;      cd $PRIVATE/work;  end
+function b;         cd $PUBLIC/www.hamsternik.com;  end
+function d;         cd $PUBLIC/dotfiles;  end
+function l;         cd $PUBLIC/ledgers;  end
 
 ### Fish Prompt
 # name: sashimi
