@@ -19,6 +19,9 @@ if test -d $HOME/.bin
   fish_add_path $HOME/.bin
 end
 
+# Homebrew
+fish_add_path /opt/homebrew/sbin
+
 # Doom Emacs
 fish_add_path ~/.emacs.d/bin
 alias e="emacsclient -c -a 'emacs'"
