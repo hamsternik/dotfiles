@@ -29,14 +29,10 @@ alias ping1="ping -c 4 google.com"
 DEVELOPER="~/Developer"
 PUBLIC="${DEVELOPER}/public"
 
-# dir routing: 1st and 2nd levels, cd ~/Developer
+# Routing
 alias dev="cd ${DEVELOPER}"
-alias public="cd ${PUBLIC}"
 alias private="cd ${DEVELOPER}/private"
-alias remote="cd ${DEVELOPER}/remote"
-
-# dir routing: public project, cd ~/Developer/public/
+alias public="cd ${PUBLIC}"
 alias b="cd ${PUBLIC}/blog"
 alias d="cd ${PUBLIC}/dotfiles"
 alias w="cd ${PUBLIC}/work"
-alias wi="cd ${PUBLIC}/work/ios-develop"

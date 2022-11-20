@@ -1,74 +1,66 @@
-#!/bin/bash
-
-CONF_PREFIX="configs"
-config_files=(
-"aliases"
-"editorconfig"
-"gitattributes"
-"gitconfig"
-"gitignore_global"
-"tmux.conf"
-"vimrc"
-"zshenv"
-"zshrc"
-)
-
-function echo_linking {
-    local fmt="$1"; shift
-    printf "\n...Linking \`${fmt}\`\n" "$@"
-}
-
-function echo_success {
-  local fmt="$1"; shift
-  printf "[dotfiles] ✅ ${fmt}\n" "$@"
-}
-
-function install_dotfiles {
-    printf "🚀🚀🚀 Linking configs into ${HOME}\n"
-    for file in "${config_files[@]}"; do
-        SOURCE=$(pwd)/${CONF_PREFIX}/${file}
-        echo_linking ".${file}"
-        ln -s -f -n "${SOURCE}" "${HOME}/.${file}" \
-            && echo_success "${file} symlink created"
-    done
-
-    echo_linking ".vim folder" # Make .vim folder symlink
-    ln -s -f -n "$(pwd)/configs/vim" "${HOME}/.vim" \
-        && echo_success ".vim folder symlink"
-
-    echo_linking "lfrc" # Make `lfrc` symlink
-    if [[ ! -d "${HOME}/.config/lf" ]]; then mkdir -p "${HOME}"/.config/lf; fi
-    ln -s -f -n "$(pwd)/${CONF_PREFIX}/lfrc" "${HOME}/.config/lf/lfrc" && \
-        echo_success "lfrc symlink created"
-
-    echo_linking "keybindings.json" # Make `keybindings.json` VSCodium symlink
-    VSCODIUM_KEYBINDINGS_DIR="${HOME}/Library/Application Support/VSCodium/User"
-    if [[ -d "$VSCODIUM_KEYBINDINGS_DIR" ]]; then
-        ln -s -f -n "$(pwd)/${CONF_PREFIX}/vscode/keybindings.json" \
-            "${VSCODIUM_KEYBINDINGS_DIR}/keybindings.json" \
-                && echo_success "VSCodium keybindings.json symlink created"
-    fi
-}
-
-function uninstall_dotfiles {
-    printf "Unlink all config files for ${USER} user"
-    for file in "${config_files[@]}"; do
-        unlink "${HOME}/.${file}" \
-            && echo_success "Symbolic link detected. Removing..." \
-            || echo "😬Sumlink does not exist already"
-    done
-}
-
-while [ $# -gt 0 ]; do
-    case $1 in
-        -i | --install)
-            install_dotfiles ;;
-        -u | --uninstall)
-            uninstall_dotfiles ;;
-    esac
-    shift
-done
+#!/bin/zsh
 
 # References
 # https://github.com/webpro/dotfiles/blob/master/bin/dotfiles
 # https://github.com/joshukraine/dotfiles/blob/master/install.sh
+
+CONF_PREFIX="configs"
+declare -A dotfiles=(
+    ["env/aliases"]=".aliases"
+    ["env/bash_profile"]=".bash_profile"
+    ["env/bashrc"]=".bashrc"
+    ["env/profile"]=".profile"
+    ["editorconfig"]=".editorconfig"
+    ["finicky"]=".finicky"
+    ["fish/config.fish"]=".config/fish/config.fish"
+    ["fish/fish_plugins"]=".config/fish/fish_plugins"
+    ["git/gitattributes"]=".gitattributes"
+    ["git/gitconfig"]=".gitconfig"
+    ["git/gitignore_global"]=".gitignore_global"
+    ["lf/lfrc"]=".config/lf/lfrc"
+    ["tmux/tmux.conf"]=".tmux.conf"
+    ["vim/vim"]=".vim"
+    ["vim/vimrc"]=".vimrc"
+    ["zsh/plugins"]=".zsh"
+    ["zsh/zshenv"]=".zshenv"
+    ["zsh/zshrc"]=".zshrc"
+)
+
+function echo_linking {
+    local fmt="$1"; shift
+    printf "\n⌛️ Linking \`${fmt}\`\n" "$@"
+}
+
+function echo_success {
+  local fmt="$1"; shift
+  printf "[dotfiles] ✅ ${fmt}\n\n" "$@"
+}
+
+while [ $# -gt 0 ]; do
+case $1 in
+    -i | --install)
+        printf "⛓ Linking configs into ${HOME}.\n"
+        for filepath filename in ${(kv)dotfiles}; do
+            SYMLINK_PATH=$(pwd)/$CONF_PREFIX/$filepath
+            echo_linking $SYMLINK_PATH
+            ln -s -f "$SYMLINK_PATH" "$HOME/$filename" \
+                && echo_success "$filepath symlink was created."
+        done ;;
+
+        # echo_linking "keybindings.json" # Make `keybindings.json` VSCodium symlink
+        # VSCODIUM_KEYBINDINGS_DIR="${HOME}/Library/Application Support/VSCodium/User"
+        # if [[ -d "$VSCODIUM_KEYBINDINGS_DIR" ]]; then
+        #     ln -s -f -n "$(pwd)/${CONF_PREFIX}/vscode/keybindings.json" \
+        #         "${VSCODIUM_KEYBINDINGS_DIR}/keybindings.json" && echo_success "VSCodium keybindings.json symlink created"
+        # fi
+    
+    -u | --uninstall)
+        printf "⛓ Unlink config files for the ${USER} user.\n"
+        for filename in ${(v)dotfiles}; do
+            unlink "$HOME/$filename" \
+                && echo_success "✅ Symbolic link detected." \
+                || echo "❌ Symlink does not exist already.\n"
+        done ;;
+esac
+shift
+done

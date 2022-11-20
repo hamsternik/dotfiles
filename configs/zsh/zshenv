@@ -18,17 +18,24 @@ export LC_ALL="en_US.UTF-8"
 export PATH=""
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
 
+# Homebrew
+export PATH=/opt/homebrew/bin:$PATH
+export PATH=/opt/homebrew/sbin:$PATH
+
 # ~/Developer default root for any project
 export DEVELOPER="/Users/hamsternik/Developer"
-export PATH=$PATH:$DEVELOPER
+export DOTFILES="$DEVELOPER/public/dotfiles"
+export PATH=$DEVELOPER:$PATH
 
 # Zsh git prompt
-export GITSTATUS=$DOTFILES/.zsh/zsh-git-prompt/src
-export PATH=$PATH:$GITSTATUS/.bin
+export ZSH_GIT_STATUS=$DOTFILES/.zsh/zsh-git-prompt/src
+export PATH=$ZSH_GIT_STATUS/.bin:$PATH
 
-# Xcode default path to the SoucreKit-LSP binary (Swift)
-export SOURCEKIT_TOOLCHAIN_PATH=`xcrun --find sourcekit-lsp`
-export PATH=$PATH:$SOURCEKIT_TOOLCHAIN_PATH
+# OpenSSL
+# before make ln -s /path/to/openssl-by-brew /usr/local/openssl
+# as ex.: ln -s /usr/local/Cellar/openssl/1.0.2j/bin/openssl /usr/local/openssl
+export OPENSSL_BREW=/usr/local/Cellar/openssl/1.0.2j/bin
+export PATH=$OPENSSL_BREW:$PATH
 
 # Ruby | rbenv
 export RBENV_SHIMS="$HOME/.rbenv/shims"
@@ -56,12 +63,6 @@ export GOPATH=$HOME/Developer/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-
-# OpenSSL
-# before make ln -s /path/to/openssl-by-brew /usr/local/openssl
-# as ex.: ln -s /usr/local/Cellar/openssl/1.0.2j/bin/openssl /usr/local/openssl
-export OPENSSL_BREW=/usr/local/Cellar/openssl/1.0.2j/bin
-export PATH=$OPENSSL_BREW:$PATH
 
 # NVM
 export NVM_AUTO_USE=true
