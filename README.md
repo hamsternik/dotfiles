@@ -2,54 +2,128 @@
 
 Hi there 👋
 
+## My macOS Daily Apps
+
+- [Rectangle. Move and resize windows on macOS with keyboard shortcuts and snap areas.](https://github.com/rxhanson/Rectangle)
+
+## Before clone
+
 The basic case – your Macbook is new and so empty. And you need to settle down all basic programs, tools, configs, etc to configure as it should be actually.
 
-### Your Next Issue
+First, install the **Homebrew**:
 
-- [create unified bash script for all VSCode commands in use #36](https://github.com/hamsternik/dotfiles/issues/36)
-- [create symlinks to macOS binaries from the dotfiles.sh #35](https://github.com/hamsternik/dotfiles/issues/35)
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
-# Clone
+Visit [the official website](https://brew.sh/) if there are any errors occures with the curl command or bash script.
 
-- `git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git` – first "raw" setup
-- `git submodule update --init --recursive` – already downloaded repo w/o initialized submodules
+Second, deal with SSH keys before clone the dotfiles repo. Copy this into the `~/.ssh/config` file:
 
-# Deploy
+```bash
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+Host github.com*
+    User git
+    HostName github.com
+    IdentityFile ~/.ssh/github-hamsternik
+Host bitbucket.org
+    User git
+    HostName bitbucket.org
+    IdentityFile ~/.ssh/bitbucket-hamsternik
+```
 
-### before clone
+Generate new local ssh key for the personal email. Use `github-hamsternik` key name.
 
-- open preferred terminal (you use daily)
-- generate new ssh key with concrete email: `$ ssh-keygen -t ed25519 -C "hamsternik9@gmail.com"`
-- for more information about SSH generation see details [on the GitHub doc](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-- use the name `github-hamsternik` for public / private key
-- start the ssh-agent in the background: `$ eval "$(ssh-agent -s)"`
-- add the ssh private key to the ssh-agent: `$ ssh-add -K ~/.ssh/github-hamsternik`
-- copy `ssh/config` text from the repo to your local machine by the `~/.ssh/config` path
-- go into your [account settings](https://github.com/settings/keys) to add your public key
-- save into the buffer public ssh key text: `$ pbcopy < ~/.ssh/github-hamsternik.pub`
+```bash
+ssh-keygen -t ed25519 -C "hamsternik9@gmail.com"
+```
 
-### tools setup
+Start ssh-agent in the background:
 
-- clone the repo (first setup): `$ git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git`
-- install Homebrew on the pretty fresh machine: `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-- install all tools and application within Homebrew (via Make command): `$ make brew-install`
-- next install `antibody` -- pluggin manager for Zsh written on Go (via Make command): `$ make antibody`
-- install all configs in the user's root directory: `$ make dotfiles-install`
-- create `~/.zsh` and `~/.vim/bundle` directories manually (will automate due the [#29](https://github.com/hamsternik/dotfiles/issues/29) and [#30](https://github.com/hamsternik/dotfiles/issues/30) issues)
-- go to the `~/.zsh` dir and run: `$ git clone git@github.com:hamsternik/zsh-git-prompt.git`
-- `cd` into the `zsh-git-prompt` and run 2 commands ([read more details](https://github.com/hamsternik/zsh-git-prompt?organization=hamsternik&organization=hamsternik))
-- `$ stack setup`
-- `$ stack build && stack install`
-- go to the `~/.vim/bundle` and run `$ git clone git@github.com:VundleVim/Vundle.vim.git`
-- open vim and use `PluginInstall` command to install all the plugins
+```bash
+eval "$(ssh-agent -s)"
+```
 
-If you see such zsh error:
+Add the ssh private key to the `ssh-agent`:
 
-> error due terminal init `zsh compinit: insecure directories`
+```bash
+$ ssh-add -K ~/.ssh/github-hamsternik
+```
 
-Please check out this [stackoverflow solution](https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories).
+Copy the public key into the clipboard:
 
-### configs setup
+```bash
+pbcopy < ~/.ssh/github-hamsternik.pub
+```
+
+Open your GitHub [account settings](https://github.com/settings/keys) and add the new generated public key copied into clipboard.
+
+Check out [official GitHub doc](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to address questions about the SSH generation.
+
+## Deploy
+
+Clone the repo and jump into it:
+
+```bash
+git clone --recurse-submodules -j8 git@github.com:hamsternik/dotfiles.git && cd dotfiles
+```
+
+or if you already cloned the repo without extra key for to load submodules, download all of submodules first:
+
+```bash
+git submodule update --init --recursive
+```
+
+Install config files in the users' root directory. 
+Just FYI – you are using Zsh at this moment. But don't worry, you will migrate to the `fish` the next turn.
+
+```bash
+make dotfiles-install
+```
+
+Next you need to settle the only `zsh-git-prompt` plugin I am using today with Zsh configuration.
+There are 2 versions of this plugin and my choice (and author's one) is the haskell version, of course.
+To set it up, first go and download the latest version of the haskell tool stack called `stack`.
+
+```bash
+curl -sSL https://get.haskellstack.org/ | sh
+```
+
+Then jump to the git plugin directory and use next commands:
+
+```bash
+stack setup
+```
+
+Please wait until the `setup` is finished to install the proper version of the `ghci` and other tools.
+Then run:
+
+```bash
+stack build && stack install
+```
+
+Next come back to the user root directory and cd into `.vim/bundle`. Run:
+
+```bash
+git clone git@github.com:VundleVim/Vundle.vim.git
+```
+
+Install all plugins described into the [.vimrc config file](/configs/vim/vimrc). 
+Open vim and run `PluginInstall`.
+Vundle will handle all the work automatically.
+
+The last step is to install applications and CLI tools via the Homebrew.
+As you see, I am actively using `make` so it would be easy to you to run any command to set up the machine "one click".
+
+```
+make brew-install
+```
+
+## Misc: Configs
+
+### GPG
 
 To be able to commit with `commit.gpgsign true` setting in your git configuration, you have to set up GPG unique key on the machine.
 Check more information about signing commits and git configuration on the [official GitHub doc page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
@@ -57,7 +131,7 @@ Check more information about signing commits and git configuration on the [offic
 To generate new GPG key you should install `gnupg` command-line tool first. Verify whether you have the app on your machine after full Homebrew settings file installation. Otherwithe use `$ brew install gnupg` command to install the app first. Then open the terminal. Generate a GPG key pair.
 
 ```bash
-$ gpg --full-generate-key
+gpg --full-generate-key
 ```
 
 Your key must be at least 4096 bits.
@@ -67,7 +141,7 @@ Type a secure passphrase... but I don't use any passphrases right now actually �
 Use the next command to list the long form of the GPG keys for which you have both a public and private key:
 
 ```bash
-$ gpg --list-secret-keys --keyid-format=long
+gpg --list-secret-keys --keyid-format=long
 ```
 
 From the list of GPG keys, copy the long form of the GPG key ID you'd like to use.
@@ -86,7 +160,7 @@ If you have any questions please refer [the official GitHub page](https://docs.g
 To disable signing your git commits just off the `commit.gpgsign` option into your git configuration file.
 More information about that see on [official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
-## Fish shell
+### Fish shell
 
 In 2022 I had switched from macOS default shell 'Zsh' to the brand-new eye-candy [fish shell](https://fishshell.com).
 Before I had Zsh with custom configuration and small set of scripts onboard, but that is all a history right now.
@@ -101,8 +175,6 @@ Here are some answers how to deal with $PATH variables and aliases:
 Furthermore, there are some official document pages from fish shell addressing issues:
 - [add path variable in fish shell](https://fishshell.com/docs/current/cmds/fish_add_path.html);
 - [alias -- create a function](https://fishshell.com/docs/current/cmds/alias.html?highlight=alias);
-
-### Fisher
 
 I am using [fisher](http://git.io/fisher) fish plugin manager to handle all my programming stuff around.
 See below certain plugins.
@@ -203,42 +275,3 @@ $ brew services stop mongodb-community
 ```
 
 More info how to install and work with the latest version of MongoDB Community take a look in the [documentation page](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/#run-mongodb-community-edition).
-
-## SourceKit-LSP ❤️ VSCode
-
-The SourceKit-LSP server is included with the Swift toolchain. Currently my single workflow is using the latest Xcode app within macOS.
-Starting from Xcode 11.4+ `sourcekit-lsp` is included as the part of Swift toolchain.
-
-The extension stored in the repo, follow the `vscode/extensions` path and run
-
-```sh
-code --install-extension sourcekit-lsp-development.vsix
-```
-
-Launch the VSCode with any Xcode project to verify wether `sourcekit-lsp` works without errors.
-Then open `Settings (cmd+,) -> Extensions -> SourceKit-LSP` and configure both the `Server Path` and `Toolchain Path`.
-Example of predefined settings for the plugin in the `vscode/settings.json`.
-
-Unfortunately, `sourcekit-lsp` does not support standard iOS projects, including these I'm working day-to-day on my work. The pipeline to tackle Swift project together with LSP is using Swift Package Manager to build the project. If you have such type of project, e.g. CLI application builded on Swift just run `swift build` in terminal / VSCode.
-
-To know more about what's sourcekit-lsp and how it can be bind together with VSCode follow the [official README on sourcekit-lsp GitHub page](https://github.com/apple/sourcekit-lsp).
-
-### [OPTIONAL] How to build VSCode extension from scratch?
-
-Download the [sourcekit-lsp repo](https://github.com/apple/sourcekit-lsp) first. As I'm have `sourcekit-lsp` already as the part of Xcode toolchain the only thing what I need to do is build sourcekit-lsp extension for VScode. In terminal go into `sourcekit-lsp/Editors/vscode` directory and run the following commands to build the VSCode extension.
-
-```bash
-$ cd Editors/vscode
-$ npm install
-$ npm run dev-package
-```
-
-Install the package from the command-line
-
-```bash
-$ code --install-extension sourcekit-lsp-development.vsix
-```
-
-### macOS daily apps
-
-- [rectangle | Move and resize windows on macOS with keyboard shortcuts and snap areas](https://github.com/rxhanson/Rectangle)
