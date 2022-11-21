@@ -136,6 +136,8 @@ cask "postman"
 cask "proxyman"
 ### Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+# Text translation application
+cask "reverso"
 ## Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
 ### Team communication and collaboration software
