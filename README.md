@@ -126,19 +126,30 @@ make brew-install
 
 ### GPG
 
+First, to disable signing your git commits just off the `commit.gpgsign` option into your git configuration file.
+That helps to eliminate any commit issues related the older signing.
+
 To be able to commit with `commit.gpgsign true` setting in your git configuration, you have to set up GPG unique key on the machine.
 Check more information about signing commits and git configuration on the [official GitHub doc page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
 To generate new GPG key you should install `gnupg` command-line tool first. Verify whether you have the app on your machine after full Homebrew settings file installation. Otherwithe use `$ brew install gnupg` command to install the app first. Then open the terminal. Generate a GPG key pair.
 
 ```bash
-gpg --full-generate-key
+gpg --default-new-key-algo rsa4096 --gen-key
 ```
 
-Your key must be at least 4096 bits.
-Enter your user ID information. I used `hamsternik` GitHub account username for that.
-Use your GitHub account verified email. For more information about email verification on GitHub check [this doc](https://docs.github.com/en/get-started/signing-up-for-github/verifying-your-email-address) out.
-Type a secure passphrase... but I don't use any passphrases right now actually 🤷🏻‍♂️
+This command is the new way to pass some arguments and omit extra work by-default. 
+The plain version of the command check out at the [Generating a new GPG key](https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key) doc page.
+
+Enter your user-ID information.
+I am using `hamsternik` GitHub account username for that.
+Next, use gh account's email.
+
+For more information about email verification on GitHub check [this doc](https://docs.github.com/en/get-started/signing-up-for-github/verifying-your-email-address) out.
+
+⚠️ After couple attempts to create GPG key with passphrase `git` does not commit any changes from any public repo.
+Idk what is the reason. For now I have GPG key with 2 years of expiration date w/o passphrase.
+
 Use the next command to list the long form of the GPG keys for which you have both a public and private key:
 
 ```bash
@@ -146,20 +157,34 @@ gpg --list-secret-keys --keyid-format=long
 ```
 
 From the list of GPG keys, copy the long form of the GPG key ID you'd like to use.
-E.g. in line `sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]` the long form of the GPG generated key is `3AA5C34371567BD2` part.
+E.g. in line `sec 4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]` the long form of the GPG generated key is `3AA5C34371567BD2` part.
 Copy that text from the terminal and insert into your `.gitconfig` file. You can find configuration file by the `configs/gitconfig` path.
-Then run the next command to to copy paste into buffer your public GPG key:
+Run to copy the public GPG key:
 
 ```bash
-gpg --armor --export %long for of GPG key copied from the preious command%%
+gpg --armor --export CCD4FA8B4F35837031CBFD0E9474253FF8C3327E-EXAMPLE | pbcopy
 ```
 
 Paste copied public key on [GPG keys page](https://github.com/settings/keys) on GitHub.
 
+The last step to do is telling `gh` to refresh new GPG key(s) locally.
+Run the command:
+
+```bash
+gh auth refresh -s read:gpg_key
+```
+
+#### Troubleshooting.
+
 If you have any questions please refer [the official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key).
 
-To disable signing your git commits just off the `commit.gpgsign` option into your git configuration file.
-More information about that see on [official GitHub page](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
+1/ When commit changes in any git repo the next error provided down below.
+TODO: figure out what is the reason.
+
+```bash
+error: gpg failed to sign the data
+fatal: failed to write commit object
+```
 
 ### Fish shell
 
