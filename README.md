@@ -23,6 +23,7 @@ Second, deal with SSH keys before clone the dotfiles repo. Copy this into the `~
 ```bash
 Host *
     AddKeysToAgent yes
+    IgnoreUnknown UseKeychain
     UseKeychain yes
 Host github.com*
     User git
