@@ -205,6 +205,35 @@ Furthermore, there are some official document pages from fish shell addressing i
 I am using [fisher](http://git.io/fisher) fish plugin manager to handle all my programming stuff around.
 See below certain plugins.
 
+### LaTeX
+
+My [resume](https://github.com/hamsternik/cv) has been written using LaTeX to process plain text into representable peace of my experience and career.
+I am not a big fan of [huge MacTex](https://tug.org/mactex/mactex-download.html) package. Official source says about ~5Gb of data. Big Yikes!
+
+Let's install [A Smaller Distribution, Basic TeX](https://tug.org/mactex/morepackages.html).
+Nowadays `basictex` brew package will not be installed automatically with the whole Brewfile apps batch.
+
+```bash
+brew install basictex --cask
+```
+
+I am using `latexmk` Perl script to automate the assembly process for the cv repo. 
+Check out more about [the latexmk documentation](https://mg.readthedocs.io/latexmk.html).
+To install `latextmk` use `tlmgr` provided in the `basictex` package:
+
+```bash
+sudo tlmgr install latexmk
+```
+
+Most of the time the prompt will say you need update `tlmgr` right after.
+
+```bash
+sudo tlmgr update --self
+```
+
+That is it. Go to the [cv repo](https://github.com/hamsternik/cv) and check it out!
+
+
 ### Node.js and NVM
 
 Brew officially provide [node.js](https://formulae.brew.sh/formula/node#default) and [NVM](https://formulae.brew.sh/formula/nvm#default) as node.js versions manager.
