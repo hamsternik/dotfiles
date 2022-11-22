@@ -4,6 +4,7 @@ DavidAnson.vscode-markdownlint
 dbaeumer.vscode-eslint
 EditorConfig.EditorConfig
 esbenp.prettier-vscode
+foam.foam-vscode
 golang.go
 James-Yu.latex-workshop
 justusadam.language-haskell
@@ -14,14 +15,13 @@ mhutchie.git-graph
 ms-azuretools.vscode-docker
 ms-python.python
 ms-python.vscode-pylance
-ms-toolsai.jupyter
-ms-toolsai.jupyter-keymap
-ms-toolsai.jupyter-renderers
 ms-vscode.live-server
+ms-vscode.makefile-tools
 octref.vetur
 rebornix.ruby
 ritwickdey.LiveServer
 sswg.swift-lang
+tomoki1207.pdf
 vadimcn.vscode-lldb
 vscode-icons-team.vscode-icons
 vscodevim.vim
