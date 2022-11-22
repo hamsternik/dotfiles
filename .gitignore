@@ -2,7 +2,8 @@
 .DS_Store
 **/.DS_Store
 
-configs/vim/bundle/*/
+configs/vim/vim/bundle/*
+configs/vim/vim/bundle/*/**
 .vim/.netrwlist
 .directory
 
