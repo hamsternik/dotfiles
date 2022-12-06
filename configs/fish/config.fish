@@ -13,14 +13,17 @@ set -gx PUBLIC $DEVELOPER/public
 
 ### PATH | Overriding
 
+# Homebrew bin path
+if test -d /opt/homebrew
+  fish_add_path /opt/homebrew/bin
+  fish_add_path /opt/homebrew/sbin
+end
+
 # ~/dotfiles macos bin
 # alias ports=`$(pwd)/bin/macos/lports`
 if test -d $HOME/.bin
   fish_add_path $HOME/.bin
 end
-
-# Homebrew
-fish_add_path /opt/homebrew/sbin
 
 # Doom Emacs
 fish_add_path ~/.emacs.d/bin
