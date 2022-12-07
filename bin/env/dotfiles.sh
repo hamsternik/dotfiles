@@ -21,6 +21,7 @@ declare -A dotfiles=(
     ["tmux/tmux.conf"]=".tmux.conf"
     ["vim/vim"]=".vim"
     ["vim/vimrc"]=".vimrc"
+    ["vscode/keybindings.json"]="Library/Application Support/Code/User/keybindings.json"
     ["zsh/plugins"]=".zsh"
     ["zsh/zshenv"]=".zshenv"
     ["zsh/zshrc"]=".zshrc"
