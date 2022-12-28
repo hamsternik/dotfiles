@@ -87,7 +87,7 @@ function private;   cd $PRIVATE;            end
 function work;      cd $PRIVATE/work;  end
 function b;         cd $PUBLIC/www.hamsternik.com;  end
 function d;         cd $PUBLIC/dotfiles;  end
-function l;         cd $PUBLIC/ledgers;  end
+function le;         cd $PUBLIC/ledgers;  end
 
 ### Fish Prompt
 # name: sashimi
