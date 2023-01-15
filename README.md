@@ -47,13 +47,23 @@ Start ssh-agent in the background:
 eval "$(ssh-agent -s)"
 ```
 
-Add the ssh private key to the `ssh-agent`:
+Add the ssh private key to the `ssh-agent`.
+
+For GitHub:
 
 ```bash
-$ ssh-add -K ~/.ssh/github-hamsternik
+ssh-add ~/.ssh/github-hamsternik
 ```
 
-Copy the public key into the clipboard:
+For Bitbucket*:
+
+```bash
+ssh-add ~/.ssh/bitbucket-hamsternik
+```
+
+Copy the public key into the clipboard.
+
+For GitHub:
 
 ```bash
 pbcopy < ~/.ssh/github-hamsternik.pub
