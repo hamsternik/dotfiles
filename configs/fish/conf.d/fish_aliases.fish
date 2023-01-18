@@ -22,7 +22,7 @@ function private;   cd $PRIVATE;            end
 function qq;        cd $PRIVATE;            end
 
 ## public projects
-function work;          cd $PRIVATE/work;                   end
+function work;          cd $PUBLIC/work;                    end
 function b;             cd $PUBLIC/www.hamsternik.com;      end
 function d;             cd $PUBLIC/dotfiles;                end
 function le;            cd $PUBLIC/ledgers;                 end
