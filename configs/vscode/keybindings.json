@@ -71,7 +71,7 @@
         "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
     },
     {
-        "key": "shift+cmd+m",
+        "key": "shift+cmd+j",
         "command": "workbench.action.toggleMaximizedPanel"
     }
 ]
