@@ -27,6 +27,7 @@ declare -A dotfiles=(
     ["zsh/plugins"]=".zsh"
     ["zsh/zshenv"]=".zshenv"
     ["zsh/zshrc"]=".zshrc"
+    ["nvim"]=".config/nvim"
 )
 
 function echo_linking {

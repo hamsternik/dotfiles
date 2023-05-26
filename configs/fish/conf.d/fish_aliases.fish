@@ -14,6 +14,11 @@ function tmux   ; command tmux -2 $argv ;               end
 function ip     ; curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g' ; end
 function ping1  ; command ping -c 4 google.com ;        end
 
+# Overrides
+function vim
+    command nvim $argv
+end
+
 ## development env
 function dev;       cd $DEVELOPER;          end
 function public;    cd $PUBLIC;             end
