@@ -51,12 +51,12 @@
     name        = !git remote -v | head -n1 | awk '{print $2}'
 
 [user]
-	name = Nikita Khomitsevych
+    name = Nikita Khomitsevych
     email = hamsternik9@gmail.com
-    signingkey = CCD4FA8B4F35837031CBFD0E9474253FF8C3327E
+    #signingkey = CCD4FA8B4F35837031CBFD0E9474253FF8C3327E
 
 [commit]
-	gpgsign = true
+    #gpgsign = true
 
 [credential]
     helper = cache --timeout=14400
@@ -66,7 +66,7 @@
     safecrlf = true
     autocrlf = false
     ignorecase = false
-	whitespace = trailing-space,space-before-tab
+    whitespace = trailing-space,space-before-tab
     excludesfile = ~/.gitignore_global
     quotepath = false
 
