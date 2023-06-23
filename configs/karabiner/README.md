@@ -5,11 +5,13 @@ To use `complex_modifications` scripts link all of them to the `~/.config/karabi
 ## Scripts
 
 I am using Karabiner only for one action: change keyboard input source by tapping only **one** button.
-There are 3 diffrerent lang sources so I mapped all of them along the next buttons:
+
+The map of langs I'm using daily:
 
 - en (ABC): left command;
 - ru: right command;
-- ua: right option; 
+- ua: right option;
+- jp (romaji): left option;
 
 ## Resources
 

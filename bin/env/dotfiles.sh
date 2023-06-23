@@ -19,7 +19,9 @@ declare -A dotfiles=(
     ["git/gitattributes"]=".gitattributes"
     ["git/gitconfig"]=".gitconfig"
     ["git/gitignore_global"]=".gitignore_global"
+    ["karabiner/change-lang-one-key.json"]=".config/karabiner/assets/complex_modifications/change-lang-one-key.json"
     ["lf/lfrc"]=".config/lf/lfrc"
+    ["nvim"]=".config/nvim"
     ["tmux/tmux.conf"]=".tmux.conf"
     ["vim/vim"]=".vim"
     ["vim/vimrc"]=".vimrc"
@@ -27,7 +29,6 @@ declare -A dotfiles=(
     ["zsh/plugins"]=".zsh"
     ["zsh/zshenv"]=".zshenv"
     ["zsh/zshrc"]=".zshrc"
-    ["nvim"]=".config/nvim"
 )
 
 function echo_linking {
