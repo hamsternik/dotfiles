@@ -1,38 +1,31 @@
-unamestr=`uname`
-if [[ "$unamestr" == 'Linux' ]]; then
-    alias ls="ls --color=auto"
-    alias dir="dir --color=auto"
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
-    alias grep="grep --color=auto"
-    alias fgrep="fgrep --color=auto"
-    alias egrep="egrep --color=auto"
-elif [[ "$unamestr" == 'FreeBSD' || "$unamestr" == 'Darwin' ]]; then
-    alias ls='ls -G'
-fi
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -Al'
 
-# Reload the shell
-alias reload="exec $SHELL -l"
+alias g='git'
+alias cl='clear'
+alias grep='grep --color=auto'
+alias ping1='ping -c 4 google.com'
+alias ip='curl -s http://checkip.dyndns.com/'
 
-# Navigation
-alias l="ls -CF"
-alias ll="l -Al"
-alias la="l -A"
-alias ...="cd ../.."
-alias ..="cd .."
+alias tmux='tmux -2'
+alias vi='nvim'
+alias vim='nvim'
 
-alias g="git"
-alias df="df -h"
-alias cl="clear"
-alias gdb="gdb -q"
-alias ping1="ping -c 4 google.com"
+alias dev='cd $DEVELOPER'
+alias public='cd $PUBLIC'
+alias private='cd $PRIVATE'
 
-DEVELOPER="~/Developer"
-PUBLIC="${DEVELOPER}/public"
+alias q='cd $PUBLIC'
+alias b='cd $PUBLIC/www.hamsternik.com'
+alias d='cd $PUBLIC/dotfiles'
 
-# Routing
-alias dev="cd ${DEVELOPER}"
-alias private="cd ${DEVELOPER}/private"
-alias public="cd ${PUBLIC}"
-alias b="cd ${PUBLIC}/blog"
-alias d="cd ${PUBLIC}/dotfiles"
-alias w="cd ${PUBLIC}/work"
+alias qq='cd $PRIVATE'
+alias le='cd $PRIVATE/ledgers'
+alias work='cd $PRIVATE/work'
+

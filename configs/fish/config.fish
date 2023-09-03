@@ -2,6 +2,12 @@
 ## aliases and prompt are kept in functions/ dir
 ## source: https://stackoverflow.com/a/61982376/3527499
 
+for file in ~/.{functions*,exports*,aliases*}
+  if test -r $file
+    source "$file"
+  end
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     status --is-interactive; and rbenv init - fish | source

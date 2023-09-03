@@ -21,9 +21,12 @@
     patch       = !git --no-pager diff --no-color
 #[rebase]
     rb          = rebase
-    rbi         = rebase -i
-    rbc         = rebase --continue
     rba         = rebase --abort
+    rbc         = rebase --continue
+    rbi         = rebase -i
+    cp		= cherry-pick
+    cpa		= cherry-pick --abort
+    cpc		= cherry-pick --continue
 #[reset]
     r           = reset
     rs          = reset --soft
