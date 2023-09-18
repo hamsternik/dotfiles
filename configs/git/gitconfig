@@ -15,6 +15,7 @@
     fpr         = fetch --prune
     p           = !git push origin `git symbolic-ref HEAD`
     pf          = !git push origin +`git symbolic-ref HEAD`
+    pt		= !git push --tag
     pl          = !git pull origin `git symbolic-ref HEAD`
     #prune       = !git pull origin --prune ### This command doesn't work
     df          = diff
