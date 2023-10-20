@@ -1,7 +1,7 @@
 local o = vim.opt
 
 -- Line numbers
-o.number = true
+--o.number = true
 --o.relativenumber = true
 
 -- tabs
@@ -18,7 +18,7 @@ end)
 -- Set sign column to be 4.
 -- So, if I have a new diff, It'll not feel weird, by the signcolumn expanding
 
-o.signcolumn = "yes:1"
+--o.signcolumn = "yes:1"
 
 -- startup line
 o.cmdheight = 0
