@@ -1,7 +1,7 @@
 local o = vim.opt
 
 -- Line numbers
---o.number = true
+o.number = true
 --o.relativenumber = true
 
 -- tabs
