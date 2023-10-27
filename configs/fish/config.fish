@@ -68,4 +68,4 @@ fish_add_path "$HOME/.bun/bin"
 # set --export PATH $BUN_INSTALL/bin $PATH
 
 # Python 3.10
-fish_add_path ~/Library/Python/3.10/bin
+#fish_add_path ~/Library/Python/3.10/bin
