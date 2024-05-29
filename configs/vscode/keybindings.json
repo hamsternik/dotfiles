@@ -21,10 +21,6 @@
         "command": "git-graph.view"
     },
     {
-        "key": "cmd+k cmd+f",
-        "command": "workbench.files.action.collapseExplorerFolders"
-    },
-    {
         "key": "shift+cmd+i",
         "command": "browser-preview.openPreview"
     },
@@ -61,7 +57,7 @@
         "when": "isInDiffEditor"
     },
     {
-        "key": "cmd+k cmd+r",
+        "key": "cmd+k r",
         "command": "editor.action.rename",
         "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
     },
@@ -73,5 +69,13 @@
     {
         "key": "shift+cmd+j",
         "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "cmd+k r",
+        "command": "-workbench.action.files.revealActiveFileInWindows"
+    },
+    {
+        "key": "shift+cmd+l",
+        "command": "workbench.files.action.showActiveFileInExplorer"
     }
 ]
