@@ -39,17 +39,8 @@ end
 fish_add_path ~/.emacs.d/bin
 alias e="emacsclient -c -a 'emacs'"
 
-# Node.js
-fish_add_path /opt/homebrew/opt/node@16/bin
-set -gx LDFLAGS "-L/opt/homebrew/opt/node@16/lib"
-set -gx CPPFLAGS "-I/opt/homebrew/opt/node@16/include"
-
-# NVM
-set -x NVM_DIR $HOME/.nvm
-fish_add_path $NVM_DIR
-
-# right now settle from shell by command `set --universal nvm_default_version lts`
-# set -gx nvm_default_version lts
+# Python 3.10
+#fish_add_path ~/Library/Python/3.10/bin
 
 # Java
 ## prerequisite: brew install --cask android-studio
@@ -62,10 +53,28 @@ fish_add_path $JAVA_HOME
 export ANDROID_HOME=$HOME/Library/Android/sdk
 fish_add_path $ANDROID_HOME/platform-tools ## add android `adb` and `fastboot` to the PATH
 
+# Node.js
+# fish_add_path /opt/homebrew/opt/node@16/bin
+# set -gx LDFLAGS "-L/opt/homebrew/opt/node@16/lib"
+# set -gx CPPFLAGS "-I/opt/homebrew/opt/node@16/include"
+fish_add_path /opt/homebrew/opt/node@20/bin
+
+# NVM
+set -x NVM_DIR $HOME/.nvm
+fish_add_path $NVM_DIR
+
+# right now settle from shell by command `set --universal nvm_default_version lts`
+# set -gx nvm_default_version lts
+
 # bun.sh (https://bun.sh/)
 fish_add_path "$HOME/.bun/bin"
 # set --export BUN_INSTALL "$HOME/.bun"
 # set --export PATH $BUN_INSTALL/bin $PATH
 
-# Python 3.10
-#fish_add_path ~/Library/Python/3.10/bin
+# pnpm
+set -gx PNPM_HOME "/Users/hamsternik/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+
