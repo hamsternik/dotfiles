@@ -18,14 +18,10 @@ alias vi='nvim'
 alias vim='nvim'
 
 alias dev='cd $DEVELOPER'
-alias public='cd $PUBLIC'
-alias private='cd $PRIVATE'
 
-alias q='cd $PUBLIC'
-alias b='cd $PUBLIC/www.hamsternik.com'
-alias d='cd $PUBLIC/dotfiles'
+alias q='cd $DEVELOPER/private'
+alias qq='cd $DEVELOPER/public'
+alias qqq='cd $DEVELOPER/work'
 
-alias qq='cd $PRIVATE'
-alias le='cd $PRIVATE/ledgers'
-alias work='cd $PRIVATE/work'
-
+alias b='cd $DEVELOPER/public/www.hamsternik.com'
+alias d='cd $DEVELOPER/public/dotfiles'
