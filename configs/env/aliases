@@ -19,9 +19,9 @@ alias vim='nvim'
 
 alias dev='cd $DEVELOPER'
 
-alias q='cd $DEVELOPER/private'
-alias qq='cd $DEVELOPER/public'
+alias q='cd $DEVELOPER/local'
+alias qq='cd $DEVELOPER/remote'
 alias qqq='cd $DEVELOPER/work'
 
-alias b='cd $DEVELOPER/public/www.hamsternik.com'
-alias d='cd $DEVELOPER/public/dotfiles'
+alias b='cd $DEVELOPER/remote/www.hamsternik.com'
+alias d='cd $DEVELOPER/remote/dotfiles'
