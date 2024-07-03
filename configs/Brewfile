@@ -166,6 +166,9 @@ cask "telegram"
 ## Tool to install Linux/BSD distributions to a partition or USB drive
 cask "unetbootin"
 
+## Native desktop client for WhatsApp
+cask whatsapp
+
 ## Install and switch between multiple versions of Xcode // UI Application
 cask "xcodes"
 
