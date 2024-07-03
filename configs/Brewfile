@@ -93,71 +93,84 @@ brew "watchman"
 # https://stackoverflow.com/questions/41993431/unable-to-find-any-jvms-matching-version-1-8-0-40-when-open-terminal-on-macos
 cask "homebrew/cask-versions/adoptopenjdk8"
 
-## Two-factor authentication software
-cask "authy"
-### iOS App Store alternative
+## iOS App Store alternative
 cask "altserver"
-### Compact TeX distribution as alternative to the full TeX Live / MacTeX
+
+## Compact TeX distribution as alternative to the full TeX Live / MacTeX
 #cask "basictex"
-### Desktop password and login vault
+
+## Desktop password and login vault
 cask "bitwarden"
-### Tool to remove unnecessary files and folders from disk
+
+## Tool to remove unnecessary files and folders from disk
 cask "cleanmymac"
-### Disk space visualizer
+
+## Disk space visualizer
 cask "daisydisk"
-### Text editor
+
+## Text editor
 cask "emacs"
-### VPN client for secure internet access and private browsing
-cask "expressvpn"
-### Collaborative team software
+
+## Collaborative team software
 cask "figma"
-### Utility for customizing which browser to start
+
+## Utility for customizing which browser to start
 cask "finicky"
-### Google Font: https://fonts.google.com/specimen/Roboto
-### Address svn to download fonts: https://github.com/Homebrew/homebrew-cask-fonts/issues/2039
+
+## Google Font: https://fonts.google.com/specimen/Roboto
+## Address svn to download fonts: https://github.com/Homebrew/homebrew-cask-fonts/issues/2039
 cask "font-roboto"
+
 # Desktop client for GitHub repositories
 cask "github"
-### Web browser
+
+## Web browser
 cask "google-chrome"
+
 ### Client for the Google Drive storage service
 cask "google-drive"
+
 # Interface for reading and syncing eBooks
 cask "kindle"
+
 # Minimal browser that protects privacy, https://minbrowser.github.io/min/
 cask "min"
-### JDK from Oracle
+
+## JDK from Oracle
 cask "oracle-jdk"
-### Shows the next meeting in the menu bar
-cask "meetingbar"
-### TeX distribution
+
+## TeX distribution
 cask "miktex-console"
-### Collaboration platform for API development
+
+## Collaboration platform for API development
 cask "postman"
-# Modern and intuitive HTTP Debugging Proxy app
+
+## Modern and intuitive HTTP Debugging Proxy app
 cask "proxyman"
-### Move and resize windows using keyboard shortcuts or snap areas
+
+## Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
-# Text translation application
+
+## Text translation application
 cask "reverso"
+
 ## Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
-### Team communication and collaboration software
+
+## Team communication and collaboration software
 cask "slack"
-### Messaging app with a focus on speed and security
+
+## Messaging app with a focus on speed and security
 cask "telegram"
-# Tool to install Linux/BSD distributions to a partition or USB drive
+
+## Tool to install Linux/BSD distributions to a partition or USB drive
 cask "unetbootin"
-# Binary releases of VS Code without MS branding/telemetry/licensing
-cask "vscodium"
-### Install and switch between multiple versions of Xcode // UI Application
+
+## Install and switch between multiple versions of Xcode // UI Application
 cask "xcodes"
-# Video communication and virtual meeting platform
+
+## Video communication and virtual meeting platform
 cask "zoom"
-## Collect, organize, cite, and share research sources
-cask "zotero"
-## Toggl Time tracker
-cask "toggl-track"
 
 # Miscellaneous Applications
 
@@ -167,8 +180,6 @@ cask "toggl-track"
 # cask "calibre"
 ## Tool to run Windows software
 # cask "crossover"
-## Open-source software for live streaming and screen recording
-# cask "obs"
 
 # Mac App Store
 ## https://github.com/mas-cli/mas
@@ -176,9 +187,6 @@ mas "Bear", id: 1091189122
 
 # Flow. A pomodoro based work timer to help you get things done
 mas "Flow", id: 1423210932
-
-# Flexible boards for deep work
-mas "Muse", id: 1501563902
 
 ## Logitec G Hub. Mouse Application, more at https://www.logitechg.com/en-eu/innovation/g-hub.html
 # wget "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.zip" && unzip "lghub_installer.zip"
