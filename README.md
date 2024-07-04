@@ -270,6 +270,8 @@ The topmost reason of doing that is that [the Terminal.app does not support true
 
 Right now I am using [onedark](https://github.com/joshdick/onedark.vim) colorscheme paired with the [lightline](https://github.com/itchyny/lightline.vim) which [is veeery sweety](https://www.sainnhe.dev/post/status-line-config/) yeah!
 
+There is a [discussion thread](https://discussions.apple.com/thread/250636611?sortBy=best) on the Apple forum about 24bit True Color support in macOS Terminal.app. The short answer: NO.
+
 ## Emacs
 
 The whole Emacs installation & system configuration I got by these links
