@@ -25,6 +25,10 @@ vscode-ext-list-export:
 	@./bin/vscode/vscode-extensions-list-export
 .PHONY: vscode-ext-list-export
 
+colorcheck:
+	@pastel colorcheck
+.PHONY: colorcheck
+
 # References
 # https://github.com/webpro/dotfiles/blob/master/Makefile
 # https://xs-labs.com/en/blog/2020/11/07/introduction-to-makefiles/
