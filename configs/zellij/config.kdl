@@ -1,0 +1,43 @@
+// choose the path to the default shell that zellij will use for opening new panes,
+// default: $SHELL,
+default_shell "fish"
+
+// toggle enabling the mouse mode,
+// default: true,
+mouse_mode true
+
+// configure the scroll back buffer size, the NOL zellij stores for _each_ pane,
+// default: 10000
+scroll_buffer_size 10000
+
+// Command to executre when copying text,
+// Default: macOS. For linux use "wl-copy",
+copy_command "pbcopy" 
+
+// Toggle between having Zellij lay out panes according to a predefined set of layouts
+// whenever possible. default: true,
+auto_layout true
+
+// Toggle between supporting the extended "styled_underlines" ANSI protocol
+// and ignoring it (can sometimes cause some issues in unsupported terminals),
+// default: true,
+styled_underlines false
+
+// sessions will be serialized to the cache folder (if enabled),
+// default: true,
+session_serialization false
+
+// the pane viewport will be serialized and resurrectable as well,
+// if enabled along w/ `session_serialization`,
+// default: false,
+pane_viewport_serialization false
+
+// enable or disable writing of session metadata to disk,
+// default: false,
+disable_session_metadata false
+
+ui {
+  pane_frames {
+    rounded_corners true
+  }
+}
