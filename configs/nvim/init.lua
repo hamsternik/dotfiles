@@ -1,8 +1,3 @@
-vim.loader.enable()
-
-vim.g.mapleader = " "
-
-require "config.options"
-require "config.keymaps"
-
-require "lazy-setup"
+require("core.keymaps")
+require("core.plugins")
+require("plugin_config")
