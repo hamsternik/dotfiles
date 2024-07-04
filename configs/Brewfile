@@ -63,6 +63,10 @@ brew "lf"
 ### OpenSSH -- suite of secure networking utilities based on the Secure Shell (SSH) protocol
 brew "openssh"
 brew "openssl@1.1" # wget dependency
+
+## Command-line tool to generate, analyze, convert and manipulate colors
+brew "pastel"
+
 ### Pinentry for GPG on Mac. Also check out "pinentry" on brew.sh
 brew pinentry-mac
 # A static site generator for Swift developers
@@ -75,6 +79,10 @@ brew "reattach-to-user-namespace"
 brew "subversion"
 ### Tmux -- terminal multiplexer
 brew "tmux"
+
+## Yet another typing test, but crab flavoured
+brew "toipe"
+
 ### Display directories as trees (with optional color/HTML output)
 brew "tree"
 ### Install and switch between multiple versions of Xcode
@@ -85,6 +93,9 @@ brew "xz"
 brew "watch"
 ### Watch files and take action when they change
 brew "watchman"
+
+## Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
 
 # User Applications
 ## https://github.com/caskroom/homebrew-cask
