@@ -91,24 +91,25 @@
 
 [color]
     ui = true
+    pager = true
 [color "branch"]
     current	= bold reverse red
-	local	= yellow
+	  local	= yellow
     remote	= blue
     plain = white
 [color "diff"]
     plain = white
-	meta = bold blue black
+	  meta = bold blue black
     frag = magenta bold
     func = cyan
     old = red
     new	= blue bold
-	whitespace = reverse black
+    whitespace = reverse black
     commit = bold black
 [color "status"]
     header = dim white black
     added = yellow
-	changed = red
+    changed = red
     untracked = cyan
     unmerged = red
 [color "decorate"]
@@ -135,8 +136,8 @@
 
 [pager]
     diff = delta
-    log = delta
-    reflog = delta
+    log = bat
+    reflog = bat 
     show = delta
 
 [interactive]

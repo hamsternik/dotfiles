@@ -132,6 +132,9 @@ cask "finicky"
 ## Address svn to download fonts: https://github.com/Homebrew/homebrew-cask-fonts/issues/2039
 cask "font-roboto"
 
+# Fira Code. Free monospaced font with programming ligatures
+cask "font-fira-code"
+
 # Desktop client for GitHub repositories
 cask "github"
 
@@ -143,6 +146,9 @@ cask "google-drive"
 
 # Interface for reading and syncing eBooks
 cask "kindle"
+
+# GPU-based terminal emulator
+cask "kitty"
 
 # Minimal browser that protects privacy, https://minbrowser.github.io/min/
 cask "min"

@@ -14,8 +14,12 @@ if status is-interactive
 end
 
 set TERM "xterm-256color"               # Sets the terminal type
-set EDITOR "emacsclient -t -a ''"       # $EDITOR use Emacs in terminal
+#set EDITOR "emacsclient -t -a ''"       # $EDITOR use Emacs in terminal
 set VISUAL "emacsclient -c -a emacs"    # $VISUAL use Emacs in GUI mode
+
+if test "$COLORTERM" = truecolor
+   set -g fish_term24bit 1
+end
 
 set -gx DEVELOPER ~/Developer
 set -gx PRIVATE $DEVELOPER/private
