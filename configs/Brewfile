@@ -1,8 +1,5 @@
 # https://github.com/Homebrew/homebrew-bundle
 tap "homebrew/bundle"
-tap "homebrew/cask-drivers"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
 tap "mongodb/brew"
 tap "dart-lang/dart"
 
