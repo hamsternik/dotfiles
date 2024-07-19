@@ -3,7 +3,7 @@ tap "homebrew/bundle"
 tap "mongodb/brew"
 tap "dart-lang/dart"
 
-# prerequisites
+# --- Prerequisites
 
 ### Download with resuming and segmented downloading
 ### Need for `xcodes` CLI tool to download Xcodes faster
@@ -23,15 +23,18 @@ brew "node"
 brew "rust", link: false
 brew "yarn"
 
-# CLI Applications
-## https://github.com/Homebrew/brew/
+# --- CLI Applications
+# --- https://github.com/Homebrew/brew/
 
 # A cat(1) clone with wings.
 brew "bat"
-# Antibody -- Zsh plugin manager
-brew "getantibody/tap/antibody"
+
+# Plugin manager for zsh, inspired by antigen and antibody
+brew "antidote"
+
 # Cmake -- family of tools designed to build, test and package software
 brew "cmake"
+
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Simple, fast and user-friendly alternative to find
@@ -92,8 +95,8 @@ brew "watchman"
 ## Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
 
-# User Applications
-## https://github.com/caskroom/homebrew-cask
+# --- User Applications
+# --- https://github.com/caskroom/homebrew-cask
 
 # adoptopenjdk8 fixes warning in terminal and also provides a correct jdk version for Android
 # https://stackoverflow.com/questions/41993431/unable-to-find-any-jvms-matching-version-1-8-0-40-when-open-terminal-on-macos
