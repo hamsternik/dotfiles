@@ -10,7 +10,7 @@ dotfiles-uninstall:
 .PHONY: dotfiles-uninstall
 
 brew-install:
-	@brew bundle --file=configs/Brewfile
+	@brew bundle install --file=configs/Brewfile
 .PHONY: brew-install
 
 antibody-install:

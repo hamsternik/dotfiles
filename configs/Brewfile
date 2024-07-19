@@ -1,7 +1,5 @@
 # https://github.com/Homebrew/homebrew-bundle
 tap "homebrew/bundle"
-tap "homebrew/core"
-tap "homebrew/cask"
 tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
@@ -68,7 +66,7 @@ brew "openssl@1.1" # wget dependency
 brew "pastel"
 
 ### Pinentry for GPG on Mac. Also check out "pinentry" on brew.sh
-brew pinentry-mac
+brew "pinentry-mac"
 # A static site generator for Swift developers
 brew "publish"
 ### Modern replacement for ps written by Rust
@@ -184,7 +182,7 @@ cask "telegram"
 cask "unetbootin"
 
 ## Native desktop client for WhatsApp
-cask whatsapp
+cask "whatsapp" 
 
 ## Install and switch between multiple versions of Xcode // UI Application
 cask "xcodes"
