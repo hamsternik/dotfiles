@@ -3,26 +3,6 @@ tap "homebrew/bundle"
 tap "mongodb/brew"
 tap "dart-lang/dart"
 
-# --- Prerequisites
-
-### Download with resuming and segmented downloading
-### Need for `xcodes` CLI tool to download Xcodes faster
-brew "aria2"
-
-# Toolchain: iOS, macOS
-brew "fastlane"
-brew "rbenv"
-brew "swiftformat"
-brew "swiftlint"
-
-# Toolchain: languages
-brew "golang"
-brew "kotlin"
-brew "mongodb-community"
-brew "node"
-brew "rust", link: false
-brew "yarn"
-
 # --- CLI Applications
 # --- https://github.com/Homebrew/brew/
 
@@ -37,6 +17,10 @@ brew "cmake"
 
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+
+## Pack, ship and run any application as a lightweight container
+brew "docker"
+
 # Simple, fast and user-friendly alternative to find
 # *emacs*: improves file indexing performance for some commands
 brew "fd"
@@ -99,12 +83,33 @@ brew "watchman"
 ## Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
 
+### Download with resuming and segmented downloading
+### Need for `xcodes` CLI tool to download Xcodes faster
+brew "aria2"
+
+# Toolchain: iOS, macOS
+brew "fastlane"
+brew "rbenv"
+brew "swiftformat"
+brew "swiftlint"
+
+# Toolchain: languages
+brew "golang"
+brew "kotlin"
+brew "mongodb-community"
+brew "node"
+brew "rust", link: false
+brew "yarn"
+
 # --- User Applications
 # --- https://github.com/caskroom/homebrew-cask
 
 # adoptopenjdk8 fixes warning in terminal and also provides a correct jdk version for Android
 # https://stackoverflow.com/questions/41993431/unable-to-find-any-jvms-matching-version-1-8-0-40-when-open-terminal-on-macos
 cask "homebrew/cask-versions/adoptopenjdk8"
+
+# Chromium based browser
+cask "arc"
 
 ## iOS App Store alternative
 cask "altserver"
@@ -120,6 +125,9 @@ cask "cleanmymac"
 
 ## Disk space visualizer
 cask "daisydisk"
+
+# App to build and share containerised applications and microservices
+cask "docker"
 
 ## Text editor
 cask "emacs"
@@ -167,6 +175,9 @@ cask "postman"
 ## Modern and intuitive HTTP Debugging Proxy app
 cask "proxyman"
 
+## Control your tools with a few keystrokes
+cask "raycast"
+
 ## Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 
@@ -203,8 +214,12 @@ cask "zoom"
 ## Tool to run Windows software
 # cask "crossover"
 
-# Mac App Store
-## https://github.com/mas-cli/mas
+# --- Mac App Store
+# --- https://github.com/mas-cli/mas
+
+## Note taking application focusing on dates
+mas "Agenda", id: 1287445660
+
 mas "Bear", id: 1091189122
 
 # Flow. A pomodoro based work timer to help you get things done
