@@ -67,7 +67,7 @@
         "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
     },
     {
-        "key": "shift+cmd+j",
+        "key": "alt+cmd+j",
         "command": "workbench.action.toggleMaximizedPanel"
     },
     {
@@ -75,7 +75,7 @@
         "command": "-workbench.action.files.revealActiveFileInWindows"
     },
     {
-        "key": "shift+cmd+l",
+        "key": "shift+cmd+j",
         "command": "workbench.files.action.showActiveFileInExplorer"
     }
 ]
