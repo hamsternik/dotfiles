@@ -77,5 +77,10 @@
     {
         "key": "shift+cmd+j",
         "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    {
+        "key": "cmd+r",
+        "command": "-workbench.action.reloadWindow",
+        "when": "isDevelopment"
     }
 ]
