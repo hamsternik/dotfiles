@@ -1,5 +1,38 @@
 {
-    "sourcekit-lsp.trace.server": "messages",
-    "sourcekit-lsp.serverPath": "/Applications/Xcode-12.5.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
-    "sourcekit-lsp.toolchainPath": "/Applications/Xcode-12.5.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain"
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.iconTheme": "vscode-icons",
+    "security.workspace.trust.untrustedFiles": "newWindow",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vsicons.dontShowNewVersionMessage": true,
+    "lldb.library": "/Applications/Xcode-14.2.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "redhat.telemetry.enabled": true,
+    "editor.minimap.enabled": false,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cmake.showOptionsMovedNotification": false,
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.sideBar.location": "right",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "prisma.showPrismaDataPlatformNotification": false,
+    "githubPullRequests.pullBranch": "never",
+    "git.autofetch": true,
+    "githubPullRequests.fileListLayout": "tree",
+    "gitblame.delayBlame": 500,
+    "gitblame.ignoreWhitespace": true,
+    "gitblame.inlineMessageEnabled": true,
+    "editor.fontSize": 13
 }
