@@ -82,5 +82,9 @@
         "key": "cmd+r",
         "command": "-workbench.action.reloadWindow",
         "when": "isDevelopment"
+    },
+    {
+        "key": "cmd+c cmd+f",
+        "command": "workbench.files.action.collapseExplorerFolders"
     }
 ]
