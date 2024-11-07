@@ -34,5 +34,7 @@
     "gitblame.delayBlame": 500,
     "gitblame.ignoreWhitespace": true,
     "gitblame.inlineMessageEnabled": true,
-    "editor.fontSize": 13
+    "editor.fontSize": 13,
+    "git.openRepositoryInParentFolders": "never",
+    "editor.accessibilitySupport": "off"
 }

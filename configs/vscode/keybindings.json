@@ -84,7 +84,7 @@
         "when": "isDevelopment"
     },
     {
-        "key": "cmd+c cmd+f",
+        "key": "cmd+k cmd+c",
         "command": "workbench.files.action.collapseExplorerFolders"
     }
 ]
