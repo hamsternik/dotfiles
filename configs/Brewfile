@@ -225,6 +225,10 @@ mas "Bear", id: 1091189122
 # Flow. A pomodoro based work timer to help you get things done
 #mas "Flow", id: 1423210932
 
+# 1120099014  PDF Viewer Pro by PSPDFKit     (2024.13)
+#mas "PDF Viewer", id: 1120099014
+mas install 1120099014
+
 ## Logitec G Hub. Mouse Application, more at https://www.logitechg.com/en-eu/innovation/g-hub.html
 # wget "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.zip" && unzip "lghub_installer.zip"
 
