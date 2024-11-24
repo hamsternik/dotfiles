@@ -88,8 +88,7 @@ install-fish:
 	@echo "\n✨ Installing fish shell config files..."
 	if [ ! -d "$$HOME/.config/fish" ]; then mkdir -p "$$HOME/.config/fish"; else echo "⚠️ ~/.config/fish already exists."; fi
 	ln -s $(FISH_DIR)/config.fish ~/.config/fish/config.fish
-	ln -s $(FISH_DIR)/fish_plugins ~/.config/fish/fish_plugins
-	ln -s $(FISH_DIR)/fish_variables ~/.config/fish/fish_variables
+# ln -s $(FISH_DIR)/fish_plugins ~/.config/fish/fish_plugins
 # @echo "✨ Installed fish config files. Installing config directories..."
 # ln -s -n $(FISH_DIR)/completions ~/.config/fish/completions
 # ln -s -n $(FISH_DIR)/conf.d ~/.config/fish/conf.d
@@ -99,8 +98,7 @@ install-fish:
 
 uninstall-fish:
 	rm ~/.config/fish/config.fish || true
-	rm ~/.config/fish/fish_plugins || true
-	rm ~/.config/fish/fish_variables || true
+# rm ~/.config/fish/fish_plugins || true
 # rm ~/.config/fish/completions || true
 # rm ~/.config/fish/conf.d || true
 # rm ~/.config/fish/functions || true
@@ -297,7 +295,10 @@ fish-install-plugins:
 	@echo "\n✨Preparing fish plugin manager before installing plugins..."
 	brew list fisher || HOMEBREW_NO_AUTO_UPDATE=1 brew install fisher
 	@echo "TBD parse ~/.config/fish/fish_plugins file, putting all plugins in a line, and provide as arg to the `fisher install <arg>`"
-	fisher install edc/bass isacikgoz/sashimi ilancosman/tide@v6 jorgebucaran/nvm.fish sentriz/fish-pipenv
+	fisher install edc/bass
+	fisher install ilancosman/tide@v6
+	fisher install jorgebucaran/nvm.fish
+	fisher install sentriz/fish-pipenv
 
 vscode-install-extensions:
 	./bin/vscode/vscode-extensions-install
