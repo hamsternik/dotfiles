@@ -22,8 +22,6 @@ if test "$COLORTERM" = truecolor
 end
 
 set -gx DEVELOPER ~/Developer
-set -gx PRIVATE $DEVELOPER/private
-set -gx PUBLIC $DEVELOPER/public
 
 ### PATH | Overriding
 
