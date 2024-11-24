@@ -6,6 +6,11 @@ esac
 
 stty -ixon
 
+## set the standard shell aliases
+if [ -f "$HOME/.aliases" ]; then
+    . "$HOME/.aliases"
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
@@ -62,11 +67,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# ALIASES HERE
-if [ -f "$HOME/.aliases" ]; then
-    . "$HOME/.aliases"
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -89,6 +89,3 @@ vim()
     stty "$STTYOPTS"
 }
 
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-export CATALINA=/opt/apache-tomcat-8.0.15
-export PATH=$JAVA_HOME/bin:${PATH}

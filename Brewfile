@@ -24,24 +24,34 @@ brew "docker"
 # Simple, fast and user-friendly alternative to find
 # *emacs*: improves file indexing performance for some commands
 brew "fd"
+
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+
 # Plugin manager for the Fish shell
 brew "fisher"
+
 # GitHub command-line tool
 brew "gh"
+
 # A syntax-highlighting pager for git and diff output
 brew "git-delta"
+
 # GNU Pretty Good Privacy (PGP) package. Formerly known as: gnupg2. See more on https://gnupg.org/
 brew "gnupg"
+
 ### Grep -- GNU grep app
 brew "grep"
+
 ### Easy plain text accounting with command-line, terminal and web UIs, https://hledger.org/
 brew "hledger"
+
 ### HTop -- interactive process viewer for Unix systems
 brew "htop"
+
 ### LF -- terminal file manager
 brew "lf"
+
 ### OpenSSH -- suite of secure networking utilities based on the Secure Shell (SSH) protocol
 brew "openssh"
 brew "openssl@1.1" # wget dependency
@@ -51,10 +61,13 @@ brew "pastel"
 
 ### Pinentry for GPG on Mac. Also check out "pinentry" on brew.sh
 brew "pinentry-mac"
+
 # A static site generator for Swift developers
 brew "publish"
+
 ### Modern replacement for ps written by Rust
 brew "procs"
+
 ### Reattach -- macOS wrapper, needs for tmux
 brew "reattach-to-user-namespace"
 
@@ -63,6 +76,7 @@ brew "stow"
 
 ### Version control system designed to be a better CVS; `subversion` or `svn`
 brew "subversion"
+
 ### Tmux -- terminal multiplexer
 brew "tmux"
 
@@ -71,12 +85,16 @@ brew "toipe"
 
 ### Display directories as trees (with optional color/HTML output)
 brew "tree"
+
 ### Install and switch between multiple versions of Xcode
 brew "xcodes"
+
 ### XZ -- General-purpose data compression with high compression ratio
 brew "xz"
+
 ### Watch -- Runs the specified command repeatedly and displays the results on standard output
 brew "watch"
+
 ### Watch files and take action when they change
 brew "watchman"
 
@@ -154,6 +172,9 @@ cask "google-chrome"
 ### Client for the Google Drive storage service
 cask "google-drive"
 
+## macOS Keyboard customiser
+cask "karabiner-elements"
+
 # Interface for reading and syncing eBooks
 cask "kindle"
 
@@ -197,7 +218,7 @@ cask "telegram"
 cask "unetbootin"
 
 ## Native desktop client for WhatsApp
-cask "whatsapp" 
+cask "whatsapp"
 
 ## Install and switch between multiple versions of Xcode // UI Application
 cask "xcodes"
@@ -205,7 +226,7 @@ cask "xcodes"
 ## Video communication and virtual meeting platform
 cask "zoom"
 
-# Miscellaneous Applications
+## Misc Applications
 
 ## Tools for building Android applications
 # cask "android-studio"
@@ -214,20 +235,7 @@ cask "zoom"
 ## Tool to run Windows software
 # cask "crossover"
 
-# --- Mac App Store
-# --- https://github.com/mas-cli/mas
-
-## Note taking application focusing on dates
-#mas "Agenda", id: 1287445660
-
-mas "Bear", id: 1091189122
-
-# Flow. A pomodoro based work timer to help you get things done
-#mas "Flow", id: 1423210932
-
-# 1120099014  PDF Viewer Pro by PSPDFKit     (2024.13)
-#mas "PDF Viewer", id: 1120099014
-mas install 1120099014
+# Misc Apps (wget, curl)
 
 ## Logitec G Hub. Mouse Application, more at https://www.logitechg.com/en-eu/innovation/g-hub.html
 # wget "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.zip" && unzip "lghub_installer.zip"

@@ -12,32 +12,6 @@ filetype off
 nnoremap <space> <nop>
 let mapleader = "\<space>"
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                          Vundle configuration                           "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage itself
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'xu-cheng/brew.vim'
-Plugin 'jph00/swift-apple'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'klen/python-mode'
-Plugin 'lervag/vimtex'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'iamcco/markdown-preview.nvim'
-
-Plugin 'ptzz/lf.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'luochen1990/rainbow'
-Plugin 'itchyny/lightline.vim' "light and configurable statusline/tabline plugin for Vim
-Plugin 'joshdick/onedark.vim' " dark Vim/Neovim color scheme inspired by Atoms's syntax theme.
-
-call vundle#end()
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Color Scheme                            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -71,13 +45,6 @@ if (has("autocmd") && !has("gui_running"))
 endif
 colorscheme onedark
 "}}}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                        turn on filetype plugins                         "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-filetype plugin on
-filetype indent plugin on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                           vimrc augroup                                 "
@@ -243,130 +210,3 @@ noremap <silent> <leader>R :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo '
 " `=` symbol is easier to type rather that `+`
 map <leader>=  :vertical res +1<CR>
 map <leader>- :vertical res -1<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           *** PLUGINS SETUP ***                       "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               lightline                               "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set laststatus=2
-set noshowmode
-
-let g:lightline = {
-    \ 'colorscheme': 'onedark',
-    \ 'separator': { 'left': '/', 'right': '\' },
-    \ 'subseparator': { 'left': '', 'right': '' },
-    \ 'tabline': { 'left': [ [ 'buffers'] ], 'right': [ [ 'tabs' ] ] },
-    \ 'component_expand': { 'buffers': 'lightline#bufferline#buffers' },
-    \ 'component_type': { 'buffers': 'tabsel' },
-    \ 'component_raw': { 'buffers': 1 }
-    \ }
-let g:lightline#bufferline#clickable = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               python-mode                             "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let ropevim_enable_shortcuts = 1
-"let g:pymode_python = 'python3'
-let g:pymode_syntax = 1
-let g:pymode_syntax_builtin_objs = 0
-let g:pymode_syntax_builtin_funcs = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               vim-markdown                            "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:vim_markdown_folding_disable = 1
-" let g:vim_markdown_folding_style_pythonic = 1
-" let g:vim_markdown_folding_level = 3
-let g:vim_markdown_frontmatter = 1 "YAML Front Matter
-set nofoldenable "Enable/Disable Folding
-
-
-""" markdown-preview.nvim
-""" ====================================================================
-" set to 1, the nvim will auto close current preview window when change
-" from markdown buffer to another buffer
-" default: 1
-let g:mkdp_auto_close = 0
-
-" set to 1, the vim will refresh markdown when save the buffer or
-" leave from insert mode, default 0 is auto refresh markdown as you edit or
-" move the cursor
-" default: 0
-let g:mkdp_refresh_slow = 1
-
-" set to 1, echo preview page url in command line when open preview page
-" default is 0
-let g:mkdp_echo_preview_url = 1
-
-" use a custom port to start server or empty for random
-let g:mkdp_port = '3001'
-
-" specify browser to open preview page
-" for path with space
-" valid: `/path/with\ space/xxx`
-" invalid: `/path/with\\ space/xxx`
-" default: ''
-let g:mkdp_browser = '/Applications/Safari.app'
-
-
-nmap <C-s> <Plug>MarkdownPreview
-nmap <M-s> <Plug>MarkdownPreviewStop
-nmap <C-p> <Plug>MarkdownPreviewToggle
-
-"" Troubleshooting
-"" MarkdownPreview command initially does not work, produce and error into console.
-"" To fix that launch commands `yarn install && yarn upgrade` inside 'markdown-preview.nvim' plugin folder
-"" More in the issue https://github.com/iamcco/markdown-preview.nvim/issues/319
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   vimtex                              "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:vimtex_latexmk_enable=1
-" let g:vimtex_imaps_leader = ','
-
-let g:tex_flavor = 'latex'
-let g:vimtex_latexmk_options='-pdfdvi'
-" let g:vimtex_view_method = "okular"
-" let g:vimtex_view_general_viewer="okular --unique"
-let g:vimtex_latexmk_continuous = 1
-let g:vimtex_latexmk_background = 1
-let g:vimtex_latexmk_callback = 0
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   rainbow                             "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-\		'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\		'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-\		'operators': '_,_',
-\		'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-\		'separately': {
-\			'*': {},
-\			'tex': {
-\				'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-\			},
-\			'vim': {
-\				'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-\			},
-\		}
-\	}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                           LF -- terminal file manager                 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lf_map_keys = 0
-map <leader>l :LfNewTab<CR>
-
-" Opening `lf` instead of netrw when you open a directory
-let g:NERDTreeHijackNetrw = 0 "" add this line if you use NERDTree
-let g:lf_replace_netrw = 1 "" open lf when vim open a directory
