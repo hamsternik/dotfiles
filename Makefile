@@ -35,58 +35,59 @@ install-mas:
 	@echo "PDF Viewer Pro by PSPDFKit"
 	mas install 1120099014
 
-# Install config files, macOS oriented.
+## Install Configuration Files
+## WARNING! The whole setup is macOS-oriented, no plans to suuport Linux currenlty.
 
-install-configs:
-	$(MAKE) install-finicky
-	$(MAKE) install-fish
-	$(MAKE) install-git
-	$(MAKE) install-gpg
-	$(MAKE) install-karabiner
-	$(MAKE) install-kitty
-	$(MAKE) install-lf
-	$(MAKE) install-nvim
-	$(MAKE) install-shell
-	$(MAKE) install-tmux
-	$(MAKE) install-vim
-	$(MAKE) install-vscode
-	$(MAKE) install-zellij
-	$(MAKE) install-zsh
+install-all:
+	$(MAKE) install-finicky-conf
+	$(MAKE) install-fish-conf
+	$(MAKE) install-git-conf
+	$(MAKE) install-gpg-conf
+	$(MAKE) install-karabiner-conf
+	$(MAKE) install-kitty-conf
+	$(MAKE) install-lf-conf
+	$(MAKE) install-nvim-conf
+	$(MAKE) install-shell-conf
+	$(MAKE) install-tmux-conf
+	$(MAKE) install-vim-conf
+	$(MAKE) install-vscode-conf
+	$(MAKE) install-zellij-conf
+	$(MAKE) install-zsh-conf
 
-uninstall-configs:
-	$(MAKE) uninstall-finicky
-	$(MAKE) uninstall-fish
-	$(MAKE) uninstall-git
-# $(MAKE) uninstall-gpg
-	$(MAKE) uninstall-karabiner
-	$(MAKE) uninstall-kitty
-	$(MAKE) uninstall-lf
-	$(MAKE) uninstall-nvim
-	$(MAKE) uninstall-shell
-	$(MAKE) uninstall-tmux
-	$(MAKE) uninstall-vim
-	$(MAKE) uninstall-vscode
-	$(MAKE) uninstall-zellij
-	$(MAKE) uninstall-zsh
+uninstall-all:
+	$(MAKE) uninstall-finicky-conf
+	$(MAKE) uninstall-fish-conf
+	$(MAKE) uninstall-git-conf
+# $(MAKE) uninstall-gpg-conf
+	$(MAKE) uninstall-karabiner-conf
+	$(MAKE) uninstall-kitty-conf
+	$(MAKE) uninstall-lf-conf
+	$(MAKE) uninstall-nvim-conf
+	$(MAKE) uninstall-shell-conf
+	$(MAKE) uninstall-tmux-conf
+	$(MAKE) uninstall-vim-conf
+	$(MAKE) uninstall-vscode-conf
+	$(MAKE) uninstall-zellij-conf
+	$(MAKE) uninstall-zsh-conf
 
 ## finicky configs (Utility for customizing which browser to start)
 
 FINICKY_DIR := $(CURRENTDIR)/configs/finicky
-install-finicky:
-	@echo "\n✨ Installing finicky.js config files..."
+install-finicky-conf:
+	@$(MAKE) uninstall-finicky-conf
+	@echo "\n✨ Installing finicky.js config files."
 	ln -s -n $(FINICKY_DIR)/finicky.js ~/.finicky.js
-.PHONY: install-finicky
 
-uninstall-finicky:
+uninstall-finicky-conf:
 	rm ~/.finicky.js || true
-.PHONY: uninstall-finicky
 
 ## fish shell
 
 FISH_DIR := $(CURRENTDIR)/configs/fish
-install-fish:
-	@echo "\n✨ Installing fish shell config files..."
-	if [ ! -d "$$HOME/.config/fish" ]; then mkdir -p "$$HOME/.config/fish"; else echo "⚠️ ~/.config/fish already exists."; fi
+install-fish-conf:
+	@$(MAKE) uninstall-fish-conf
+	@echo "\n✨ Installing fish shell config files."
+	@if [ ! -d "$(HOME)/.config/fish" ]; then echo "❌ ~/.config/fish dir already exists. Exit."; exit 1; fi
 	ln -s $(FISH_DIR)/config.fish ~/.config/fish/config.fish
 # ln -s $(FISH_DIR)/fish_plugins ~/.config/fish/fish_plugins
 # @echo "✨ Installed fish config files. Installing config directories..."
@@ -94,211 +95,189 @@ install-fish:
 # ln -s -n $(FISH_DIR)/conf.d ~/.config/fish/conf.d
 # ln -s -n $(FISH_DIR)/functions ~/.config/fish/functions
 # ln -s -n $(FISH_DIR)/themes ~/.config/fish/themes
-.PHONY: install-fish
 
-uninstall-fish:
+uninstall-fish-conf:
 	rm ~/.config/fish/config.fish || true
 # rm ~/.config/fish/fish_plugins || true
 # rm ~/.config/fish/completions || true
 # rm ~/.config/fish/conf.d || true
 # rm ~/.config/fish/functions || true
 # rm ~/.config/fish/themes || true
-.PHONY: uninstall-fish
 
 ## git configs
 
 GIT_DIR := $(CURRENTDIR)/configs/git
-install-git:
-	@echo "\n✨ Installing git config files..."
+install-git-conf:
+	@$(MAKE) uninstall-git-conf
+	@echo "\n✨ Installing git config files."
 	ln -s -n $(GIT_DIR)/gitattributes ~/.gitattributes
 	ln -s -n $(GIT_DIR)/gitignore_global ~/.gitignore_global
 	ln -s -n $(GIT_DIR)/gitconfig ~/.gitconfig
-.PHONY: install-git
 
-uninstall-git:
+uninstall-git-conf:
 	rm ~/.gitattributes || true
 	rm ~/.gitignore_global || true
 	rm ~/.gitconfig || true
-.PHONY: uninstall-git
 
 ## gnupg configs
 
 GNUPG_DIR := $(CURRENTDIR)/configs/gnupg
-install-gpg:
-	@echo "GPG public key(ring) is not used at the moment."
+install-gpg-conf:
+	@echo "GPG public key(ring) is not used at the moment. Exit."
 # brew list gnupg || HOMEBREW_NO_AUTO_UPDATE=1 brew install gnupg
 # ln -s -n $(GNUPG_DIR)/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 # ln -s -n $(GNUPG_DIR)/gpg.conf ~/.gnupg/gpg.conf
-.PHONY: install-gpg
 
 ## karabiner configs (Keyboard customiser)
 
 KARABINER_DIR := $(CURRENTDIR)/configs/karabiner
-install-karabiner:
-	@echo "\n✨ Installing Karabiner config files..."
+install-karabiner-conf:
+	@$(MAKE) uninstall-karabiner-conf
+	@echo "\n✨ Installing Karabiner config files."
 	ln -s -n $(KARABINER_DIR)/karabiner.json ~/.config/karabiner/karabiner.json
 	ln -s -n $(KARABINER_DIR)/change-lang-one-key.json ~/.config/karabiner/assets/complex_modifications/change-lang-one-key.json
-.PHONY: install-karabiner
 
-uninstall-karabiner:
+uninstall-karabiner-conf:
 	rm ~/.config/karabiner/karabiner.json || true
 	rm ~/.config/karabiner/assets/complex_modifications/change-lang-one-key.json || true
-.PHONY: uninstall-karabiner
 
 ## kitty configs (GPU-based terminal emulator on Python)
 
 KITTY_DIR := $(CURRENTDIR)/configs/kitty
-install-kitty:
-	@echo "\n✨ Installing kitty terminal config files..."
+install-kitty-conf:
+	@$(MAKE) uninstall-kitty-conf
+	@echo "\n✨ Installing kitty terminal config files."
 	ln -s -n $(KITTY_DIR)/kitty.conf ~/.config/kitty/kitty.conf
-.PHONY: install-kitty
 
-uninstall-kitty:
+uninstall-kitty-conf:
 	rm ~/.config/kitty/kitty.conf || true
-.PHONY: uninstall-kitty
 
 ## lf configs (Terminal file manager)
 
 LF_DIR := $(CURRENTDIR)/configs/lf
-install-lf:
-	@echo "\n✨ Installing lf config files..."
+install-lf-conf:
+	@$(MAKE) uninstall-lf-conf
+	@echo "\n✨ Installing lf config files."
 	ln -s -n $(LF_DIR)/lfrc ~/.config/lf/lfrc
-.PHONY: install-lf
 
-uninstall-lf:
+uninstall-lf-conf:
 	rm ~/.config/lf/lfrc || true
-.PHONY: uninstall-lf
 
-## nvim configs
+## NVIM configs
 
 NVIM_DIR := $(CURRENTDIR)/configs/nvim
-install-nvim:
-	@echo "\n✨ Installing NeoVim config files..."
-	if [ ! -d "$$HOME/.config/nvim" ]; then mkdir -p "$$HOME/.config/nvim"; else echo "~/.config/nvim already exists."; fi
+install-nvim-conf:
+	@$(MAKE) uninstall-nvim-conf
+	@echo "\n✨ Installing NeoVim config files."
+	@if [ ! -d "$$HOME/.config/nvim" ]; then echo "~/.config/nvim configuration dir does not exist. Exit."; exit 1; fi
 	ln -s -n $(NVIM_DIR)/init.lua ~/.config/nvim/init.lua
 	ln -s -n $(NVIM_DIR)/lua ~/.config/nvim/lua
 	ln -s -n $(NVIM_DIR)/plugin ~/.config/nvim/plugin
-.PHONY: install-nvim
 
-uninstall-nvim:
+uninstall-nvim-conf:
 	rm ~/.config/nvim/init.lua || true
 	rm ~/.config/nvim/lua || true
 	rm ~/.config/nvim/plugin || true
-.PHONY: uninstall-nvim
 
 ## Sublime Text 4 configs
 
 SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURRENTDIR)/configs/sublime-text
 SUBLIME_TEXT_CONF_DIR := "$(HOME)/Library/Application\ Support/Sublime\ Text/Packages/User"
-install-sublime-text:
-	@$(MAKE) uninstall-sublime-text
-	@echo "\n✨ Installing Sublime Text 4 config files..."
+install-sublime-text-conf:
+	@$(MAKE) uninstall-sublime-text-conf
+	@echo "\n✨ Installing Sublime Text 4 config files."
 	@if [ ! -d "$(SUBLIME_TEXT_CONF_DIR)" ]; then echo "❌ Sublime Text 4 is not installed"; exit -1; fi
 	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Default (OSX).sublime-keymap" "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap"
 	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Package Control.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings"
 	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Preferences.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
 
-uninstall-sublime-text:
-	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap"
-	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings"
-	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
+uninstall-sublime-text-conf:
+	rm "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap" || true
+	rm "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings" || true
+	rm "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings" || true
 
 ## basic shell configs
 
 SHELL_DIR := $(CURRENTDIR)/configs/shell
-install-shell:
-	@echo "\n✨ Installing bash & shell config files..."
+install-shell-conf:
+	@$(MAKE) uninstall-shell-conf
+	@echo "\n✨ Installing bash & shell config files."
 	ln -s -n $(SHELL_DIR)/aliases ~/.aliases
 	ln -s -n $(SHELL_DIR)/bashrc ~/.bashrc
 	ln -s -n $(SHELL_DIR)/profile ~/.profile
-.PHONY: install-shell
 
-uninstall-shell:
+uninstall-shell-conf:
 	rm ~/.aliases || true
 	rm ~/.bashrc || true
 	rm ~/.profile || true
-.PHONY: uninstall-shell
 
 # TMUX config (Terminal multiplexer)
 
 TMUX_DIR := $(CURRENTDIR)/configs/tmux
-install-tmux:
+install-tmux-conf:
+	@$(MAKE) uninstall-tmux-conf
 	@echo "\n✨ Installing TMUX config files..."
 	ln -s -n $(TMUX_DIR)/tmux.conf ~/.tmux.conf
-.PHONY: install-tmux
 
-uninstall-tmux:
+uninstall-tmux-conf:
 	rm ~/.tmux.conf || true
-.PHONY: uninstall-tmux
-
-## Terminal.app (default macOS terminal app)
-
-TERMINAL_DIR := $(CURRENTDIR)/configs/terminal-macos
-install-terminal:
-	@echo "Use Atom.terminal theme in the Termainl.app -> Settings -> Profiles -> More -> Import..."
-.PHONY: install-terminal
 
 ## ViM configs (Vi 'workalike' with many additional features)
 
 VIM_DIR := $(CURRENTDIR)/configs/vim
-install-vim:
-	@echo "\n✨ Installing ViM config files..."
-	if [ ! -d "$$HOME/.vim" ]; then mkdir -p "$$HOME/.vim"; else echo "~/.vim already exists."; fi
+install-vim-conf:
+	@$(MAKE) uninstall-vim-conf
+	@echo "\n✨ Installing ViM config files."
+	@if [ ! -d "$(HOME)/.vim" ]; then echo "~/.vim dir does not exist! Exit."; exit 1; fi
 	ln -s -n $(VIM_DIR)/vimrc ~/.vim/.vimrc
-.PHONY: install-vim
 
-uninstall-vim:
+uninstall-vim-conf:
 	rm ~/.vim/.vimrc || true
-.PHONY: uninstall-vim
 
 ## VSCode configs (Open-source code editor)
 
 VSCODE_DIR := $(CURRENTDIR)/configs/vscode
-install-vscode:
-	@echo "\n✨ Installing VSCode config files..."
+install-vscode-conf:
+	@$(MAKE) uninstall-vscode-conf
+	@echo "\n✨ Installing VSCode config files."
 	ln -s -n $(VSCODE_DIR)/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 	ln -s -n $(VSCODE_DIR)/settings.json ~/Library/Application\ Support/Code/User/settings.json
-.PHONY: install-vscode
 
-uninstall-vscode:
+uninstall-vscode-conf:
 	rm ~/Library/Application\ Support/Code/User/keybindings.json || true
 	rm ~/Library/Application\ Support/Code/User/settings.json || true
-.PHONY: uninstall-vscode
 
 ## zellij configs (Pluggable terminal workspace, with terminal multiplexer as the base feature)
 
 ZELLIJ_DIR := $(CURRENTDIR)/configs/zellij
-install-zellij:
+install-zellij-conf:
+	@$(MAKE) uninstall-zellij-conf
 	@echo "\n✨ Installing zellij config files..."
 	ln -s -n $(ZELLIJ_DIR)/config.kdl ~/.config/zellij/config.kdl
-.PHONY: install-zellij
 
-uninstall-zellij:
+uninstall-zellij-conf:
 	rm ~/.config/zellij/config.kdl || true
-.PHONY: uninstall-zellij
 
 doc-zellij:
 	@echo "There are 2 config files available, config.kdl and default.config.kdl in the repo."
 	@echo "The config.default.kdl is generated by zellij if there is no config files in the ~/.config/zellij dir by-default."
-.PHONY: doc-zellij
 
 ## Zsh configs (shell designed for interactive use, although it is also a powerful scripting language)
 
 ZSH_DIR := $(CURRENTDIR)/configs/zsh
-install-zsh:
+install-zsh-conf:
+	@$(MAKE) uninstall-zsh-conf
 	@echo "\n✨ Installing Zsh config files..."
 	@echo "TBD find zsh-git-prompt plugin or theme with build-in git using antigen PM:"
 	@echo "antigen: https://github.com/zsh-users/antigen"
 	ln -s -n $(ZSH_DIR)/zshenv ~/.zshenv
 	ln -s -n $(ZSH_DIR)/zshrc ~/.zshrc
-.PHONY: install-zsh
 
-uninstall-zsh:
+uninstall-zsh-conf:
 	@echo "Uninstalling Zsh config files..."
 # rm -rf ~/.zsh/*
 	rm ~/.zshenv || true
 	rm ~/.zshrc || true
-.PHONY: uninstall-zsh
 
 # Misc Targets:
 
@@ -323,3 +302,6 @@ vscode-install-extensions:
 vscode-export-extension-list:
 	./bin/vscode/vscode-extensions-list-export
 .PHONY: export-vscode-extension-list
+
+terminal-macos-doc:
+	@echo "Use Atom.terminal theme in the Termainl.app -> Settings -> Profiles -> More -> Import..."
