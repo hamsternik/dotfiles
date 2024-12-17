@@ -1,0 +1,11 @@
+// Settings in here override those in "Default/Preferences.sublime-settings",
+// and are overridden in turn by syntax-specific settings.
+{
+ "ignored_packages": [
+	],
+ "vintage_start_in_command_mode": true,
+ "vintage_ctrl_keys": true,
+ "relative_line_numbers": true,
+ "font_face": "Fira Code",
+ "font_size": 13,
+}

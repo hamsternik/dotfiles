@@ -1,0 +1,19 @@
+[
+ {
+        "keys": ["option+command+left"], 
+        "command": "fold"
+    },
+    {
+        "keys": ["option+command+right"], 
+        "command": "unfold"
+    },
+    {
+        "keys": ["shift+command+o"],
+        "command": "show_overlay",
+        "args": { "overlay": "goto", "show_files": true }
+    },
+    {
+        "keys": ["ctrl+i"],
+        "command": "pretty_json"
+    }
+]

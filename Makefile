@@ -186,6 +186,23 @@ uninstall-nvim:
 	rm ~/.config/nvim/plugin || true
 .PHONY: uninstall-nvim
 
+## Sublime Text 4 configs
+
+SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURRENTDIR)/configs/sublime-text
+SUBLIME_TEXT_CONF_DIR := "$(HOME)/Library/Application\ Support/Sublime\ Text/Packages/User"
+install-sublime-text:
+	@$(MAKE) uninstall-sublime-text
+	@echo "\n✨ Installing Sublime Text 4 config files..."
+	@if [ ! -d "$(SUBLIME_TEXT_CONF_DIR)" ]; then echo "❌ Sublime Text 4 is not installed"; exit -1; fi
+	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Default (OSX).sublime-keymap" "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap"
+	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Package Control.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings"
+	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Preferences.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
+
+uninstall-sublime-text:
+	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap"
+	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings"
+	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
+
 ## basic shell configs
 
 SHELL_DIR := $(CURRENTDIR)/configs/shell
