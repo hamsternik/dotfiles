@@ -1,3 +1,6 @@
+# To see how much the disk space Homebrew apps take:
+# https://gist.github.com/eguven/23d8c9fc78856bd20f65f8bcf03e691b
+
 # https://github.com/Homebrew/homebrew-bundle
 tap "homebrew/bundle"
 tap "mongodb/brew"
@@ -6,11 +9,11 @@ tap "dart-lang/dart"
 # --- CLI Applications
 # --- https://github.com/Homebrew/brew/
 
-# A cat(1) clone with wings.
-brew "bat"
-
 # Plugin manager for zsh, inspired by antigen and antibody
 brew "antidote"
+
+# A cat(1) clone with wings.
+brew "bat"
 
 # Cmake -- family of tools designed to build, test and package software
 brew "cmake"
@@ -18,8 +21,9 @@ brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 
-## Pack, ship and run any application as a lightweight container
-brew "docker"
+# Pack, ship and run any application as a lightweight container
+# Better to install Docker Desktop, see https://www.docker.com/products/docker-desktop
+#brew "docker"
 
 # Simple, fast and user-friendly alternative to find
 # *emacs*: improves file indexing performance for some commands
@@ -40,17 +44,23 @@ brew "git-delta"
 # GNU Pretty Good Privacy (PGP) package. Formerly known as: gnupg2. See more on https://gnupg.org/
 brew "gnupg"
 
-### Grep -- GNU grep app
+# GNU grep app
 brew "grep"
 
-### Easy plain text accounting with command-line, terminal and web UIs, https://hledger.org/
+# Easy plain text accounting with command-line, terminal and web UIs, https://hledger.org/
 brew "hledger"
 
-### HTop -- interactive process viewer for Unix systems
+# Interactive process viewer for Unix systems
 brew "htop"
 
-### LF -- terminal file manager
+# Terminal file manager
 brew "lf"
+
+# Mac App Store command-line interface
+brew "mas"
+
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 
 ### OpenSSH -- suite of secure networking utilities based on the Secure Shell (SSH) protocol
 brew "openssh"
@@ -129,17 +139,20 @@ cask "homebrew/cask-versions/adoptopenjdk8"
 # Chromium based browser
 cask "arc"
 
-## iOS App Store alternative
+# iOS App Store alternative
 cask "altserver"
 
-## Compact TeX distribution as alternative to the full TeX Live / MacTeX
-#cask "basictex"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+# Required password
+cask "basictex" 
+#cask "mactex"
 
 ## Desktop password and login vault
 cask "bitwarden"
 
-## Tool to remove unnecessary files and folders from disk
-cask "cleanmymac"
+# Tool to remove unnecessary files and folders from disk
+# Warning: CleanMyMac is now version 5 and I do not have licence for v5.
+#cask "cleanmymac"
 
 ## Disk space visualizer
 cask "daisydisk"
@@ -150,21 +163,14 @@ cask "docker"
 ## Text editor
 cask "emacs"
 
-## Collaborative team software
-cask "figma"
-
 ## Utility for customizing which browser to start
 cask "finicky"
-
-## Google Font: https://fonts.google.com/specimen/Roboto
-## Address svn to download fonts: https://github.com/Homebrew/homebrew-cask-fonts/issues/2039
-cask "font-roboto"
 
 # Fira Code. Free monospaced font with programming ligatures
 cask "font-fira-code"
 
-# Desktop client for GitHub repositories
-cask "github"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 
 ## Web browser
 cask "google-chrome"
@@ -176,69 +182,94 @@ cask "google-drive"
 cask "karabiner-elements"
 
 # Interface for reading and syncing eBooks
-cask "kindle"
+# Warning: Cask 'kindle' has been disabled because it is discontinued upstream! It was disabled on 2024-12-16.
+#cask "kindle"
 
 # GPU-based terminal emulator
-cask "kitty"
+#cask "kitty"
 
 # Minimal browser that protects privacy, https://minbrowser.github.io/min/
 cask "min"
 
-## JDK from Oracle
+# Tool to control external monitor brightness & volume
+cask "monitorcontrol"
+
+# JDK from Oracle
 cask "oracle-jdk"
 
-## TeX distribution
-cask "miktex-console"
+# TeX distribution
+#cask "miktex-console"
 
-## Collaboration platform for API development
-cask "postman"
-
-## Modern and intuitive HTTP Debugging Proxy app
+# Modern and intuitive HTTP Debugging Proxy app
 cask "proxyman"
 
-## Control your tools with a few keystrokes
+# Control your tools with a few keystrokes
 cask "raycast"
 
-## Move and resize windows using keyboard shortcuts or snap areas
+# Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 
-## Text translation application
+# Text translation application
 cask "reverso"
 
-## Tool that provides consistent, highly configurable symbols for apps
+# Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
 
-## Team communication and collaboration software
+# Team communication and collaboration software
 cask "slack"
 
-## Messaging app with a focus on speed and security
+# Text editor for code, markup and prose
+cask "sublime-text"
+
+# Messaging app with a focus on speed and security
 cask "telegram"
 
-## Tool to install Linux/BSD distributions to a partition or USB drive
-cask "unetbootin"
+# MS Open-source code editor
+cask "visual-studio-code"
 
-## Native desktop client for WhatsApp
+# Native desktop client for WhatsApp
 cask "whatsapp"
 
-## Install and switch between multiple versions of Xcode // UI Application
-cask "xcodes"
+# Wine wrapper built with SwiftUI
+cask "whisky"
 
-## Video communication and virtual meeting platform
-cask "zoom"
+# Install and switch between multiple versions of Xcode // UI Application
+cask "xcodes"
 
 ## Misc Applications
 
-## Tools for building Android applications
+# Tools for building Android applications
 # cask "android-studio"
-## E-books management software
+
+# Opensource IDE for exploring and testing api's
+#cask "bruno"
+
+# E-books management software
 # cask "calibre"
-## Tool to run Windows software
+
+# Tool to run Windows software
 # cask "crossover"
+
+# Write, edit, and chat about your code with AI
+#cask "cursor"
+
+# Voice and text chat software
+#cask "discord"
+
+# Collaborative team software
+#cask "figma"
+
+# Collaboration platform for API development
+#cask "postman"
+
+# Tool to install Linux/BSD distributions to a partition or USB drive
+#cask "unetbootin"
+
+# Multiplayer code editor
+#cask "zed"
 
 # Misc Apps (wget, curl)
 
 ## Logitec G Hub. Mouse Application, more at https://www.logitechg.com/en-eu/innovation/g-hub.html
-# wget "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.zip" && unzip "lghub_installer.zip"
+#wget "https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.zip" && unzip "lghub_installer.zip"
 
-## Online translation based on NMT (Neural Machine Translation), contextual dictionaries, online bilingual concordances, etc
-# wget "https://dl.reverso.net/desktop-app/macos" && open Reverso.dmg
