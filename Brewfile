@@ -59,6 +59,9 @@ brew "lf"
 # Mac App Store command-line interface
 brew "mas"
 
+# Fast, highly customisable system info script
+brew "neofetch"
+
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 
