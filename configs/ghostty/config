@@ -1,0 +1,28 @@
+# Official ghostty configuration documentation:
+# https://ghostty.org/docs/config
+#
+# In the CLI, you can run:
+# > ghostty +show-config --default --docs | nvim
+
+# Error: Ghostty failed to launch the requested command:
+# bash: /opt/howebrew/bin/fish: No such file or directory
+# bash: line 0: exec: /opt/howebrew/bin/fish: cannot execute: No such file or directory
+#command = /opt/howebrew/bin/fish
+
+# Keymaps
+
+# Tabs configuration
+
+# Cursor configurations 
+
+cursor-style = underline
+cursor-style-blink = true
+
+# Font configurations
+
+font-size = 14
+font-family = Fira Code
+
+# Theme configurations
+
+#theme = zenwritten_dark
