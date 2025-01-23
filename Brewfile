@@ -56,6 +56,9 @@ brew "htop"
 # Terminal file manager
 brew "lf"
 
+# libpq, Postgres C API library
+brew "libpq"
+
 # Mac App Store command-line interface
 brew "mas"
 
@@ -65,23 +68,26 @@ brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 
-### OpenSSH -- suite of secure networking utilities based on the Secure Shell (SSH) protocol
+# OpenSSH -- suite of secure networking utilities based on the Secure Shell (SSH) protocol
 brew "openssh"
 brew "openssl@1.1" # wget dependency
 
-## Command-line tool to generate, analyze, convert and manipulate colors
+# Command-line tool to generate, analyze, convert and manipulate colors
 brew "pastel"
 
-### Pinentry for GPG on Mac. Also check out "pinentry" on brew.sh
+# Pinentry for GPG on Mac. Also check out "pinentry" on brew.sh
 brew "pinentry-mac"
+
+# postgresql@14, Object-relational database system
+brew "postgresql@14"
 
 # A static site generator for Swift developers
 brew "publish"
 
-### Modern replacement for ps written by Rust
+# Modern replacement for ps written by Rust
 brew "procs"
 
-### Reattach -- macOS wrapper, needs for tmux
+# Reattach -- macOS wrapper, needs for tmux
 brew "reattach-to-user-namespace"
 
 # Organize software neatly under a single directory tree (e.g. /usr/local)
