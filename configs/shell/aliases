@@ -14,8 +14,8 @@ alias ping1='ping -c 4 google.com'
 alias ip='curl -s http://checkip.dyndns.com/'
 
 alias tmux='tmux -2'
-alias vi='nvim'
 alias vim='nvim'
+alias vv='nvim .'
 
 alias dev='cd $DEVELOPER'
 
