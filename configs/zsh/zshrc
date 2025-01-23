@@ -1,24 +1,40 @@
+check_and_exec () {
+  if [[ -e $1 ]]; then source $1; fi
+}
+
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+#"                              Zsh -- Plugins                              "
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+# antibody, The fastest shell plugin manager.
+# https://github.com/getantibody/antibody is **deprecated** starts on May 28, 2022.
+#source ~/.zsh_plugins.sh
+
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #"                                Prompt & Colors                           "
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autoload -U colors && colors
 
-PROMPT='%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_super_status) %B%F{magenta}~❯ %b%f%k'
+check_and_exec $HOME/.aliases
+check_and_exec $HOME/.zsh/zsh-git-prompt/zshrc.sh
+
+PROMPT='%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%} %B%F{magenta}~❯ %b%f%k'
+if type git_super_status &>/dev/null; then
+  PROMPT='%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_super_status) %B%F{magenta}~❯ %b%f%k'
+fi
+
 RPROMPT=''
 
 # check if Haskell already installed in system
 if hash ghc 2>/dev/null; then
-    GIT_PROMPT_EXECUTABLE="haskell"
+  GIT_PROMPT_EXECUTABLE="haskell"
 else
-    GIT_PROMPT_EXECUTABLE="python"
+  GIT_PROMPT_EXECUTABLE="python"
 fi
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #"                                Global Functions                          "
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-check_and_exec () {
-    if [[ -e $1 ]]; then source $1; fi
-}
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #"                                Zsh -- Options                            "
@@ -129,20 +145,3 @@ lfcd () {
 bindkey -s '^o' 'lfcd\n'
 bindkey -s '^l' 'lf\n'
 
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-#"                              Zsh -- Plugins                              "
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-# [local]
-check_and_exec $HOME/.aliases
-check_and_exec $HOME/.zsh/zsh-git-prompt/zshrc.sh
-
-# [antibody]
-source ~/.zsh_plugins.sh
-
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-#"                               Travis CI                                  "
-#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-# added by travis gem
-[ -f /Users/khomitsevich/.travis/travis.sh ] && source /Users/khomitsevich/.travis/travis.sh
