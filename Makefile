@@ -89,7 +89,7 @@ install-fish-conf:
 	@echo "\n✨ Installing fish shell config files."
 	@if [ ! -d "$(HOME)/.config/fish" ]; then echo "❌ ~/.config/fish dir already exists. Exit."; exit 1; fi
 	ln -s $(FISH_DIR)/config.fish ~/.config/fish/config.fish
-# ln -s $(FISH_DIR)/fish_plugins ~/.config/fish/fish_plugins
+	ln -s $(FISH_DIR)/fish_plugins ~/.config/fish/fish_plugins
 # @echo "✨ Installed fish config files. Installing config directories..."
 # ln -s -n $(FISH_DIR)/completions ~/.config/fish/completions
 # ln -s -n $(FISH_DIR)/conf.d ~/.config/fish/conf.d
