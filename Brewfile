@@ -181,6 +181,9 @@ cask "font-fira-code"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 
+# Iosevka Font: Versatile typeface for code, from code
+cask "font-iosevka"
+
 ## Web browser
 cask "google-chrome"
 
