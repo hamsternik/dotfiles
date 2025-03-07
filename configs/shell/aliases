@@ -19,8 +19,9 @@ alias vv='nvim .'
 
 alias dev='cd $DEVELOPER'
 
-alias q='cd $DEVELOPER/@work'
-alias qq='cd $DEVELOPER/@hamsternik'
+alias q='cd $DEVELOPER/@hamsternik'
+alias qq='cd $DEVELOPER/@projects'
+alias qqq='cd $DEVELOPER/@work'
 
 alias d='cd $DEVELOPER/@hamsternik/dotfiles'
 alias b='cd $DEVELOPER/@hamsternik/www.hamsternik.com'
