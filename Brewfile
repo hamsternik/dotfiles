@@ -175,6 +175,10 @@ cask "emacs"
 ## Utility for customizing which browser to start
 cask "finicky"
 
+# A programming font focused on source code legibility.
+# Available @ https://www.nerdfonts.com/font-downloads or Homebrew.
+cask "font-0xproto-nerd-font"
+
 # Fira Code. Free monospaced font with programming ligatures
 cask "font-fira-code"
 
