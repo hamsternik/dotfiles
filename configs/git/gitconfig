@@ -157,3 +157,6 @@
     commit-decoration-style = bold yellow box ul
     file-style = bold yellow ul
     file-decoration-style = none
+
+[includeIf "gitdir:~/Developer/work/"]
+  path = ~/.gitconfig.work

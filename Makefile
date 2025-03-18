@@ -48,6 +48,7 @@ install-all:
 	$(MAKE) install-lf-conf
 	$(MAKE) install-nvim-conf
 	$(MAKE) install-shell-conf
+	$(MAKE) install-ssh-conf
 	$(MAKE) install-tmux-conf
 	$(MAKE) install-vim-conf
 	$(MAKE) install-vscode-conf
@@ -64,6 +65,7 @@ uninstall-all:
 	$(MAKE) uninstall-lf-conf
 	$(MAKE) uninstall-nvim-conf
 	$(MAKE) uninstall-shell-conf
+	$(MAKE) uninstall-ssh-conf
 	$(MAKE) uninstall-tmux-conf
 	$(MAKE) uninstall-vim-conf
 	$(MAKE) uninstall-vscode-conf
@@ -210,6 +212,17 @@ uninstall-shell-conf:
 	rm ~/.aliases || true
 	rm ~/.bashrc || true
 	rm ~/.profile || true
+
+## SSH configuration
+
+SHELL_DIR := $(CURRENTDIR)/configs/ssh
+install-ssh-conf:
+	@echo "\n✨ Installing SSH configuration files."
+	ln -s -n $(SHELL_DIR)/config ~/.ssh/config
+
+uninstall-ssh-conf:
+	rm ~/.ssh/config || true
+
 
 # TMUX config (Terminal multiplexer)
 
