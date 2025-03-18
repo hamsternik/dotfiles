@@ -219,8 +219,10 @@ uninstall-shell-conf:
 
 SHELL_DIR := $(CURRENTDIR)/configs/ssh
 install-ssh-conf:
-	@echo "\n✨ Installing SSH configuration files."
+	@echo "\n✨Installing SSH configuration files."
 	ln -s -n $(SHELL_DIR)/config ~/.ssh/config
+	@echo "\n✨Check out SSH private keys for the 'ssh-agent':"
+	ssh-add -l
 
 uninstall-ssh-conf:
 	rm ~/.ssh/config || true

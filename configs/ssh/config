@@ -1,18 +1,18 @@
-Host github.com*
-    AddKeysToAgent yes
-    IgnoreUnknown UseKeychain
-    UseKeychain yes
+Host *
+  IgnoreUnknown UseKeychain
+  AddKeysToAgent yes
+  UseKeychain yes
 
 # personal GitHub account
 # is primary on personal machine
 Host github.com-default
-    User git 
-    HostName github.com
-    IdentityFile ~/.ssh/github-hamsternik
+  User git 
+  HostName github.com
+  IdentityFile ~/.ssh/github.hamsternik
 
 # work GitHub account
 # necessary when personal machine is settled for work
 Host github.com-work
-    User git
-    HostName github.com
-    IdentityFile ~/.ssh/github.work
+  User git
+  HostName github.com
+  IdentityFile ~/.ssh/github.work
