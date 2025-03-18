@@ -3,19 +3,16 @@ Host *
   AddKeysToAgent yes
   UseKeychain yes
 
-# NOTE: personal GitHub account
-# NOTE: add the private key to the ssh-agent manually:
-# `ssh-add ~/.ssh/github.hamsternik`
-Host github.com-default
-  User git 
+# NOTE: personal account (GitHub)
+# NOTE: to add the private key to the ssh-agent manually:
+# NOTE: `ssh-add ~/.ssh/hamsterik.github.com`
+Host hamsternik.github.com
   HostName github.com
-  IdentityFile ~/.ssh/github.hamsternik
+  IdentityFile ~/.ssh/hamsternik.github.com
 
-# NOTE: work GitHub account
-# NOTE: necessary when personal machine is settled for work
-# NOTE: add private key to the ssh-agent manually:
-# `ssh-add ~/.ssh/github.work`
-Host github.com-work
-  User git
+# NOTE: work account (GitHub). when need to manage 2 more accounts, eg. personal and work accounts
+# NOTE: to add private key to the ssh-agent manually:
+# NOTE: `ssh-add ~/.ssh/work.github.com`
+Host work.github.com
   HostName github.com
-  IdentityFile ~/.ssh/github.work
+  IdentityFile ~/.ssh/work.github.com
