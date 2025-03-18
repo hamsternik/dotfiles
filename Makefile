@@ -115,11 +115,13 @@ install-git-conf:
 	ln -s -n $(GIT_DIR)/gitattributes ~/.gitattributes
 	ln -s -n $(GIT_DIR)/gitignore_global ~/.gitignore_global
 	ln -s -n $(GIT_DIR)/gitconfig ~/.gitconfig
+	ln -s -n $(GIT_DIR)/gitconfig.work ~/.gitconfig.work
 
 uninstall-git-conf:
 	rm ~/.gitattributes || true
 	rm ~/.gitignore_global || true
 	rm ~/.gitconfig || true
+	rm ~/.gitconfig.work || true
 
 ## gnupg configs
 
