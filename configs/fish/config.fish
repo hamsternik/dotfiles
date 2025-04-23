@@ -86,3 +86,6 @@ end
 # More: https://www.postgresql.org/docs/current/libpq.html
 fish_add_path /opt/homebrew/opt/libpq/bin
 # libpq end
+
+# Added by Windsurf
+fish_add_path /Users/hamsternik/.codeium/windsurf/bin
