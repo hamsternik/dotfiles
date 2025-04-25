@@ -52,6 +52,7 @@ install-all:
 	$(MAKE) install-tmux-conf
 	$(MAKE) install-vim-conf
 	$(MAKE) install-vscode-conf
+	$(MAKE) install-zed-conf
 	$(MAKE) install-zellij-conf
 	$(MAKE) install-zsh-conf
 
@@ -69,6 +70,7 @@ uninstall-all:
 	$(MAKE) uninstall-tmux-conf
 	$(MAKE) uninstall-vim-conf
 	$(MAKE) uninstall-vscode-conf
+	$(MAKE) uninstall-zed-conf
 	$(MAKE) uninstall-zellij-conf
 	$(MAKE) uninstall-zsh-conf
 
@@ -263,6 +265,20 @@ install-vscode-conf:
 uninstall-vscode-conf:
 	rm ~/Library/Application\ Support/Code/User/keybindings.json || true
 	rm ~/Library/Application\ Support/Code/User/settings.json || true
+
+## Zed editor configs
+
+ZED_EDITOR := $(CURRENTDIR)/configs/zed
+install-zed-conf:
+	@$(MAKE) uninstall-zed-conf
+	@echo "\n✨ Installing Zed editor config files."
+	ln -s -n $(ZED_EDITOR)/settings.json ~/.config/zed/settings.json
+	ln -s -n $(ZED_EDITOR)/keymap.json ~/.config/zed/keymap.json
+
+
+uninstall-zed-conf:
+	rm ~/.config/zed/settings.json || true
+	rm ~/.config/zed/keymap.json || true
 
 ## zellij configs (Pluggable terminal workspace, with terminal multiplexer as the base feature)
 

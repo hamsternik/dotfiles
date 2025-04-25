@@ -1,0 +1,314 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+    // Automatically update Zed. This setting may be ignored on Linux if
+    // installed through a package manager.
+    "assistant": {
+        "default_model": {
+            "provider": "openai",
+            "model": "gpt-4o"
+        },
+        "version": "2"
+    },
+    "auto_update": true,
+    "theme": {
+        "mode": "system", // values: light, dark, system
+        "light": "Cosmos",
+        "dark": "Gruvbox Dark"
+    },
+    "icon_theme": "Zed (Default)",
+    "base_keymap": "VSCode",
+    // The name of a font to use for rendering text in the editor
+    "buffer_font_family": "Fira Code",
+    "buffer_font_size": 14,
+    "ui_font_size": 14,
+    // How much to fade out unused code.
+    "unnecessary_code_fade": 0.3,
+    // The key to use for adding multiple cursors
+    // Currently "alt" or "cmd_or_ctrl"  (also aliased as
+    // "cmd" and "ctrl") are supported.
+    // "multi_cursor_modifier": "ctrl_shift" // FIXME: incorrect value syntax
+    // Whether to enable vim modes and key bindings.
+    "vim_mode": true,
+    // Whether to confirm before quitting Zed.
+    "confirm_quit": true,
+    // What to do when multibuffer is double clicked in some of its excerpts
+    // (parts of singleton buffers).
+    // May take 2 values:
+    //  1. Behave as a regular buffer and select the whole word (default).
+    //         "double_click_in_multibuffer": "select"
+    //  2. Open the excerpt clicked as a new buffer in the new tab.
+    //         "double_click_in_multibuffer": "open",
+    // For the case of "open", regular selection behavior can be achieved by holding `alt` when double clicking.
+    "double_click_in_multibuffer": "open",
+    "project_panel": {
+        "dock": "right"
+    },
+    "git_panel": {
+        "dock": "right"
+    },
+    // Whether to perform linked edits of associated ranges, if the language server supports it.
+    // For example, when editing opening <html> tag, the contents of the closing </html> tag will be edited as well.
+    "linked_edits": true,
+    // The list of language servers to use (or disable) for all languages.
+    //
+    // This is typically customized on a per-language basis.
+    // TODO: to add LSP config for Swift
+    "language_servers": ["..."],
+    "tabs": {
+        // Show git status colors in the editor tabs.
+        "git_status": true,
+        // Position of the close button on the editor tabs.
+        // One of: ["right", "left", "hidden"]
+        "close_position": "left",
+        // Whether to show the file icon for a tab.
+        "file_icons": true
+    },
+    // Whether or not to perform a buffer format before saving
+    //
+    // Keep in mind, if the autosave with delay is enabled, format_on_save will be ignored
+    "format_on_save": "on",
+    // How to perform a buffer format. This setting can take 4 values:
+    //
+    // 1. Format code using the current language server:
+    //     "formatter": "language_server"
+    // 2. Format code using an external command:
+    //     "formatter": {
+    //       "external": {
+    //         "command": "prettier",
+    //         "arguments": ["--stdin-filepath", "{buffer_path}"]
+    //       }
+    //     }
+    // 3. Format code using Zed's Prettier integration:
+    //     "formatter": "prettier"
+    // 4. Default. Format files using Zed's Prettier integration (if applicable),
+    //    or falling back to formatting via language server:
+    //     "formatter": "auto"
+    "formatter": "auto",
+    // The column at which to soft-wrap lines, for buffers where soft-wrap
+    // is enabled.
+    "preferred_line_length": 80,
+    // Whether to indent lines using tab characters, as opposed to multiple
+    // spaces.
+    "hard_tabs": false,
+    // How many columns a tab should occupy.
+    "tab_size": 4,
+    "terminal": {
+        // What shell to use when opening a terminal. May take 3 values:
+        // 1. Use the system's default terminal configuration in /etc/passwd
+        //      "shell": "system"
+        // 2. A program:
+        //      "shell": {
+        //        "program": "sh"
+        //      }
+        // 3. A program with arguments:
+        //     "shell": {
+        //         "with_arguments": {
+        //           "program": "/bin/bash",
+        //           "args": ["--login"]
+        //         }
+        //     }
+        "shell": "system",
+        // Where to dock terminals panel. Can be `left`, `right`, `bottom`.
+        "dock": "bottom"
+    },
+    // An object whose keys are language names, and whose values
+    // are arrays of filenames or extensions of files that should
+    // use those languages.
+    //
+    // For example, to treat files like `foo.notjs` as JavaScript,
+    // and `Embargo.lock` as TOML:
+    //
+    // {
+    //   "JavaScript": ["notjs"],
+    //   "TOML": ["Embargo.lock"]
+    // }
+    //
+    "file_types": {
+        "JSONC": [
+            "**/.zed/**/*.json",
+            "**/zed/**/*.json",
+            "**/Zed/**/*.json",
+            "**/.vscode/**/*.json"
+        ],
+        "Shell Script": [".env.*"],
+        "Swift": [".swift"]
+    },
+
+    // The extensions that Zed should automatically install on startup.
+    //
+    // If you don't want any of these extensions, add this field to your settings
+    // and change the value to `false`.
+    "auto_install_extensions": {
+        "html": true
+    },
+    "completions": {
+        // Whether to fetch LSP completions or not.
+        //
+        // Default: true
+        "lsp": true
+    },
+    "languages": {
+        "Astro": {
+            "language_servers": ["astro-language-server", "..."],
+            "prettier": {
+                "allowed": true,
+                "plugins": ["prettier-plugin-astro"]
+            }
+        },
+        "Go": {
+            "code_actions_on_format": {
+                "source.organizeImports": true
+            }
+        },
+        "HTML": {
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "Java": {
+            "prettier": {
+                "allowed": true,
+                "plugins": ["prettier-plugin-java"]
+            }
+        },
+        "JavaScript": {
+            "language_servers": ["!typescript-language-server", "vtsls", "..."],
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "JSON": {
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "JSONC": {
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "LaTeX": {
+            "format_on_save": "on",
+            "formatter": "language_server",
+            "language_servers": ["texlab", "..."],
+            "prettier": {
+                "allowed": false
+            }
+        },
+        "Markdown": {
+            "format_on_save": "off",
+            "use_on_type_format": false,
+            "allow_rewrap": "anywhere",
+            "soft_wrap": "editor_width",
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "Ruby": {
+            "language_servers": ["solargraph", "!ruby-lsp", "!rubocop", "..."]
+        },
+        "Svelte": {
+            "language_servers": ["svelte-language-server", "..."],
+            "prettier": {
+                "allowed": true,
+                "plugins": ["prettier-plugin-svelte"]
+            }
+        },
+        "TSX": {
+            "language_servers": ["!typescript-language-server", "vtsls", "..."],
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "TypeScript": {
+            "language_servers": ["!typescript-language-server", "vtsls", "..."],
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "Vue.js": {
+            "language_servers": ["vue-language-server", "..."],
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "XML": {
+            "prettier": {
+                "allowed": true,
+                "plugins": ["@prettier/plugin-xml"]
+            }
+        },
+        "YAML": {
+            "prettier": {
+                "allowed": true
+            }
+        },
+        "Zig": {
+            "language_servers": ["zls", "..."]
+        }
+    },
+    // Zed's Prettier integration settings.
+    // Allows to enable/disable formatting with Prettier
+    // and configure default Prettier, used when no project-level Prettier installation is found.
+    "prettier": {
+        // // Whether to consider prettier formatter or not when attempting to format a file.
+        "allowed": true
+        //
+        // // Use regular Prettier json configuration.
+        // // If Prettier is allowed, Zed will use this for its Prettier instance for any applicable file, if
+        // // the project has no other Prettier installed.
+        // "plugins": [],
+        //
+        // // Use regular Prettier json configuration.
+        // // If Prettier is allowed, Zed will use this for its Prettier instance for any applicable file, if
+        // // the project has no other Prettier installed.
+        // "trailingComma": "es5",
+        // "tabWidth": 4,
+        // "semi": false,
+        // "singleQuote": true
+    },
+    // Settings for auto-closing of JSX tags.
+    "jsx_tag_auto_close": {
+        "enabled": true
+    },
+    // LSP Specific settings.
+    "lsp": {
+        // Specify the LSP name as a key here.
+        // "rust-analyzer": {
+        //     // A special flag for rust-analyzer integration, to use server-provided tasks
+        //     enable_lsp_tasks": true,
+        //     // These initialization options are merged into Zed's defaults
+        //     "initialization_options": {
+        //         "check": {
+        //             "command": "clippy" // rust-analyzer.check.command (default: "check")
+        //         }
+        //     }
+        // }
+    },
+    // Vim settings
+    "vim": {
+        "default_mode": "normal",
+        "toggle_relative_line_numbers": false,
+        "use_system_clipboard": "always",
+        "use_multiline_find": false,
+        "use_smartcase_find": false,
+        "highlight_on_yank_duration": 200,
+        "custom_digraphs": {}
+    },
+    // Set to configure aliases for the command palette.
+    // When typing a query which is a key of this object, the value will be used instead.
+    //
+    // Examples:
+    // {
+    //   "W": "workspace::Save"
+    // }
+    // // TODO: to read docs about command_aliases usage.
+    "command_aliases": {}
+}

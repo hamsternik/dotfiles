@@ -1,0 +1,37 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+    // Standard macOS bindings
+    {
+        "use_key_equivalents": true,
+        "bindings": {
+            "f4": "debugger::Start",
+            "cmd-p": null,
+            "cmd-shift-o": "file_finder::Toggle"
+        }
+    },
+    {
+        "context": "Workspace",
+        "bindings": {
+            // "shift shift": "file_finder::Toggle"
+        }
+    },
+    {
+        "context": "Editor",
+        "bindings": {
+            // "j k": ["workspace::SendKeystrokes", "escape"]
+        }
+    },
+    {
+        "context": "Editor && mode == full",
+        "use_key_equivalents": true,
+        "bindings": {
+            "cmd-shift-j": "pane::RevealInProjectPanel"
+        }
+    }
+]
