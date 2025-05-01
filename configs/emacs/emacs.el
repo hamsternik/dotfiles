@@ -1,5 +1,9 @@
 ;;; init.el --- Emacs configuration -*- lexical-binding: t -*-
 ;;; Commentary:
+;;;
+;;; TBD to build basic emacs config file based on the [Configuring Emacs on My New Laptop]
+;;; https://youtu.be/81MdyDYqB-A
+;;;
 ;;; TBD to review gf3/dotfiles emacs config files
 ;;; https://github.com/gf3/dotfiles/blob/main/.config/emacs/init.el 
 
