@@ -1,3 +1,10 @@
+;;; init.el --- Emacs configuration -*- lexical-binding: t -*-
+;;; Commentary:
+;;; TBD to review gf3/dotfiles emacs config files
+;;; https://github.com/gf3/dotfiles/blob/main/.config/emacs/init.el 
+
+;;; Code: 
+
 (setq custom-file "~/.emacs.custom.el")
 ;;(package-initialize)
 
