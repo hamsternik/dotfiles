@@ -159,6 +159,9 @@ cask "basictex"
 ## Desktop password and login vault
 cask "bitwarden"
 
+## Send any size file between devices (and replace AirDrop)
+cask "blip"
+
 # Tool to remove unnecessary files and folders from disk
 # Warning: CleanMyMac is now version 5 and I do not have licence for v5.
 #cask "cleanmymac"
