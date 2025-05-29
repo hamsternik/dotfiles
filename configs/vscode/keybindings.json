@@ -44,7 +44,7 @@
         "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
     },
     {
-        "key": "cmd+k cmd+d",
+        "key": "cmd+j",
         "command": "editor.action.peekDefinition"
     },
     {
@@ -86,5 +86,15 @@
     {
         "key": "cmd+k cmd+c",
         "command": "workbench.files.action.collapseExplorerFolders"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "-workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "cmd+h",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
     }
 ]
