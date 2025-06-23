@@ -26,3 +26,4 @@ font-family = Fira Code
 # Theme configurations
 
 #theme = zenwritten_dark
+keybind = shift+enter=text:\n
