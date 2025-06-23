@@ -236,10 +236,11 @@ TMUX_DIR := $(CURRENTDIR)/configs/tmux
 install-tmux-conf:
 	@$(MAKE) uninstall-tmux-conf
 	@echo "\n✨ Installing TMUX config files..."
-	ln -s -n $(TMUX_DIR)/tmux.conf ~/.tmux.conf
+	mkdir -p ~/.config/tmux || true
+	ln -s -n $(TMUX_DIR)/tmux.conf ~/.config/tmux/tmux.conf
 
 uninstall-tmux-conf:
-	rm ~/.tmux.conf || true
+	rm ~/.config/tmux/tmux.conf || true
 
 ## ViM configs (Vi 'workalike' with many additional features)
 
