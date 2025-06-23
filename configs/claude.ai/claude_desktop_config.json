@@ -1,15 +1,4 @@
 {
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/hamsternik/Developer/@hamsternik",
-        "/Users/hamsternik/Developer/@work/suremote-android",
-        "/Users/hamsternik/Developer/@work/suremote-ios-app"
-      ]
-    }
-  }
+  "globalShortcut": "",
+  "mcpServers": {}
 }
-
