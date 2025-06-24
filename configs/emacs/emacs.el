@@ -53,7 +53,7 @@
 
 ;;; project / file navigation
 (global-set-key (kbd "s-O") #'project-find-file) ;; to search a project-specific file like in Xcode
-(global-set-key (kbd "s-b") #'switch-to-buffer) ;; to switch between emacs buffers
+(global-set-key (kbd "s-w") #'switch-to-buffer) ;; to switch between emacs buffers
 
 ;;; emacs Buffers
 (defun create-empty-buffer ()
