@@ -39,6 +39,14 @@
 ;;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
 
+;;; reload emacs config
+(defun reload-emacs-config ()
+    "Reload emacs.el Emacs configuration file"
+    (interactive)
+    (load-file user-init-file))
+
+(global-set-key (kbd "C-c C-r") 'reload-emacs-config) ;; C-c C-r to reload
+
 (global-set-key [s-up] 'beginning-of-buffer)
 (global-set-key [s-down] 'end-of-buffer)
 (global-set-key (kbd "s-Z") 'undo-redo) ;; Super+Shift+z for emacs 28+ build-in `undo-redo`
@@ -57,6 +65,7 @@
 (global-set-key (kbd "C-x C-e") #'eval-buffer) ;; rebind default `eval-last-sexp` with `eval-buffer` to evaluate the whole buffer at a time
 (global-set-key (kbd "C-c C-e") 'eval-last-sexp) ;; bind `eval-last-sexp` to `ctrl-c ctrl-e` instead of default keybind
 (global-set-key (kbd "C-c n") 'create-empty-buffer)
+(global-set-key (kbd "C-c r") 'rename-buffer)
 
 ;;; split window
 (global-set-key (kbd "s-\\") #'split-window-right) ;; to split the current window vertically, putting new window to the right
