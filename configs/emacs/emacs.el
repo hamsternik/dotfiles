@@ -22,8 +22,8 @@
 (setq inhibit-startup-screen t) ;; to disable emacs splash screen
 ;; (setq initial-scratch-message nil) ;; to remove initial message in *scratch*
 
-;;; FIXME: Fira Code font does not work properly in Standalone Emacs 
-;;; Check out any of provided workarounds: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions 
+;;; FIXME: Fira Code font does not work properly in Standalone Emacs
+;;; Check out any of provided workarounds: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
 ;;; (add-to-list (quote default-frame-alist (quote font . "Fira Code")))
 ;;; (add-to-list 'default-frame-alist `(font . "Iosevka"))
 
@@ -45,11 +45,18 @@
 
 ;;; project / file navigation
 (global-set-key (kbd "s-O") #'project-find-file) ;; to search a project-specific file like in Xcode
-(global-set-key (kbd "s-b") #'switch-to-buffer) ;; to switch between emacs buffers 
+(global-set-key (kbd "s-b") #'switch-to-buffer) ;; to switch between emacs buffers
 
-;;; execute emacs buffer
+;;; emacs Buffers
+(defun create-empty-buffer ()
+    "Create a new empty buffer."
+    (interactive)
+    (let ((buf (generate-new-buffer "untitled")))
+        (switch-to-buffer buf)))
+
 (global-set-key (kbd "C-x C-e") #'eval-buffer) ;; rebind default `eval-last-sexp` with `eval-buffer` to evaluate the whole buffer at a time
 (global-set-key (kbd "C-c C-e") 'eval-last-sexp) ;; bind `eval-last-sexp` to `ctrl-c ctrl-e` instead of default keybind
+(global-set-key (kbd "C-c n") 'create-empty-buffer)
 
 ;;; split window
 (global-set-key (kbd "s-\\") #'split-window-right) ;; to split the current window vertically, putting new window to the right
