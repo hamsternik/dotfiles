@@ -18,6 +18,7 @@
     {
         "context": "Workspace",
         "bindings": {
+            "cmd-j": "workspace::ToggleBottomDock"
             // "shift shift": "file_finder::Toggle"
         }
     },
