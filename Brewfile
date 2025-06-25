@@ -213,6 +213,9 @@ cask "min"
 # Tool to control external monitor brightness & volume
 cask "monitorcontrol"
 
+# VPN client, https://mullvad.net/
+cask "mullvad-vpn"
+
 # JDK from Oracle
 cask "oracle-jdk"
 
