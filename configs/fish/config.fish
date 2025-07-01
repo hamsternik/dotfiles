@@ -89,3 +89,8 @@ fish_add_path /opt/homebrew/opt/libpq/bin
 
 # Added by Windsurf
 fish_add_path /Users/hamsternik/.codeium/windsurf/bin
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/hamsternik/.lmstudio/bin
+# End of LM Studio CLI section
+

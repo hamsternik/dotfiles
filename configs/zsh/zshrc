@@ -145,3 +145,8 @@ lfcd () {
 bindkey -s '^o' 'lfcd\n'
 bindkey -s '^l' 'lf\n'
 
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/hamsternik/.lmstudio/bin"
+# End of LM Studio CLI section
+
