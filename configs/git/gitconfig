@@ -19,6 +19,7 @@
     pl          = !git pull origin `git symbolic-ref HEAD`
     #prune      = !git pull origin --prune ### This command doesn't work
     df          = diff
+    dfc         = diff --cached
     patch       = !git --no-pager diff --no-color
 #[rebase]
     rb          = rebase
