@@ -19,7 +19,7 @@
     "auto_update": true,
     "theme": {
         "mode": "system", // values: light, dark, system
-        "light": "Ayu Mirage",
+        "light": "Sublime Mariana",
         "dark": "Gruvbox Dark"
     },
     "icon_theme": "Zed (Default)",
