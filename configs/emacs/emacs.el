@@ -53,7 +53,7 @@
 
 ;;; project / file navigation
 (global-set-key (kbd "s-O") #'project-find-file) ;; to search a project-specific file like in Xcode
-(global-set-key (kbd "s-w") #'switch-to-buffer) ;; to switch between emacs buffers
+(global-set-key (kbd "s-S") #'switch-to-buffer) ;; to switch between emacs buffers
 
 ;;; emacs Buffers
 (defun create-empty-buffer ()
@@ -67,7 +67,7 @@
 (global-set-key (kbd "C-c n") 'create-empty-buffer)
 (global-set-key (kbd "C-c r") 'rename-buffer)
 
-;;; split window
+;;; emacs Windows
 (global-set-key (kbd "s-\\") #'split-window-right) ;; to split the current window vertically, putting new window to the right
 (global-set-key (kbd "s-|") #'split-window-below) ;; to split the current window horizontally, putting new window down below
 
@@ -83,6 +83,16 @@
 ;; (windmove-default-keybindings) ;; to enable Shift+Arrow movement
 (global-set-key (kbd "s-}") 'hamsternik/windmove-right-or-down) ;; to switch window to the *right* or *down* splitted one
 (global-set-key (kbd "s-{") 'hamsternik/windmove-left-or-up) ;; to switch window to the *left* or *up* splitted one
+
+;; close the 2nd (split) window in the buffer
+(defun close-current-window ()
+  "Close the currently active split window."
+  (interactive)
+  (if (not (one-window-p))
+      (delete-window)
+    (message "Cannot close the only window")))
+
+(global-set-key (kbd "s-w") 'close-current-window)
 
 ;;; Packages:
 
