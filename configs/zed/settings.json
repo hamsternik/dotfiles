@@ -22,7 +22,7 @@
         "light": "Sublime Mariana",
         "dark": "Gruvbox Dark"
     },
-    "icon_theme": "Zed (Default)",
+    "icon_theme": "Modern Icons (Dark)",
     "base_keymap": "VSCode",
     // The name of a font to use for rendering text in the editor
     "buffer_font_family": "Fira Code",
