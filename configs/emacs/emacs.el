@@ -11,7 +11,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
-(global-display-line-numbers-mode t)
+;; (global-display-line-numbers-mode t)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -39,6 +39,17 @@
 ;;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
 
+(global-set-key [s-up] 'beginning-of-buffer)
+(global-set-key [s-down] 'end-of-buffer)
+(global-set-key (kbd "s-Z") 'undo-redo) ;; Super+Shift+z for emacs 28+ build-in `undo-redo`
+
+(defun delete-to-start-of-line ()
+  "Delete all content from the cursor to the start of the line."
+  (interactive)
+  (delete-region (line-beginning-position) (point)))
+
+(global-set-key (kbd "s-<backspace>") 'delete-to-start-of-line)
+
 ;;; reload emacs config
 (defun reload-emacs-config ()
     "Reload emacs.el Emacs configuration file"
@@ -46,10 +57,6 @@
     (load-file user-init-file))
 
 (global-set-key (kbd "C-c C-r") 'reload-emacs-config) ;; C-c C-r to reload
-
-(global-set-key [s-up] 'beginning-of-buffer)
-(global-set-key [s-down] 'end-of-buffer)
-(global-set-key (kbd "s-Z") 'undo-redo) ;; Super+Shift+z for emacs 28+ build-in `undo-redo`
 
 ;;; project / file navigation
 (global-set-key (kbd "s-O") #'project-find-file) ;; to search a project-specific file like in Xcode
