@@ -53,7 +53,7 @@
 (defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
 (defun hn/save-scratch ()
   (with-current-buffer "*scratch*"
-    (write-region (point-min) (point-max) scratch-file)))
+    (write-region (point-min) (point-max) hn/scratch-file)))
 (defun hn/restore-scratch ()
   (when (file-exists-p hn/scratch-file)
     (with-current-buffer "*scratch*"
