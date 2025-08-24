@@ -74,6 +74,18 @@ uninstall-all:
 	$(MAKE) uninstall-zellij-conf
 	$(MAKE) uninstall-zsh-conf
 
+## https://github.com/charmbracelet/crush
+## The glamourous AI coding agent for your favourite terminal 💘
+CRUSH_SOURCE := $(CURRENTDIR)/configs/crush
+CRUSH_DESTINATION := ~/.local/share/crush
+install-crush-conf:
+	@$(MAKE) uninstall-crush-conf
+	@echo "\n✨ Installing crush/crush.json config file."
+	ln -s -n $(CRUSH_SOURCE)/crush.json $(CRUSH_DESTINATION)/crush.json
+
+uninstall-crush-conf:
+	rm $(CRUSH_DESTINATION)/crush.json || true
+
 ## finicky configs (Utility for customizing which browser to start)
 
 FINICKY_DIR := $(CURRENTDIR)/configs/finicky

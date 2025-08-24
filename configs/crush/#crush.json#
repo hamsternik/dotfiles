@@ -1,0 +1,29 @@
+{
+  "providers": { 
+    "lmstudio": {
+      "name": "LM Studio",
+	"base_url": "http://localhost:1234/v1/",
+      "type": "openai",
+      "api_key": "lm-studio",
+      "models": [
+        {
+          "name": "qwen/qwen2.5-coder-14b",
+          "id": "chatcmpl-w3p2n7sakmsfh6bp52xyp",
+          "context_window": 131072,
+          "default_max_tokens": 8192,
+          "cost_per_1m_in": 0,
+          "cost_per_1m_out": 0,
+          "cost_per_1m_in_cached": 0,
+          "cost_per_1m_out_cached": 0,
+          "supports_tools": true,
+          "supports_attachments": false,
+          "can_reason": false
+        }
+      ]
+    }
+  },
+  "models": {
+    "large": {"model":"chatcmpl-w3p2n7sakmsfh6bp52xyp","provider":"lmstudio","max_tokens":8192},
+    "small": {"model":"chatcmpl-w3p2n7sakmsfh6bp52xyp","provider":"lmstudio","max_tokens":8192}
+  }
+}
