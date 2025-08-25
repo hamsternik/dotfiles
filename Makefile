@@ -24,19 +24,22 @@ help:
 install-brew:
 	brew bundle install --file=Brewfile
 
-## mas, Mac App Store command-line interface, https://github.com/mas-cli/mas
-install-mas:
-# @echo "Agenda, note taking application focusing on dates"
-# mas install 1287445660
+## mas 
+### 📦 Mac App Store command line interface
+mas-list-apps:
+	@echo "Here is the list of all macOS apps installed via App Store:"
+	mas list
+
+mas-install-bear:
 	@echo "Bear, beautiful, powerfully simple Markdown app to capture, write, and organize your life."
 	mas install 1091189122
-# @echo "Flow, a pomodoro based work timer to help you get things done."
-# mas install 1423210932
+
+mas-install-pdf:
 	@echo "PDF Viewer Pro by PSPDFKit"
 	mas install 1120099014
 
 ## Install Configuration Files
-## WARNING! The whole setup is macOS-oriented, no plans to suuport Linux currenlty.
+# WARNING! The whole setup is macOS-oriented, no plans to suuport Linux currenlty.
 
 install-all:
 	$(MAKE) install-finicky-conf
