@@ -25,6 +25,10 @@ brew "coreutils"
 # Better to install Docker Desktop, see https://www.docker.com/products/docker-desktop
 #brew "docker"
 
+# GNU Emacs text editor
+## https://formulae.brew.sh/formula/emacs#default
+brew "emacs"
+
 # Simple, fast and user-friendly alternative to find
 # *emacs*: improves file indexing performance for some commands
 brew "fd"
@@ -173,7 +177,9 @@ cask "daisydisk"
 cask "docker"
 
 ## Text editor
-cask "emacs"
+##cask "emacs"
+## the latest 'pure' emacs GUI app in Homebrew, https://formulae.brew.sh/cask/emacs-app#default
+cask "emacs-app"
 
 ## Utility for customizing which browser to start
 cask "finicky"
