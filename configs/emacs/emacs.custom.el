@@ -5,13 +5,16 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(gruber-darker))
  '(custom-safe-themes
-   '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7" default))
+   '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7"
+     default))
  '(display-line-numbers-type 'relative)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(consult marginalia vertico use-package gruber-darker-theme))
+   '(consult corfu denote gruber-darker-theme marginalia markdown-mode
+	     use-package vertico))
  '(whitespace-style
-   '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
+   '(face tabs spaces trailing space-before-tab newline indentation empty
+	  space-after-tab space-mark tab-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

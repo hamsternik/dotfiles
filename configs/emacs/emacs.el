@@ -9,9 +9,12 @@
 (load-theme 'gruber-darker' t) ;; to load `gruber-darker` custom theme in emacs 24+
 
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
-;;; Check out any of provided workarounds: https://github.com/tonsky/FiraCode/wiki/ Emacs-instructions
-;;; (add-to-list (quote default-frame-alist (quote font . "Fira Code")))
-;;; (add-to-list 'default-frame-alist `(font . "Iosevka"))
+;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
+(set-face-attribute 'default nil
+		    :font "Fira Code-14")
+(set-fontset-font t 'latin "Iosevka-14" nil 'append)
+(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
+
 
 ;; scroll Emacs like lightning (macOS)
 ;;; https://github.com/jdtsmith/ultra-scroll
@@ -70,9 +73,17 @@
 (ido-everywhere 1)
 (setq ido-enable-flex-matching 1)
 
-;;; Keybindings:
+;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
 ;;; =======================================================
+
+;;; macOS Keybindings:
+;;; based on https://www.emacswiki.org/emacs/EmacsForMacOS%20
+(when (eq system-type 'darwin)
+  ;;  (setq mac-option-modifier 'alt)
+  ;;  (setq mac-command-modifier 'meta)
+  ;; sets fn-delete to be right-delete
+  (global-set-key [kp-delete] 'delete-char))
 
 (global-set-key [s-up] 'beginning-of-buffer)
 (global-set-key [s-down] 'end-of-buffer)
@@ -87,9 +98,9 @@
 
 ;;; reload emacs config
 (defun reload-emacs-config ()
-    "Reload emacs.el Emacs configuration file"
-    (interactive)
-    (load-file user-init-file))
+  "Reload emacs.el Emacs configuration file"
+  (interactive)
+  (load-file user-init-file))
 
 (global-set-key (kbd "C-c C-r") 'reload-emacs-config) ;; C-c C-r to reload
 
@@ -100,17 +111,21 @@
 ;;; emacs *scratch* buffer
 (global-set-key (kbd "C-c s SPC") (lambda () (interactive) (switch-to-buffer "*scratch*")))
 
+;;; comment line or region
+(global-set-key (kbd "s-/") 'comment-line)
+(global-set-key (kbd "C-c C-/") 'comment-or-uncomment-region)
 
-;;; Buffers:
+
+;; Buffers:
 ;;; Custom functions and emacs window keybindings
 ;;; =============================================
 
 ;; create new empty *untitled* buffer
 (defun create-empty-buffer ()
-    "Create a new empty buffer."
-    (interactive)
-    (let ((buf (generate-new-buffer "untitled")))
-        (switch-to-buffer buf)))
+  "Create a new empty buffer."
+  (interactive)
+  (let ((buf (generate-new-buffer "untitled")))
+    (switch-to-buffer buf)))
 
 (global-set-key (kbd "C-x C-e") #'eval-buffer) ;; rebind default `eval-last-sexp` with `eval-buffer` to evaluate the whole buffer at a time
 (global-set-key (kbd "C-c C-e") 'eval-last-sexp) ;; bind `eval-last-sexp` to `ctrl-c ctrl-e` instead of default keybind
@@ -161,3 +176,14 @@
 ;;; TBD to configure MELTA packages within gnu packages
 
 ;;; TBD to review video [Emacs: modern minibuffer packages](https://youtu.be/d3aaxOqwHhI)
+;;; do i really need orderless??? have fuzzy 'orderless' search in M-x commands for multiple-word commands.
+
+;; use-package
+;;; init & config emacs features
+
+(use-package markdown-mode
+  :ensure t
+  ;; :defer t
+  ;; :config
+  ;; (setq markdown-fontify-code-blocks-natively t)
+ )
