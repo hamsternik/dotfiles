@@ -3,7 +3,7 @@
 
 ;;; - C-h f custom-file to see the function decl;
 ;;; - C-h v custom-file to see the variable decl and example of custom-file usage.
-(setq custom-file "~/.emacs.custom.el")
+(setq custom-file "~/.config/emacs/custom.init.el")
 (load custom-file) ;; OR (load-file custom-file)
 
 (load-theme 'gruber-darker' t) ;; to load `gruber-darker` custom theme in emacs 24+
