@@ -10,4 +10,8 @@ configs/vim/vim/bundle/*/**
 # awesome-bot
 ab-results-README.*
 
+# Emacs auto-save and backup files
+\#*\#
+*~
 .vscode/*
+
