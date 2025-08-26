@@ -191,11 +191,14 @@ cask "font-0xproto-nerd-font"
 # Fira Code. Free monospaced font with programming ligatures
 cask "font-fira-code"
 
-# Terminal emulator that uses platform-native UI and GPU acceleration
-cask "ghostty"
-
 # Iosevka Font: Versatile typeface for code, from code
 cask "font-iosevka"
+
+#  Roboto Mono
+cask "font-roboto-mono"
+
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 
 ## Web browser
 cask "google-chrome"
