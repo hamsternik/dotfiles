@@ -120,6 +120,8 @@
 ;;; Custom functions and emacs window keybindings
 ;;; =============================================
 
+(global-set-key (kbd "C-c o") 'buffer-menu)
+
 ;; create new empty *untitled* buffer
 (defun create-empty-buffer ()
   "Create a new empty buffer."
@@ -173,10 +175,8 @@
 ;;; Packages:
 ;;; =========
 
-;;; TBD to configure MELTA packages within gnu packages
-
-;;; TBD to review video [Emacs: modern minibuffer packages](https://youtu.be/d3aaxOqwHhI)
-;;; do i really need orderless??? have fuzzy 'orderless' search in M-x commands for multiple-word commands.
+;; Today I installed all packages in the `M-x package-list-packages`.
+;; All packages are installed in the `custom.init.el` file.
 
 ;; use-package
 ;;; init & config emacs features
@@ -186,4 +186,10 @@
   ;; :defer t
   ;; :config
   ;; (setq markdown-fontify-code-blocks-natively t)
- )
+  )
+
+;; TBD to watch about `orderless` package by @prot
+;; https://youtu.be/d3aaxOqwHhI?t=1929
+
+;; @prot sample configuration including `orderless` package
+;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/ 
