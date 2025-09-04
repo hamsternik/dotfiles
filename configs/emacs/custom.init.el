@@ -11,7 +11,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    '(consult corfu denote gruber-darker-theme marginalia markdown-mode
-	     use-package vertico))
+	     modus-themes use-package vertico))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty
 	  space-after-tab space-mark tab-mark)))
