@@ -203,13 +203,26 @@
 ;; @prot sample configuration including `orderless` package
 ;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
 
-;;; eglot
+;; TREE-SITTER (ts)
+;;; GitHub: https://github.com/tree-sitter/tree-sitter
+
+;;; TBD to read about how to get started w/ Tree-Sitter
+;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+
+;; EGLOT
 ;;; a client for LSP servers
 ;;; https://github.com/joaotavora/eglot
 
+;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
+;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
+
+;; FIXME: no syntax highlight in .swift files
 (use-package swift-mode
   :mode "\\.swift\\'")
 
+;; based on:
+;; https://github.com/joaotavora/eglot/issues/825#issuecomment-1024267560
+;; FIXME: no code completion in .swift file
 (defun hamsternik/sourcekit-lsp-executable ()
   (setq hamsternik/sourcekit-lsp-executable
 	(cond ((executable-find "sourcekit-lsp"))
