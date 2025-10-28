@@ -121,6 +121,9 @@
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "C-c C-/") 'comment-or-uncomment-region)
 
+(add-hook 'text-mode-hook 'outline-minor-mode)
+(add-hook 'fundamental-mode-hook 'outline-minor-mode)
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 ;; Buffers:
 ;;; Custom functions and emacs window keybindings
@@ -129,7 +132,7 @@
 (global-set-key (kbd "C-c o") 'buffer-menu)
 
 ;; create new empty *untitled* buffer
-(defun create-empty-buffer ()
+(defun create-empty-buffer () 
   "Create a new empty buffer."
   (interactive)
   (let ((buf (generate-new-buffer "untitled")))
@@ -198,4 +201,32 @@
 ;; https://youtu.be/d3aaxOqwHhI?t=1929
 
 ;; @prot sample configuration including `orderless` package
-;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/ 
+;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
+
+;;; eglot
+;;; a client for LSP servers
+;;; https://github.com/joaotavora/eglot
+
+(use-package swift-mode
+  :mode "\\.swift\\'")
+
+(defun hamsternik/sourcekit-lsp-executable ()
+  (setq hamsternik/sourcekit-lsp-executable
+	(cond ((executable-find "sourcekit-lsp"))
+	      ((equal system-type 'darwin)
+	       (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
+	      ((equal system-type 'gnu/linux)
+	       (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
+	      (t
+	       ("sourcekit-lsp")))))
+(defun hamsternik/sourcekit-lsp-command (interactive)
+  (append (list (hamsternik/sourcekit-lsp-executable))))
+
+(use-package eglot
+  ;; :defer t
+  ;; :hook ((python-mode . eglot-ensure))
+  ;; :custom
+  ;; (eglot-report-progress nil)  ; Prevent minibuffer spam
+  :config
+  ;; (fset #'jsonrpc--log-event #'ignore)
+  (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
