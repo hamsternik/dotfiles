@@ -48,5 +48,9 @@
             "allowed": true
         }
     ],
-    "zig.zls.enabled": "on"
+    "zig.zls.enabled": "on",
+    "workbench.colorTheme": "Visual Studio Dark - C++",
+    "editor.showFoldingControls": "always",
+    "makefile.configureOnOpen": true,
+    "editor.unicodeHighlight.ambiguousCharacters": false
 }
