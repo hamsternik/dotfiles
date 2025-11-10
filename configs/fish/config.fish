@@ -95,3 +95,5 @@ fish_add_path /opt/homebrew/opt/libpq/bin
 set -gx PATH $PATH /Users/hamsternik/.lmstudio/bin
 # End of LM Studio CLI section
 
+
+alias claude="/Users/hamsternik/.claude/local/claude"
