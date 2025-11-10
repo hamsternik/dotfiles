@@ -52,6 +52,10 @@
 
 (global-set-key (kbd "C-c d") 'open-dired-at-current-file)
 
+;; !TIP: use `g` to refresh the buffer to see the latest changed in the dir
+;; auto-refresh dired buffers when files change
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
 ;; restore the last emacs session, including the buffer for the file, *scratch* buffer, etc
 (desktop-save-mode 1)
 ;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
