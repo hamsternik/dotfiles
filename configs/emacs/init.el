@@ -43,15 +43,6 @@
 ;; (setq initial-buffer-choice t)
 (setq initial-buffer-choice (lambda () (dired "~")))
 
-(defun open-dired-at-current-file ()
-  "Open `dired` in the directory of the currenly opened file."
-  (interactive)
-  (if buffer-file-name
-      (dired (file-name-directory buffer-file-name))
-    (message "No file associated with this buffer.")))
-
-(global-set-key (kbd "C-c d") 'open-dired-at-current-file)
-
 ;; !TIP: use `g` to refresh the buffer to see the latest changed in the dir
 ;; auto-refresh dired buffers when files change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
