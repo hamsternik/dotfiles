@@ -138,7 +138,7 @@
 # Source: https://github.com/dandavison/delta
 
 [pager]
-    diff = delta
+    diff = bat
     log = bat
     reflog = bat 
     show = delta
