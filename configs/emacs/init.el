@@ -198,7 +198,7 @@
   :ensure t
   ;; :defer t
   ;; :config
-  ;; (setq markdown-fontify-code-blocks-natively t)
+  ;; ( markdown-fontify-code-blocks-natively t)
   )
 
 ;; TBD to watch about `orderless` package by @prot
@@ -247,3 +247,5 @@
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
+
+(telephone-line-mode 1)
