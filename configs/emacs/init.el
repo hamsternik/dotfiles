@@ -14,6 +14,10 @@
 
 (load-theme 'gruber-darker' t) ;; to load `gruber-darker` custom theme in emacs 24+
 
+;;; set up a visible bell instead of audio
+;;; FIXME: to turn on **only** on non-macOS. macOS manages visiable bell w/ the weird huge yellow triangle in the middle of the screen.
+(setq visible-bell t)
+
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
 ;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
 (set-face-attribute 'default nil
@@ -66,13 +70,21 @@
 (add-hook 'kill-emacs-hook 'hn/save-scratch)
 (add-hook 'after-init-hook 'hn/restore-scratch)
 
+;; ido-mode (IDO, Interactively Do Things)
+;;; turning on `fido-vertical-mode` (emacs 28+) instead of old-fashion `ido-mode` 
+(fido-vertical-mode 1)
 
-;;; emacs IDO MODE
-;;; ==============
+;; ansi-color
+;; Enable ANSI color support in compilation buffers
+(require 'ansi-color)
 
-(ido-mode 1) ;; enable ido-mode for better switching
-(ido-everywhere 1)
-(setq ido-enable-flex-matching 1)
+(defun hn/colorize-compilation-buffer ()
+  "Colorize compilation buffer by interpreting ANSI color codes."
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region compilation-filter-start (point))))
+
+(add-hook 'compilation-filter-hook (function hn/colorize-compilation-buffer))
+;; ![TIP] use `#'hn/colorize-compilation-buffer` as syntax sugar instead of (function ...)
 
 ;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
