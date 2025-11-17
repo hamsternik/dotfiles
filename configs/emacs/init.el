@@ -86,6 +86,10 @@
 (add-hook 'compilation-filter-hook (function hn/colorize-compilation-buffer))
 ;; ![TIP] use `#'hn/colorize-compilation-buffer` as syntax sugar instead of (function ...)
 
+;; enable better ansi color support in shell-mode
+;; FIXME: broken ansi symbols in standard fish greeting message when run `C-x p s` shell
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 ;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
 ;;; =======================================================
@@ -131,6 +135,10 @@
 (add-hook 'text-mode-hook 'outline-minor-mode)
 (add-hook 'fundamental-mode-hook 'outline-minor-mode)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
+
+;; M-! key bind alternatives
+(bind-key "C-;" 'shell-command)
+(bind-key ";" 'shell-command dired-mode-map)
 
 ;; Buffers:
 ;;; Custom functions and emacs window keybindings
