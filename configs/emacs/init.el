@@ -75,6 +75,14 @@
 (add-hook 'kill-emacs-hook 'hn/save-scratch)
 (add-hook 'after-init-hook 'hn/restore-scratch)
 
+;; disable auto-save files in emacs
+;; (setq auto-save-default nil)
+
+;; keeping auto-save files enabled but moving files to a central dir:
+(make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
+(setq auto-save-file-name-transforms
+      `((".*" ,(expand-file-name "auto-save/" user-emacs-directory) t)))
+
 ;;; IDO:
 ;;; Interactively Do Things (ido-mode)
 ;;; turning on `fido-vertical-mode` (emacs 28+) instead of old-fashion `ido-mode` 
