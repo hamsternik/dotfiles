@@ -164,7 +164,9 @@
   (interactive)
   (indent-region (point-min) (point-max)))
 
-(global-set-key (kbd "C-c i") 'indent-buffer) ;; bind to fix the indentation as Xcode standard keybind 
+(global-set-key (kbd "C-c i") 'indent-buffer) ;; bind to fix the indentation as Xcode standard keybind
+
+(bind-key "-" 'dired-up-directory dired-mode-map)
 
 ;;; Windows:
 ;;; Custom functions and emacs window keybindings
