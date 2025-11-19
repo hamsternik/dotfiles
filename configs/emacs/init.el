@@ -41,7 +41,12 @@
 
 ;;; Dired:
 ;;; the Directory Editor
-;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html 
+;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
+
+(use-package dired
+  :ensure nil ; built-in, no need to install
+  :bind (:map dired-mode-map) (";" . shell-command)
+  :bind (:map dired-mode-map) ("-" . dired-up-directory))
 
 (setq dired-use-ls-dired nil)
 ;; (setq initial-buffer-choice t)
@@ -70,7 +75,8 @@
 (add-hook 'kill-emacs-hook 'hn/save-scratch)
 (add-hook 'after-init-hook 'hn/restore-scratch)
 
-;; ido-mode (IDO, Interactively Do Things)
+;;; IDO:
+;;; Interactively Do Things (ido-mode)
 ;;; turning on `fido-vertical-mode` (emacs 28+) instead of old-fashion `ido-mode` 
 (fido-vertical-mode 1)
 
@@ -138,7 +144,6 @@
 
 ;; M-! key bind alternatives
 (bind-key "C-;" 'shell-command)
-(bind-key ";" 'shell-command dired-mode-map)
 
 ;; Buffers:
 ;;; Custom functions and emacs window keybindings
@@ -165,8 +170,6 @@
   (indent-region (point-min) (point-max)))
 
 (global-set-key (kbd "C-c i") 'indent-buffer) ;; bind to fix the indentation as Xcode standard keybind
-
-(bind-key "-" 'dired-up-directory dired-mode-map)
 
 ;;; Windows:
 ;;; Custom functions and emacs window keybindings
