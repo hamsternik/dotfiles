@@ -20,11 +20,23 @@
 
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
 ;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
-(set-face-attribute 'default nil
-		    :font "Fira Code-14")
-(set-fontset-font t 'latin "Iosevka-14" nil 'append)
-(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
+;;(set-face-attribute 'default nil
+;;		    :font "Fira Code-14")
+;;(set-fontset-font t 'latin "Iosevka-14" nil 'append)
+;;(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
 
+;; Font platform-specific platform configuration
+(cond
+ ;; macOS: use preferred fonts: Fira Code, Iosevka, Roboto Mono
+ ((eq system-type 'darwin)
+  (set-face-attribute 'default nil :font "Fira Code-14")
+  (set-fontset-font t 'latin "Iosevka-14" nil 'append)
+  (set-fontset-font t 'latin "Roboto Mono-14" nil 'append))
+;; otherwise, try Fira Code, fallback to monospace
+(t
+ (if (find-font (font-spec :name "Fira Code"))
+ (set-face-attribute 'default nil :font "Fira Code-14")
+ (set-face-attribute 'default nil :font "monospace-14"))))
 
 ;; scroll Emacs like lightning (macOS)
 ;;; https://github.com/jdtsmith/ultra-scroll
@@ -38,6 +50,11 @@
 
 (setq inhibit-startup-screen t) ;; to disable emacs splash screen
 ;; (setq initial-scratch-message nil) ;; to remove initial message in *scratch*
+
+;;; Emacs package sources:
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
 
 ;;; Dired:
 ;;; the Directory Editor
