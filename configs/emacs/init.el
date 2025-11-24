@@ -13,16 +13,22 @@
       (if (eq system-type 'darwin)
           "~/.config/emacs/custom.init.el"
         "~/.emacs.d/custom.init.el"))
-(if (file-exists-p) custom-file)
-(load custom-file)
-(message "No custom.init.el found, creating...")
-(touch custom-file))
+(if (file-exists-p custom-file)
+    (load custom-file)
+  (message "No custom.init.el found, creating...")
+  (touch custom-file))
 
 (load-theme 'gruber-darker' t) ;; to load `gruber-darker` custom theme in emacs 24+
 
 ;;; set up a visible bell instead of audio
 ;;; FIXME: to turn on **only** on non-macOS. macOS manages visiable bell w/ the weird huge yellow triangle in the middle of the screen.
 (setq visible-bell t)
+
+;; set a reasonable default PATH
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
 ;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions

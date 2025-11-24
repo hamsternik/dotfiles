@@ -10,9 +10,10 @@
  '(display-line-numbers-type 'relative)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(consult corfu denote eglot-inactive-regions gruber-darker-theme
-	     kotlin-mode marginalia markdown-mode modus-themes
-	     swift-mode telephone-line use-package vertico))
+   '(consult corfu denote eglot-inactive-regions exec-path-from-shell
+	     gruber-darker-theme kotlin-mode marginalia markdown-mode
+	     modus-themes swift-mode telephone-line use-package
+	     vertico))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty
 	  space-after-tab space-mark tab-mark)))
