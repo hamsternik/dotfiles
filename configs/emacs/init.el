@@ -1,6 +1,9 @@
-;;; init.el --- Emacs configuration -*- lexical-binding: t -*-
-;;; Commentary:
+;;  -*- coding: utf-8; lexical-binding: t -*- 
 
+;;; Intro:
+;; See https://github.com/patrickt/emacs for inspiration.
+
+;;; Commentary:
 ;;; - C-h f custom-file to see the function decl;
 ;;; - C-h v custom-file to see the variable decl and example of custom-file usage.
 ;; Set custom-file path based on platform
@@ -10,7 +13,10 @@
       (if (eq system-type 'darwin)
           "~/.config/emacs/custom.init.el"
         "~/.emacs.d/custom.init.el"))
-(load custom-file) ;; OR (load-file custom-file)
+(if (file-exists-p) custom-file)
+(load custom-file)
+(message "No custom.init.el found, creating...")
+(touch custom-file))
 
 (load-theme 'gruber-darker' t) ;; to load `gruber-darker` custom theme in emacs 24+
 
