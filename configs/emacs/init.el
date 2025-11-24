@@ -241,12 +241,27 @@
 ;;; Packages:
 ;;; =========
 
+;;;; Project.el
+(use-package project
+  :ensure t)
+
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
 (use-package markdown-mode
   :ensure t
   ;; :defer t
-  ;; :config
-  ;; ( markdown-fontify-code-blocks-natively t)
-  )
+  :hook
+  (markdown-mode . flyspell-mode)
+  (markdown-mode . auto-fill-mode)
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode)))
+
+;;;; Swift
+(use-package swift-mode
+  :mode "\\.swift\\'")
 
 ;; TBD to watch about `orderless` package by @prot
 ;; https://youtu.be/d3aaxOqwHhI?t=1929
@@ -263,9 +278,6 @@
 ;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
 ;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
 
-;; FIXME: no syntax highlight in .swift files
-(use-package swift-mode
-  :mode "\\.swift\\'")
 
 ;; based on:
 ;; https://github.com/joaotavora/eglot/issues/825#issuecomment-1024267560
@@ -281,11 +293,6 @@
 	       ("sourcekit-lsp")))))
 (defun hamsternik/sourcekit-lsp-command (interactive)
   (append (list (hamsternik/sourcekit-lsp-executable))))
-
-(use-package telephone-line
-  :ensure t
-  :config
-  (telephone-line-mode 1))
 
 ;;; LSP modes
 
@@ -307,3 +314,6 @@
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
+
+(use-package latex-mode
+  :ensure t)
