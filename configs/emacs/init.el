@@ -289,4 +289,7 @@
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
 
-(telephone-line-mode 1)
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
