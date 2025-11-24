@@ -241,12 +241,6 @@
 ;;; Packages:
 ;;; =========
 
-;; Today I installed all packages in the `M-x package-list-packages`.
-;; All packages are installed in the `custom.init.el` file.
-
-;; use-package
-;;; init & config emacs features
-
 (use-package markdown-mode
   :ensure t
   ;; :defer t
