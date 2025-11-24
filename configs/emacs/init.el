@@ -245,19 +245,22 @@
 (use-package project
   :ensure t)
 
+;;;; https://github.com/dbordak/telephone-line
 (use-package telephone-line
   :ensure t
   :config
   (telephone-line-mode 1))
 
+;;;; https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
   :ensure t
   ;; :defer t
+  :mode
+  ("README\\.md\\'" . gfm-mode)
   :hook
   (markdown-mode . flyspell-mode)
   (markdown-mode . auto-fill-mode)
-  :config
-  (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode)))
+)
 
 ;;;; Swift
 (use-package swift-mode
@@ -315,5 +318,21 @@
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
 
-(use-package latex-mode
-  :ensure t)
+;;;; LaTeX/AucTeX
+;;;; !NOTE: to automatically compile and update PDF preview use:
+;;;; https://www.reddit.com/r/emacs/comments/k7sx2n/latexpreviewpane_and_latexmk/
+(use-package tex
+  :ensure auctex
+  :custom
+  (font-latex-script-display nil)
+  (font-latex-fontify-script nil)
+  (font-latex-fontify-sectioning 'color)
+  (TeX-auto-save t)
+  (Tex-parse-self t)
+  (TeX-PDF-mode t) ; PDF mode by default
+  :hook
+  (LaTeX-mode . auto-fill-mode)
+  (LaTeX-mode . flyspell-mode)
+  (LaTeX-mode . LaTeX-math-mode)  ; easy math input
+  (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
+  (LaTeX-mode . (lambda () (setq show-trailing-whitespace t))))
