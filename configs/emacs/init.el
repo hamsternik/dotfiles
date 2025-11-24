@@ -266,10 +266,6 @@
 ;;; TBD to read about how to get started w/ Tree-Sitter
 ;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 
-;; EGLOT
-;;; a client for LSP servers
-;;; https://github.com/joaotavora/eglot
-
 ;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
 ;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
 
@@ -292,16 +288,28 @@
 (defun hamsternik/sourcekit-lsp-command (interactive)
   (append (list (hamsternik/sourcekit-lsp-executable))))
 
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
+;;; LSP modes
+
+;;;; eglot
+;;; https://github.com/joaotavora/eglot
+;;; a client for LSP servers; built-in since Emacs 29
 (use-package eglot
   ;; :defer t
   ;; :hook ((python-mode . eglot-ensure))
   ;; :custom
   ;; (eglot-report-progress nil)  ; Prevent minibuffer spam
+  :bind
+  (:map eglot-mode-map
+	("C-." . 'xref-find-definitions)
+	("C-," . 'xref-go-back)
+	("C-c ?" . 'eglot-help-at-point)
+	("C-c C-c" . 'eglot-code-actions)
+	("C-c C-r" . 'eglot-rename))
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
-
-(use-package telephone-line
-  :ensure t
-  :config
-  (telephone-line-mode 1))
