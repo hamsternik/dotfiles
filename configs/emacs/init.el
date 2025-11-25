@@ -72,24 +72,6 @@
 ;;; https://github.com/jdtsmith/ultra-scroll
 ;;; based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
 
-;;; Dired:
-;;; the Directory Editor
-;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
-
-(use-package dired
-  :ensure nil ; built-in, no need to install
-  :bind (:map dired-mode-map) (";" . shell-command)
-  :bind (:map dired-mode-map) ("-" . dired-up-directory))
-
-(setq dired-use-ls-dired nil)
-;; (setq initial-buffer-choice t)
-(setq initial-buffer-choice (lambda () (dired "~")))
-
-;; !TIP: use `g` to refresh the buffer to see the latest changed in the dir
-;; auto-refresh dired buffers when files change
-(add-hook 'dired-mode-hook 'auto-revert-mode)
-
-
 (defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
 (defun hn/save-scratch ()
   (with-current-buffer "*scratch*"
@@ -114,41 +96,6 @@
 ;;; Interactively Do Things (ido-mode)
 ;;; turning on `fido-vertical-mode` (emacs 28+) instead of old-fashion `ido-mode` 
 (fido-vertical-mode 1)
-
-;; ansi-color; enable ANSI color support in compilation buffers
-;;; based on https://github.com/anschwa/emacs.d?tab=readme-ov-file#ansi-color-codes
-;; FIXME: broken ansi symbols in standard fish greeting message when run `C-x p s` shell
-(use-package ansi-color
-  :ensure nil  ;; built-in package
-  :hook
-  ;; Modren shell-mode ANSI color support (Emacs 28+)
-  (shell-mode . hn/setup-shell-ansi-color)
-  (compilation-filter . hn/colorize-compilation-buffer)
-  :config
-  (defun hn/setup-shell-ansi-color ()
-    "Setup modern ANSI color handling for shell-mode."
-    ;; Remove the old processor if present
-    (setq-local comint-output-filter-functions
-		(remove 'ansi-color-process-output comint-output-filter-functions))
-    ;; Add the new region-based processor
-    (add-hook 'comint-output-filter-functions
-	      #'ansi-color-apply-on-region nil t))
-  
-  (defun hn/ansi-color (&optional beg end)
-    "Interpret ANSI color escape sequence by colorifying content.
-Operate on selected region or whole buffer."
-    (interactive
-     (if (use-region-p)
-	 (list (region-beginning) (region-end))
-       (list (point-min) (point-max))))
-    (let ((inhibit-read-only t))
-      (ansi-color-apply-on-region beg end)))
-
-  (defun hn/colorize-compilation-buffer ()
-    "Colorize compilation buffer by interpreting ANSI color codes."
-    (let ((inhibit-read-only t))
-      (ansi-color-apply-on-region compilation-filter-start (point))))  
-  )
 
 ;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
@@ -259,6 +206,63 @@ Operate on selected region or whole buffer."
 ;;; Packages:
 ;;; =========
 
+;;; Dired
+;;;; the directory editor
+;;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
+(use-package dired
+  :ensure nil ; built-in, no need to install
+  :bind (:map dired-mode-map) (";" . shell-command)
+  :bind (:map dired-mode-map) ("-" . dired-up-directory))
+
+(setq dired-use-ls-dired nil)
+;; (setq initial-buffer-choice t)
+(setq initial-buffer-choice (lambda () (dired "~")))
+
+;; !TIP: use `g` to refresh the buffer to see the latest changed in the dir
+;; auto-refresh dired buffers when files change
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
+;;; Project.el
+(use-package project
+  :ensure t)
+
+
+;;; ansi-color
+;;;; enable ANSI color support in compilation buffers
+;;;; based on https://github.com/anschwa/emacs.d?tab=readme-ov-file#ansi-color-codes
+;;;; FIXME: broken ansi symbols in standard fish greeting message when run `C-x p s` shell
+(use-package ansi-color
+  :ensure nil  ;; built-in package
+  :hook
+  ;; Modren shell-mode ANSI color support (Emacs 28+)
+  (shell-mode . hn/setup-shell-ansi-color)
+  (compilation-filter . hn/colorize-compilation-buffer)
+  :config
+  (defun hn/setup-shell-ansi-color ()
+    "Setup modern ANSI color handling for shell-mode."
+    ;; Remove the old processor if present
+    (setq-local comint-output-filter-functions
+		(remove 'ansi-color-process-output comint-output-filter-functions))
+    ;; Add the new region-based processor
+    (add-hook 'comint-output-filter-functions
+	      #'ansi-color-apply-on-region nil t))
+  
+  (defun hn/ansi-color (&optional beg end)
+    "Interpret ANSI color escape sequence by colorifying content.
+Operate on selected region or whole buffer."
+    (interactive
+     (if (use-region-p)
+	 (list (region-beginning) (region-end))
+       (list (point-min) (point-max))))
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region beg end)))
+
+  (defun hn/colorize-compilation-buffer ()
+    "Colorize compilation buffer by interpreting ANSI color codes."
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region compilation-filter-start (point))))  
+  )
+
 ;;; LSP mode
 
 ;; swiftlang/sourcekit-lsp: language protocol impl. for Swift and C-based lang.
@@ -299,10 +303,6 @@ Operate on selected region or whole buffer."
 ;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
 ;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
 
-
-;;;; Project.el
-(use-package project
-  :ensure t)
 
 ;; set a reasonable default PATH
 ;;; !WARNING: config execution takes 0.745ms
