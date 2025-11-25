@@ -6,7 +6,13 @@
 ;;; Commentary:
 ;;; - C-h f custom-file to see the function decl;
 ;;; - C-h v custom-file to see the variable decl and example of custom-file usage.
-;; Set custom-file path based on platform
+
+(when (window-system)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+  (menu-bar-mode 0))
+
+;; set custom filepath to keep all nongnu/melpa plugins:
 ;; macOS/Darwin: ~/.config/emacs/custom.init.el
 ;; Linux/WSL: ~/.emacs.d/custom.init.el
 (setq custom-file
@@ -18,17 +24,29 @@
   (message "No custom.init.el found, creating...")
   (touch custom-file))
 
-(load-theme 'gruber-darker' t) ;; to load `gruber-darker` custom theme in emacs 24+
+;;; Emacs package sources:
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+
+(load-theme 'gruber-darker' t)
+
+;; (global-display-line-numbers-mode t)
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(setq inhibit-startup-screen t) ;; to disable emacs splash screen
+;; (setq initial-scratch-message nil) ;; to remove initial message in *scratch*
 
 ;;; set up a visible bell instead of audio
 ;;; FIXME: to turn on **only** on non-macOS. macOS manages visiable bell w/ the weird huge yellow triangle in the middle of the screen.
 (setq visible-bell t)
 
-;; set a reasonable default PATH
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
+;; restore the last emacs session, including the buffer for the file, *scratch* buffer, etc
+(desktop-save-mode 1)
+;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
+(global-auto-revert-mode 1)
+;; [!NOTE]: This code does not work for the *scratch* buffer specifically. Need to store *scratch* buffer content manually to a file.
+;;(setq desktop-buffers-not-to-save (delete "\\*scratch\\*" desktop-buffers-not-to-save))
 
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
 ;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
@@ -54,20 +72,6 @@
 ;;; https://github.com/jdtsmith/ultra-scroll
 ;;; based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
 
-(tool-bar-mode 0)
-(menu-bar-mode 0)
-(scroll-bar-mode 0)
-;; (global-display-line-numbers-mode t)
-(fset 'yes-or-no-p 'y-or-n-p)
-
-(setq inhibit-startup-screen t) ;; to disable emacs splash screen
-;; (setq initial-scratch-message nil) ;; to remove initial message in *scratch*
-
-;;; Emacs package sources:
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
-
 ;;; Dired:
 ;;; the Directory Editor
 ;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
@@ -85,12 +89,6 @@
 ;; auto-refresh dired buffers when files change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
-;; restore the last emacs session, including the buffer for the file, *scratch* buffer, etc
-(desktop-save-mode 1)
-;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
-(global-auto-revert-mode 1)
-;; [!NOTE]: This code does not work for the *scratch* buffer specifically. Need to store *scratch* buffer content manually to a file.
-;;(setq desktop-buffers-not-to-save (delete "\\*scratch\\*" desktop-buffers-not-to-save))
 
 (defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
 (defun hn/save-scratch ()
@@ -238,12 +236,60 @@
 
 (global-set-key (kbd "s-w") 'close-current-window)
 
+
 ;;; Packages:
 ;;; =========
+
+;;; LSP mode
+
+;; swiftlang/sourcekit-lsp: language protocol impl. for Swift and C-based lang.
+;; https://github.com/joaotavora/eglot/issues/825#issuecomment-1024267560
+;; FIXME: no code completion in .swift file
+(defun hamsternik/sourcekit-lsp-executable ()
+  (setq hamsternik/sourcekit-lsp-executable
+	(cond ((executable-find "sourcekit-lsp"))
+	      ((equal system-type 'darwin)
+	       (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
+	      ((equal system-type 'gnu/linux)
+	       (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
+	      (t
+	       ("sourcekit-lsp")))))
+(defun hamsternik/sourcekit-lsp-command (interactive)
+  (append (list (hamsternik/sourcekit-lsp-executable))))
+
+;;;; eglot
+;;; https://github.com/joaotavora/eglot
+;;; a client for LSP servers; built-in since Emacs 29
+(use-package eglot
+  ;; :defer t
+  ;; :hook ((python-mode . eglot-ensure))
+  ;; :custom
+  ;; (eglot-report-progress nil)  ; Prevent minibuffer spam
+  :bind
+  (:map eglot-mode-map
+	("C-." . 'xref-find-definitions)
+	("C-," . 'xref-go-back)
+	("C-c ?" . 'eglot-help-at-point)
+	("C-c C-c" . 'eglot-code-actions)
+	("C-c C-r" . 'eglot-rename))
+  :config
+  ;; (fset #'jsonrpc--log-event #'ignore)
+  (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
+
+;;;; !NOTE:
+;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
+;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
+
 
 ;;;; Project.el
 (use-package project
   :ensure t)
+
+;; set a reasonable default PATH
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
 ;;;; https://github.com/dbordak/telephone-line
 (use-package telephone-line
@@ -266,58 +312,6 @@
 (use-package swift-mode
   :mode "\\.swift\\'")
 
-;; TBD to watch about `orderless` package by @prot
-;; https://youtu.be/d3aaxOqwHhI?t=1929
-
-;; @prot sample configuration including `orderless` package
-;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
-
-;; TREE-SITTER (ts)
-;;; GitHub: https://github.com/tree-sitter/tree-sitter
-
-;;; TBD to read about how to get started w/ Tree-Sitter
-;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
-
-;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
-;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
-
-
-;; based on:
-;; https://github.com/joaotavora/eglot/issues/825#issuecomment-1024267560
-;; FIXME: no code completion in .swift file
-(defun hamsternik/sourcekit-lsp-executable ()
-  (setq hamsternik/sourcekit-lsp-executable
-	(cond ((executable-find "sourcekit-lsp"))
-	      ((equal system-type 'darwin)
-	       (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
-	      ((equal system-type 'gnu/linux)
-	       (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
-	      (t
-	       ("sourcekit-lsp")))))
-(defun hamsternik/sourcekit-lsp-command (interactive)
-  (append (list (hamsternik/sourcekit-lsp-executable))))
-
-;;; LSP modes
-
-;;;; eglot
-;;; https://github.com/joaotavora/eglot
-;;; a client for LSP servers; built-in since Emacs 29
-(use-package eglot
-  ;; :defer t
-  ;; :hook ((python-mode . eglot-ensure))
-  ;; :custom
-  ;; (eglot-report-progress nil)  ; Prevent minibuffer spam
-  :bind
-  (:map eglot-mode-map
-	("C-." . 'xref-find-definitions)
-	("C-," . 'xref-go-back)
-	("C-c ?" . 'eglot-help-at-point)
-	("C-c C-c" . 'eglot-code-actions)
-	("C-c C-r" . 'eglot-rename))
-  :config
-  ;; (fset #'jsonrpc--log-event #'ignore)
-  (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
-
 ;;;; LaTeX/AucTeX
 ;;;; !NOTE: to automatically compile and update PDF preview use:
 ;;;; https://www.reddit.com/r/emacs/comments/k7sx2n/latexpreviewpane_and_latexmk/
@@ -336,3 +330,15 @@
   (LaTeX-mode . LaTeX-math-mode)  ; easy math input
   (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
   (LaTeX-mode . (lambda () (setq show-trailing-whitespace t))))
+
+;; TBD to watch about `orderless` package by @prot
+;; https://youtu.be/d3aaxOqwHhI?t=1929
+
+;; @prot sample configuration including `orderless` package
+;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
+
+;; TREE-SITTER (ts)
+;;; GitHub: https://github.com/tree-sitter/tree-sitter
+
+;;; TBD to read about how to get started w/ Tree-Sitter
+;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
