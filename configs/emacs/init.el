@@ -115,21 +115,40 @@
 ;;; turning on `fido-vertical-mode` (emacs 28+) instead of old-fashion `ido-mode` 
 (fido-vertical-mode 1)
 
-;; ansi-color
-;; Enable ANSI color support in compilation buffers
-(require 'ansi-color)
-
-(defun hn/colorize-compilation-buffer ()
-  "Colorize compilation buffer by interpreting ANSI color codes."
-  (let ((inhibit-read-only t))
-    (ansi-color-apply-on-region compilation-filter-start (point))))
-
-(add-hook 'compilation-filter-hook (function hn/colorize-compilation-buffer))
-;; ![TIP] use `#'hn/colorize-compilation-buffer` as syntax sugar instead of (function ...)
-
-;; enable better ansi color support in shell-mode
+;; ansi-color; enable ANSI color support in compilation buffers
+;;; based on https://github.com/anschwa/emacs.d?tab=readme-ov-file#ansi-color-codes
 ;; FIXME: broken ansi symbols in standard fish greeting message when run `C-x p s` shell
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(use-package ansi-color
+  :ensure nil  ;; built-in package
+  :hook
+  ;; Modren shell-mode ANSI color support (Emacs 28+)
+  (shell-mode . hn/setup-shell-ansi-color)
+  (compilation-filter . hn/colorize-compilation-buffer)
+  :config
+  (defun hn/setup-shell-ansi-color ()
+    "Setup modern ANSI color handling for shell-mode."
+    ;; Remove the old processor if present
+    (setq-local comint-output-filter-functions
+		(remove 'ansi-color-process-output comint-output-filter-functions))
+    ;; Add the new region-based processor
+    (add-hook 'comint-output-filter-functions
+	      #'ansi-color-apply-on-region nil t))
+  
+  (defun hn/ansi-color (&optional beg end)
+    "Interpret ANSI color escape sequence by colorifying content.
+Operate on selected region or whole buffer."
+    (interactive
+     (if (use-region-p)
+	 (list (region-beginning) (region-end))
+       (list (point-min) (point-max))))
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region beg end)))
+
+  (defun hn/colorize-compilation-buffer ()
+    "Colorize compilation buffer by interpreting ANSI color codes."
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region compilation-filter-start (point))))  
+  )
 
 ;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
@@ -286,10 +305,11 @@
   :ensure t)
 
 ;; set a reasonable default PATH
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
+;;; !WARNING: config execution takes 0.745ms
+;;(use-package exec-path-from-shell
+;;  :ensure t
+;;  :config
+;;  (exec-path-from-shell-initialize))
 
 ;;;; https://github.com/dbordak/telephone-line
 (use-package telephone-line
