@@ -13,7 +13,7 @@
    '(auctex consult corfu denote eglot-inactive-regions
 	    exec-path-from-shell gruber-darker-theme kotlin-mode
 	    latex-mode latex-unicode-math-mode marginalia
-	    markdown-mode modus-themes pdf-tools swift-mode
+	    markdown-mode modus-themes orderless pdf-tools swift-mode
 	    telephone-line use-package vertico))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty

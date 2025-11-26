@@ -12,6 +12,12 @@
   (scroll-bar-mode 0)
   (menu-bar-mode 0))
 
+;;; package initialization first
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+(package-initialize)
+
 ;; set custom filepath to keep all nongnu/melpa plugins:
 ;; macOS/Darwin: ~/.config/emacs/custom.init.el
 ;; Linux/WSL: ~/.emacs.d/custom.init.el
@@ -19,15 +25,7 @@
       (if (eq system-type 'darwin)
           "~/.config/emacs/custom.init.el"
         "~/.emacs.d/custom.init.el"))
-(if (file-exists-p custom-file)
-    (load custom-file)
-  (message "No custom.init.el found, creating...")
-  (touch custom-file))
-
-;;; Emacs package sources:
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+(load custom-file)
 
 (load-theme 'gruber-darker' t)
 
@@ -224,8 +222,7 @@
 
 ;;; Project.el
 (use-package project
-  :ensure t)
-
+  :ensure nil)
 
 ;;; ansi-color
 ;;;; enable ANSI color support in compilation buffers
@@ -284,6 +281,7 @@ Operate on selected region or whole buffer."
 ;;; https://github.com/joaotavora/eglot
 ;;; a client for LSP servers; built-in since Emacs 29
 (use-package eglot
+  :ensure nil
   ;; :defer t
   ;; :hook ((python-mode . eglot-ensure))
   ;; :custom
@@ -320,16 +318,20 @@ Operate on selected region or whole buffer."
 ;;;; https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
   :ensure t
-  ;; :defer t
+  ;;  :defer t
   :mode
   ("README\\.md\\'" . gfm-mode)
   :hook
   (markdown-mode . flyspell-mode)
-  (markdown-mode . auto-fill-mode)
-)
+  (markdown-mode . auto-fill-mode))
 
-;;;; Swift
+;;; https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
+(use-package kotlin-mode
+  :ensure t)
+
+;;; https://github.com/swift-emacs/swift-mode
 (use-package swift-mode
+  :ensure t
   :mode "\\.swift\\'")
 
 ;;;; LaTeX/AucTeX
@@ -351,12 +353,44 @@ Operate on selected region or whole buffer."
   (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
   (LaTeX-mode . (lambda () (setq show-trailing-whitespace t))))
 
+;;; https://github.com/minad/vertico
+(use-package vertico
+  :ensure t)
+
+;;; https://github.com/minad/corfu
+(use-package corfu
+  :ensure t)
+
 ;; TBD to watch about `orderless` package by @prot
 ;; https://youtu.be/d3aaxOqwHhI?t=1929
 
 ;; @prot sample configuration including `orderless` package
 ;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
 
+;;; https://github.com/oantolin/orderless
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+;;; https://github.com/protesilaos/denote
+(use-package denote
+  :ensure t)
+
+;;; https://github.com/minad/marginalia
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
+
+(use-package modus-themes
+  :ensure t)
+; :demand t
+; :init
+; (modus-themes-include-derivatives-mode 1))
+  
 ;; TREE-SITTER (ts)
 ;;; GitHub: https://github.com/tree-sitter/tree-sitter
 
