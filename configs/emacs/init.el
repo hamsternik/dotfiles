@@ -380,10 +380,10 @@ Operate on selected region or whole buffer."
   :ensure t)
 
 ;;; https://github.com/minad/marginalia
-(use-package marginalia
-  :ensure t
-  :init
-  (marginalia-mode))
+;;(use-package marginalia
+;;  :ensure t
+;;  :init
+;;  (marginalia-mode))
 
 (use-package modus-themes
   :ensure t)
