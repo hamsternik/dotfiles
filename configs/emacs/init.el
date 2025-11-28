@@ -204,6 +204,9 @@
 ;;; Packages:
 ;;; =========
 
+;;;; Built-in packages:
+;;;; ==================
+
 ;;; Dired
 ;;;; the directory editor
 ;;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
@@ -277,6 +280,10 @@ Operate on selected region or whole buffer."
 (defun hamsternik/sourcekit-lsp-command (interactive)
   (append (list (hamsternik/sourcekit-lsp-executable))))
 
+;;;; !NOTE:
+;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
+;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
+
 ;;;; eglot
 ;;; https://github.com/joaotavora/eglot
 ;;; a client for LSP servers; built-in since Emacs 29
@@ -297,9 +304,13 @@ Operate on selected region or whole buffer."
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
 
-;;;; !NOTE:
-;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
-;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
+(use-package flyspell
+  :ensure t
+  :config
+  (setq ispell-program-name "aspell"))
+
+;;;; Installed packages:
+;;;; ===================
 
 
 ;; set a reasonable default PATH

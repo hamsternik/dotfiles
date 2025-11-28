@@ -12,6 +12,9 @@ tap "dart-lang/dart"
 # Plugin manager for zsh, inspired by antigen and antibody
 brew "antidote"
 
+# Spell checker with better logic than ispell
+brew "aspell"
+
 # A cat(1) clone with wings.
 brew "bat"
 
