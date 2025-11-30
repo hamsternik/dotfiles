@@ -12,7 +12,7 @@
  '(package-selected-packages
    '(auctex consult corfu denote eglot-inactive-regions
 	    exec-path-from-shell gruber-darker-theme json-mode
-	    kotlin-mode latex-mode latex-unicode-math-mode
+	    kotlin-mode latex-mode latex-unicode-math-mode magit
 	    marginalia markdown-mode modus-themes orderless pdf-tools
 	    prism swift-mode telephone-line use-package vertico))
  '(whitespace-style

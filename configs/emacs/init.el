@@ -326,6 +326,15 @@ Operate on selected region or whole buffer."
   :config
   (telephone-line-mode 1))
 
+;;; magit.el
+;;;; https://github.com/magit/magit
+(use-package magit
+  :ensure t)
+
+;;;; TBD to read about Essential Settings
+;;;;; https://docs.magit.vc/magit/Essential-Settings.html
+
+
 ;;;; https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
   :ensure t
