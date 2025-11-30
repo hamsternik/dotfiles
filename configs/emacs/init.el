@@ -12,6 +12,16 @@
   (scroll-bar-mode 0)
   (menu-bar-mode 0))
 
+(when (eq system-type 'darwin)
+  ;; make Commnad key act as Meta
+  (setq mac-command-modifier 'meta)
+  ;; keep Option/Alt as Meta
+  (setq mac-option-modifier 'meta)
+  ;; make Control stay as Control
+  (setq mac-control-modifier 'control)
+  ;; optional: make right Command act as Super instead
+  (setq mac-right-command-modifier 'super))
+
 ;;; package initialization first
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
