@@ -407,3 +407,18 @@ Operate on selected region or whole buffer."
 
 ;;; TBD to read about how to get started w/ Tree-Sitter
 ;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+
+;;; json-mode.el
+;;;; https://elpa.gnu.org/packages/json-mode.html
+(use-package json-mode
+  :ensure t)
+
+;;; prism.el
+;;;; https://github.com/alphapapa/prism.el
+(use-package prism
+  :ensure t
+  :defer t
+  :hook
+  ;; activate prism for C-based major modes
+  ((json-mode) . prism-mode)
+  ((python-mode python-ts-mode haskell-mode) . prism-whitespace-mode))
