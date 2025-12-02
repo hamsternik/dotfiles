@@ -69,6 +69,9 @@ brew "libpq"
 # Mac App Store command-line interface
 brew "mas"
 
+# Turn marked-up plain text into well-formatted documents
+brew "multimarkdown"
+
 # Fast, highly customisable system info script
 brew "neofetch"
 
