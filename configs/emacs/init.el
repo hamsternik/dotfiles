@@ -37,7 +37,30 @@
         "~/.emacs.d/custom.init.el"))
 (load custom-file)
 
-(load-theme 'gruber-darker' t)
+;; (load-theme 'gruber-darker' t)
+
+;;; Modus Themes
+;;; https://github.com/protesilaos/modus-themes
+(use-package modus-themes
+  :ensure nil
+  :demand t
+  :config
+  (setq mode-line-compact nil)
+  (setq modus-themes-common-palette-overrides
+	'((bg-mode-line-active bg-blue-subtle)
+	  (fg-mode-line-active fg-main)
+	  (border-mode-line-active bg-blue-subtle)
+	  (border-mode-line-inactive bg-dim)
+	  (bg-region bg-hl-line) ;; OR alternative 'bg-lavender color
+	  (fg-region unsepcified)))
+
+  ;; Finally, load your theme of choice:
+  ;; - modus-operandi, the light theme
+  ;; - modus-vivdendi, the dark theme
+  ;; OR switch between them via: M-x modus-themes-toggle
+
+  ;; Load theme 
+  (load-theme 'modus-vivendi :no-confirm))
 
 ;; (global-display-line-numbers-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
