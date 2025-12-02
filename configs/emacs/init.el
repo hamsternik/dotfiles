@@ -353,7 +353,10 @@ Operate on selected region or whole buffer."
   ("README\\.md\\'" . gfm-mode)
   :hook
   (markdown-mode . flyspell-mode)
-  (markdown-mode . auto-fill-mode))
+  (markdown-mode . auto-fill-mode)
+  :config
+  (when (executable-find "mutltimarkdown")
+    (setq markdown-command "multimarkdown")))
 
 ;;; https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
 (use-package kotlin-mode
