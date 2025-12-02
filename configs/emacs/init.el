@@ -441,3 +441,7 @@ Operate on selected region or whole buffer."
   ;; activate prism for C-based major modes
   ((json-mode) . prism-mode)
   ((python-mode python-ts-mode haskell-mode) . prism-whitespace-mode))
+
+(use-package cmake-mode
+  :ensure t
+  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))

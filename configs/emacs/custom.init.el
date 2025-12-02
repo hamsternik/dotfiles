@@ -10,7 +10,7 @@
  '(display-line-numbers-type 'relative)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(auctex consult corfu denote eglot-inactive-regions
+   '(auctex cmake-mode consult corfu denote eglot-inactive-regions
 	    exec-path-from-shell gruber-darker-theme json-mode
 	    kotlin-mode latex-mode latex-unicode-math-mode magit
 	    marginalia markdown-mode modus-themes orderless pdf-tools
