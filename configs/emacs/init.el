@@ -368,7 +368,10 @@ Operate on selected region or whole buffer."
 ;;;;; https://docs.magit.vc/magit/Essential-Settings.html
 
 
-;;;; https://github.com/jrblevin/markdown-mode
+;;; https://github.com/jrblevin/markdown-mode
+;;;; TBD to verify whether `aspell` is installed
+;;;; macOS: brew install aspell
+;;;; Win/WSL: sudo apt install aspell aspell-en
 (use-package markdown-mode
   :ensure t
   ;;  :defer t
@@ -378,7 +381,7 @@ Operate on selected region or whole buffer."
   (markdown-mode . flyspell-mode)
   (markdown-mode . auto-fill-mode)
   :config
-  (when (executable-find "mutltimarkdown")
+  (when (executable-find "multimarkdown")
     (setq markdown-command "multimarkdown")))
 
 ;;; https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
