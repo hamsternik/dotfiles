@@ -378,9 +378,10 @@ Operate on selected region or whole buffer."
   :mode
   ("README\\.md\\'" . gfm-mode)
   :hook
-  (markdown-mode . flyspell-mode)
   (markdown-mode . auto-fill-mode)
   :config
+  (when (executable-find "aspell")
+    (add-hook 'markdown-mode-hook #'flyspell-mode))
   (when (executable-find "multimarkdown")
     (setq markdown-command "multimarkdown")))
 
