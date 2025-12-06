@@ -58,6 +58,14 @@
          ;; M-! keybind alternative
          ("C-;" . shell-command)
          ("C-c C-/" . 'comment-or-uncomment-region)
+         ;; re-bind `eval-last-sexp` with `eval-buffer` to evaluate an entire buffer atm
+         ("C-x C-e" . 'eval-buffer)
+         ;; bind `eval-last-sexp` to a non-standard key bind
+         ("C-c C-e" . 'eval-last-sexp)
+         ("C-c n" . 'create-empty-buffer)
+         ("C-c r" . 'rename-buffer)
+         ;; indent an entire file, Xcode-related
+         ("C-c i" . 'indent-buffer)
 	 )
 
   :hook
@@ -70,7 +78,7 @@
   ;; macOS Command is a built-in Super key `s`
   (when (eq system-type 'darwin)
     (bind-key "s-Z" 'undo-redo)
-    ;; to find a project-specific file, Xcode-based
+    ;; to find a project-specific file, Xcode-related
     (bind-key "s-O" #'project-find-file)
     ;; to switch between emacs buffer
     (bind-key "s-S" #'switch-to-buffer)
@@ -144,6 +152,7 @@
  (set-face-attribute 'default nil :font "monospace-14"))))
 
 
+
 (defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
 (defun hn/save-scratch ()
   (with-current-buffer "*scratch*"
@@ -173,11 +182,6 @@
   (interactive)
   (load-file user-init-file))
 
-
-;; Buffers:
-;;; Custom functions and emacs window keybindings
-;;; =============================================
-
 ;; create new empty *untitled* buffer
 (defun create-empty-buffer () 
   "Create a new empty buffer."
@@ -185,18 +189,11 @@
   (let ((buf (generate-new-buffer "untitled")))
     (switch-to-buffer buf)))
 
-(global-set-key (kbd "C-x C-e") #'eval-buffer) ;; rebind default `eval-last-sexp` with `eval-buffer` to evaluate the whole buffer at a time
-(global-set-key (kbd "C-c C-e") 'eval-last-sexp) ;; bind `eval-last-sexp` to `ctrl-c ctrl-e` instead of default keybind
-(global-set-key (kbd "C-c n") 'create-empty-buffer)
-(global-set-key (kbd "C-c r") 'rename-buffer)
-
 ;; re-indent the entire emacs buffer
 (defun indent-buffer ()
   "Indent the entire buffer."
   (interactive)
   (indent-region (point-min) (point-max)))
-
-(global-set-key (kbd "C-c i") 'indent-buffer) ;; bind to fix the indentation as Xcode standard keybind
 
 ;;; Windows:
 ;;; Custom functions and emacs window keybindings
