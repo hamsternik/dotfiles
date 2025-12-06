@@ -13,8 +13,11 @@
   (inhibit-startup-screen t)
   (delete-selection-mode 1)
   (indent-tabs-mode nil)
-  ;;(column-number-mode t)
-  )
+  ;;(column-number-mode)
+  (display-line-numbers-type 'absolute)
+
+  :hook
+  (prog-mode . display-line-numbers-mode))
 
 (when (window-system)
   (tool-bar-mode 0)
@@ -71,7 +74,6 @@
   ;; Load theme 
   (load-theme 'modus-vivendi :no-confirm))
 
-;; (global-display-line-numbers-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;;; set up a visible bell instead of audio
