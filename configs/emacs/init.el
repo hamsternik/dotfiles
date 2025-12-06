@@ -1,7 +1,10 @@
 ;;  -*- coding: utf-8; lexical-binding: t -*- 
 
 ;;; Intro:
-;; See https://github.com/patrickt/emacs for inspiration.
+;;; See https://github.com/patrickt/emacs for inspiration.
+
+;;; Emacs Wiki:
+;;; EmascForMacOS, https://www.emacswiki.org/emacs/EmacsForMacOS
 
 ;;; Commentary:
 ;;; - C-h f custom-file to see the function decl;
@@ -107,9 +110,6 @@
  (set-face-attribute 'default nil :font "Fira Code-14")
  (set-face-attribute 'default nil :font "monospace-14"))))
 
-;; scroll Emacs like lightning (macOS)
-;;; https://github.com/jdtsmith/ultra-scroll
-;;; based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
 
 (defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
 (defun hn/save-scratch ()
@@ -140,24 +140,16 @@
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
 ;;; =======================================================
 
-;;; macOS Keybindings:
-;;; based on https://www.emacswiki.org/emacs/EmacsForMacOS%20
-(when (eq system-type 'darwin)
-  ;;  (setq mac-option-modifier 'alt)
-  ;;  (setq mac-command-modifier 'meta)
-  ;; sets fn-delete to be right-delete
-  (global-set-key [kp-delete] 'delete-char))
 
-(global-set-key [s-up] 'beginning-of-buffer)
-(global-set-key [s-down] 'end-of-buffer)
-(global-set-key (kbd "s-Z") 'undo-redo) ;; Super+Shift+z for emacs 28+ build-in `undo-redo`
+;; Super+Shift+z for emacs 28+ build-in `undo-redo`
+(bind-key "C-x r" 'undo-redo)
+(bind-key "s-Z" 'undo-redo)
 
 (defun delete-to-start-of-line ()
   "Delete all content from the cursor to the start of the line."
   (interactive)
   (delete-region (line-beginning-position) (point)))
-
-(global-set-key (kbd "s-<backspace>") 'delete-to-start-of-line)
+(bind-key "s-<backspace>" 'delete-to-start-of-line)
 
 ;;; reload emacs config
 (defun reload-emacs-config ()
@@ -483,3 +475,7 @@ Operate on selected region or whole buffer."
 (use-package cmake-mode
   :ensure t
   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
+
+;; scroll Emacs like lightning (macOS)
+;;; https://github.com/jdtsmith/ultra-scroll
+;;; based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
