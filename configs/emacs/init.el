@@ -134,7 +134,12 @@
     (bind-key "s-O" #'project-find-file)
     ;; to switch between emacs buffer
     (bind-key "s-S" #'switch-to-buffer)
-    (bind-key "s-/" 'comment-line))
+    (bind-key "s-w" 'close-current-window)
+    (bind-key "s-/" 'comment-line)
+    (bind-key "s-\\" #'split-window-right)
+    (bind-key "s-|" #'split-window-below)
+    (bind-key "s-{" 'hamsternik/windmove-left-or-up)
+    (bind-key "s-}" 'hamsternik/windmove-right-or-down))
 
   ;; macOS re-map all control keys
   (when (eq system-type 'darwin)
@@ -215,20 +220,6 @@
   (load-theme 'modus-vivendi :no-confirm))
 
 
-
-
-
-
-(global-set-key (kbd "s-\\") #'split-window-right) ;; to split the current window vertically, putting new window to the right
-(global-set-key (kbd "s-|") #'split-window-below) ;; to split the current window horizontally, putting new window down below
-
-;; (windmove-default-keybindings) ;; to enable Shift+Arrow movement
-(global-set-key (kbd "s-}") 'hamsternik/windmove-right-or-down) ;; to switch window to the *right* or *down* splitted one
-(global-set-key (kbd "s-{") 'hamsternik/windmove-left-or-up) ;; to switch window to the *left* or *up* splitted one
-
-(global-set-key (kbd "s-w") 'close-current-window)
-
-
 ;;; DIRED
 ;; the directory editor
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
@@ -259,6 +250,7 @@
   ;; Modren shell-mode ANSI color support (Emacs 28+)
   (shell-mode . hn/setup-shell-ansi-color)
   (compilation-filter . hn/colorize-compilation-buffer)
+  
   :config
   (defun hn/setup-shell-ansi-color ()
     "Setup modern ANSI color handling for shell-mode."
