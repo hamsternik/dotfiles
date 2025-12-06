@@ -14,28 +14,38 @@
     (tool-bar-mode 0)
     (scroll-bar-mode 0)
     (menu-bar-mode 0))
+  ;; restore the last emacs session, including *scratch* buffer latest changes
+  (desktop-save-mode 1)
+  ;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
+  (global-auto-revert-mode 1)
+  ;; [!NOTE]: This code does not work for the *scratch* buffer specifically. Need to store *scratch* buffer content manually to a file.
+  ;;(setq desktop-buffers-not-to-save (delete "\\*scratch\\*" desktop-buffers-not-to-save))
   (inhibit-startup-screen t)
-  (indent-tabs-mode nil) ;; disable the use of tabs for indentation (spaces instead)
-  (tab-always-indent 'complete) ;; make the TAB key complete text instead of just indenting
+  ;; disable the use of tabs for indentation (spaces instead)
+  (indent-tabs-mode nil)
+  ;; make the TAB key complete text instead of just indenting
+  (tab-always-indent 'complete)
   (tab-width 4)
   (display-line-numbers-type 'absolute)
   (delete-selection-mode 1)
   (truncate-lines t)
   (use-short-answers t)
+  (visible-bell t)
 
   :hook
-  (prog-mode . display-line-numbers-mode))
+  (prog-mode . display-line-numbers-mode)
 
+  :config
+  (when (eq system-type 'darwin)
+    ;; make Commnad key act as Meta
+    (setq mac-command-modifier 'meta)
+    ;; keep Option/Alt as Meta
+    (setq mac-option-modifier 'meta)
+    ;; make Control stay as Control
+    (setq mac-control-modifier 'control)
+    ;; optional: make right Command act as Super instead
+    (setq mac-right-command-modifier 'super)))
 
-(when (eq system-type 'darwin)
-  ;; make Commnad key act as Meta
-  (setq mac-command-modifier 'meta)
-  ;; keep Option/Alt as Meta
-  (setq mac-option-modifier 'meta)
-  ;; make Control stay as Control
-  (setq mac-control-modifier 'control)
-  ;; optional: make right Command act as Super instead
-  (setq mac-right-command-modifier 'super))
 
 ;;; package initialization first
 (require 'package)
@@ -76,17 +86,6 @@
 
   ;; Load theme 
   (load-theme 'modus-vivendi :no-confirm))
-
-;;; set up a visible bell instead of audio
-;;; FIXME: to turn on **only** on non-macOS. macOS manages visiable bell w/ the weird huge yellow triangle in the middle of the screen.
-(setq visible-bell t)
-
-;; restore the last emacs session, including the buffer for the file, *scratch* buffer, etc
-(desktop-save-mode 1)
-;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
-(global-auto-revert-mode 1)
-;; [!NOTE]: This code does not work for the *scratch* buffer specifically. Need to store *scratch* buffer content manually to a file.
-;;(setq desktop-buffers-not-to-save (delete "\\*scratch\\*" desktop-buffers-not-to-save))
 
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
 ;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
