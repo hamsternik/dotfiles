@@ -16,7 +16,8 @@
     (menu-bar-mode 0))
   (inhibit-startup-screen t)
   (indent-tabs-mode nil) ;; disable the use of tabs for indentation (spaces instead)
-  ;;(column-number-mode)
+  (tab-always-indent 'complete) ;; make the TAB key complete text instead of just indenting
+  (tab-width 4)
   (display-line-numbers-type 'absolute)
   (delete-selection-mode 1)
 
