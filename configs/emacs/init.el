@@ -20,6 +20,8 @@
   (tab-width 4)
   (display-line-numbers-type 'absolute)
   (delete-selection-mode 1)
+  (truncate-lines t)
+  (use-short-answers t)
 
   :hook
   (prog-mode . display-line-numbers-mode))
@@ -74,8 +76,6 @@
 
   ;; Load theme 
   (load-theme 'modus-vivendi :no-confirm))
-
-(fset 'yes-or-no-p 'y-or-n-p)
 
 ;;; set up a visible bell instead of audio
 ;;; FIXME: to turn on **only** on non-macOS. macOS manages visiable bell w/ the weird huge yellow triangle in the middle of the screen.
