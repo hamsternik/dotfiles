@@ -52,10 +52,27 @@
   ;; enable ido-mode successor, available in emacs 28+
   (fido-vertical-mode 1)
 
+  :bind (("C-c C-r" . 'reload-emacs-config)
+         ("C-x r" . undo-redo)
+         ("C-c o" . buffer-menu)
+         ;; M-! keybind alternative
+         ("C-;" . shell-command)
+         ("C-c C-/" . 'comment-or-uncomment-region)
+	 )
+
   :hook
   (prog-mode . display-line-numbers-mode)
 
   :config
+  ;; macOS Command is a built-in Super key `s`
+  (when (eq system-type 'darwin)
+    (bind-key "s-Z" 'undo-redo)
+    ;; to find a project-specific file, Xcode-based
+    (bind-key "s-O" #'project-find-file)
+    ;; to switch between emacs buffer
+    (bind-key "s-S" #'switch-to-buffer)
+    (bind-key "s-/" 'comment-line))
+
   (when (eq system-type 'darwin)
     ;; make Commnad key act as Meta
     (setq mac-command-modifier 'meta)
@@ -66,6 +83,8 @@
     ;; optional: make right Command act as Super instead
     (setq mac-right-command-modifier 'super)))
 
+;;; emacs *scratch* buffer
+(global-set-key (kbd "C-c s SPC") (lambda () (interactive) (switch-to-buffer "*scratch*")))
 
 ;; set custom filepath to keep all nongnu/melpa plugins:
 ;; macOS/Darwin: ~/.config/emacs/custom.init.el
@@ -139,14 +158,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "auto-save/" user-emacs-directory) t)))
 
-;; Keybindings:
-;;; emacs build-in Super key [`s`] equals Command in macOS.
-;;; =======================================================
-
-;; Super+Shift+z for emacs 28+ build-in `undo-redo`
-(bind-key "C-x r" 'undo-redo)
-(bind-key "s-Z" 'undo-redo)
-
 (defun delete-to-start-of-line ()
   "Delete all content from the cursor to the start of the line."
   (interactive)
@@ -159,31 +170,14 @@
   (interactive)
   (load-file user-init-file))
 
-(global-set-key (kbd "C-c C-r") 'reload-emacs-config) ;; C-c C-r to reload
-
-;;; project / file navigation
-(global-set-key (kbd "s-O") #'project-find-file) ;; to search a project-specific file like in Xcode
-(global-set-key (kbd "s-S") #'switch-to-buffer) ;; to switch between emacs buffers
-
-;;; emacs *scratch* buffer
-(global-set-key (kbd "C-c s SPC") (lambda () (interactive) (switch-to-buffer "*scratch*")))
-
-;;; comment line or region
-(global-set-key (kbd "s-/") 'comment-line)
-(global-set-key (kbd "C-c C-/") 'comment-or-uncomment-region)
 
 (add-hook 'text-mode-hook 'outline-minor-mode)
 (add-hook 'fundamental-mode-hook 'outline-minor-mode)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
-;; M-! key bind alternatives
-(bind-key "C-;" 'shell-command)
-
 ;; Buffers:
 ;;; Custom functions and emacs window keybindings
 ;;; =============================================
-
-(global-set-key (kbd "C-c o") 'buffer-menu)
 
 ;; create new empty *untitled* buffer
 (defun create-empty-buffer () 
