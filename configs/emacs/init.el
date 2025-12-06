@@ -7,6 +7,15 @@
 ;;; - C-h f custom-file to see the function decl;
 ;;; - C-h v custom-file to see the variable decl and example of custom-file usage.
 
+(use-package emacs
+  :ensure nil
+  :custom
+  (inhibit-startup-screen t)
+  (delete-selection-mode 1)
+  (indent-tabs-mode nil)
+  ;;(column-number-mode t)
+  )
+
 (when (window-system)
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
@@ -64,9 +73,6 @@
 
 ;; (global-display-line-numbers-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
-
-(setq inhibit-startup-screen t) ;; to disable emacs splash screen
-;; (setq initial-scratch-message nil) ;; to remove initial message in *scratch*
 
 ;;; set up a visible bell instead of audio
 ;;; FIXME: to turn on **only** on non-macOS. macOS manages visiable bell w/ the weird huge yellow triangle in the middle of the screen.
