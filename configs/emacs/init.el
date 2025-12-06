@@ -75,6 +75,58 @@
   (prog-mode . hs-minor-mode)
 
   :config
+  (defun delete-to-start-of-line ()
+    "Delete all content from the cursor to the start of the line."
+    (interactive)
+    (delete-region (line-beginning-position) (point)))
+  (bind-key "s-<backspace>" 'delete-to-start-of-line)
+
+  ;; reload emacs config
+  (defun reload-emacs-config ()
+    "Reload emacs.el Emacs configuration file"
+    (interactive)
+    (load-file user-init-file))
+
+  ;; create new empty *untitled* buffer
+  (defun create-empty-buffer () 
+    "Create a new empty buffer."
+    (interactive)
+    (let ((buf (generate-new-buffer "untitled")))
+      (switch-to-buffer buf)))
+
+  ;; re-indent the entire emacs buffer
+  (defun indent-buffer ()
+    "Indent the entire buffer."
+    (interactive)
+    (indent-region (point-min) (point-max)))
+
+  ;; close the 2nd (split) window in the buffer
+  (defun close-current-window ()
+    "Close the currently active split window."
+    (interactive)
+    (if (not (one-window-p))
+        (delete-window)
+      (message "Cannot close the only window")))
+
+  ;; try to move right, fallback to down
+  (defun hamsternik/windmove-right-or-down ()
+    (interactive)
+    (unless (ignore-errors (windmove-right)) (ignore-errors (windmove-down))))
+
+  (defun hamsternik/windmove-left-or-up ()
+    (interactive)
+    (unless (ignore-errors (windmove-left)) (ignore-errors (windmove-up))))
+
+  (defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
+  (defun hn/save-scratch ()
+    (with-current-buffer "*scratch*"
+      (write-region (point-min) (point-max) hn/scratch-file)))
+  (defun hn/restore-scratch ()
+    (when (file-exists-p hn/scratch-file)
+      (with-current-buffer "*scratch*"
+        (delete-region (point-min) (point-max))
+        (insert-file-contents hn/scratch-file))))
+  
   ;; macOS Command is a built-in Super key `s`
   (when (eq system-type 'darwin)
     (bind-key "s-Z" 'undo-redo)
@@ -84,6 +136,7 @@
     (bind-key "s-S" #'switch-to-buffer)
     (bind-key "s-/" 'comment-line))
 
+  ;; macOS re-map all control keys
   (when (eq system-type 'darwin)
     ;; make Commnad key act as Meta
     (setq mac-command-modifier 'meta)
@@ -97,6 +150,36 @@
 ;;; emacs *scratch* buffer
 (global-set-key (kbd "C-c s SPC") (lambda () (interactive) (switch-to-buffer "*scratch*")))
 
+(add-hook 'kill-emacs-hook 'hn/save-scratch)
+(add-hook 'after-init-hook 'hn/restore-scratch)
+
+;; keeping auto-save files enabled but moving files to a central dir:
+(make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
+(setq auto-save-file-name-transforms
+      `((".*" ,(expand-file-name "auto-save/" user-emacs-directory) t)))
+
+;; Font platform-specific platform configuration
+(cond
+ ;; macOS: use preferred fonts: Fira Code, Iosevka, Roboto Mono
+ ((eq system-type 'darwin)
+  (set-face-attribute 'default nil :font "Fira Code-14")
+  (set-fontset-font t 'latin "Iosevka-14" nil 'append)
+  (set-fontset-font t 'latin "Roboto Mono-14" nil 'append))
+;; otherwise, try Fira Code, fallback to monospace
+(t
+ (if (find-font (font-spec :name "Fira Code"))
+ (set-face-attribute 'default nil :font "Fira Code-14")
+ (set-face-attribute 'default nil :font "monospace-14"))))
+
+
+
+;;; FIXME: Fira Code font does not work properly in Standalone Emacs
+;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
+;;(set-face-attribute 'default nil
+;;		    :font "Fira Code-14")
+;;(set-fontset-font t 'latin "Iosevka-14" nil 'append)
+;;(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
+
 ;; set custom filepath to keep all nongnu/melpa plugins:
 ;; macOS/Darwin: ~/.config/emacs/custom.init.el
 ;; Linux/WSL: ~/.emacs.d/custom.init.el
@@ -109,7 +192,7 @@
 ;; (load-theme 'gruber-darker' t)
 
 ;;; Modus Themes
-;;; https://github.com/protesilaos/modus-themes
+;; https://github.com/protesilaos/modus-themes
 (use-package modus-themes
   :ensure nil
   :demand t
@@ -131,110 +214,24 @@
   ;; Load theme 
   (load-theme 'modus-vivendi :no-confirm))
 
-;;; FIXME: Fira Code font does not work properly in Standalone Emacs
-;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
-;;(set-face-attribute 'default nil
-;;		    :font "Fira Code-14")
-;;(set-fontset-font t 'latin "Iosevka-14" nil 'append)
-;;(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
-
-;; Font platform-specific platform configuration
-(cond
- ;; macOS: use preferred fonts: Fira Code, Iosevka, Roboto Mono
- ((eq system-type 'darwin)
-  (set-face-attribute 'default nil :font "Fira Code-14")
-  (set-fontset-font t 'latin "Iosevka-14" nil 'append)
-  (set-fontset-font t 'latin "Roboto Mono-14" nil 'append))
-;; otherwise, try Fira Code, fallback to monospace
-(t
- (if (find-font (font-spec :name "Fira Code"))
- (set-face-attribute 'default nil :font "Fira Code-14")
- (set-face-attribute 'default nil :font "monospace-14"))))
 
 
 
-(defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
-(defun hn/save-scratch ()
-  (with-current-buffer "*scratch*"
-    (write-region (point-min) (point-max) hn/scratch-file)))
-(defun hn/restore-scratch ()
-  (when (file-exists-p hn/scratch-file)
-    (with-current-buffer "*scratch*"
-      (delete-region (point-min) (point-max))
-      (insert-file-contents hn/scratch-file))))
-(add-hook 'kill-emacs-hook 'hn/save-scratch)
-(add-hook 'after-init-hook 'hn/restore-scratch)
 
-;; keeping auto-save files enabled but moving files to a central dir:
-(make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
-(setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "auto-save/" user-emacs-directory) t)))
-
-(defun delete-to-start-of-line ()
-  "Delete all content from the cursor to the start of the line."
-  (interactive)
-  (delete-region (line-beginning-position) (point)))
-(bind-key "s-<backspace>" 'delete-to-start-of-line)
-
-;;; reload emacs config
-(defun reload-emacs-config ()
-  "Reload emacs.el Emacs configuration file"
-  (interactive)
-  (load-file user-init-file))
-
-;; create new empty *untitled* buffer
-(defun create-empty-buffer () 
-  "Create a new empty buffer."
-  (interactive)
-  (let ((buf (generate-new-buffer "untitled")))
-    (switch-to-buffer buf)))
-
-;; re-indent the entire emacs buffer
-(defun indent-buffer ()
-  "Indent the entire buffer."
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
-;;; Windows:
-;;; Custom functions and emacs window keybindings
-;;; =============================================
 
 (global-set-key (kbd "s-\\") #'split-window-right) ;; to split the current window vertically, putting new window to the right
 (global-set-key (kbd "s-|") #'split-window-below) ;; to split the current window horizontally, putting new window down below
-
-;; try to move right, fallback to down
-(defun hamsternik/windmove-right-or-down ()
-  (interactive)
-  (unless (ignore-errors (windmove-right)) (ignore-errors (windmove-down))))
-
-(defun hamsternik/windmove-left-or-up ()
-  (interactive)
-  (unless (ignore-errors (windmove-left)) (ignore-errors (windmove-up))))
 
 ;; (windmove-default-keybindings) ;; to enable Shift+Arrow movement
 (global-set-key (kbd "s-}") 'hamsternik/windmove-right-or-down) ;; to switch window to the *right* or *down* splitted one
 (global-set-key (kbd "s-{") 'hamsternik/windmove-left-or-up) ;; to switch window to the *left* or *up* splitted one
 
-;; close the 2nd (split) window in the buffer
-(defun close-current-window ()
-  "Close the currently active split window."
-  (interactive)
-  (if (not (one-window-p))
-      (delete-window)
-    (message "Cannot close the only window")))
-
 (global-set-key (kbd "s-w") 'close-current-window)
 
 
-;;; Packages:
-;;; =========
-
-;;;; Built-in packages:
-;;;; ==================
-
-;;; Dired
-;;;; the directory editor
-;;;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
+;;; DIRED
+;; the directory editor
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
 (use-package dired
   :ensure nil ; built-in, no need to install
   :bind (:map dired-mode-map) (";" . shell-command)
