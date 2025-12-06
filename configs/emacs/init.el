@@ -61,7 +61,10 @@
 	 )
 
   :hook
+  (fundamental-mode . outline-minor-mode)
+  (text-mode . outline-minor-mode)
   (prog-mode . display-line-numbers-mode)
+  (prog-mode . hs-minor-mode)
 
   :config
   ;; macOS Command is a built-in Super key `s`
@@ -170,10 +173,6 @@
   (interactive)
   (load-file user-init-file))
 
-
-(add-hook 'text-mode-hook 'outline-minor-mode)
-(add-hook 'fundamental-mode-hook 'outline-minor-mode)
-(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 ;; Buffers:
 ;;; Custom functions and emacs window keybindings
