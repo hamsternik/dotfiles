@@ -126,6 +126,15 @@
       (with-current-buffer "*scratch*"
         (delete-region (point-min) (point-max))
         (insert-file-contents hn/scratch-file))))
+
+  ;; Set custom filepath to keep all nongnu/melpa plugins.
+  ;; macOS/Darwin: ~/.config/emacs/custom.init.el
+  ;; Linux/WSL: ~/.emacs.d/custom.init.el
+  (setq custom-file
+        (if (eq system-type 'darwin)
+            "~/.config/emacs/custom.init.el"
+          "~/.emacs.d/custom.init.el"))
+  (load custom-file)
   
   ;; macOS Command is a built-in Super key `s`
   (when (eq system-type 'darwin)
@@ -150,13 +159,11 @@
     ;; make Control stay as Control
     (setq mac-control-modifier 'control)
     ;; optional: make right Command act as Super instead
-    (setq mac-right-command-modifier 'super)))
+    (setq mac-right-command-modifier 'super))
 
-;;; emacs *scratch* buffer
-(global-set-key (kbd "C-c s SPC") (lambda () (interactive) (switch-to-buffer "*scratch*")))
-
-(add-hook 'kill-emacs-hook 'hn/save-scratch)
-(add-hook 'after-init-hook 'hn/restore-scratch)
+  (add-hook 'kill-emacs-hook 'hn/save-scratch)
+  (add-hook 'after-init-hook 'hn/restore-scratch)
+)
 
 ;; keeping auto-save files enabled but moving files to a central dir:
 (make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
@@ -176,23 +183,12 @@
  (set-face-attribute 'default nil :font "Fira Code-14")
  (set-face-attribute 'default nil :font "monospace-14"))))
 
-
-
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
 ;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
 ;;(set-face-attribute 'default nil
 ;;		    :font "Fira Code-14")
 ;;(set-fontset-font t 'latin "Iosevka-14" nil 'append)
 ;;(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
-
-;; set custom filepath to keep all nongnu/melpa plugins:
-;; macOS/Darwin: ~/.config/emacs/custom.init.el
-;; Linux/WSL: ~/.emacs.d/custom.init.el
-(setq custom-file
-      (if (eq system-type 'darwin)
-          "~/.config/emacs/custom.init.el"
-        "~/.emacs.d/custom.init.el"))
-(load custom-file)
 
 ;; (load-theme 'gruber-darker' t)
 
@@ -325,14 +321,6 @@ Operate on selected region or whole buffer."
 
 ;;;; Installed packages:
 ;;;; ===================
-
-
-;; set a reasonable default PATH
-;;; !WARNING: config execution takes 0.745ms
-;;(use-package exec-path-from-shell
-;;  :ensure t
-;;  :config
-;;  (exec-path-from-shell-initialize))
 
 ;;;; https://github.com/dbordak/telephone-line
 (use-package telephone-line
