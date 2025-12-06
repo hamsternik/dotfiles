@@ -10,6 +10,15 @@
 ;;; - C-h f custom-file to see the function decl;
 ;;; - C-h v custom-file to see the variable decl and example of custom-file usage.
 
+;; Package initialization first. In Emacs, a package is a collection of
+;; Elisp code that extends the editor's functionality. Import this package
+;; to add package archives. Then, add MELPA and nonGNU to the list of
+;; package archives. By default, Emacs comes with ELPA configured.
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+(package-initialize)
+
 (use-package emacs
   :ensure nil
   :custom
@@ -49,12 +58,6 @@
     ;; optional: make right Command act as Super instead
     (setq mac-right-command-modifier 'super)))
 
-
-;;; package initialization first
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
-(package-initialize)
 
 ;; set custom filepath to keep all nongnu/melpa plugins:
 ;; macOS/Darwin: ~/.config/emacs/custom.init.el
@@ -139,7 +142,6 @@
 ;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
 ;;; =======================================================
-
 
 ;; Super+Shift+z for emacs 28+ build-in `undo-redo`
 (bind-key "C-x r" 'undo-redo)
