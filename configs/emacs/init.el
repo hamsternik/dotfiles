@@ -2,6 +2,7 @@
 
 ;;; Intro:
 ;;; See https://github.com/patrickt/emacs for inspiration.
+;;; See https://github.com/LionyxML/emacs-kick to build upon kickstarter config.
 
 ;;; Emacs Wiki:
 ;;; EmascForMacOS, https://www.emacswiki.org/emacs/EmacsForMacOS
@@ -26,6 +27,8 @@
     (tool-bar-mode 0)
     (scroll-bar-mode 0)
     (menu-bar-mode 0))
+  ;; disable automatic saving on buffers. 
+  ;;(auto-save-default nil)
   ;; restore the last emacs session, including *scratch* buffer latest changes
   (desktop-save-mode 1)
   ;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
@@ -43,6 +46,11 @@
   (truncate-lines t)
   (use-short-answers t)
   (visible-bell t)
+  
+  ;; ICOMPLETE
+  ;; Interactively Do Things (ido-mode)
+  ;; enable ido-mode successor, available in emacs 28+
+  (fido-vertical-mode 1)
 
   :hook
   (prog-mode . display-line-numbers-mode)
@@ -126,18 +134,10 @@
 (add-hook 'kill-emacs-hook 'hn/save-scratch)
 (add-hook 'after-init-hook 'hn/restore-scratch)
 
-;; disable auto-save files in emacs
-;; (setq auto-save-default nil)
-
 ;; keeping auto-save files enabled but moving files to a central dir:
 (make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "auto-save/" user-emacs-directory) t)))
-
-;;; IDO:
-;;; Interactively Do Things (ido-mode)
-;;; turning on `fido-vertical-mode` (emacs 28+) instead of old-fashion `ido-mode` 
-(fido-vertical-mode 1)
 
 ;; Keybindings:
 ;;; emacs build-in Super key [`s`] equals Command in macOS.
