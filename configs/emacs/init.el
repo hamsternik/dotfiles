@@ -7,6 +7,9 @@
 ;;; Emacs Wiki:
 ;;; EmascForMacOS, https://www.emacswiki.org/emacs/EmacsForMacOS
 
+;;; Magit: Essential Settings
+;;; See https://docs.magit.vc/magit/Essential-Settings.html
+
 ;;; Commentary:
 ;;; - C-h f custom-file to see the function decl;
 ;;; - C-h v custom-file to see the variable decl and example of custom-file usage.
@@ -170,6 +173,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "auto-save/" user-emacs-directory) t)))
 
+;;; EMACS FACE FONT
 ;; Font platform-specific platform configuration
 (cond
  ;; macOS: use preferred fonts: Fira Code, Iosevka, Roboto Mono
@@ -190,9 +194,10 @@
 ;;(set-fontset-font t 'latin "Iosevka-14" nil 'append)
 ;;(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
 
+;;; EMACS THEME
 ;; (load-theme 'gruber-darker' t)
 
-;;; Modus Themes
+;;; MODUS THEMES
 ;; https://github.com/protesilaos/modus-themes
 (use-package modus-themes
   :ensure nil
@@ -215,6 +220,16 @@
   ;; Load theme 
   (load-theme 'modus-vivendi :no-confirm))
 
+;; ORG-MODE
+;; Org mode is a powerful system for organizing and managing your notes,
+;; tasks, and documents in plain text. It offers features like task
+;; management, outlining, scheduling, and much mroe, making it a versatile
+;; tool for productivity. The configuration below simply deferes loading
+;; Org-mode until it is explicitly needed, which can help speed up Emacs
+;; startup time.
+(use-package org
+  :ensure nil
+  :defer t)
 
 ;;; DIRED
 ;; the directory editor
@@ -232,14 +247,14 @@
 ;; auto-refresh dired buffers when files change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
-;;; Project.el
+;;; PROJECT
 (use-package project
   :ensure nil)
 
-;;; ansi-color
-;;;; enable ANSI color support in compilation buffers
-;;;; based on https://github.com/anschwa/emacs.d?tab=readme-ov-file#ansi-color-codes
-;;;; FIXME: broken ansi symbols in standard fish greeting message when run `C-x p s` shell
+;;; ANSI COLOR
+;; enable ANSI color support in compilation buffers
+;; based on https://github.com/anschwa/emacs.d?tab=readme-ov-file#ansi-color-codes
+;; FIXME: broken ansi symbols in standard fish greeting message when run `C-x p s` shell
 (use-package ansi-color
   :ensure nil  ;; built-in package
   :hook
@@ -273,7 +288,171 @@ Operate on selected region or whole buffer."
       (ansi-color-apply-on-region compilation-filter-start (point))))  
   )
 
-;;; LSP mode
+;;; ELDOC
+;; Eldoc provides helpful inline documentation for functions and variables
+;; in the minibuffer, enhancing the development experience. It can be
+;; particulary useful in programming modes, as it helps you to understand
+;; the context of functions as you type. The following line enables Eldoc
+;; globally for all files.
+(use-package eldoc
+  :ensure nil
+  :config
+  ;; automatically fetch doc help
+  (setq eldoc-idle-delay 0.1)
+  ;; use the "K" floating help instead
+  (setq eldoc-echo-area-use-multiline-p nil)
+  ;; FIXME: set to `t` if you want docs on the echo area
+  (setq eldoc-echo-area-display-truncation-message nil)
+  :init
+  (global-eldoc-mode))
+
+;;; FLYSPELL
+(use-package flyspell
+  :ensure nil
+  :config
+  (setq ispell-program-name "aspell"))
+
+;; FLYMAKE
+;; Flymake is an on-the-fly syntax checking extension that provides
+;; real-time feedback about erros and warnings in your code as you write.
+;; The configuration below activates Flymake mode in programming buffers.
+(use-package flymake
+  :ensure nil
+  :defer t
+  :hook (prog-mode . flymake-mode)
+  :custom
+  (flymake-margin-indicators-string
+   '((error "!»" compilation-error)
+     (warning "»" compilation-warning)
+     (note "»" compilation-info))))
+
+
+;;; NONGNU PACKAGES
+;;; MELPA PACKAGES
+
+;;; MODE LINE
+;; https://github.com/dbordak/telephone-line
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
+;;; VERTICO
+;; https://github.com/minad/vertico
+;; Vertico enhances the completion experience in Emacs by providing a
+;; vertical selection interface for both buffer and minibuffers completions.
+;; Unlike traditional minibuffer completion, which displays candidates
+;; in a horizontal format, Vertico presents candidates in a vertical list,
+;; macking it easier to browse and select from multiple options.
+(use-package vertico
+  :ensure t
+  :hook
+  ;; enable vertico after Emacs has initialized
+  (after-init . vertico-mode))
+
+;;; https://github.com/minad/corfu
+(use-package corfu
+  :ensure t)
+
+;; TBD to watch about `orderless` package by @prot
+;; https://youtu.be/d3aaxOqwHhI?t=1929
+
+;; @prot sample configuration including `orderless` package
+;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
+
+;;; https://github.com/oantolin/orderless
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+;;; MARGINALIA
+;; https://github.com/minad/marginalia
+;;(use-package marginalia
+;;  :ensure t
+;;  :init
+;;  (marginalia-mode))
+
+
+;;; ULTRA SCROLL
+;; https://github.com/jdtsmith/ultra-scroll
+;; Scroll Emacs like lightning (macOS).
+;; Based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
+
+;;; DENOTE
+;; https://github.com/protesilaos/denote
+(use-package denote
+  :ensure t)
+
+;;; TEX and LATEX
+;; !NOTE: to automatically compile and update PDF preview use:
+;; https://www.reddit.com/r/emacs/comments/k7sx2n/latexpreviewpane_and_latexmk/
+(use-package tex
+  :ensure auctex
+  :custom
+  (font-latex-script-display nil)
+  (font-latex-fontify-script nil)
+  (font-latex-fontify-sectioning 'color)
+  (TeX-auto-save t)
+  (Tex-parse-self t)
+  (TeX-PDF-mode t) ; PDF mode by default
+  :hook
+  (LaTeX-mode . auto-fill-mode)
+  (LaTeX-mode . flyspell-mode)
+  (LaTeX-mode . LaTeX-math-mode)  ; easy math input
+  (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
+  (LaTeX-mode . (lambda () (setq show-trailing-whitespace t))))
+
+;;; MARKDOWN
+;; https://github.com/jrblevin/markdown-mode
+;; TBD to verify whether `aspell` is installed
+;; macOS: brew install aspell
+;; Win/WSL: sudo apt install aspell aspell-en
+(use-package markdown-mode
+  :ensure t
+  ;;  :defer t
+  :mode
+  ("README\\.md\\'" . gfm-mode)
+  :hook
+  (markdown-mode . auto-fill-mode)
+  :config
+  (when (executable-find "aspell")
+    (add-hook 'markdown-mode-hook #'flyspell-mode))
+  (when (executable-find "multimarkdown")
+    (setq markdown-command "multimarkdown")))
+
+;;; KOTLIN MODE
+;; https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
+(use-package kotlin-mode
+  :ensure t)
+
+;;; SWIFT MODE
+;; https://github.com/swift-emacs/swift-mode
+(use-package swift-mode
+  :ensure t
+  :mode "\\.swift\\'")
+
+;;; JSON MODe
+;; https://elpa.gnu.org/packages/json-mode.html
+(use-package json-mode
+  :ensure t)
+
+;;; PRISM
+;; https://github.com/alphapapa/prism.el
+(use-package prism
+  :ensure t
+  :defer t
+  :hook
+  ;; activate prism for C-based major modes
+  ((json-mode) . prism-mode)
+  ((python-mode python-ts-mode haskell-mode) . prism-whitespace-mode))
+
+;;; CMAKE MODE
+(use-package cmake-mode
+  :ensure t
+  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
 
 ;; swiftlang/sourcekit-lsp: language protocol impl. for Swift and C-based lang.
 ;; https://github.com/joaotavora/eglot/issues/825#issuecomment-1024267560
@@ -294,9 +473,9 @@ Operate on selected region or whole buffer."
 ;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
 ;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
 
-;;;; eglot
-;;; https://github.com/joaotavora/eglot
-;;; a client for LSP servers; built-in since Emacs 29
+;;; EGLOT
+;; https://github.com/joaotavora/eglot
+;; A client for LSP servers; built-in since Emacs 29.
 (use-package eglot
   :ensure nil
   ;; :defer t
@@ -313,112 +492,6 @@ Operate on selected region or whole buffer."
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
-
-(use-package flyspell
-  :ensure t
-  :config
-  (setq ispell-program-name "aspell"))
-
-;;;; Installed packages:
-;;;; ===================
-
-;;;; https://github.com/dbordak/telephone-line
-(use-package telephone-line
-  :ensure t
-  :config
-  (telephone-line-mode 1))
-
-;;; magit.el
-;;;; https://github.com/magit/magit
-(use-package magit
-  :ensure t)
-
-;;;; TBD to read about Essential Settings
-;;;;; https://docs.magit.vc/magit/Essential-Settings.html
-
-
-;;; https://github.com/jrblevin/markdown-mode
-;;;; TBD to verify whether `aspell` is installed
-;;;; macOS: brew install aspell
-;;;; Win/WSL: sudo apt install aspell aspell-en
-(use-package markdown-mode
-  :ensure t
-  ;;  :defer t
-  :mode
-  ("README\\.md\\'" . gfm-mode)
-  :hook
-  (markdown-mode . auto-fill-mode)
-  :config
-  (when (executable-find "aspell")
-    (add-hook 'markdown-mode-hook #'flyspell-mode))
-  (when (executable-find "multimarkdown")
-    (setq markdown-command "multimarkdown")))
-
-;;; https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode
-(use-package kotlin-mode
-  :ensure t)
-
-;;; https://github.com/swift-emacs/swift-mode
-(use-package swift-mode
-  :ensure t
-  :mode "\\.swift\\'")
-
-;;;; LaTeX/AucTeX
-;;;; !NOTE: to automatically compile and update PDF preview use:
-;;;; https://www.reddit.com/r/emacs/comments/k7sx2n/latexpreviewpane_and_latexmk/
-(use-package tex
-  :ensure auctex
-  :custom
-  (font-latex-script-display nil)
-  (font-latex-fontify-script nil)
-  (font-latex-fontify-sectioning 'color)
-  (TeX-auto-save t)
-  (Tex-parse-self t)
-  (TeX-PDF-mode t) ; PDF mode by default
-  :hook
-  (LaTeX-mode . auto-fill-mode)
-  (LaTeX-mode . flyspell-mode)
-  (LaTeX-mode . LaTeX-math-mode)  ; easy math input
-  (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
-  (LaTeX-mode . (lambda () (setq show-trailing-whitespace t))))
-
-;;; https://github.com/minad/vertico
-(use-package vertico
-  :ensure t)
-
-;;; https://github.com/minad/corfu
-(use-package corfu
-  :ensure t)
-
-;; TBD to watch about `orderless` package by @prot
-;; https://youtu.be/d3aaxOqwHhI?t=1929
-
-;; @prot sample configuration including `orderless` package
-;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
-
-;;; https://github.com/oantolin/orderless
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles partial-completion)))))
-
-;;; https://github.com/protesilaos/denote
-(use-package denote
-  :ensure t)
-
-;;; https://github.com/minad/marginalia
-;;(use-package marginalia
-;;  :ensure t
-;;  :init
-;;  (marginalia-mode))
-
-(use-package modus-themes
-  :ensure t)
-; :demand t
-; :init
-; (modus-themes-include-derivatives-mode 1))
   
 ;; TREE-SITTER (ts)
 ;;; GitHub: https://github.com/tree-sitter/tree-sitter
@@ -426,25 +499,5 @@ Operate on selected region or whole buffer."
 ;;; TBD to read about how to get started w/ Tree-Sitter
 ;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 
-;;; json-mode.el
-;;;; https://elpa.gnu.org/packages/json-mode.html
-(use-package json-mode
-  :ensure t)
-
-;;; prism.el
-;;;; https://github.com/alphapapa/prism.el
-(use-package prism
-  :ensure t
-  :defer t
-  :hook
-  ;; activate prism for C-based major modes
-  ((json-mode) . prism-mode)
-  ((python-mode python-ts-mode haskell-mode) . prism-whitespace-mode))
-
-(use-package cmake-mode
-  :ensure t
-  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
-
-;; scroll Emacs like lightning (macOS)
-;;; https://github.com/jdtsmith/ultra-scroll
-;;; based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
+(provide 'init)
+;;; init.el ends here
