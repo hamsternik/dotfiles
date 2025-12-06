@@ -10,19 +10,19 @@
 (use-package emacs
   :ensure nil
   :custom
+  (when (window-system)
+    (tool-bar-mode 0)
+    (scroll-bar-mode 0)
+    (menu-bar-mode 0))
   (inhibit-startup-screen t)
-  (delete-selection-mode 1)
-  (indent-tabs-mode nil)
+  (indent-tabs-mode nil) ;; disable the use of tabs for indentation (spaces instead)
   ;;(column-number-mode)
   (display-line-numbers-type 'absolute)
+  (delete-selection-mode 1)
 
   :hook
   (prog-mode . display-line-numbers-mode))
 
-(when (window-system)
-  (tool-bar-mode 0)
-  (scroll-bar-mode 0)
-  (menu-bar-mode 0))
 
 (when (eq system-type 'darwin)
   ;; make Commnad key act as Meta
