@@ -55,7 +55,7 @@
   ;; ICOMPLETE
   ;; Interactively Do Things (ido-mode)
   ;; enable ido-mode successor, available in emacs 28+
-  ;;(fido-vertical-mode 1)
+  ;; (fido-vertical-mode 1)
 
   :bind (("C-c C-r" . 'reload-emacs-config)
          ("C-x r" . undo-redo)
@@ -396,13 +396,24 @@ Operate on selected region or whole buffer."
   :init
   (corfu-popupinfo-mode t))
 
-;; TBD to watch about `orderless` package by @prot
-;; https://youtu.be/d3aaxOqwHhI?t=1929
+;;; MARGINALIA
+;; https://github.com/minad/marginalia
+;; The `marginalia package provides helpful annotations next to
+;; completion candidates in the minibuffer. The information on display
+;; depends on the type of content. If it is about files, it shows
+;; file permissions and the last modified date. If it is a buffer,
+;; it shows the buffer size, major mode and other things.
+;; (use-package marginalia
+;;   :ensure t
+;;   :bind (:map minibuffer-local-map
+;;               ("M-A" . marginalia-cycle))
+;;   :init
+;;   ;; marginalia must be activated in the :init section of use-package
+;;   ;; such that the mode gets enabled right away. Note that this
+;;   ;; forces loading the package.
+;;   (marginalia-mode -1))
 
-;; @prot sample configuration including `orderless` package
-;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages
-
-;;; ORDERLESS
+;;; Orderless
 ;; https://github.com/oantolin/orderless
 (use-package orderless
   :ensure t
@@ -411,12 +422,8 @@ Operate on selected region or whole buffer."
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
-;;; MARGINALIA
-;; https://github.com/minad/marginalia
-;;(use-package marginalia
-;;  :ensure t
-;;  :init
-;;  (marginalia-mode))
+;; TODO: @prot sample configuration including `orderless` package
+;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages
 
 
 ;;; ULTRA SCROLL
