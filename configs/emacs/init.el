@@ -34,6 +34,8 @@
   ;;(auto-save-default nil)
   ;; restore the last emacs session, including *scratch* buffer latest changes
   (desktop-save-mode 1)
+  (display-line-numbers-type 'absolute)
+  (delete-selection-mode 1)
   ;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
   (global-auto-revert-mode 1)
   ;; [!NOTE]: This code does not work for the *scratch* buffer specifically. Need to store *scratch* buffer content manually to a file.
@@ -41,11 +43,11 @@
   (inhibit-startup-screen t)
   ;; disable the use of tabs for indentation (spaces instead)
   (indent-tabs-mode nil)
-  ;; make the TAB key complete text instead of just indenting
+  ;; enable indentation+completion using the TAB key
   (tab-always-indent 'complete)
+  ;; disable Ispell completion function in Emacs 30+ and try 'cape-dict as an alternative
+  (text-mode-ispell-word-completion nil)
   (tab-width 4)
-  (display-line-numbers-type 'absolute)
-  (delete-selection-mode 1)
   (truncate-lines t)
   (use-short-answers t)
   (visible-bell t)
@@ -53,7 +55,7 @@
   ;; ICOMPLETE
   ;; Interactively Do Things (ido-mode)
   ;; enable ido-mode successor, available in emacs 28+
-  (fido-vertical-mode 1)
+  ;;(fido-vertical-mode 1)
 
   :bind (("C-c C-r" . 'reload-emacs-config)
          ("C-x r" . undo-redo)
@@ -344,23 +346,64 @@ Operate on selected region or whole buffer."
 ;; Unlike traditional minibuffer completion, which displays candidates
 ;; in a horizontal format, Vertico presents candidates in a vertical list,
 ;; macking it easier to browse and select from multiple options.
-(use-package vertico
-  :ensure t
-  :hook
-  ;; enable vertico after Emacs has initialized
-  (after-init . vertico-mode))
+;; (use-package vertico
+;;   :ensure t
+;;   :hook
+;;   ;; enable vertico after Emacs has initialized
+;;   (after-init . vertico-mode))
 
-;;; https://github.com/minad/corfu
+;;; CAPE
+;; https://github.com/minad/cape
+;; Completion at point extension. Cape provides Completion At Point Extensions which
+;; can be used in combination with Corfu, Company or the default completion UI,
+;; e.g. 'dabbrev as dynamic abbreviation. The completion backends used by
+;; `completion-at-point` are so called `completion-at-point-functions` (Capfs).
+;; BTW no need to configure the 'dabbrev built-in package for auto-complete feature,
+;; as cape-dabbrev is a thin wrapper around the build-in 'dabbrev functionality.
+;; It uses 'dabbrev under the hood with its default settings, which work well for most cases.
+(use-package cape
+  :ensure t
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
+
+;;; CORFU
+;; https://github.com/minad/corfu
+;; Corfu mode provides a text completion framework for Emacs. It enhances
+;; the editing experience by offering context-aware suggestions as you
+;; type. Highly customizable and can be integrated with various modes and languages.
 (use-package corfu
-  :ensure t)
+  :ensure t
+  :defer t
+  :custom
+  ;; completes when hitting TAB /only/ 
+  (corfu-auto t)
+  ;; delay before popup; enable if corfu-auto is t
+  (corfu-auto-delay 0.2)
+  ;; trigger completion after typing 2 characters
+  (corfu-auto-prefix 2)
+  ;; quit popup if no match
+  (corfu-quit-no-match t)
+  ;; margin when scrolling completions
+  (corfu-scroll-margin 5)
+  ;; delay before showing documentation popup
+  (corfu-popupinfo-delay 0.5)
+
+  :hook ((prog-mode . corfu-mode)
+         (shell-mode . corfu-mode)
+         (eshell-mode . corfu-mode))
+  
+  :init
+  (corfu-popupinfo-mode t))
 
 ;; TBD to watch about `orderless` package by @prot
 ;; https://youtu.be/d3aaxOqwHhI?t=1929
 
 ;; @prot sample configuration including `orderless` package
-;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/
+;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages
 
-;;; https://github.com/oantolin/orderless
+;;; ORDERLESS
+;; https://github.com/oantolin/orderless
 (use-package orderless
   :ensure t
   :custom

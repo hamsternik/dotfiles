@@ -10,14 +10,14 @@
  '(display-line-numbers-type 'relative)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(auctex cmake-mode consult corfu denote eglot-inactive-regions
-	    exec-path-from-shell gruber-darker-theme json-mode
-	    kotlin-mode latex-mode latex-unicode-math-mode magit
-	    marginalia markdown-mode modus-themes orderless pdf-tools
-	    prism swift-mode telephone-line use-package vertico))
+   '(auctex cape cmake-mode consult corfu denote eglot-inactive-regions
+            exec-path-from-shell gruber-darker-theme json-mode
+            kotlin-mode latex-mode latex-unicode-math-mode magit
+            marginalia markdown-mode modus-themes orderless pdf-tools
+            prism swift-mode telephone-line use-package vertico))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty
-	  space-after-tab space-mark tab-mark)))
+          space-after-tab space-mark tab-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
