@@ -403,15 +403,17 @@ Operate on selected region or whole buffer."
 ;; depends on the type of content. If it is about files, it shows
 ;; file permissions and the last modified date. If it is a buffer,
 ;; it shows the buffer size, major mode and other things.
-;; (use-package marginalia
-;;   :ensure t
-;;   :bind (:map minibuffer-local-map
-;;               ("M-A" . marginalia-cycle))
-;;   :init
-;;   ;; marginalia must be activated in the :init section of use-package
-;;   ;; such that the mode gets enabled right away. Note that this
-;;   ;; forces loading the package.
-;;   (marginalia-mode -1))
+(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+  :init
+  ;; marginalia must be activated in the :init section of use-package
+  ;; such that the mode gets enabled right away. Note that this
+  ;; forces loading the package.
+  (marginalia-mode))
+
+(fido-vertical-mode 1)
 
 ;;; Orderless
 ;; https://github.com/oantolin/orderless
