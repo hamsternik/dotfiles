@@ -26,10 +26,7 @@
 (use-package emacs
   :ensure nil
   :custom
-  (when (window-system)
-    (tool-bar-mode 0)
-    (scroll-bar-mode 0)
-    (menu-bar-mode 0))
+
   ;; disable automatic saving on buffers. 
   ;;(auto-save-default nil)
   ;; restore the last emacs session, including *scratch* buffer latest changes
@@ -64,9 +61,9 @@
          ("C-;" . shell-command)
          ("C-c C-/" . 'comment-or-uncomment-region)
          ;; re-bind `eval-last-sexp` with `eval-buffer` to evaluate an entire buffer atm
-         ("C-x C-e" . 'eval-buffer)
+         ;;("C-x C-e" . 'eval-buffer)
          ;; bind `eval-last-sexp` to a non-standard key bind
-         ("C-c C-e" . 'eval-last-sexp)
+         ;;("C-c C-e" . 'eval-last-sexp)
          ("C-c n" . 'create-empty-buffer)
          ("C-c r" . 'rename-buffer)
          ;; indent an entire file, Xcode-related
@@ -140,6 +137,12 @@
             "~/.config/emacs/custom.init.el"
           "~/.emacs.d/custom.init.el"))
   (load custom-file)
+
+  ;; disable all built-in panels in Emacs in GUI mode
+  (when (window-system)
+    (tool-bar-mode 0)
+    (scroll-bar-mode 0)
+    (menu-bar-mode 0))
   
   ;; macOS Command is a built-in Super key `s`
   (when (eq system-type 'darwin)
