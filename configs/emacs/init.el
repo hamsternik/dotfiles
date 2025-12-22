@@ -66,10 +66,10 @@
          ;;("C-c C-e" . 'eval-last-sexp)
          ("C-c n" . 'create-empty-buffer)
          ("C-c r" . 'rename-buffer)
-         ;;; standard key bind to indent region is C-i
-         ;; indent an entire file, Xcode-related
-         ;;("C-c i" . 'indent-buffer))
-
+         ;; Fix the indentation of an entire buffer.
+	     ;; To indent a region, highlight the text and use C-i.
+         ("C-x C-i" . 'indent-buffer))
+  
   :hook
   (fundamental-mode . outline-minor-mode)
   (text-mode . outline-minor-mode)
@@ -98,7 +98,7 @@
 
   ;; re-indent the entire emacs buffer
   (defun indent-buffer ()
-    "Indent the entire buffer."
+    "Indent an entire buffer."
     (interactive)
     (indent-region (point-min) (point-max)))
 
