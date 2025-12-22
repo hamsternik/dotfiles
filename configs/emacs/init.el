@@ -23,6 +23,52 @@
 (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
 (package-initialize)
 
+(defun delete-to-start-of-line ()
+  "Delete all content from the cursor to the start of the line."
+  (interactive)
+  (delete-region (line-beginning-position) (point)))
+(bind-key "s-<backspace>" 'delete-to-start-of-line)
+
+;; reload emacs config
+(defun reload-emacs-config ()
+  "Reload emacs.el Emacs configuration file"
+  (interactive)
+  (load-file user-init-file))
+
+;; create new empty *untitled* buffer
+(defun create-empty-buffer () 
+  "Create a new empty buffer."
+  (interactive)
+  (let ((buf (generate-new-buffer "untitled")))
+    (switch-to-buffer buf)))
+
+;; re-indent the entire emacs buffer
+(defun indent-buffer ()
+  "Indent an entire buffer."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+;; close the 2nd (split) window in the buffer
+(defun close-current-window ()
+  "Close the currently active split window."
+  (interactive)
+  (if (not (one-window-p))
+      (delete-window)
+    (message "Cannot close the only window")))
+
+;; try to move right, fallback to down
+(defun hamsternik/windmove-right-or-down ()
+  "Switch focus on right or bottom window in buffer."
+  (interactive)
+  (unless (ignore-errors (windmove-right))
+    (ignore-errors (windmove-down))))
+
+(defun hamsternik/windmove-left-or-up ()
+  "Switch focus on left or top window in buffer."
+  (interactive)
+  (unless (ignore-errors (windmove-left))
+    (ignore-errors (windmove-up))))
+
 (use-package emacs
   :ensure nil
   :custom
@@ -78,49 +124,8 @@
   (prog-mode . hs-minor-mode)
 
   :config
-  (defun delete-to-start-of-line ()
-    "Delete all content from the cursor to the start of the line."
-    (interactive)
-    (delete-region (line-beginning-position) (point)))
-  (bind-key "s-<backspace>" 'delete-to-start-of-line)
-
-  ;; reload emacs config
-  (defun reload-emacs-config ()
-    "Reload emacs.el Emacs configuration file"
-    (interactive)
-    (load-file user-init-file))
-
-  ;; create new empty *untitled* buffer
-  (defun create-empty-buffer () 
-    "Create a new empty buffer."
-    (interactive)
-    (let ((buf (generate-new-buffer "untitled")))
-      (switch-to-buffer buf)))
-
-  ;; re-indent the entire emacs buffer
-  (defun indent-buffer ()
-    "Indent an entire buffer."
-    (interactive)
-    (indent-region (point-min) (point-max)))
-
-  ;; close the 2nd (split) window in the buffer
-  (defun close-current-window ()
-    "Close the currently active split window."
-    (interactive)
-    (if (not (one-window-p))
-        (delete-window)
-      (message "Cannot close the only window")))
-
-  ;; try to move right, fallback to down
-  (defun hamsternik/windmove-right-or-down ()
-    (interactive)
-    (unless (ignore-errors (windmove-right)) (ignore-errors (windmove-down))))
-
-  (defun hamsternik/windmove-left-or-up ()
-    (interactive)
-    (unless (ignore-errors (windmove-left)) (ignore-errors (windmove-up))))
-
-  (defvar hn/scratch-file (expand-file-name "scratch.txt" user-emacs-directory))
+  (defvar hn/scratch-file
+    (expand-file-name "scratch.txt" user-emacs-directory))
   (defun hn/save-scratch ()
     (with-current-buffer "*scratch*"
       (write-region (point-min) (point-max) hn/scratch-file)))
