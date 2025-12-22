@@ -26,7 +26,6 @@
 (use-package emacs
   :ensure nil
   :custom
-
   ;; disable automatic saving on buffers. 
   ;;(auto-save-default nil)
   ;; restore the last emacs session, including *scratch* buffer latest changes
@@ -54,21 +53,23 @@
   ;; enable ido-mode successor, available in emacs 28+
   ;; (fido-vertical-mode 1)
 
-  :bind (("C-c C-r" . 'reload-emacs-config)
+  ;; M-! alternative to C-;
+  :bind (("C-;" . shell-command)
+         ;;; C-x KEYBINDS
          ("C-x r" . undo-redo)
-         ("C-c o" . buffer-menu)
-         ;; M-! keybind alternative
-         ("C-;" . shell-command)
          ("C-x C-/" . 'comment-or-uncomment-region)
+         ;; Fix the indentation of an entire buffer.
+	     ;; To indent a region, highlight the text and use C-i.
+         ("C-x C-i" . 'indent-buffer)
+         ;;; C-c KEYBINDS
+         ("C-c C-r" . 'reload-emacs-config)         
+         ("C-c o" . buffer-menu)
          ;; re-bind `eval-last-sexp` with `eval-buffer` to evaluate an entire buffer atm
          ;;("C-x C-e" . 'eval-buffer)
          ;; bind `eval-last-sexp` to a non-standard key bind
          ;;("C-c C-e" . 'eval-last-sexp)
          ("C-c n" . 'create-empty-buffer)
-         ("C-c r" . 'rename-buffer)
-         ;; Fix the indentation of an entire buffer.
-	     ;; To indent a region, highlight the text and use C-i.
-         ("C-x C-i" . 'indent-buffer))
+         ("C-c r" . 'rename-buffer))
   
   :hook
   (fundamental-mode . outline-minor-mode)
