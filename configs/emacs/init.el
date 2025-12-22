@@ -59,16 +59,16 @@
          ("C-c o" . buffer-menu)
          ;; M-! keybind alternative
          ("C-;" . shell-command)
-         ("C-c C-/" . 'comment-or-uncomment-region)
+         ("C-x C-/" . 'comment-or-uncomment-region)
          ;; re-bind `eval-last-sexp` with `eval-buffer` to evaluate an entire buffer atm
          ;;("C-x C-e" . 'eval-buffer)
          ;; bind `eval-last-sexp` to a non-standard key bind
          ;;("C-c C-e" . 'eval-last-sexp)
          ("C-c n" . 'create-empty-buffer)
          ("C-c r" . 'rename-buffer)
+         ;;; standard key bind to indent region is C-i
          ;; indent an entire file, Xcode-related
-         ("C-c i" . 'indent-buffer)
-	 )
+         ;;("C-c i" . 'indent-buffer))
 
   :hook
   (fundamental-mode . outline-minor-mode)
@@ -171,7 +171,7 @@
 
   (add-hook 'kill-emacs-hook 'hn/save-scratch)
   (add-hook 'after-init-hook 'hn/restore-scratch)
-)
+  )
 
 ;; keeping auto-save files enabled but moving files to a central dir:
 (make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
@@ -186,11 +186,11 @@
   (set-face-attribute 'default nil :font "Fira Code-14")
   (set-fontset-font t 'latin "Iosevka-14" nil 'append)
   (set-fontset-font t 'latin "Roboto Mono-14" nil 'append))
-;; otherwise, try Fira Code, fallback to monospace
-(t
- (if (find-font (font-spec :name "Fira Code"))
- (set-face-attribute 'default nil :font "Fira Code-14")
- (set-face-attribute 'default nil :font "monospace-14"))))
+ ;; otherwise, try Fira Code, fallback to monospace
+ (t
+  (if (find-font (font-spec :name "Fira Code"))
+      (set-face-attribute 'default nil :font "Fira Code-14")
+    (set-face-attribute 'default nil :font "monospace-14"))))
 
 ;;; FIXME: Fira Code font does not work properly in Standalone Emacs
 ;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
@@ -210,12 +210,12 @@
   :config
   (setq mode-line-compact nil)
   (setq modus-themes-common-palette-overrides
-	'((bg-mode-line-active bg-blue-subtle)
-	  (fg-mode-line-active fg-main)
-	  (border-mode-line-active bg-blue-subtle)
-	  (border-mode-line-inactive bg-dim)
-	  (bg-region bg-hl-line) ;; OR alternative 'bg-lavender color
-	  (fg-region unsepcified)))
+	    '((bg-mode-line-active bg-blue-subtle)
+	      (fg-mode-line-active fg-main)
+	      (border-mode-line-active bg-blue-subtle)
+	      (border-mode-line-inactive bg-dim)
+	      (bg-region bg-hl-line) ;; OR alternative 'bg-lavender color
+	      (fg-region unsepcified)))
 
   ;; Finally, load your theme of choice:
   ;; - modus-operandi, the light theme
@@ -272,17 +272,17 @@
     "Setup modern ANSI color handling for shell-mode."
     ;; Remove the old processor if present
     (setq-local comint-output-filter-functions
-		(remove 'ansi-color-process-output comint-output-filter-functions))
+		        (remove 'ansi-color-process-output comint-output-filter-functions))
     ;; Add the new region-based processor
     (add-hook 'comint-output-filter-functions
-	      #'ansi-color-apply-on-region nil t))
+	          #'ansi-color-apply-on-region nil t))
   
   (defun hn/ansi-color (&optional beg end)
     "Interpret ANSI color escape sequence by colorifying content.
 Operate on selected region or whole buffer."
     (interactive
      (if (use-region-p)
-	 (list (region-beginning) (region-end))
+	     (list (region-beginning) (region-end))
        (list (point-min) (point-max))))
     (let ((inhibit-read-only t))
       (ansi-color-apply-on-region beg end)))
@@ -514,13 +514,13 @@ Operate on selected region or whole buffer."
 ;; FIXME: no code completion in .swift file
 (defun hamsternik/sourcekit-lsp-executable ()
   (setq hamsternik/sourcekit-lsp-executable
-	(cond ((executable-find "sourcekit-lsp"))
-	      ((equal system-type 'darwin)
-	       (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
-	      ((equal system-type 'gnu/linux)
-	       (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
-	      (t
-	       ("sourcekit-lsp")))))
+	    (cond ((executable-find "sourcekit-lsp"))
+	          ((equal system-type 'darwin)
+	           (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
+	          ((equal system-type 'gnu/linux)
+	           (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
+	          (t
+	           ("sourcekit-lsp")))))
 (defun hamsternik/sourcekit-lsp-command (interactive)
   (append (list (hamsternik/sourcekit-lsp-executable))))
 
@@ -539,15 +539,15 @@ Operate on selected region or whole buffer."
   ;; (eglot-report-progress nil)  ; Prevent minibuffer spam
   :bind
   (:map eglot-mode-map
-	("C-." . 'xref-find-definitions)
-	("C-," . 'xref-go-back)
-	("C-c ?" . 'eglot-help-at-point)
-	("C-c C-c" . 'eglot-code-actions)
-	("C-c C-r" . 'eglot-rename))
+	    ("C-." . 'xref-find-definitions)
+	    ("C-," . 'xref-go-back)
+	    ("C-c ?" . 'eglot-help-at-point)
+	    ("C-c C-c" . 'eglot-code-actions)
+	    ("C-c C-r" . 'eglot-rename))
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
   (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
-  
+
 ;; TREE-SITTER (ts)
 ;;; GitHub: https://github.com/tree-sitter/tree-sitter
 
