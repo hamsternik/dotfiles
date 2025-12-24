@@ -93,11 +93,6 @@
   (truncate-lines t)
   (use-short-answers t)
   (visible-bell t)
-  
-  ;; ICOMPLETE
-  ;; Interactively Do Things (ido-mode)
-  ;; enable ido-mode successor, available in emacs 28+
-  ;; (fido-vertical-mode 1)
 
   ;; M-! alternative to C-;
   :bind (("C-;" . shell-command)
@@ -420,9 +415,10 @@ Operate on selected region or whole buffer."
   ;; marginalia must be activated in the :init section of use-package
   ;; such that the mode gets enabled right away. Note that this
   ;; forces loading the package.
-  (marginalia-mode))
+  (marginalia-mode)
 
-(fido-vertical-mode 1)
+  :config
+  (fido-vertical-mode 1))
 
 ;;; Orderless
 ;; https://github.com/oantolin/orderless
