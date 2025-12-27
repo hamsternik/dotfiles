@@ -45,9 +45,10 @@
 #[log]
     st            = status # --short
     lg            = log --abbrev-commit --left-right --name-only
+    his           = log --oneline
     hist          = log --pretty=format:\"%h %ad (%ar) | %s%d [author: %an]\" --graph --date=short
-    hist5	  = !git hist | head -n 5
-    hist15	  = !git hist | head -n 15
+    hist5	      = !git hist | head -n 5
+    hist15	      = !git hist | head -n 15
     tree          = log --all --decorate --oneline --graph
     show-last     = show --pretty="format:" --name-only # `git describe --always`
     show-prev     = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
