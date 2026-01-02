@@ -300,6 +300,9 @@ cask "xcodes"
 # Tool to install Linux/BSD distributions to a partition or USB drive
 cask "unetbootin"
 
+# Video communication and virtual meeting platform
+cask "zoom"
+
 # Misc Apps (wget, curl)
 
 ## Logitec G Hub. Mouse Application, more at https://www.logitechg.com/en-eu/innovation/g-hub.html
