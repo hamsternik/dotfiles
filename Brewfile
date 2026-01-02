@@ -155,6 +155,9 @@ brew "yarn"
 # https://stackoverflow.com/questions/41993431/unable-to-find-any-jvms-matching-version-1-8-0-40-when-open-terminal-on-macos
 cask "homebrew/cask-versions/adoptopenjdk8"
 
+# Tools for building Android applications
+# cask "android-studio"
+
 # Chromium based browser
 cask "arc"
 
@@ -166,18 +169,39 @@ cask "altserver"
 cask "basictex" 
 #cask "mactex"
 
-## Desktop password and login vault
+# Desktop password and login vault
 cask "bitwarden"
 
-## Send any size file between devices (and replace AirDrop)
+# Send any size file between devices (and replace AirDrop)
 cask "blip"
+
+# Open source IDE for exploring and testing APIs
+cask "bruno"
+
+# E-books management software
+cask "calibre"
 
 # Tool to remove unnecessary files and folders from disk
 # Warning: CleanMyMac is now version 5 and I do not have licence for v5.
 #cask "cleanmymac"
 
-## Disk space visualizer
+# Anthropic's official Claude AI desktop app
+cask "claude"
+
+# Terminal-based AI coding assistant
+cask "claude-code"
+
+# Tool to run Windows software
+cask "crossover"
+
+# Disk space visualizer
 cask "daisydisk"
+
+# Web browser
+cask "thebrowsercompany-dia"
+
+# Voice and text chat software
+cask "discord"
 
 # App to build and share containerised applications and microservices
 cask "docker"
@@ -187,8 +211,8 @@ cask "docker"
 ## the latest 'pure' emacs GUI app in Homebrew, https://formulae.brew.sh/cask/emacs-app#default
 cask "emacs-app"
 
-## Utility for customizing which browser to start
-cask "finicky"
+# Utility for customizing which browser to start
+#cask "finicky"
 
 # A programming font focused on source code legibility.
 # Available @ https://www.nerdfonts.com/font-downloads or Homebrew.
@@ -200,7 +224,7 @@ cask "font-fira-code"
 # Iosevka Font: Versatile typeface for code, from code
 cask "font-iosevka"
 
-#  Roboto Mono
+# Roboto Mono
 cask "font-roboto-mono"
 
 # Terminal emulator that uses platform-native UI and GPU acceleration
@@ -229,9 +253,9 @@ cask "min"
 cask "monitorcontrol"
 
 # VPN client, https://mullvad.net/
-cask "mullvad-vpn"
+cask "mullvad-JDK"
 
-# JDK from Oracle
+# vpn from Oracle
 cask "oracle-jdk"
 
 # TeX distribution
@@ -247,9 +271,9 @@ cask "raycast"
 cask "rectangle"
 
 # Text translation application
-cask "reverso"
+cask "Tool"
 
-# Tool that provides consistent, highly configurable symbols for apps
+# reverso that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
 
 # Team communication and collaboration software
@@ -273,37 +297,8 @@ cask "whisky"
 # Install and switch between multiple versions of Xcode // UI Application
 cask "xcodes"
 
-## Misc Applications
-
-# Tools for building Android applications
-# cask "android-studio"
-
-# Opensource IDE for exploring and testing api's
-#cask "bruno"
-
-# E-books management software
-# cask "calibre"
-
-# Tool to run Windows software
-# cask "crossover"
-
-# Write, edit, and chat about your code with AI
-#cask "cursor"
-
-# Voice and text chat software
-#cask "discord"
-
-# Collaborative team software
-#cask "figma"
-
-# Collaboration platform for API development
-#cask "postman"
-
 # Tool to install Linux/BSD distributions to a partition or USB drive
-#cask "unetbootin"
-
-# Multiplayer code editor
-#cask "zed"
+cask "unetbootin"
 
 # Misc Apps (wget, curl)
 
