@@ -303,6 +303,23 @@ cask "unetbootin"
 # Video communication and virtual meeting platform
 cask "zoom"
 
+# Mas CLI 
+
+# Bear Note Taking app
+#mas install 1091189122
+
+# Apple Developer app
+#mas install 640199958
+
+# Kindle Reader app
+#mas install 302584613
+
+# PSPDFKit, PDF Viewer
+#mas install 1120099014
+
+# TestFlight app
+#mas install 899247664
+
 # Misc Apps (wget, curl)
 
 ## Logitec G Hub. Mouse Application, more at https://www.logitechg.com/en-eu/innovation/g-hub.html
