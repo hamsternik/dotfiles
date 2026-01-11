@@ -235,7 +235,11 @@
 ;; startup time.
 (use-package org
   :ensure nil
-  :defer t)
+  :defer t
+
+  :custom
+  (org-todo-keywords
+   '((sequence "TODO(t)" "IN-PROGRESS(p)" "|" "DONE(d)" "CANCELLED(c)"))))
 
 ;;; DIRED
 ;; the directory editor
