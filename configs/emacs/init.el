@@ -69,6 +69,19 @@
   (unless (ignore-errors (windmove-left))
     (ignore-errors (windmove-up))))
 
+(defvar hn/scratch-file
+  (expand-file-name "scratch.txt" user-emacs-directory))
+(defun hn/save-scratch ()
+  "Save *scratch* buffer data in the local ~/.emacs.d file."
+  (with-current-buffer "*scratch*"
+    (write-region (point-min) (point-max) hn/scratch-file)))
+(defun hn/restore-scratch ()
+  "Restore *scratch* buffer from the local ~/.emacs.d file."
+  (when (file-exists-p hn/scratch-file)
+    (with-current-buffer "*scratch*"
+      (delete-region (point-min) (point-max))
+      (insert-file-contents hn/scratch-file))))
+
 (use-package emacs
   :ensure nil
   :custom
@@ -119,17 +132,6 @@
   (prog-mode . hs-minor-mode)
 
   :config
-  (defvar hn/scratch-file
-    (expand-file-name "scratch.txt" user-emacs-directory))
-  (defun hn/save-scratch ()
-    (with-current-buffer "*scratch*"
-      (write-region (point-min) (point-max) hn/scratch-file)))
-  (defun hn/restore-scratch ()
-    (when (file-exists-p hn/scratch-file)
-      (with-current-buffer "*scratch*"
-        (delete-region (point-min) (point-max))
-        (insert-file-contents hn/scratch-file))))
-
   ;; Set custom filepath to keep all nongnu/melpa plugins.
   ;; macOS/Darwin: ~/.config/emacs/custom.init.el
   ;; Linux/WSL: ~/.emacs.d/custom.init.el
@@ -171,8 +173,7 @@
     (setq mac-right-command-modifier 'super))
 
   (add-hook 'kill-emacs-hook 'hn/save-scratch)
-  (add-hook 'after-init-hook 'hn/restore-scratch)
-  )
+  (add-hook 'after-init-hook 'hn/restore-scratch))
 
 ;; keeping auto-save files enabled but moving files to a central dir:
 (make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
