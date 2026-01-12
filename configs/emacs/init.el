@@ -350,6 +350,13 @@ Operate on selected region or whole buffer."
      (warning "»" compilation-warning)
      (note "»" compilation-info))))
 
+;; DOC-VIEW
+(use-package doc-view
+  :ensure nil
+  :mode ("\\.pdf\\'" . doc-view-mode)
+  :custom
+  (doc-view-resolution 300)
+  (doc-view-continuous t))
 
 ;;; NONGNU PACKAGES
 ;;; MELPA PACKAGES
