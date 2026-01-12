@@ -253,7 +253,7 @@
 
   :custom
   (org-todo-keywords
-   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELLED(c)" "|" "DONE(d)"))))
+   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELED(c)" "|" "DONE(d)"))))
 
 ;;; DIRED
 ;; the directory editor
