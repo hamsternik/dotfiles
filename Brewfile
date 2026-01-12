@@ -45,6 +45,9 @@ brew "fisher"
 # GitHub command-line tool
 brew "gh"
 
+# Interpreter for PostScript and PDF
+brew "ghostscript"
+
 # A syntax-highlighting pager for git and diff output
 brew "git-delta"
 
