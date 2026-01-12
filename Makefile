@@ -291,7 +291,6 @@ install-zed-conf:
 	ln -s -n $(ZED_EDITOR)/settings.json ~/.config/zed/settings.json
 	ln -s -n $(ZED_EDITOR)/keymap.json ~/.config/zed/keymap.json
 
-
 uninstall-zed-conf:
 	rm ~/.config/zed/settings.json || true
 	rm ~/.config/zed/keymap.json || true
@@ -330,8 +329,6 @@ uninstall-zsh-conf:
 
 # Misc Targets:
 
-## VSCode Extensions
-
 colorcheck:
 	pastel colorcheck
 .PHONY: colorcheck
@@ -344,9 +341,11 @@ fish-install-plugins:
 	fisher install ilancosman/tide@v6
 	fisher install jorgebucaran/nvm.fish
 	fisher install sentriz/fish-pipenv
+.PHONY: fish-install-plugins
 
 vscode-install-extensions:
 	./bin/vscode/vscode-extensions-install
+.PHONY: vscode-install-extensions
 
 vscode-export-extension-list:
 	./bin/vscode/vscode-extensions-list-export
@@ -354,3 +353,9 @@ vscode-export-extension-list:
 
 terminal-macos-doc:
 	@echo "Use Atom.terminal theme in the Termainl.app -> Settings -> Profiles -> More -> Import..."
+.PHONY: terminal-macos-doc
+
+
+
+
+
