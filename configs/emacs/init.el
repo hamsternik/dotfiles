@@ -82,6 +82,13 @@
       (delete-region (point-min) (point-max))
       (insert-file-contents hn/scratch-file))))
 
+(defun hn/copy-line ()
+  "Copy the current line including newline to the kill ring."
+  (interactive)
+  (kill-ring-save (line-beginning-position) (line-beginning-position 2))
+  (message "Line copied"))
+
+;; EMACS CONFIG
 (use-package emacs
   :ensure nil
   :custom
@@ -123,7 +130,11 @@
          ;; bind `eval-last-sexp` to a non-standard key bind
          ;;("C-c C-e" . 'eval-last-sexp)
          ("C-c n" . 'create-empty-buffer)
-         ("C-c r" . 'rename-buffer))
+         ("C-c r" . 'rename-buffer)
+         ("M-p" . yank)
+         ("M-P" . yank-pop)
+         ;; Bind =Yank from kill-ring=
+         ("M-W" . 'hn/copy-line))
   
   :hook
   (fundamental-mode . outline-minor-mode)
@@ -175,12 +186,14 @@
   (add-hook 'kill-emacs-hook 'hn/save-scratch)
   (add-hook 'after-init-hook 'hn/restore-scratch))
 
+;; EMACS POST-CONFIG
+
 ;; keeping auto-save files enabled but moving files to a central dir:
 (make-directory (expand-file-name "auto-save/" user-emacs-directory) t)
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "auto-save/" user-emacs-directory) t)))
 
-;;; EMACS FACE FONT
+;; EMACS FACE FONT
 ;; Font platform-specific platform configuration
 (cond
  ;; macOS: use preferred fonts: Fira Code, Iosevka, Roboto Mono
@@ -240,7 +253,7 @@
 
   :custom
   (org-todo-keywords
-   '((sequence "TODO(t)" "IN-PROGRESS(p)" "|" "DONE(d)" "CANCELLED(c)"))))
+   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELLED(c)" "|" "DONE(d)"))))
 
 ;;; DIRED
 ;; the directory editor
