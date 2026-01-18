@@ -2,6 +2,7 @@
     cl          = clone --recursive
     a           = add
     ai          = add -p
+    au          = add -u
     c           = commit -m
     ca          = commit --amend
     co          = checkout

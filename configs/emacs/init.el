@@ -253,7 +253,17 @@
 
   :custom
   (org-todo-keywords
-   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELED(c)" "|" "DONE(d)"))))
+   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELED(c)" "|" "DONE(d)")))
+
+  ;; Format: (INACTIVE-FORMAT . ACTIVE FORMAT)
+  ;; %a abbreviated day name
+  ;; %b abbreviated month name
+  ;; %d day of month
+  ;; %Y year
+  (org-time-stamp-custom-formats '("<%a, %b %d %Y>" . "<%a, %b %d %Y>"))
+  ;; Optional: to turn on custom format by-default.
+  (org-display-custom-times t)
+  (browse-url-browser-function 'browse-url-default-browser))
 
 ;;; DIRED
 ;; the directory editor
