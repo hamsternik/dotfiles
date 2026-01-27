@@ -1,4 +1,7 @@
 {
   "globalShortcut": "",
-  "mcpServers": {}
+  "mcpServers": {},
+  "preferences": {
+    "quickEntryDictationShortcut": "capslock"
+  }
 }

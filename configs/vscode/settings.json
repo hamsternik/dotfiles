@@ -52,5 +52,6 @@
     "workbench.colorTheme": "Visual Studio Dark - C++",
     "editor.showFoldingControls": "always",
     "makefile.configureOnOpen": true,
-    "editor.unicodeHighlight.ambiguousCharacters": false
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "github.copilot.nextEditSuggestions.enabled": true
 }
