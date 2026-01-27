@@ -184,7 +184,12 @@
     (setq mac-right-command-modifier 'super))
 
   (add-hook 'kill-emacs-hook 'hn/save-scratch)
-  (add-hook 'after-init-hook 'hn/restore-scratch))
+  (add-hook 'after-init-hook 'hn/restore-scratch)
+
+  ;; Using claude-code in *vterm* build-in Emacs terminal.
+  ;; The most reliable workflow I found is: `C-c C-t` (enter copy mode), then
+  ;; navigate/select -> `M-w` -> `C-c C-t` to exit copy mode.
+  (setq select-enable-clipboard t))
 
 ;; EMACS POST-CONFIG
 
