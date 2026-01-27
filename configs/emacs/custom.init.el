@@ -14,7 +14,8 @@
             exec-path-from-shell gruber-darker-theme json-mode
             kotlin-mode latex-mode latex-unicode-math-mode magit
             marginalia markdown-mode modus-themes orderless pdf-tools
-            prism swift-mode telephone-line use-package vertico vterm))
+            prism swift-mode telephone-line use-package vertico vterm
+            xterm-color))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty
           space-after-tab space-mark tab-mark)))
