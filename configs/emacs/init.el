@@ -92,14 +92,13 @@
 (use-package emacs
   :ensure nil
   :custom
-  ;; disable automatic saving on buffers. 
-  ;;(auto-save-default nil)
-  ;; restore the last emacs session, including *scratch* buffer latest changes
-  (desktop-save-mode 1)
   (display-line-numbers-type 'absolute)
-  (delete-selection-mode 1)
-  ;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
-  (global-auto-revert-mode 1)
+  ;; global-visual-line mode.
+  ;; Just wrap visually, keep normal line navigation. The mode both display and navigation,
+  ;; e.g. navigation commands works on /logical lines/ (actual newlines in the buffer). That means
+  ;; if the line is wrapped into a new line in visual-line-mode, C-a/C-e will not navigate to the end
+  ;; of the /real/ line. Instead you will stop at the end of current /visual/ line.
+  (global-visual-line-mode -1) ;; try out if you are OK to adapt with changed navigation behavior.
   ;; [!NOTE]: This code does not work for the *scratch* buffer specifically. Need to store *scratch* buffer content manually to a file.
   ;;(setq desktop-buffers-not-to-save (delete "\\*scratch\\*" desktop-buffers-not-to-save))
   (inhibit-startup-screen t)
@@ -110,7 +109,6 @@
   ;; disable Ispell completion function in Emacs 30+ and try 'cape-dict as an alternative
   (text-mode-ispell-word-completion nil)
   (tab-width 4)
-  (truncate-lines t)
   (use-short-answers t)
   (visible-bell t)
 
@@ -143,6 +141,16 @@
   (prog-mode . hs-minor-mode)
 
   :config
+  ;;(auto-save-default nil) ;; disable automatic saving on buffers.
+  (desktop-save-mode 1) ;; restore the last emacs session, including *scratch* buffer latest changes.
+  (delete-selection-mode 1)
+  ;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
+  (global-auto-revert-mode 1)
+
+  ;; Word wrapping settings.
+  (setq-default word-wrap t) ;; wrap at word boundaries.
+  (setq-default truncate-lines nil) ;; do not truncate long lines (only visually).
+  
   ;; Set custom filepath to keep all nongnu/melpa plugins.
   ;; macOS/Darwin: ~/.config/emacs/custom.init.el
   ;; Linux/WSL: ~/.emacs.d/custom.init.el
@@ -373,8 +381,7 @@ Operate on selected region or whole buffer."
   (doc-view-resolution 300)
   (doc-view-continuous t))
 
-;;; NONGNU PACKAGES
-;;; MELPA PACKAGES
+;;; NONGNU / MELPA PACKAGES
 
 ;;; MODE LINE
 ;; https://github.com/dbordak/telephone-line
@@ -382,6 +389,7 @@ Operate on selected region or whole buffer."
   :ensure t
   :config
   (telephone-line-mode 1))
+
 
 ;;; VERTICO
 ;; https://github.com/minad/vertico
