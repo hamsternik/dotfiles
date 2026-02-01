@@ -390,6 +390,10 @@ Operate on selected region or whole buffer."
   :config
   (telephone-line-mode 1))
 
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config (exec-path-from-shell-initialize))
 
 ;;; VERTICO
 ;; https://github.com/minad/vertico
