@@ -397,10 +397,6 @@ Operate on selected region or whole buffer."
   :if (memq window-system '(mac ns x))
   :config (exec-path-from-shell-initialize))
 
-;;; DENOTE
-;; https://github.com/protesilaos/denote
-(use-package denote
-  :ensure t)
 
 ;;; VERTICO
 ;; https://github.com/minad/vertico
