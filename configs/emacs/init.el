@@ -227,78 +227,7 @@
 ;;(set-fontset-font t 'latin "Iosevka-14" nil 'append)
 ;;(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
 
-;;; EMACS THEME
-;; (load-theme 'gruber-darker' t)
-
-;;; MODUS THEMES
-;; https://github.com/protesilaos/modus-themes
-(use-package modus-themes
-  :ensure nil
-  :demand t
-  :config
-  (setq mode-line-compact nil)
-  (setq modus-themes-common-palette-overrides
-	    '((bg-mode-line-active bg-blue-subtle)
-	      (fg-mode-line-active fg-main)
-	      (border-mode-line-active bg-blue-subtle)
-	      (border-mode-line-inactive bg-dim)
-	      (bg-region bg-hl-line) ;; OR alternative 'bg-lavender color
-	      (fg-region unsepcified)))
-
-  ;; Finally, load your theme of choice:
-  ;; - modus-operandi, the light theme
-  ;; - modus-vivdendi, the dark theme
-  ;; OR switch between them via: M-x modus-themes-toggle
-
-  ;; Load theme 
-  (load-theme 'modus-vivendi :no-confirm))
-
-;; ORG-MODE
-;; Org mode is a powerful system for organizing and managing your notes,
-;; tasks, and documents in plain text. It offers features like task
-;; management, outlining, scheduling, and much mroe, making it a versatile
-;; tool for productivity. The configuration below simply deferes loading
-;; Org-mode until it is explicitly needed, which can help speed up Emacs
-;; startup time.
-(use-package org
-  :ensure nil
-  :defer t
-
-  :custom
-  (org-todo-keywords
-   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELED(c)" "|" "DONE(d)")))
-
-  ;; Format: (INACTIVE-FORMAT . ACTIVE FORMAT)
-  ;; %a abbreviated day name
-  ;; %b abbreviated month name
-  ;; %d day of month
-  ;; %Y year
-  (org-time-stamp-custom-formats '("<%a, %b %d %Y>" . "<%a, %b %d %Y>"))
-  ;; Optional: to turn on custom format by-default.
-  (org-display-custom-times t)
-  (browse-url-browser-function 'browse-url-default-browser))
-
-;;; DIRED
-;; the directory editor
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
-(use-package dired
-  :ensure nil ; built-in, no need to install
-  :bind (:map dired-mode-map) (";" . shell-command)
-  :bind (:map dired-mode-map) ("-" . dired-up-directory))
-
-(setq dired-use-ls-dired nil)
-;; (setq initial-buffer-choice t)
-(setq initial-buffer-choice (lambda () (dired "~")))
-
-;; !TIP: use `g` to refresh the buffer to see the latest changed in the dir
-;; auto-refresh dired buffers when files change
-(add-hook 'dired-mode-hook 'auto-revert-mode)
-
-;;; PROJECT
-(use-package project
-  :ensure nil)
-
-;;; ANSI COLOR
+;;; ANSI-COLOR
 ;; enable ANSI color support in compilation buffers
 ;; based on https://github.com/anschwa/emacs.d?tab=readme-ov-file#ansi-color-codes
 ;; FIXME: broken ansi symbols in standard fish greeting message when run `C-x p s` shell
@@ -335,6 +264,30 @@ Operate on selected region or whole buffer."
       (ansi-color-apply-on-region compilation-filter-start (point))))  
   )
 
+;;; DIRED
+;; the directory editor
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
+(use-package dired
+  :ensure nil ; built-in, no need to install
+  :bind (:map dired-mode-map) (";" . shell-command)
+  :bind (:map dired-mode-map) ("-" . dired-up-directory))
+
+(setq dired-use-ls-dired nil)
+;; (setq initial-buffer-choice t)
+(setq initial-buffer-choice (lambda () (dired "~")))
+
+;; !TIP: use `g` to refresh the buffer to see the latest changed in the dir
+;; auto-refresh dired buffers when files change
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
+;; DOC-VIEW
+(use-package doc-view
+  :ensure nil
+  :mode ("\\.pdf\\'" . doc-view-mode)
+  :custom
+  (doc-view-resolution 300)
+  (doc-view-continuous t))
+
 ;;; ELDOC
 ;; Eldoc provides helpful inline documentation for functions and variables
 ;; in the minibuffer, enhancing the development experience. It can be
@@ -353,12 +306,6 @@ Operate on selected region or whole buffer."
   :init
   (global-eldoc-mode))
 
-;;; FLYSPELL
-(use-package flyspell
-  :ensure nil
-  :config
-  (setq ispell-program-name "aspell"))
-
 ;; FLYMAKE
 ;; Flymake is an on-the-fly syntax checking extension that provides
 ;; real-time feedback about erros and warnings in your code as you write.
@@ -373,17 +320,69 @@ Operate on selected region or whole buffer."
      (warning "»" compilation-warning)
      (note "»" compilation-info))))
 
-;; DOC-VIEW
-(use-package doc-view
+;;; FLYSPELL
+(use-package flyspell
   :ensure nil
-  :mode ("\\.pdf\\'" . doc-view-mode)
+  :config
+  (setq ispell-program-name "aspell"))
+
+;; MODUS-THEMES
+;; https://github.com/protesilaos/modus-themes
+(use-package modus-themes
+  :ensure nil
+  :demand t
+  :config
+  (setq mode-line-compact nil)
+  (setq modus-themes-common-palette-overrides
+	    '((bg-mode-line-active bg-blue-subtle)
+	      (fg-mode-line-active fg-main)
+	      (border-mode-line-active bg-blue-subtle)
+	      (border-mode-line-inactive bg-dim)
+	      (bg-region bg-hl-line) ;; OR alternative 'bg-lavender color
+	      (fg-region unsepcified)))
+
+  ;; Finally, load your theme of choice:
+  ;; - modus-operandi, the light theme
+  ;; - modus-vivdendi, the dark theme
+  ;; OR switch between them via: M-x modus-themes-toggle
+
+  ;; Load theme 
+  (load-theme 'modus-vivendi :no-confirm))
+;; (load-theme 'gruber-darker' t)
+
+
+;; ORG-MODE
+;; Org mode is a powerful system for organizing and managing your notes,
+;; tasks, and documents in plain text. It offers features like task
+;; management, outlining, scheduling, and much mroe, making it a versatile
+;; tool for productivity. The configuration below simply deferes loading
+;; Org-mode until it is explicitly needed, which can help speed up Emacs
+;; startup time.
+(use-package org
+  :ensure nil
+  :defer t
+
   :custom
-  (doc-view-resolution 300)
-  (doc-view-continuous t))
+  (org-todo-keywords
+   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELED(c)" "|" "DONE(d)")))
+
+  ;; Format: (INACTIVE-FORMAT . ACTIVE FORMAT)
+  ;; %a abbreviated day name
+  ;; %b abbreviated month name
+  ;; %d day of month
+  ;; %Y year
+  (org-time-stamp-custom-formats '("<%a, %b %d %Y>" . "<%a, %b %d %Y>"))
+  ;; Optional: to turn on custom format by-default.
+  (org-display-custom-times t)
+  (browse-url-browser-function 'browse-url-default-browser))
+
+;;; PROJECT
+(use-package project
+  :ensure nil)
 
 ;;; NONGNU / MELPA PACKAGES
 
-;;; MODE LINE
+;;; MODE-LINE
 ;; https://github.com/dbordak/telephone-line
 (use-package telephone-line
   :ensure t
@@ -397,6 +396,11 @@ Operate on selected region or whole buffer."
   :ensure t
   :if (memq window-system '(mac ns x))
   :config (exec-path-from-shell-initialize))
+
+;;; DENOTE
+;; https://github.com/protesilaos/denote
+(use-package denote
+  :ensure t)
 
 ;;; VERTICO
 ;; https://github.com/minad/vertico
@@ -493,10 +497,6 @@ Operate on selected region or whole buffer."
 ;; Scroll Emacs like lightning (macOS).
 ;; Based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
 
-;;; DENOTE
-;; https://github.com/protesilaos/denote
-(use-package denote
-  :ensure t)
 
 ;;; TEX and LATEX
 ;; !NOTE: to automatically compile and update PDF preview use:
