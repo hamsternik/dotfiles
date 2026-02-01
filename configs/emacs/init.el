@@ -306,6 +306,14 @@ Operate on selected region or whole buffer."
   :init
   (global-eldoc-mode))
 
+;; ELECTRIC-PAIR-MODE
+;; A built-in minor mode that automatically insert matching closing delimeters
+;; when you type an opening one. Also handles the reverse intelligently, e.g.
+;; typing a delimeter when it is already exist, then elec-mode skips the duplicate.
+(use-package elec-pair
+  :ensure nil
+  :hook (prog-mode . electric-pair-local-mode))
+
 ;; FLYMAKE
 ;; Flymake is an on-the-fly syntax checking extension that provides
 ;; real-time feedback about erros and warnings in your code as you write.
