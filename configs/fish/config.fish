@@ -25,6 +25,10 @@ set -gx DEVELOPER ~/Developer
 
 ### PATH | Overriding
 
+# XDG Local bins
+export LOCAL_BIN="$HOME/.local/bin"
+fish_add_path $LOCAL_BIN
+
 # Homebrew bin path
 if test -d /opt/homebrew
   fish_add_path /opt/homebrew/bin
@@ -96,4 +100,3 @@ set -gx PATH $PATH /Users/hamsternik/.lmstudio/bin
 # End of LM Studio CLI section
 
 
-alias claude="/Users/hamsternik/.claude/local/claude"
