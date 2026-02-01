@@ -360,8 +360,6 @@ Operate on selected region or whole buffer."
 ;; startup time.
 (use-package org
   :ensure nil
-  :defer t
-
   :custom
   (org-todo-keywords
    '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELED(c)" "|" "DONE(d)")))
@@ -428,8 +426,9 @@ Operate on selected region or whole buffer."
 
 ;;; CORFU
 ;; https://github.com/minad/corfu
-;; Corfu mode provides a text completion framework for Emacs. It enhances
-;; the editing experience by offering context-aware suggestions as you
+;; Corfu mode provides a text completion framework for Emacs build upon
+;; a core Emacs abstraction: Completion-At-Point-Functions (CAPF).
+;; It enhances the editing experience by offering context-aware suggestions as you
 ;; type. Highly customizable and can be integrated with various modes and languages.
 (use-package corfu
   :ensure t
@@ -450,10 +449,11 @@ Operate on selected region or whole buffer."
 
   :hook ((prog-mode . corfu-mode)
          (shell-mode . corfu-mode)
-         (eshell-mode . corfu-mode))
+         (eshell-mode . corfu-mode)
+         (org-mode . corfu-mode))
   
-  :init
-  (corfu-popupinfo-mode t))
+  :config
+  (corfu-popupinfo-mode 1))
 
 ;;; MARGINALIA
 ;; https://github.com/minad/marginalia
