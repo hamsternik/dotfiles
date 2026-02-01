@@ -390,6 +390,9 @@ Operate on selected region or whole buffer."
   :config
   (telephone-line-mode 1))
 
+;; EXEC-PATH-FROM-SHELL
+;; https://github.com/purcell/exec-path-from-shell
+;; Make Emacs use the $PATH set up by the user's shell, e.g. macOS.
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns x))
