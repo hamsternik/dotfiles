@@ -403,6 +403,17 @@ Operate on selected region or whole buffer."
   :if (memq window-system '(mac ns x))
   :config (exec-path-from-shell-initialize))
 
+(defun project-multi-vterm ()
+  "Open multi-vterm in project root."
+  (interactive)
+  (let ((default-directory (project-root (project-current t))))
+    (multi-vterm)))
+
+(use-package multi-vterm
+  :ensure t
+  :bind (:map project-prefix-map
+              ("t" . project-multi-vterm)))
+
 
 ;;; VERTICO
 ;; https://github.com/minad/vertico
