@@ -2,15 +2,11 @@
 
 Hi there 👋
 
-## My macOS Daily Apps
-
-- [Rectangle. Move and resize windows on macOS with keyboard shortcuts and snap areas.](https://github.com/rxhanson/Rectangle)
-
-## Before clone
+## Before clone (Settle SSH Keys)
 
 The basic case – your Macbook is new and so empty. And you need to settle down all basic programs, tools, configs, etc to configure as it should be actually.
 
-First, install the **Homebrew**:
+First, install the **Homebrew** on macOS:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -41,37 +37,19 @@ Generate new local ssh key for the personal email. Use `github-hamsternik` key n
 ssh-keygen -t ed25519 -C "hamsternik9@gmail.com"
 ```
 
-Start ssh-agent in the background:
+Give the name accordingly to the platform the key pair will target,
+e.g. for GitHub use 'github-*' prefix, for Codeberg use 'codeberg-*' one.
 
-```bash
-eval "$(ssh-agent -s)"
-```
+Copy the public key into the clipboard. E.g. use `pbcopy` on macOS. Or
+just use `cat` on Linux/WSL to print out *.pub key and copy from the
+terminal.
 
-Add the ssh private key to the `ssh-agent`.
+- `pbcopy < ~/.ssh/github-hamsternik.pub` OR
+- `cat ~/.ssh/github-hamsternik.pub`
 
-For GitHub:
-
-```bash
-ssh-add ~/.ssh/github-hamsternik
-```
-
-For Bitbucket*:
-
-```bash
-ssh-add ~/.ssh/bitbucket-hamsternik
-```
-
-Copy the public key into the clipboard.
-
-For GitHub:
-
-```bash
-pbcopy < ~/.ssh/github-hamsternik.pub
-```
-
-Open your GitHub [account settings](https://github.com/settings/keys) and add the new generated public key copied into clipboard.
-
-Check out [official GitHub doc](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to address questions about the SSH generation.
+Settle the public key into your profile settings:
+- https://githib.com/settings/keys for GitHub OR
+- https://codeberg.org/user/settings/keys for Codeberg
 
 ## Deploy
 
