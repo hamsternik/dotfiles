@@ -29,10 +29,10 @@ Host github.com*
     User git
     HostName github.com
     IdentityFile ~/.ssh/github-hamsternik
-Host bitbucket.org
+Host codeberg.org
     User git
-    HostName bitbucket.org
-    IdentityFile ~/.ssh/bitbucket-hamsternik
+    HostName codeberg.org
+    IdentityFile ~/.ssh/codeberg-hamsternik
 ```
 
 Generate new local ssh key for the personal email. Use `github-hamsternik` key name.
