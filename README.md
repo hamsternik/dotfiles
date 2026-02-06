@@ -250,58 +250,6 @@ Right now I am using [onedark](https://github.com/joshdick/onedark.vim) colorsch
 
 There is a [discussion thread](https://discussions.apple.com/thread/250636611?sortBy=best) on the Apple forum about 24bit True Color support in macOS Terminal.app. The short answer: NO.
 
-## Emacs
-
-The whole Emacs installation & system configuration I got by these links
-
-- [Doom Emacs. Installation section](https://github.com/doomemacs/doomemacs#install)
-- [Emacs Deamon Mode on macos](https://briansunter.com/blog/emacs-daemon-macos/)
-
-To install Emacs Client with Doom configuration framework just run these 2 commands and give 3-5 min:
-
-```sh
-git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-```
-
-To launch `emacs` daemon within every user login create the next file by the pass
-`~/Library/LaunchAgents/gnu.emacs.daemon.plist`:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key>
-  <string>gnu.emacs.daemon</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>/opt/homebrew/bin/emacs</string>
-    <string>--daemon</string>
-  </array>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>ServiceDescription</key>
-  <string>GNU Emacs Daemon</string>
-</dict>
-</plist>
-```
-
-and use `launchctl` commands to load the script due the startup:
-
-```sh
-launchctl unload ~/Library/LaunchAgents/gnu.emacs.daemon.plist
-launchctl load -w ~/Library/LaunchAgents/gnu.emacs.daemon.plist
-```
-
-**[UPD]** Both of these commands are [deprecated by Apple starting from 10.10](https://babodee.wordpress.com/2016/04/09/launchctl-2-0-syntax/).
-Instead use new `bootstrap` and `bootout` commands with appropriate user's UID and service-name:
-
-``` bash
-id -u "Nikita Khomitsevych" # To know current user UID
-sudo launchctl bootstrap gui/<user's UID> ~/Library/LaunchAgents/gnu.emacs.daemon.plist # Use `sudo` to get more detailed error
-```
-
 ## MongoDB
 
 Basically, I am not a cloud engineer, so I really need some space to recall the basic information about i.e. how to run
