@@ -380,9 +380,14 @@ Operate on selected region or whole buffer."
   (org-time-stamp-custom-formats '("<%a, %b %d %Y>" . "<%a, %b %d %Y>"))
   ;; Optional: to turn on custom format by-default.
   (org-display-custom-times t)
-  (browse-url-browser-function 'browse-url-default-browser))
+  (browse-url-browser-function 'browse-url-default-browser)
+  (org-startup-with-inline-images t) ;; Auto-display images on file open.
+  (org-image-actual-width nil) ;; Use #+ATTR_ORG :width to control size.
+  :config
+  ;; TODO Review orgmode doc 17.2 Structure Templates
+  ;; to insert empty structural blocks or to wrap existing text in such a block.
+  (require 'org-tempo))
 
-;;; PROJECT
 (use-package project
   :ensure nil)
 
