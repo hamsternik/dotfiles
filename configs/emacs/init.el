@@ -631,5 +631,14 @@ Operate on selected region or whole buffer."
 ;;; TBD to read about how to get started w/ Tree-Sitter
 ;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
 
+;; FIXME: Too complicated installation and deployment process in WSL within Emacs. Use LSP with Eglot package instead.
+(when (treesit-available-p)
+  (use-package treesit
+    :config
+    (setq treesit-language-source-alist
+          '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+            (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+            (swift "https://github.com/alex-pinkus/tree-sitter-swift")))))
+
 (provide 'init)
 ;;; init.el ends here
