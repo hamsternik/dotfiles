@@ -150,3 +150,6 @@ bindkey -s '^l' 'lf\n'
 export PATH="$PATH:/Users/hamsternik/.lmstudio/bin"
 # End of LM Studio CLI section
 
+
+# Added by parm installer
+export PATH="/Users/hamsternik/Library/Application Support/parm/bin:$PATH"
