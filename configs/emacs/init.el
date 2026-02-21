@@ -332,7 +332,8 @@ Operate on selected region or whole buffer."
 (use-package flyspell
   :ensure nil
   :config
-  (setq ispell-program-name "aspell"))
+  (setq ispell-program-name "aspell")
+  (define-key flyspell-mode-map (kbd "C-;") nil))
 
 ;; MODUS-THEMES
 ;; https://github.com/protesilaos/modus-themes
@@ -474,7 +475,8 @@ Operate on selected region or whole buffer."
   :hook ((prog-mode . corfu-mode)
          (shell-mode . corfu-mode)
          (eshell-mode . corfu-mode)
-         (org-mode . corfu-mode))
+         (org-mode . corfu-mode)
+         (LaTeX-mode . corfu-mode))
   
   :config
   (corfu-popupinfo-mode 1))
