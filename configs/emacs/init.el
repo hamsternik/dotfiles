@@ -476,7 +476,8 @@ Operate on selected region or whole buffer."
          (shell-mode . corfu-mode)
          (eshell-mode . corfu-mode)
          (org-mode . corfu-mode)
-         (LaTeX-mode . corfu-mode))
+         (LaTeX-mode . corfu-mode)
+         (makefile-mode . corfu-mode))
   
   :config
   (corfu-popupinfo-mode 1))
