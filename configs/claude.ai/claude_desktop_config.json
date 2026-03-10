@@ -2,6 +2,9 @@
   "globalShortcut": "",
   "mcpServers": {},
   "preferences": {
-    "quickEntryDictationShortcut": "capslock"
+    "quickEntryDictationShortcut": "capslock",
+    "coworkScheduledTasksEnabled": true,
+    "sidebarMode": "chat",
+    "coworkWebSearchEnabled": true
   }
 }
