@@ -447,7 +447,12 @@ Operate on selected region or whole buffer."
   :ensure t
   :init
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file))
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  :config
+  (add-hook 'makefile-mode-hook
+            (lambda ()
+              (add-to-list 'completion-at-point-functions #'cape-file)
+              (add-to-list 'completion-at-point-functions #'cape-dabbrev))))
 
 ;;; CORFU
 ;; https://github.com/minad/corfu
@@ -457,7 +462,7 @@ Operate on selected region or whole buffer."
 ;; type. Highly customizable and can be integrated with various modes and languages.
 (use-package corfu
   :ensure t
-  :defer t
+  :demand t
   :custom
   ;; completes when hitting TAB /only/ 
   (corfu-auto t)
@@ -472,12 +477,12 @@ Operate on selected region or whole buffer."
   ;; delay before showing documentation popup
   (corfu-popupinfo-delay 0.5)
 
+  ;; since all makefile modes derive from prog-mode, the explicit makefile hooks are /redundant/.
   :hook ((prog-mode . corfu-mode)
          (shell-mode . corfu-mode)
          (eshell-mode . corfu-mode)
          (org-mode . corfu-mode)
-         (LaTeX-mode . corfu-mode)
-         (makefile-mode . corfu-mode))
+         (LaTeX-mode . corfu-mode))
   
   :config
   (corfu-popupinfo-mode 1))
