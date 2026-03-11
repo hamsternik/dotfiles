@@ -8,6 +8,10 @@ Personal dotfiles repository for macOS development environment. Manages 25+ tool
 
 **Primary focus:** macOS (no Linux support planned)
 
+## Workflow Rules
+
+- Do not offer to make code edits. Provide explanations and code snippets; the user will apply changes manually.
+
 ## Project Structure
 
 ```
