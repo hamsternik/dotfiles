@@ -197,7 +197,9 @@
   ;; Using claude-code in *vterm* build-in Emacs terminal.
   ;; The most reliable workflow I found is: `C-c C-t` (enter copy mode), then
   ;; navigate/select -> `M-w` -> `C-c C-t` to exit copy mode.
-  (setq select-enable-clipboard t))
+  (setq select-enable-clipboard t)
+  ;; When set to 't it does not leak buffers, killing previous opened one.
+  (setq dired-kill-when-opening-new-dired-buffer t))
 
 ;; EMACS POST-CONFIG
 
