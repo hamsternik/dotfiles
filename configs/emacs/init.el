@@ -528,6 +528,30 @@ Operate on selected region or whole buffer."
 ;; TODO: @prot sample configuration including `orderless` package
 ;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages
 
+;;; --- LSP's configuration
+
+;; a client for Language Server Protocol servers.
+;; https://github.com/joaotavora/eglot
+(use-package eglot
+  :ensure nil
+  :bind
+  (:map eglot-mode-map
+	    ("C-." . 'xref-find-definitions)
+	    ("C-," . 'xref-go-back)
+	    ("C-c ?" . 'eglot-help-at-point)
+	    ("C-c C-c" . 'eglot-code-actions)
+	    ("C-c C-r" . 'eglot-rename))
+
+  :hook ((python-mode . eglot-ensure)
+         (typescript-mode . eglot-ensure)
+         (js2-mode . eglot-ensure)
+         (web-mode . eglot-ensure))
+  
+  :config
+  ;; (fset #'jsonrpc--log-event #'ignore)
+  (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command))
+  (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio"))))
+
 
 ;;; ULTRA SCROLL
 ;; https://github.com/jdtsmith/ultra-scroll
@@ -652,29 +676,6 @@ Operate on selected region or whole buffer."
   :custom
   (js2-basic-offset 4))
 
-;;;; !NOTE:
-;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
-;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
-
-;;; EGLOT
-;; https://github.com/joaotavora/eglot
-;; A client for LSP servers; built-in since Emacs 29.
-(use-package eglot
-  :ensure nil
-  ;; :defer t
-  ;; :hook ((python-mode . eglot-ensure))
-  ;; :custom
-  ;; (eglot-report-progress nil)  ; Prevent minibuffer spam
-  :bind
-  (:map eglot-mode-map
-	    ("C-." . 'xref-find-definitions)
-	    ("C-," . 'xref-go-back)
-	    ("C-c ?" . 'eglot-help-at-point)
-	    ("C-c C-c" . 'eglot-code-actions)
-	    ("C-c C-r" . 'eglot-rename))
-  :config
-  ;; (fset #'jsonrpc--log-event #'ignore)
-  (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command)))
 
 ;; TREE-SITTER (ts)
 ;;; GitHub: https://github.com/tree-sitter/tree-sitter
