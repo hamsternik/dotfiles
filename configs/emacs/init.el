@@ -569,7 +569,10 @@ Operate on selected region or whole buffer."
   ;; Optional: Tailwind CSS intellisense
   ;; npm install -g @tailwindcss/language-server
   (add-to-list 'eglot-server-programs
-               '(css-mode . ("vscode-css-language-server" "--stdio"))))
+               '(css-mode . ("vscode-css-language-server" "--stdio")))
+  
+  (define-key eglot-mode-map [M-mouse-1] #'xref-find-definitions)
+  (define-key eglot-mode-map [M-mouse-3] #'xref-go-back))
 
 
 ;;; ULTRA SCROLL
