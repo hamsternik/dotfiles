@@ -549,8 +549,27 @@ Operate on selected region or whole buffer."
   
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
-  (add-to-list 'eglot-server-programs '((swift-mode) . hamsternik/sourcekit-lsp-command))
-  (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio"))))
+  (add-to-list 'eglot-server-programs
+               '((swift-mode) . hamsternik/sourcekit-lsp-command))
+
+  ;; install to execute with Eglot
+  ;; npm install -g typescript-language-server typescript
+  ;; Optional: ESLint integration
+  ;; npm install -g eslint
+  (add-to-list 'eglot-server-programs
+               '(web-mode . ("typescript-language-server" "--stdio")))
+
+  ;; install to execute with Eglot
+  ;; npm install -g vscode-langservers-extracted
+  (add-to-list 'eglot-server-programs
+               '(html-mode . ("vscode-html-language-server" "--stdio")))
+  
+  ;; install to execute with Eglot
+  ;; npm install -g vscode-langservers-extracted
+  ;; Optional: Tailwind CSS intellisense
+  ;; npm install -g @tailwindcss/language-server
+  (add-to-list 'eglot-server-programs
+               '(css-mode . ("vscode-css-language-server" "--stdio"))))
 
 
 ;;; ULTRA SCROLL
