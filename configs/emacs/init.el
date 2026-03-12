@@ -274,7 +274,8 @@ Operate on selected region or whole buffer."
   
   :config
   ;; When set to 't it does not leak buffers, killing previous opened one.
-  (setq dired-kill-when-opening-new-dired-buffer t))
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  (setq dired-dwim-target t))
 
 (setq dired-use-ls-dired nil)
 ;; (setq initial-buffer-choice t)
@@ -612,6 +613,22 @@ Operate on selected region or whole buffer."
 	           ("sourcekit-lsp")))))
 (defun hamsternik/sourcekit-lsp-command (interactive)
   (append (list (hamsternik/sourcekit-lsp-executable))))
+
+;; Web templates editing mode for emacs.
+;; https://github.com/fxbois/web-mode
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.css?\\'" . web-mode)
+         ("\\.jsx\\'" . web-mode)
+         ("\\.tsx\\'" . web-mode)
+         ("\\.astro\\'" . web-mode))
+  :custom
+  (web-mode-markup-indent-offset 4)
+  (web-mode-css-indent-offset 4)
+  (web-mode-code-indent-offset 4)
+  (web-mode-enable-auto-pairing t)
+  (web-mode-enable-css-colorization t))
 
 ;;;; !NOTE:
 ;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
