@@ -133,6 +133,10 @@
          ("M-P" . yank-pop)
          ;; Bind =Yank from kill-ring=
          ("M-W" . 'hn/copy-line))
+
+  :bind (:map minibuffer-local-map
+              ("M-p" . yank)
+              ("M-P" . yank-pop))
   
   :hook
   (fundamental-mode . outline-minor-mode)
