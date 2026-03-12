@@ -11,11 +11,12 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    '(auctex cape cmake-mode consult corfu denote eglot-inactive-regions
-            exec-path-from-shell gruber-darker-theme json-mode
-            kotlin-mode latex-mode latex-unicode-math-mode magit
-            marginalia markdown-mode modus-themes multi-vterm
+            exec-path-from-shell gruber-darker-theme js2-mode
+            json-mode kotlin-mode latex-mode latex-unicode-math-mode
+            magit marginalia markdown-mode modus-themes multi-vterm
             orderless pdf-tools prism swift-mode telephone-line
-            use-package vertico vterm web-mode xterm-color))
+            typescript-mode use-package vertico vterm web-mode
+            xterm-color))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty
           space-after-tab space-mark tab-mark)))

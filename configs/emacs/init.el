@@ -630,6 +630,24 @@ Operate on selected region or whole buffer."
   (web-mode-enable-auto-pairing t)
   (web-mode-enable-css-colorization t))
 
+;; TypeScript-support for Emacs.
+;; https://github.com/emacs-typescript/typescript.el
+;; [!WARNING]: the repo is on development HALT. Use Emacs 29+ with
+;; built-in tree-sitter to use provided typescript-ts-mode instead.
+(use-package typescript-mode
+  :ensure t
+  :mode "\\.ts\\'"
+  :custom
+  (typescript-indent-level 4))
+
+;; Improved JavaScript editing mode for GNU Emacs.
+;; https://github.com/mooz/js2-mode
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'"
+  :custom
+  (js2-basic-offset 4))
+
 ;;;; !NOTE:
 ;;; lsp-mode vs. lsp-bridge vs. lspce vs. eglot
 ;;; discussion on reddit: https://www.reddit.com/r/emacs/comments/1c0v28k/lspmode_vs_lspbridge_vs_lspce_vs_eglot/
