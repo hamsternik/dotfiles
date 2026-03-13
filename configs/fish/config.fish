@@ -99,4 +99,5 @@ fish_add_path /opt/homebrew/opt/libpq/bin
 set -gx PATH $PATH /Users/hamsternik/.lmstudio/bin
 # End of LM Studio CLI section
 
-
+# opencode
+fish_add_path /home/hamsternik/.opencode/bin
