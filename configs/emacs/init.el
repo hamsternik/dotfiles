@@ -532,6 +532,13 @@ Operate on selected region or whole buffer."
   :ensure t
   :bind ("C-=" . er/expand-region))
 
+(use-package diff-hl
+  :ensure t
+  :config
+  (setq diff-hl-draw-borders nil)
+  (global-diff-hl-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
+
 ;;; --- LSP's configuration
 
 ;; a client for Language Server Protocol servers.
