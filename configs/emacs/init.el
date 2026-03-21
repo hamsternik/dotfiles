@@ -528,6 +528,10 @@ Operate on selected region or whole buffer."
 ;; TODO: @prot sample configuration including `orderless` package
 ;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages
 
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
+
 ;;; --- LSP's configuration
 
 ;; a client for Language Server Protocol servers.
@@ -610,8 +614,13 @@ Operate on selected region or whole buffer."
   ;;  :defer t
   :mode
   ("README\\.md\\'" . gfm-mode)
+  ;;  :hook
+  ;; (markdown-mode . auto-fill-mode)
+  ;; (markdown-mode . visual-line-mode) ;; soft wrap at word boundaries instead.
   :hook
-  (markdown-mode . auto-fill-mode)
+  (markdown-mode . (lambda ()
+                     (auto-fill-mode -1)
+                     (setq-local truncate-lines nil)))
   :config
   (when (executable-find "aspell")
     (add-hook 'markdown-mode-hook #'flyspell-mode))
