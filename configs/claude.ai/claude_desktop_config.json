@@ -4,7 +4,7 @@
   "preferences": {
     "quickEntryDictationShortcut": "capslock",
     "coworkScheduledTasksEnabled": true,
-    "sidebarMode": "chat",
+    "sidebarMode": "task",
     "coworkWebSearchEnabled": true
   }
 }
