@@ -201,7 +201,11 @@
   ;; Using claude-code in *vterm* build-in Emacs terminal.
   ;; The most reliable workflow I found is: `C-c C-t` (enter copy mode), then
   ;; navigate/select -> `M-w` -> `C-c C-t` to exit copy mode.
-  (setq select-enable-clipboard t))
+  (setq select-enable-clipboard t)
+  ;; By default symlink extension is irrelevant, Emacs uses the target file's extension.
+  ;; This tells Emacs to use the /symlink's name/ for mode detection instead of resolving
+  ;; to the target. E.g. jjournal.org as symlink -> org-mode would work. 
+  (setq find-file-visit-truename nil))
 
 ;; EMACS POST-CONFIG
 
