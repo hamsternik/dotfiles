@@ -541,6 +541,7 @@ Operate on selected region or whole buffer."
   :config
   (setq diff-hl-draw-borders nil)
   (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
 
 (use-package git-auto-commit-mode
