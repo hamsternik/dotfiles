@@ -543,6 +543,12 @@ Operate on selected region or whole buffer."
   (global-diff-hl-mode)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
 
+(use-package git-auto-commit-mode
+  :ensure t
+  :defer t
+  :config
+  (setq gac-automatically-push-p t))
+
 ;;; --- LSP's configuration
 
 ;; a client for Language Server Protocol servers.
