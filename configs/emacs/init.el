@@ -544,6 +544,9 @@ Operate on selected region or whole buffer."
   (diff-hl-flydiff-mode)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
 
+(advice-add 'shell-command :after
+            (lambda (&rest _) (vc-refresh-state)))
+
 (use-package git-auto-commit-mode
   :ensure t
   :defer t
