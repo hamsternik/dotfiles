@@ -8,10 +8,6 @@ Personal dotfiles repository for macOS development environment. Manages 25+ tool
 
 **Primary focus:** macOS (no Linux support planned)
 
-## Workflow Rules
-
-- Do not offer to make code edits. Provide explanations and code snippets; the user will apply changes manually.
-
 ## Project Structure
 
 ```
@@ -163,6 +159,27 @@ M-x describe-variable RET completion-at-point-functions  ;; check local vs globa
 M-x cape-dabbrev                                         ;; test cape directly
 M-/                                                      ;; test dabbrev-expand
 ```
+
+## Emacs Validation Tools
+
+**Built-in tools for validating elisp config:**
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `byte-compile-file` | Compiles elisp, reports warnings/errors | `M-x byte-compile-file RET init.el` |
+| `check-parens` | Validates balanced parentheses | `M-x check-parens` |
+| `elint-current-buffer` | Lints elisp code | `M-x elint-current-buffer` |
+| `checkdoc` | Validates docstrings | `M-x checkdoc` |
+
+**Batch validation from terminal:**
+```bash
+emacs --batch -l ~/.config/emacs/init.el
+```
+
+**Quick validation workflow:**
+1. `M-x check-parens` - catch syntax errors
+2. `M-x byte-compile-file` - catch semantic issues (check `*Compile-Log*` buffer)
+3. `C-c C-r` - test actual loading
 
 ## Code Style
 
