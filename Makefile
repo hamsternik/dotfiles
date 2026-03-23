@@ -24,6 +24,10 @@ help:
 install-brew:
 	brew bundle install --file=Brewfile
 
+## Batch mode - test if config loads without errors.
+emacs-lint:
+	emacs --batch -l configs/emacs/init.el
+
 ## mas 
 ### 📦 Mac App Store command line interface
 mas-list-apps:

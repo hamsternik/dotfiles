@@ -59,6 +59,7 @@ make install-all              # Install all configurations
 make uninstall-all            # Remove all symlinks
 make install-<tool>-conf      # Install specific tool (e.g., install-emacs-conf)
 make install-brew             # Install Homebrew packages from Brewfile
+make emacs-lint               # Validate Emacs config (batch load, reports errors)
 ```
 
 ## Emacs Configuration
@@ -173,13 +174,14 @@ M-/                                                      ;; test dabbrev-expand
 
 **Batch validation from terminal:**
 ```bash
-emacs --batch -l ~/.config/emacs/init.el
+make emacs-lint               # preferred: runs emacs --batch -l configs/emacs/init.el
 ```
 
 **Quick validation workflow:**
 1. `M-x check-parens` - catch syntax errors
 2. `M-x byte-compile-file` - catch semantic issues (check `*Compile-Log*` buffer)
-3. `C-c C-r` - test actual loading
+3. `make emacs-lint` - batch load test from terminal
+4. `C-c C-r` - test actual loading inside Emacs
 
 ## Code Style
 
