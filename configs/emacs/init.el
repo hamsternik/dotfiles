@@ -544,8 +544,19 @@ Operate on selected region or whole buffer."
   (diff-hl-flydiff-mode)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
 
-(advice-add 'shell-command :after
-            (lambda (&rest _) (vc-refresh-state)))
+;; Refresh VC state after M-! shell commands so diff-hl updates.
+;; Without this, diff-hl fringe indicators remain stale after
+;; git operations (add/commit/push) run via shell-command.
+;; TODO: not working yet - need to investigate further.
+(advice-add 'shell-command :around
+            (lambda (orig-fun &rest args)
+              (let ((buf (current-buffer)))
+                (apply orig-fun args)
+                (with-current-buffer buf
+                  (when buffer-file-name
+                    (vc-refresh-state)
+                    (when (fboundp 'diff-hl-update)
+                      (diff-hl-update)))))))
 
 (use-package git-auto-commit-mode
   :ensure t
