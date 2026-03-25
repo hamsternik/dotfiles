@@ -205,7 +205,12 @@
   ;; By default symlink extension is irrelevant, Emacs uses the target file's extension.
   ;; This tells Emacs to use the /symlink's name/ for mode detection instead of resolving
   ;; to the target. E.g. jjournal.org as symlink -> org-mode would work. 
-  (setq find-file-visit-truename nil))
+  (setq find-file-visit-truename nil)
+  ;; Silently follow synlinks to their real files (no prompt), where:
+  ;; /ask/ - prompt every time (set by default)
+  ;; /t/ - always follow silently
+  ;; /nil/ - never follow, open the symlink as-is
+  (setq vc-follow-symlinks nil))
 
 ;; EMACS POST-CONFIG
 
