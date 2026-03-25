@@ -44,6 +44,7 @@ dotfiles/
 │   ├── karabiner/                # Keyboard customization
 │   ├── finicky/                  # Browser routing
 │   ├── lf/                       # Terminal file manager
+│   ├── xcode/                    # Xcode key bindings (custom.idekeybindings)
 │   ├── claude-desktop/           # Claude Desktop config
 │   └── crush/                    # Crush AI config
 │
@@ -51,6 +52,19 @@ dotfiles/
 ├── Brewfile                      # Homebrew packages (100+ packages)
 └── README.md                     # Setup documentation
 ```
+
+## Xcode Configuration
+
+**Location:** `configs/xcode/custom.idekeybindings`
+
+Custom Xcode key bindings in XML plist format (`.idekeybindings`). Xcode loads all `.idekeybindings` files found in `~/Library/Developer/Xcode/UserData/KeyBindings/` and exposes each as a selectable profile under **Settings → Key Bindings**.
+
+```bash
+make install-xcode-keybinds    # symlink custom.idekeybindings into Xcode's KeyBindings dir
+make uninstall-xcode-keybinds  # remove the symlink
+```
+
+Modifier notation used in the file: `@` = Cmd, `$` = Shift, `^` = Ctrl, `~` = Option.
 
 ## Key Commands
 

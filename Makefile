@@ -204,6 +204,19 @@ uninstall-nvim-conf:
 	rm ~/.config/nvim/lua || true
 	rm ~/.config/nvim/plugin || true
 
+## Xcode keybindings
+
+XCODE_DIR := $(CURRENTDIR)/configs/xcode
+XCODE_KEYBINDINGS_DESTINATION := $(HOME)/Library/Developer/Xcode/UserData/KeyBindings
+install-xcode-keybinds:
+	@$(MAKE) uninstall-xcode-keybinds
+	@echo "\n✨ Installing Xcode custom key bindings."
+	mkdir -p $(XCODE_KEYBINDINGS_DESTINATION)
+	ln -s -n $(XCODE_DIR)/custom.idekeybindings $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings
+
+uninstall-xcode-keybinds:
+	rm $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings || true
+
 ## Sublime Text 4 configs
 
 SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURRENTDIR)/configs/sublime-text
