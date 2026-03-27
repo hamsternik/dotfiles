@@ -229,17 +229,18 @@ uninstall-sublime-text-conf:
 	rm "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings" || true
 	rm "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings" || true
 
-# TMUX config (Terminal multiplexer)
+# https://github.com/tmux/tmux
+# TMUX CONFIGURATION (Terminal multiplexer)
 
-TMUX_DIR := $(CURDIR)/configs/tmux
-install-tmux-conf:
-	@$(MAKE) uninstall-tmux-conf
-	@echo "\n✨ Installing TMUX config files..."
-	mkdir -p ~/.config/tmux || true
-	ln -s -n $(TMUX_DIR)/tmux.conf ~/.config/tmux/tmux.conf
+TMUX_SOURCE := $(CURDIR)/configs/tmux
+TMUX_DEST := $(HOME)/.config/tmux
+install-tmux-conf: uninstall-tmux-conf
+	@echo "\nInstalling tmux configuration 🚀"
+	mkdir -p $(TMUX_DEST)
+	ln -s -f $(TMUX_SOURCE)/tmux.conf $(TMUX_DEST)/tmux.conf
 
 uninstall-tmux-conf:
-	rm ~/.config/tmux/tmux.conf || true
+	rm $(TMUX_DEST)/tmux.conf || true
 
 ## ViM configs (Vi 'workalike' with many additional features)
 
