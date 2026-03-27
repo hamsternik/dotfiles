@@ -142,12 +142,13 @@ install-gpg-conf:
 
 ## karabiner configs (Keyboard customiser)
 
-KARABINER_DIR := $(CURRENTDIR)/configs/karabiner
+KARABINER_SOURCE := $(CURRENTDIR)/configs/karabiner
+KARABINER_DEST := $(HOME)/.config/karabiner
 install-karabiner-conf:
 	@$(MAKE) uninstall-karabiner-conf
-	@echo "\n✨ Installing Karabiner config files."
-	ln -s -n $(KARABINER_DIR)/karabiner.json ~/.config/karabiner/karabiner.json
-	ln -s -n $(KARABINER_DIR)/change-lang-one-key.json ~/.config/karabiner/assets/complex_modifications/change-lang-one-key.json
+	@echo "\nInstalling Karabiner configuration 🚀"
+	ln -s $(KARABINER_SOURCE)/karabiner.json $(KARABINER_DEST)/karabiner.json
+	ln -s $(KARABINER_SOURCE)/change-lang-one-key.json $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json
 
 uninstall-karabiner-conf:
 	rm ~/.config/karabiner/karabiner.json || true
