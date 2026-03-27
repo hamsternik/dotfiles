@@ -17,6 +17,7 @@
 # Use `|| true` in the end of the command to suppress the error.
 
 CURRENTDIR := $(shell pwd)
+HOMEDIR := $(HOME)
 
 help:
 	@cat Makefile
@@ -129,20 +130,21 @@ uninstall-fish-conf:
 
 ## git configs
 
-GIT_DIR := $(CURRENTDIR)/configs/git
+GIT_SOURCE := $(CURRENTDIR)/configs/git
+GIT_DEST := $(HOMEDIR)
 install-git-conf:
 	@$(MAKE) uninstall-git-conf
-	@echo "\n✨ Installing git config files."
-	ln -s -n $(GIT_DIR)/gitattributes ~/.gitattributes
-	ln -s -n $(GIT_DIR)/gitignore_global ~/.gitignore_global
-	ln -s -n $(GIT_DIR)/gitconfig ~/.gitconfig
-	ln -s -n $(GIT_DIR)/gitconfig.work ~/.gitconfig.work
+	@echo "\nInstalling git configuration 🚀"
+	ln -s -f $(GIT_SOURCE)/gitattributes $(GIT_DEST)/.gitattributes
+	ln -s -f $(GIT_SOURCE)/gitconfig $(GIT_DEST)/.gitconfig
+	ln -s -f $(GIT_SOURCE)/gitconfig.work $(GIT_DEST)/.gitconfig.work
+	ln -s -f $(GIT_SOURCE)/gitignore_global $(GIT_DEST)/.gitignore_global
 
 uninstall-git-conf:
 	rm ~/.gitattributes || true
-	rm ~/.gitignore_global || true
 	rm ~/.gitconfig || true
 	rm ~/.gitconfig.work || true
+	rm ~/.gitignore_global || true
 
 ## gnupg configs
 
@@ -236,13 +238,15 @@ uninstall-sublime-text-conf:
 
 ## basic shell configs
 
-SHELL_DIR := $(CURRENTDIR)/configs/shell
+SHELL_SOURCE := $(CURRENTDIR)/configs/shell
+SHELL_DEST := $(HOMEDIR)
 install-shell-conf:
 	@$(MAKE) uninstall-shell-conf
-	@echo "\n✨ Installing bash & shell config files."
-	ln -s -n $(SHELL_DIR)/aliases ~/.aliases
-	ln -s -n $(SHELL_DIR)/bashrc ~/.bashrc
-	ln -s -n $(SHELL_DIR)/profile ~/.profile
+	@echo "\nInstalling bash & shell config files 🚀"
+	echo "$(SHELL_SOURCE)/aliases link to $(SHELL_DEST)/.aliases"
+	ln -s -f $(SHELL_SOURCE)/aliases $(SHELL_DEST)/.aliases
+	ln -s -f $(SHELL_SOURCE)/bashrc $(SHELL_DEST)/.bashrc
+	ln -s -f $(SHELL_SOURCE)/profile $(SHELL_DEST)/.profile
 
 uninstall-shell-conf:
 	rm ~/.aliases || true
@@ -251,11 +255,13 @@ uninstall-shell-conf:
 
 ## SSH configuration
 
-SHELL_DIR := $(CURRENTDIR)/configs/ssh
+SSH_SOURCE := $(CURRENTDIR)/configs/ssh
+SSH_DEST := $(HOMEDIR)/.ssh
 install-ssh-conf:
-	@echo "\n✨Installing SSH configuration files."
-	ln -s -n $(SHELL_DIR)/config ~/.ssh/config
-	@echo "\n✨Check out SSH private keys for the 'ssh-agent':"
+	@$(MAKE) uninstall-ssh-conf
+	@echo "\nInstalling SSH configuration 🚀"
+	ln -s -f $(SSH_SOURCE)/config $(SSH_DEST)/config
+	@echo "\nChecking out SSH private keys for the 'ssh-agent:"
 	ssh-add -l
 
 uninstall-ssh-conf:
