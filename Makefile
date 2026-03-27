@@ -50,7 +50,7 @@ install-all:
 	$(MAKE) install-finicky-conf
 	$(MAKE) install-fish-conf
 	$(MAKE) install-git-conf
-	$(MAKE) install-gpg-conf
+#$(MAKE) install-gpg-conf
 	$(MAKE) install-karabiner-conf
 	$(MAKE) install-nvim-conf
 	$(MAKE) install-shell-conf
@@ -66,7 +66,7 @@ uninstall-all:
 	$(MAKE) uninstall-finicky-conf
 	$(MAKE) uninstall-fish-conf
 	$(MAKE) uninstall-git-conf
-# $(MAKE) uninstall-gpg-conf
+#$(MAKE) uninstall-gpg-conf
 	$(MAKE) uninstall-karabiner-conf
 	$(MAKE) uninstall-nvim-conf
 	$(MAKE) uninstall-shell-conf
@@ -138,12 +138,20 @@ uninstall-git-conf:
 
 ## gnupg configs
 
-GNUPG_DIR := $(CURRENTDIR)/configs/gnupg
+GNUPG_SOURCE := $(CURDIR)/configs/gnupg
+GNUPG_DEST := $(HOME)/.gnupg
 install-gpg-conf:
 	@echo "GPG public key(ring) is not used at the moment. Exit."
-# brew list gnupg || HOMEBREW_NO_AUTO_UPDATE=1 brew install gnupg
-# ln -s -n $(GNUPG_DIR)/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-# ln -s -n $(GNUPG_DIR)/gpg.conf ~/.gnupg/gpg.conf
+	brew list gnupg || HOMEBREW_NO_AUTO_UPDATE=1 brew install gnupg
+	@echo "\nInstalling GnuPG (gpg) configuration 🚀"
+	ln -s -f $(GNUPG_SOURCE)/common.conf $(GNUPG_DEST)/common.conf
+# ln -s -f $(GNUPG_SOURCE)/gpg.conf $(GNUPG_DEST)/gpg.conf
+# ln -s -f $(GNUPG_SOURCE)/gpg-agent.conf $(GNUPG_DEST)/gpg-agent.conf
+
+uninstall-gpg-conf:
+	rm -f $(GNUPG_DEST)/common.conf
+#rm -f $(GNUPG_DEST)/gpg.conf
+#rm -f $(GNUPG_DEST)/gpg-agent.conf
 
 ## karabiner configs (Keyboard customiser)
 
