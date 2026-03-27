@@ -242,17 +242,18 @@ install-tmux-conf: uninstall-tmux-conf
 uninstall-tmux-conf:
 	rm $(TMUX_DEST)/tmux.conf || true
 
-## ViM configs (Vi 'workalike' with many additional features)
+# https://github.com/vim/vim
+# VIM CONFIGURATION
 
-VIM_DIR := $(CURDIR)/configs/vim
-install-vim-conf:
-	@$(MAKE) uninstall-vim-conf
-	@echo "\n✨ Installing ViM config files."
-	@if [ ! -d "$(HOME)/.vim" ]; then echo "~/.vim dir does not exist! Exit."; exit 1; fi
-	ln -s -n $(VIM_DIR)/vimrc ~/.vim/.vimrc
+VIM_SOURCE := $(CURDIR)/configs/vim
+VIM_DEST := $(HOME)/.vim
+install-vim-conf: uninstall-vim-conf
+	@if [ ! -d "$(VIM_DEST)" ]; then echo "❌ ~/.vim dir does not exist. Exit."; exit 1; fi
+	@echo "\nInstalling Vim configuration 🚀"
+	ln -s -f $(VIM_SOURCE)/vimrc $(VIM_DEST)/.vimrc
 
 uninstall-vim-conf:
-	rm ~/.vim/.vimrc || true
+	rm $(VIM_DEST)/.vimrc || true
 
 ## VSCode configs (Open-source code editor)
 
