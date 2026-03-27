@@ -197,6 +197,60 @@ make emacs-lint               # preferred: runs emacs --batch -l configs/emacs/i
 3. `make emacs-lint` - batch load test from terminal
 4. `C-c C-r` - test actual loading inside Emacs
 
+## Makefile Patterns
+
+### Variable naming conventions
+
+| Pattern | When to use | Example |
+|---------|-------------|---------|
+| `TOOL_SOURCE` + `TOOL_DEST` | File-to-file symlinks | `FINICKY_SOURCE`, `GIT_SOURCE` |
+| `TOOL_DIR` | Directory-based configs, multiple files symlinked from one dir | `FISH_DIR`, `NVIM_DIR` |
+
+### Target structure
+
+Every tool follows this pair pattern:
+
+```makefile
+install-X-conf:
+	@$(MAKE) uninstall-X-conf        # always clean before installing
+	@echo "\n✨ Installing X config files."
+	ln -s -n $(X_DIR)/file ~/.config/x/file
+
+uninstall-X-conf:
+	rm ~/.config/x/file || true      # suppress error if symlink missing
+```
+
+### Symlink flags
+
+- `ln -s -f` — for **individual files** (overwrites existing target)
+- `ln -s -n` — for **directories** (treats destination as normal file, not a dir inside dir)
+- Never use `ln -s` alone — always specify `-f` or `-n`
+
+### Pre-condition guards
+
+Check that a required directory exists before symlinking into it:
+
+```makefile
+@if [ ! -d "$$HOME/.config/nvim" ]; then echo "dir does not exist. Exit."; exit 1; fi
+```
+
+Note: use `$$HOME` (escaped) inside recipe shell commands, `$(HOME)` in Make variable context.
+
+### Echo / messaging convention
+
+- Prefix with `\n` for visual separation
+- Emoji goes at the **end** of the sentence, not the beginning
+- Always use `🚀` for all install echo messages
+- Use `@echo` (silent) for announcements, bare `echo` only when the output itself is the content
+
+### install-all / uninstall-all
+
+Both batch targets list every tool explicitly via `$(MAKE) install-X-conf` calls. When adding a new tool, add it to **both** batch targets.
+
+### Known inconsistencies (do not replicate)
+
+- `uninstall-all`: `uninstall-gpg-conf` is commented out, but `install-all` includes it
+
 ## Code Style
 
 - Emacs: 4-space indentation, no tabs
