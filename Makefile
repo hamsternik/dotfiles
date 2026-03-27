@@ -16,9 +16,6 @@
 # Use `-` before a command to ignore errors and continue with next one.
 # Use `|| true` in the end of the command to suppress the error.
 
-CURRENTDIR := $(shell pwd)
-HOMEDIR := $(HOME)
-
 help:
 	@cat Makefile
 
@@ -80,17 +77,18 @@ uninstall-all:
 
 # https://github.com/johnste/finicky
 # A macOS app for customizing which browser to start
-FINICKY_SOURCE := $(CURRENTDIR)/configs/finicky
-FINICKY_DEST := $(HOMEDIR)
-install-finicky-conf:
-	@$(MAKE) uninstall-finicky-conf
+
+FINICKY_SOURCE := $(CURDIR)/configs/finicky
+FINICKY_DEST := $(HOME)
+install-finicky-conf: uninstall-finicky-conf
 	@echo "\nInstalling finicky configuration 🚀"
 	ln -s -f $(FINICKY_SOURCE)/finicky.js $(FINICKY_DEST)/.finicky.js
 
 uninstall-finicky-conf:
 	rm ~/.finicky.js || true
 
-## fish shell
+# https://github.com/fish-shell/fish-shell
+# FISH SHELL CONFIGURATION
 
 #TODO(fish): fix up make error log isses:
 #make: fisher: No such file or directory
@@ -104,26 +102,26 @@ install-fish-plugins:
 	fisher install jorgebucaran/nvm.fish
 	fisher install sentriz/fish-pipenv
 
-FISH_DIR := $(CURRENTDIR)/configs/fish
-install-fish-conf:
-	@$(MAKE) uninstall-fish-conf
+FISH_SOURCE := $(CURDIR)/configs/fish
+FISH_DEST := $(HOME)/.config/fish
+install-fish-conf: uninstall-fish-conf
+	@if [ ! -d "$(FISH_DEST)" ]; then echo "❌ ~/.config/fish dir does not exist. Exit."; exit 1; fi
 	@echo "\nInstalling fish shell configuration 🚀"
-	@if [ ! -d "$(HOME)/.config/fish" ]; then echo "❌ ~/.config/fish dir does not exist. Exit."; exit 1; fi
-	ln -s -f $(FISH_DIR)/config.fish ~/.config/fish/config.fish
-	ln -s -f $(FISH_DIR)/fish_plugins ~/.config/fish/fish_plugins
-	ln -s -f $(FISH_DIR)/functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+	ln -s -f $(FISH_SOURCE)/config.fish $(FISH_DEST)/config.fish
+	ln -s -f $(FISH_SOURCE)/fish_plugins $(FISH_DEST)/fish_plugins
+	ln -s -f $(FISH_SOURCE)/functions/fish_prompt.fish $(FISH_DEST)/functions/fish_prompt.fish
 
 uninstall-fish-conf:
-	rm ~/.config/fish/config.fish || true
-	rm ~/.config/fish/fish_plugins || true
-	rm ~/.config/fish/functions/fish_prompt.fish || true
+	rm $(FISH_DEST)/config.fish || true
+	rm $(FISH_DEST)/fish_plugins || true
+	rm $(FISH_DEST)/functions/fish_prompt.fish || true
 
-## git configs
+# https://github.com/git/git
+# git configuration 
 
-GIT_SOURCE := $(CURRENTDIR)/configs/git
-GIT_DEST := $(HOMEDIR)
-install-git-conf:
-	@$(MAKE) uninstall-git-conf
+GIT_SOURCE := $(CURDIR)/configs/git
+GIT_DEST := $(HOME)
+install-git-conf: uninstall-git-conf
 	@echo "\nInstalling git configuration 🚀"
 	ln -s -f $(GIT_SOURCE)/gitattributes $(GIT_DEST)/.gitattributes
 	ln -s -f $(GIT_SOURCE)/gitconfig $(GIT_DEST)/.gitconfig
@@ -136,11 +134,12 @@ uninstall-git-conf:
 	rm ~/.gitconfig.work || true
 	rm ~/.gitignore_global || true
 
-## gnupg configs
+# https://github.com/gpg/gnupg
+# gnupg configuration 
 
 GNUPG_SOURCE := $(CURDIR)/configs/gnupg
 GNUPG_DEST := $(HOME)/.gnupg
-install-gpg-conf:
+install-gpg-conf: uninstall-gpg-conf
 	@echo "GPG public key(ring) is not used at the moment. Exit."
 	brew list gnupg || HOMEBREW_NO_AUTO_UPDATE=1 brew install gnupg
 	@echo "\nInstalling GnuPG (gpg) configuration 🚀"
@@ -153,21 +152,23 @@ uninstall-gpg-conf:
 #rm -f $(GNUPG_DEST)/gpg.conf
 #rm -f $(GNUPG_DEST)/gpg-agent.conf
 
-## karabiner configs (Keyboard customiser)
+# https://github.com/pqrs-org/Karabiner-Elements
+# karabiner configuration (Keyboard customiser)
 
-KARABINER_SOURCE := $(CURRENTDIR)/configs/karabiner
+KARABINER_SOURCE := $(CURDIR)/configs/karabiner
 KARABINER_DEST := $(HOME)/.config/karabiner
-install-karabiner-conf:
-	@$(MAKE) uninstall-karabiner-conf
+install-karabiner-conf: uninstall-karabiner-conf
 	@echo "\nInstalling Karabiner configuration 🚀"
-	ln -s $(KARABINER_SOURCE)/karabiner.json $(KARABINER_DEST)/karabiner.json
-	ln -s $(KARABINER_SOURCE)/change-lang-one-key.json $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json
+	ln -s -f $(KARABINER_SOURCE)/karabiner.json $(KARABINER_DEST)/karabiner.json
+	ln -s -f $(KARABINER_SOURCE)/change-lang-one-key.json $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json
 
 uninstall-karabiner-conf:
-	rm ~/.config/karabiner/karabiner.json || true
-	rm ~/.config/karabiner/assets/complex_modifications/change-lang-one-key.json || true
+	rm $(KARABINER_DEST)/karabiner.json || true
+	rm $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json || true
 
-## neovim configurations
+# https://github.com/neovim/neovim
+# NEOVIM CONFIGURATION 
+
 NVIM_SOURCE := $(CURDIR)/configs/nvim
 NVIM_DEST := $(HOME)/.config/nvim
 install-nvim-conf: uninstall-nvim-conf
@@ -181,11 +182,12 @@ uninstall-nvim-conf:
 	rm $(NVIM_DEST)/lua || true
 
 
-## shell configuration, bash-based.
-SHELL_SOURCE := $(CURRENTDIR)/configs/shell
-SHELL_DEST := $(HOMEDIR)
-install-shell-conf:
-	@$(MAKE) uninstall-shell-conf
+# https://github.com/gitGNU/gnu_bash
+# SHELL CONFIGURATION (bash-driven)
+
+SHELL_SOURCE := $(CURDIR)/configs/shell
+SHELL_DEST := $(HOME)
+install-shell-conf: uninstall-shell-conf
 	@echo "\nInstalling bash & shell config files 🚀"
 	echo "$(SHELL_SOURCE)/aliases link to $(SHELL_DEST)/.aliases"
 	ln -s -f $(SHELL_SOURCE)/aliases $(SHELL_DEST)/.aliases
@@ -197,12 +199,12 @@ uninstall-shell-conf:
 	rm ~/.bashrc || true
 	rm ~/.profile || true
 
-## SSH configuration
+# https://github.com/openssh/openssh-portable
+# SSH CONFIGURATION
 
-SSH_SOURCE := $(CURRENTDIR)/configs/ssh
-SSH_DEST := $(HOMEDIR)/.ssh
-install-ssh-conf:
-	@$(MAKE) uninstall-ssh-conf
+SSH_SOURCE := $(CURDIR)/configs/ssh
+SSH_DEST := $(HOME)/.ssh
+install-ssh-conf: uninstall-ssh-conf
 	@echo "\nInstalling SSH configuration 🚀"
 	ln -s -f $(SSH_SOURCE)/config $(SSH_DEST)/config
 	@echo "\nChecking out SSH private keys for the 'ssh-agent:"
@@ -212,7 +214,7 @@ uninstall-ssh-conf:
 	rm ~/.ssh/config || true
 
 ## Sublime Text 4 configs
-SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURRENTDIR)/configs/sublime-text
+SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURDIR)/configs/sublime-text
 SUBLIME_TEXT_CONF_DIR := "$(HOME)/Library/Application\ Support/Sublime\ Text/Packages/User"
 install-sublime-text-conf:
 	@$(MAKE) uninstall-sublime-text-conf
@@ -229,7 +231,7 @@ uninstall-sublime-text-conf:
 
 # TMUX config (Terminal multiplexer)
 
-TMUX_DIR := $(CURRENTDIR)/configs/tmux
+TMUX_DIR := $(CURDIR)/configs/tmux
 install-tmux-conf:
 	@$(MAKE) uninstall-tmux-conf
 	@echo "\n✨ Installing TMUX config files..."
@@ -241,7 +243,7 @@ uninstall-tmux-conf:
 
 ## ViM configs (Vi 'workalike' with many additional features)
 
-VIM_DIR := $(CURRENTDIR)/configs/vim
+VIM_DIR := $(CURDIR)/configs/vim
 install-vim-conf:
 	@$(MAKE) uninstall-vim-conf
 	@echo "\n✨ Installing ViM config files."
@@ -253,7 +255,7 @@ uninstall-vim-conf:
 
 ## VSCode configs (Open-source code editor)
 
-VSCODE_DIR := $(CURRENTDIR)/configs/vscode
+VSCODE_DIR := $(CURDIR)/configs/vscode
 install-vscode-conf:
 	@$(MAKE) uninstall-vscode-conf
 	@echo "\n✨ Installing VSCode config files."
@@ -265,7 +267,7 @@ uninstall-vscode-conf:
 	rm ~/Library/Application\ Support/Code/User/settings.json || true
 
 ## Xcode keybindings
-XCODE_DIR := $(CURRENTDIR)/configs/xcode
+XCODE_DIR := $(CURDIR)/configs/xcode
 XCODE_KEYBINDINGS_DESTINATION := $(HOME)/Library/Developer/Xcode/UserData/KeyBindings
 install-xcode-keybinds:
 	@$(MAKE) uninstall-xcode-keybinds
@@ -278,7 +280,7 @@ uninstall-xcode-keybinds:
 
 ## Zed editor configs
 
-ZED_EDITOR := $(CURRENTDIR)/configs/zed
+ZED_EDITOR := $(CURDIR)/configs/zed
 install-zed-conf:
 	@$(MAKE) uninstall-zed-conf
 	@echo "\n✨ Installing Zed editor config files."
@@ -291,7 +293,7 @@ uninstall-zed-conf:
 
 ## zellij configs (Pluggable terminal workspace, with terminal multiplexer as the base feature)
 
-ZELLIJ_DIR := $(CURRENTDIR)/configs/zellij
+ZELLIJ_DIR := $(CURDIR)/configs/zellij
 install-zellij-conf:
 	@$(MAKE) uninstall-zellij-conf
 	@echo "\n✨ Installing zellij config files..."
@@ -306,7 +308,7 @@ doc-zellij:
 
 ## Zsh configs (shell designed for interactive use, although it is also a powerful scripting language)
 
-ZSH_DIR := $(CURRENTDIR)/configs/zsh
+ZSH_DIR := $(CURDIR)/configs/zsh
 install-zsh-conf:
 	@$(MAKE) uninstall-zsh-conf
 	@echo "\n✨ Installing Zsh config files..."
