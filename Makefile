@@ -22,6 +22,21 @@ help:
 install-brew:
 	brew bundle install --file=Brewfile
 
+# https://github.com/emacs-mirror/emacs
+# EMACS CONFIGURATION
+
+EMACS_SOURCE := $(CURDIR)/configs/emacs
+EMACS_DEST := $(HOME)/.config/emacs
+install-emacs-conf: uninstall-emacs-conf
+	@if [ ! -d "$(EMACS_DEST)" ]; then echo "❌ ~/.config/emacs dir does not exist. Exit."; exit 1; fi
+	@echo "\nInstalling Emacs configuration 🚀"
+	ln -s -f $(EMACS_SOURCE)/init.el $(EMACS_DEST)/init.el
+	ln -s -f $(EMACS_SOURCE)/custom.init.el $(EMACS_DEST)/custom.init.el
+
+uninstall-emacs-conf:
+	rm $(EMACS_DEST)/init.el || true
+	rm $(EMACS_DEST)/custom.init.el || true
+
 ## Batch mode - test if config loads without errors.
 emacs-lint:
 	emacs --batch -l configs/emacs/init.el
@@ -44,6 +59,7 @@ mas-install-pdf:
 # WARNING! The whole setup is macOS-oriented, no plans to suuport Linux currenlty.
 
 install-all:
+	$(MAKE) install-emacs-conf
 	$(MAKE) install-finicky-conf
 	$(MAKE) install-fish-conf
 	$(MAKE) install-git-conf
@@ -60,6 +76,7 @@ install-all:
 	$(MAKE) install-zsh-conf
 
 uninstall-all:
+	$(MAKE) uninstall-emacs-conf
 	$(MAKE) uninstall-finicky-conf
 	$(MAKE) uninstall-fish-conf
 	$(MAKE) uninstall-git-conf
