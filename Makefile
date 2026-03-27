@@ -167,21 +167,18 @@ uninstall-karabiner-conf:
 	rm ~/.config/karabiner/karabiner.json || true
 	rm ~/.config/karabiner/assets/complex_modifications/change-lang-one-key.json || true
 
-## NVIM configs
-
-NVIM_DIR := $(CURRENTDIR)/configs/nvim
-install-nvim-conf:
-	@$(MAKE) uninstall-nvim-conf
-	@echo "\n✨ Installing NeoVim config files."
-	@if [ ! -d "$$HOME/.config/nvim" ]; then echo "~/.config/nvim configuration dir does not exist. Exit."; exit 1; fi
-	ln -s -n $(NVIM_DIR)/init.lua ~/.config/nvim/init.lua
-	ln -s -n $(NVIM_DIR)/lua ~/.config/nvim/lua
-	ln -s -n $(NVIM_DIR)/plugin ~/.config/nvim/plugin
+## neovim configurations
+NVIM_SOURCE := $(CURDIR)/configs/nvim
+NVIM_DEST := $(HOME)/.config/nvim
+install-nvim-conf: uninstall-nvim-conf
+	@if [ ! -d "$(NVIM_DEST)" ]; then echo "❌ ~/.config/nvim dir does not exist. Exit."; exit 1; fi
+	@echo "\nInstalling NeoVim configuration 🚀"
+	ln -s -f $(NVIM_SOURCE)/init.lua $(NVIM_DEST)/init.lua
+	ln -s -n $(NVIM_SOURCE)/lua $(NVIM_DEST)/lua
 
 uninstall-nvim-conf:
-	rm ~/.config/nvim/init.lua || true
-	rm ~/.config/nvim/lua || true
-	rm ~/.config/nvim/plugin || true
+	rm $(NVIM_DEST)/init.lua || true
+	rm $(NVIM_DEST)/lua || true
 
 
 ## shell configuration, bash-based.
