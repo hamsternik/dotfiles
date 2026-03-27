@@ -297,16 +297,18 @@ uninstall-zed-conf:
 	rm $(ZED_DEST)/settings.json || true
 	rm $(ZED_DEST)/keymap.json || true
 
-## zellij configs (Pluggable terminal workspace, with terminal multiplexer as the base feature)
+# https://github.com/zellij-org/zellij
+# ZELLIJ CONFIGURATION (Pluggable terminal workspace)
 
-ZELLIJ_DIR := $(CURDIR)/configs/zellij
-install-zellij-conf:
-	@$(MAKE) uninstall-zellij-conf
-	@echo "\n✨ Installing zellij config files..."
-	ln -s -n $(ZELLIJ_DIR)/config.kdl ~/.config/zellij/config.kdl
+ZELLIJ_SOURCE := $(CURDIR)/configs/zellij
+ZELLIJ_DEST := $(HOME)/.config/zellij
+install-zellij-conf: uninstall-zellij-conf
+	@if [ ! -d "$(ZELLIJ_DEST)" ]; then echo "❌ ~/.config/zellij dir does not exist. Exit."; exit 1; fi
+	@echo "\nInstalling zellij configuration 🚀"
+	ln -s -f $(ZELLIJ_SOURCE)/config.kdl $(ZELLIJ_DEST)/config.kdl
 
 uninstall-zellij-conf:
-	rm ~/.config/zellij/config.kdl || true
+	rm $(ZELLIJ_DEST)/config.kdl || true
 
 doc-zellij:
 	@echo "There are 2 config files available, config.kdl and default.config.kdl in the repo."
