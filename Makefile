@@ -255,18 +255,20 @@ install-vim-conf: uninstall-vim-conf
 uninstall-vim-conf:
 	rm $(VIM_DEST)/.vimrc || true
 
-## VSCode configs (Open-source code editor)
+# https://github.com/microsoft/vscode
+# VSCODE CONFIGURATION
 
-VSCODE_DIR := $(CURDIR)/configs/vscode
-install-vscode-conf:
-	@$(MAKE) uninstall-vscode-conf
-	@echo "\n✨ Installing VSCode config files."
-	ln -s -n $(VSCODE_DIR)/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
-	ln -s -n $(VSCODE_DIR)/settings.json ~/Library/Application\ Support/Code/User/settings.json
+VSCODE_SOURCE := $(CURDIR)/configs/vscode
+VSCODE_DEST := $(HOME)/Library/Application\ Support/Code/User
+install-vscode-conf: uninstall-vscode-conf
+	@if [ ! -d $(VSCODE_DEST) ]; then echo "❌ VSCode is not installed. Exit."; exit 1; fi
+	@echo "\nInstalling VSCode configuration 🚀"
+	ln -s -f $(VSCODE_SOURCE)/keybindings.json $(VSCODE_DEST)/keybindings.json
+	ln -s -f $(VSCODE_SOURCE)/settings.json $(VSCODE_DEST)/settings.json
 
 uninstall-vscode-conf:
-	rm ~/Library/Application\ Support/Code/User/keybindings.json || true
-	rm ~/Library/Application\ Support/Code/User/settings.json || true
+	rm $(VSCODE_DEST)/keybindings.json || true
+	rm $(VSCODE_DEST)/settings.json || true
 
 ## Xcode keybindings
 XCODE_DIR := $(CURDIR)/configs/xcode
