@@ -52,8 +52,6 @@ install-all:
 	$(MAKE) install-git-conf
 	$(MAKE) install-gpg-conf
 	$(MAKE) install-karabiner-conf
-	$(MAKE) install-kitty-conf
-	$(MAKE) install-lf-conf
 	$(MAKE) install-nvim-conf
 	$(MAKE) install-shell-conf
 	$(MAKE) install-ssh-conf
@@ -70,8 +68,6 @@ uninstall-all:
 	$(MAKE) uninstall-git-conf
 # $(MAKE) uninstall-gpg-conf
 	$(MAKE) uninstall-karabiner-conf
-	$(MAKE) uninstall-kitty-conf
-	$(MAKE) uninstall-lf-conf
 	$(MAKE) uninstall-nvim-conf
 	$(MAKE) uninstall-shell-conf
 	$(MAKE) uninstall-ssh-conf
@@ -82,25 +78,14 @@ uninstall-all:
 	$(MAKE) uninstall-zellij-conf
 	$(MAKE) uninstall-zsh-conf
 
-## https://github.com/charmbracelet/crush
-## The glamourous AI coding agent for your favourite terminal 💘
-CRUSH_SOURCE := $(CURRENTDIR)/configs/crush
-CRUSH_DESTINATION := ~/.local/share/crush
-install-crush-conf:
-	@$(MAKE) uninstall-crush-conf
-	@echo "\n✨ Installing crush/crush.json config file."
-	ln -s -n $(CRUSH_SOURCE)/crush.json $(CRUSH_DESTINATION)/crush.json
-
-uninstall-crush-conf:
-	rm $(CRUSH_DESTINATION)/crush.json || true
-
-## finicky configs (Utility for customizing which browser to start)
-
-FINICKY_DIR := $(CURRENTDIR)/configs/finicky
+# https://github.com/johnste/finicky
+# A macOS app for customizing which browser to start
+FINICKY_SOURCE := $(CURRENTDIR)/configs/finicky
+FINICKY_DEST := $(HOMEDIR)
 install-finicky-conf:
 	@$(MAKE) uninstall-finicky-conf
-	@echo "\n✨ Installing finicky.js config files."
-	ln -s -n $(FINICKY_DIR)/finicky.js ~/.finicky.js
+	@echo "\nInstalling finicky configuration 🚀"
+	ln -s -f $(FINICKY_SOURCE)/finicky.js $(FINICKY_DEST)/.finicky.js
 
 uninstall-finicky-conf:
 	rm ~/.finicky.js || true
@@ -167,28 +152,6 @@ install-karabiner-conf:
 uninstall-karabiner-conf:
 	rm ~/.config/karabiner/karabiner.json || true
 	rm ~/.config/karabiner/assets/complex_modifications/change-lang-one-key.json || true
-
-## kitty configs (GPU-based terminal emulator on Python)
-
-KITTY_DIR := $(CURRENTDIR)/configs/kitty
-install-kitty-conf:
-	@$(MAKE) uninstall-kitty-conf
-	@echo "\n✨ Installing kitty terminal config files."
-	ln -s -n $(KITTY_DIR)/kitty.conf ~/.config/kitty/kitty.conf
-
-uninstall-kitty-conf:
-	rm ~/.config/kitty/kitty.conf || true
-
-## lf configs (Terminal file manager)
-
-LF_DIR := $(CURRENTDIR)/configs/lf
-install-lf-conf:
-	@$(MAKE) uninstall-lf-conf
-	@echo "\n✨ Installing lf config files."
-	ln -s -n $(LF_DIR)/lfrc ~/.config/lf/lfrc
-
-uninstall-lf-conf:
-	rm ~/.config/lf/lfrc || true
 
 ## NVIM configs
 
