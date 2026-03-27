@@ -170,38 +170,8 @@ uninstall-nvim-conf:
 	rm ~/.config/nvim/lua || true
 	rm ~/.config/nvim/plugin || true
 
-## Xcode keybindings
 
-XCODE_DIR := $(CURRENTDIR)/configs/xcode
-XCODE_KEYBINDINGS_DESTINATION := $(HOME)/Library/Developer/Xcode/UserData/KeyBindings
-install-xcode-keybinds:
-	@$(MAKE) uninstall-xcode-keybinds
-	@echo "\n✨ Installing Xcode custom key bindings."
-	mkdir -p $(XCODE_KEYBINDINGS_DESTINATION)
-	ln -s -n $(XCODE_DIR)/custom.idekeybindings $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings
-
-uninstall-xcode-keybinds:
-	rm $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings || true
-
-## Sublime Text 4 configs
-
-SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURRENTDIR)/configs/sublime-text
-SUBLIME_TEXT_CONF_DIR := "$(HOME)/Library/Application\ Support/Sublime\ Text/Packages/User"
-install-sublime-text-conf:
-	@$(MAKE) uninstall-sublime-text-conf
-	@echo "\n✨ Installing Sublime Text 4 config files."
-	@if [ ! -d "$(SUBLIME_TEXT_CONF_DIR)" ]; then echo "❌ Sublime Text 4 is not installed"; exit -1; fi
-	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Default (OSX).sublime-keymap" "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap"
-	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Package Control.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings"
-	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Preferences.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
-
-uninstall-sublime-text-conf:
-	rm "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap" || true
-	rm "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings" || true
-	rm "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings" || true
-
-## basic shell configs
-
+## shell configuration, bash-based.
 SHELL_SOURCE := $(CURRENTDIR)/configs/shell
 SHELL_DEST := $(HOMEDIR)
 install-shell-conf:
@@ -231,6 +201,21 @@ install-ssh-conf:
 uninstall-ssh-conf:
 	rm ~/.ssh/config || true
 
+## Sublime Text 4 configs
+SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURRENTDIR)/configs/sublime-text
+SUBLIME_TEXT_CONF_DIR := "$(HOME)/Library/Application\ Support/Sublime\ Text/Packages/User"
+install-sublime-text-conf:
+	@$(MAKE) uninstall-sublime-text-conf
+	@echo "\n✨ Installing Sublime Text 4 config files."
+	@if [ ! -d "$(SUBLIME_TEXT_CONF_DIR)" ]; then echo "❌ Sublime Text 4 is not installed"; exit -1; fi
+	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Default (OSX).sublime-keymap" "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap"
+	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Package Control.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings"
+	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Preferences.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
+
+uninstall-sublime-text-conf:
+	rm "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap" || true
+	rm "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings" || true
+	rm "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings" || true
 
 # TMUX config (Terminal multiplexer)
 
@@ -268,6 +253,18 @@ install-vscode-conf:
 uninstall-vscode-conf:
 	rm ~/Library/Application\ Support/Code/User/keybindings.json || true
 	rm ~/Library/Application\ Support/Code/User/settings.json || true
+
+## Xcode keybindings
+XCODE_DIR := $(CURRENTDIR)/configs/xcode
+XCODE_KEYBINDINGS_DESTINATION := $(HOME)/Library/Developer/Xcode/UserData/KeyBindings
+install-xcode-keybinds:
+	@$(MAKE) uninstall-xcode-keybinds
+	@echo "\nInstalling Xcode custom key bindings 🚀"
+	mkdir -p $(XCODE_KEYBINDINGS_DESTINATION)
+	ln -s -n $(XCODE_DIR)/custom.idekeybindings $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings
+
+uninstall-xcode-keybinds:
+	rm $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings || true
 
 ## Zed editor configs
 
