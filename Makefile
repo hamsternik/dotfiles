@@ -282,18 +282,20 @@ install-xcode-keybinds:
 uninstall-xcode-keybinds:
 	rm $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings || true
 
-## Zed editor configs
+# https://github.com/zed-industries/zed
+# ZED EDITOR CONFIGURATION
 
-ZED_EDITOR := $(CURDIR)/configs/zed
-install-zed-conf:
-	@$(MAKE) uninstall-zed-conf
-	@echo "\n✨ Installing Zed editor config files."
-	ln -s -n $(ZED_EDITOR)/settings.json ~/.config/zed/settings.json
-	ln -s -n $(ZED_EDITOR)/keymap.json ~/.config/zed/keymap.json
+ZED_SOURCE := $(CURDIR)/configs/zed
+ZED_DEST := $(HOME)/.config/zed
+install-zed-conf: uninstall-zed-conf
+	@if [ ! -d $(ZED_DEST) ]; then echo "❌ ~/.config/zed dir does not exist. Exit."; exit 1; fi
+	@echo "\nInstalling Zed editor configuration 🚀"
+	ln -s -f $(ZED_SOURCE)/settings.json $(ZED_DEST)/settings.json
+	ln -s -f $(ZED_SOURCE)/keymap.json $(ZED_DEST)/keymap.json
 
 uninstall-zed-conf:
-	rm ~/.config/zed/settings.json || true
-	rm ~/.config/zed/keymap.json || true
+	rm $(ZED_DEST)/settings.json || true
+	rm $(ZED_DEST)/keymap.json || true
 
 ## zellij configs (Pluggable terminal workspace, with terminal multiplexer as the base feature)
 
