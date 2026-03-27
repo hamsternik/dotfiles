@@ -95,23 +95,16 @@ uninstall-finicky-conf:
 FISH_DIR := $(CURRENTDIR)/configs/fish
 install-fish-conf:
 	@$(MAKE) uninstall-fish-conf
-	@echo "\nInstalling fish shell config files. ✨"
+	@echo "\nInstalling fish shell configuration 🚀"
 	@if [ ! -d "$(HOME)/.config/fish" ]; then echo "❌ ~/.config/fish dir does not exist. Exit."; exit 1; fi
 	ln -s -f $(FISH_DIR)/config.fish ~/.config/fish/config.fish
 	ln -s -f $(FISH_DIR)/fish_plugins ~/.config/fish/fish_plugins
-# @echo "✨ Installed fish config files. Installing config directories..."
-# ln -s -n $(FISH_DIR)/completions ~/.config/fish/completions
-# ln -s -n $(FISH_DIR)/conf.d ~/.config/fish/conf.d
-# ln -s -n $(FISH_DIR)/functions ~/.config/fish/functions
-# ln -s -n $(FISH_DIR)/themes ~/.config/fish/themes
+	ln -s -f $(FISH_DIR)/functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 
 uninstall-fish-conf:
 	rm ~/.config/fish/config.fish || true
 	rm ~/.config/fish/fish_plugins || true
-# rm ~/.config/fish/completions || true
-# rm ~/.config/fish/conf.d || true
-# rm ~/.config/fish/functions || true
-# rm ~/.config/fish/themes || true
+	rm ~/.config/fish/functions/fish_prompt.fish || true
 
 ## git configs
 
