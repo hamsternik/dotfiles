@@ -92,6 +92,18 @@ uninstall-finicky-conf:
 
 ## fish shell
 
+#TODO(fish): fix up make error log isses:
+#make: fisher: No such file or directory
+#make: *** [install-fish-plugins] Error 1
+install-fish-plugins:
+	@echo "\nPreparing fish plugin manager before installing plugins..."
+	brew list fisher || HOMEBREW_NO_AUTO_UPDATE=1 brew install fisher
+	@echo "TBD parse ~/.config/fish/fish_plugins file, putting all plugins in a line, and provide as arg to the `fisher install <arg>`"
+	fisher install edc/bass
+#fisher install ilancosman/tide@v6
+	fisher install jorgebucaran/nvm.fish
+	fisher install sentriz/fish-pipenv
+
 FISH_DIR := $(CURRENTDIR)/configs/fish
 install-fish-conf:
 	@$(MAKE) uninstall-fish-conf
@@ -310,16 +322,6 @@ colorcheck:
 	pastel colorcheck
 .PHONY: colorcheck
 
-fish-install-plugins:
-	@echo "\n✨Preparing fish plugin manager before installing plugins..."
-	brew list fisher || HOMEBREW_NO_AUTO_UPDATE=1 brew install fisher
-	@echo "TBD parse ~/.config/fish/fish_plugins file, putting all plugins in a line, and provide as arg to the `fisher install <arg>`"
-	fisher install edc/bass
-	fisher install ilancosman/tide@v6
-	fisher install jorgebucaran/nvm.fish
-	fisher install sentriz/fish-pipenv
-.PHONY: fish-install-plugins
-
 vscode-install-extensions:
 	./bin/vscode/vscode-extensions-install
 .PHONY: vscode-install-extensions
@@ -331,8 +333,4 @@ vscode-export-extension-list:
 terminal-macos-doc:
 	@echo "Use Atom.terminal theme in the Termainl.app -> Settings -> Profiles -> More -> Import..."
 .PHONY: terminal-macos-doc
-
-
-
-
 
