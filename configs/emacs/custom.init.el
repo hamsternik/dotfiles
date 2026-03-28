@@ -19,6 +19,16 @@
             typescript-mode use-package vertico vterm web-mode
             xterm-color))
  '(safe-local-variable-directories '("/Users/hamsternik/Developer/@hamsternik/nnotes/"))
+ '(safe-local-variable-values
+   '((eval progn
+           (defun nnotes/gac-add-readme nil
+             (when
+                 (and git-auto-commit-mode
+                      (string-match-p "jjournal\\.org$"
+                                      (buffer-file-name)))
+               (shell-command "make j")))
+           (add-hook 'after-save-hook #'nnotes/gac-add-readme nil t)
+           (git-auto-commit-mode 1))))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty
           space-after-tab space-mark tab-mark)))
