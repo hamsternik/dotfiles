@@ -412,6 +412,15 @@ Operate on selected region or whole buffer."
 
 ;;; NONGNU / MELPA PACKAGES
 
+;; org-transclusion
+;; https://github.com/nobiot/org-transclusion
+;;
+;; basic syntax to embed .org file in another .org file is:
+;; #+transclude: [[file:<filename>.org]]
+(use-package org-transclusion
+  :ensure t
+  :after org)
+
 ;;; MODE-LINE
 ;; https://github.com/dbordak/telephone-line
 (use-package telephone-line

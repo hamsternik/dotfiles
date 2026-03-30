@@ -15,9 +15,9 @@
             git-auto-commit-mode gruber-darker-theme js2-mode
             json-mode kotlin-mode latex-mode latex-unicode-math-mode
             magit marginalia markdown-mode modus-themes multi-vterm
-            orderless pdf-tools prism swift-mode telephone-line
-            typescript-mode use-package vertico vterm web-mode
-            xterm-color))
+            orderless org-transclusion pdf-tools prism swift-mode
+            telephone-line typescript-mode use-package vertico vterm
+            web-mode xterm-color))
  '(safe-local-variable-directories '("/Users/hamsternik/Developer/@hamsternik/nnotes/"))
  '(safe-local-variable-values
    '((eval progn
