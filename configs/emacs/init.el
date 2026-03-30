@@ -224,21 +224,21 @@
 (cond
  ;; macOS: use preferred fonts: Fira Code, Iosevka, Roboto Mono
  ((eq system-type 'darwin)
-  (set-face-attribute 'default nil :font "Fira Code-14")
-  (set-fontset-font t 'latin "Iosevka-14" nil 'append)
-  (set-fontset-font t 'latin "Roboto Mono-14" nil 'append))
- ;; otherwise, try Fira Code, fallback to monospace
- (t
+  (setq mac-allow-anti-aliasing t)
+  ;; (set-face-attribute 'default nil :font "Fira Code-14")
+  (set-face-attribute 'default nil :font "Roboto Mono")
+  (set-fontset-font t 'latin "Fira Code" nil 'append)
+  (set-fontset-font t 'latin "Iosevka" nil 'append))
+ (t ;; on Windows/WSL/Linux: use Fira Code, and fallback to monospace 
   (if (find-font (font-spec :name "Fira Code"))
       (set-face-attribute 'default nil :font "Fira Code-14")
     (set-face-attribute 'default nil :font "monospace-14"))))
 
-;;; FIXME: Fira Code font does not work properly in Standalone Emacs
-;;; TBD to check out workaround here: https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
-;;(set-face-attribute 'default nil
-;;		    :font "Fira Code-14")
-;;(set-fontset-font t 'latin "Iosevka-14" nil 'append)
-;;(set-fontset-font t 'latin "Roboto Mono-14" nil 'append)
+(set-face-attribute 'default nil
+                    :weight 'light
+                    :height 140)
+;; buffer variable: line spacing, lives out of 'set-face-attribute
+(setq-default line-spacing 0.175)
 
 ;;; ANSI-COLOR
 ;; enable ANSI color support in compilation buffers
