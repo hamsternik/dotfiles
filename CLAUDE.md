@@ -122,6 +122,29 @@ make emacs-lint               # Validate Emacs config (batch load, reports error
 | `C-c C-r` | Reload config |
 | `C-x C-i` | Indent buffer |
 
+### Font Configuration
+
+Font setup is split into two concerns:
+
+**1. Font family + fallback chain** (inside the `cond` block):
+```elisp
+(set-face-attribute 'default nil :font "Roboto Mono")
+(set-fontset-font t 'latin "Iosevka" nil 'append)
+(set-fontset-font t 'latin "Fira Code" nil 'append)
+```
+Priority: Roboto Mono (primary) → Iosevka → Fira Code.
+
+**2. Rendering settings** (after the `cond`, applied once regardless of font chosen):
+```elisp
+(set-face-attribute 'default nil :weight 'light :height 140)
+(setq mac-allow-anti-aliasing t)
+(setq-default line-spacing 0.1)
+```
+
+- `:weight` and `:height` are face attributes — set via `set-face-attribute`
+- `line-spacing` is a buffer variable — set via `setq-default`; cannot go inside `set-face-attribute`
+- `:height` unit is 1/10pt, so `140` = 14pt; drop the `-14` suffix from the font name string to avoid redundancy
+
 ### TBD / Commented Code
 
 1. **Vertico** (lines 431-435) - Vertical completion UI, currently disabled:
@@ -140,7 +163,7 @@ make emacs-lint               # Validate Emacs config (batch load, reports error
 
 4. **Tree-sitter** (lines 637-644) - Noted as "too complicated" for WSL, partial config exists
 
-5. **Fira Code ligatures** (lines 223-228) - Font ligatures workaround needed
+5. **Fira Code ligatures** - Font ligatures require extra setup; see https://github.com/tonsky/FiraCode/wiki/Emacs-instructions
 
 ### Corfu + Cape + Makefile Mode
 
