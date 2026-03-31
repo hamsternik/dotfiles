@@ -667,6 +667,7 @@ Operate on selected region or whole buffer."
   (markdown-mode . (lambda ()
                      (auto-fill-mode -1)
                      (setq-local truncate-lines nil)))
+  (markdown-mode . display-line-numbers-mode)
   :config
   (when (executable-find "aspell")
     (add-hook 'markdown-mode-hook #'flyspell-mode))
