@@ -73,17 +73,10 @@ fish_add_path /opt/homebrew/opt/node@20/bin
 #test -s "$NVM_DIR/nvm.sh" && source "$NVM_DIR/nvm.sh"
 
 # fnm (Fast Node Manager);; https://github.com/Schniz/fnm
-
-## Quick fix: Disable fnm's multishell feature, causes permission issues on WSL:
-set -gx FNM_MULTISHELL_DIR "$HOME/.fnm_multishell"
-
-## NOTE: no need to set up fnm env configuration in config.fish,
-## as fnm creates one in ~/.config/fish/conf.d/fnm.fish after success install.
-set FNM_PATH "/home/hamsternik/.local/share/fnm"
-if [ -d "$FNM_PATH" ]
-  set PATH "$FNM_PATH" $PATH
-  fnm env --shell fish | source
-end
+# WARNING:
+# No need to set up fnm env configuration in config.fish,
+# as fnm creates one in ~/.config/fish/conf.d/fnm.fish after success install.
+# There is the custom fnm.fish to workaround WSL2/Windows host machine having `fnm env` working fine.
 
 # right now settle from shell by command `set --universal nvm_default_version lts`
 # set -gx nvm_default_version lts

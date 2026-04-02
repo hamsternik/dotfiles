@@ -122,11 +122,13 @@ install-fish-plugins:
 FISH_SOURCE := $(CURDIR)/configs/fish
 FISH_DEST := $(HOME)/.config/fish
 install-fish-conf: uninstall-fish-conf
-	@if [ ! -d "$(FISH_DEST)" ]; then echo "❌ ~/.config/fish dir does not exist. Exit."; exit 1; fi
+	@if [ ! -d "$(FISH_DEST)" ]; then echo "❌ ~/.config/fish dir does not exist. Exit"; exit 1; fi
 	@echo "\nInstalling fish shell configuration 🚀"
 	ln -s -f $(FISH_SOURCE)/config.fish $(FISH_DEST)/config.fish
 	ln -s -f $(FISH_SOURCE)/fish_plugins $(FISH_DEST)/fish_plugins
 	ln -s -f $(FISH_SOURCE)/functions/fish_prompt.fish $(FISH_DEST)/functions/fish_prompt.fish
+	@if [ ! -d "$(FISH_DEST)/conf.d" ]; then echo "~/.config/fish/conf.d dir does not exist. Exit"; exit 1; fi
+	ln -s -f $(FISH_SOURCE)/conf.d/fnm.fish $(FISH_DEST)/conf.d/fnm.fish
 
 uninstall-fish-conf:
 	rm $(FISH_DEST)/config.fish || true
