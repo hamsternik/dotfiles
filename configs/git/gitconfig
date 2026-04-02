@@ -15,6 +15,7 @@
     f           = fetch
     fa          = fetch --all
     fpr         = fetch --prune
+    ff          = !git fa && git pl
     p           = !git push origin `git symbolic-ref HEAD`
     pf          = !git push origin +`git symbolic-ref HEAD`
     pt		      = !git push --tag
