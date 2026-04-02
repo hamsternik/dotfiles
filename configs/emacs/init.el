@@ -158,10 +158,7 @@
   ;; Set custom filepath to keep all nongnu/melpa plugins.
   ;; macOS/Darwin: ~/.config/emacs/custom.init.el
   ;; Linux/WSL: ~/.emacs.d/custom.init.el
-  (setq custom-file
-        (if (eq system-type 'darwin)
-            "~/.config/emacs/custom.init.el"
-          "~/.emacs.d/custom.init.el"))
+  (setq custom-file "~/.config/emacs/custom.init.el")
   (load custom-file)
 
   ;; disable all built-in panels in Emacs in GUI mode
