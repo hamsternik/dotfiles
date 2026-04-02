@@ -21,11 +21,13 @@
  '(safe-local-variable-values
    '((eval progn
            (defun nnotes/gac-add-readme nil
-             (when
-                 (and git-auto-commit-mode
-                      (string-match-p "jjournal\\.org$"
-                                      (buffer-file-name)))
-               (shell-command "make j")))
+             (when (and git-auto-commit-mode)
+               (string-match-p "jjournal\\.org$" (buffer-file-name)))
+             (let
+                 ((result (call-process-shell-command "make j-commit")))
+               (when (= result 0)
+                 (start-process-shell-command "nnotes-gac-push" nil
+                                              "make j-push"))))
            (add-hook 'after-save-hook #'nnotes/gac-add-readme nil t)
            (git-auto-commit-mode 1))))
  '(whitespace-style
