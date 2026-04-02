@@ -8,7 +8,8 @@ for file in ~/.{functions*,exports*,aliases*}
   end
 end
 
-if status is-interactive
+# rbenv (Ruby version manager) - only if installed
+if command -v rbenv &> /dev/null
     # Commands to run in interactive sessions can go here
     status --is-interactive; and rbenv init - fish | source
 end
@@ -65,9 +66,24 @@ fish_add_path $ANDROID_HOME/platform-tools ## add android `adb` and `fastboot` t
 # set -gx CPPFLAGS "-I/opt/homebrew/opt/node@16/include"
 fish_add_path /opt/homebrew/opt/node@20/bin
 
-# NVM
-set -x NVM_DIR $HOME/.nvm
-fish_add_path $NVM_DIR
+# NVM (Node Version Manager); https://github.com/nvm-sh/nvm
+## NOTE: nvm does not install if you use the fish shell.
+## More details why in https://github.com/nvm-sh/nvm/issues/303 issue.
+#set -gx NVM_DIR "$HOME/.nvm"
+#test -s "$NVM_DIR/nvm.sh" && source "$NVM_DIR/nvm.sh"
+
+# fnm (Fast Node Manager);; https://github.com/Schniz/fnm
+
+## Quick fix: Disable fnm's multishell feature, causes permission issues on WSL:
+set -gx FNM_MULTISHELL_DIR "$HOME/.fnm_multishell"
+
+## NOTE: no need to set up fnm env configuration in config.fish,
+## as fnm creates one in ~/.config/fish/conf.d/fnm.fish after success install.
+set FNM_PATH "/home/hamsternik/.local/share/fnm"
+if [ -d "$FNM_PATH" ]
+  set PATH "$FNM_PATH" $PATH
+  fnm env --shell fish | source
+end
 
 # right now settle from shell by command `set --universal nvm_default_version lts`
 # set -gx nvm_default_version lts
