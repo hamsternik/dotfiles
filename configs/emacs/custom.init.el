@@ -11,7 +11,7 @@
  '(package-selected-packages
    '(auctex cape cmake-mode consult corfu denote diff-hl
             eglot-inactive-regions exec-path-from-shell expand-region
-            git-auto-commit-mode gruber-darker-theme js2-mode
+            ghostel git-auto-commit-mode gruber-darker-theme js2-mode
             json-mode kotlin-mode latex-mode latex-unicode-math-mode
             magit marginalia markdown-mode modus-themes multi-vterm
             orderless org-transclusion pdf-tools prism swift-mode

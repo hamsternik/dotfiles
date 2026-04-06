@@ -444,6 +444,8 @@ Operate on selected region or whole buffer."
   :bind (:map project-prefix-map
               ("t" . project-multi-vterm)))
 
+(use-package ghostel
+  :vc (:url "https://github.com/dakra/ghostel" :rev :newest))
 
 ;;; VERTICO
 ;; https://github.com/minad/vertico
