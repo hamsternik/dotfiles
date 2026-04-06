@@ -506,10 +506,13 @@ Operate on selected region or whole buffer."
          (shell-mode . corfu-mode)
          (eshell-mode . corfu-mode)
          (org-mode . corfu-mode)
+         (markdown-mode . corfu-mode)
          (LaTeX-mode . corfu-mode))
   
   :config
-  (corfu-popupinfo-mode 1))
+  (corfu-popupinfo-mode 1)
+  (add-hook 'org-mode-hook (lambda () (setq-local corfu-auto nil)))
+  (add-hook 'markdown-mode-hook (lambda () (setq-local corfu-auto nil))))
 
 ;;; MARGINALIA
 ;; https://github.com/minad/marginalia
