@@ -14,6 +14,14 @@
 ;;; - C-h f custom-file to see the function decl;
 ;;; - C-h v custom-file to see the variable decl and example of custom-file usage.
 
+;;; TBD:
+;;; - expand-region (C-=): add custom org block inner expansion to select only
+;;;   content between #+begin_*/#+end_* without the delimiter lines; insert a
+;;;   custom er/mark-org-block-inner step into er/try-expand-list before
+;;;   er/mark-org-element via org-mode-hook.
+;;;   NOTE: default Emacs workaround — `M-h` (org-mark-element) selects the
+;;;   entire block incl. delimiters, then `M-w` copies it to the clipboard.
+
 ;; Package initialization first. In Emacs, a package is a collection of
 ;; Elisp code that extends the editor's functionality. Import this package
 ;; to add package archives. Then, add MELPA and nonGNU to the list of
