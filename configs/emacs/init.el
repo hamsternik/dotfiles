@@ -615,7 +615,16 @@ Operate on selected region or whole buffer."
   :config
   (setq gac-automatically-push-p t))
 
-;;; --- LSP's configuration
+(use-package rainbow-delimiters
+  :ensure t
+  :hook ((prog-mode . rainbow-delimiters-mode)))
+
+;;; ULTRA SCROLL
+;; https://github.com/jdtsmith/ultra-scroll
+;; Scroll Emacs like lightning (macOS).
+;; Based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
+
+;;; --- MELPA / LSP's configuration
 
 ;; a client for Language Server Protocol servers.
 ;; https://github.com/joaotavora/eglot
@@ -660,12 +669,6 @@ Operate on selected region or whole buffer."
   
   (define-key eglot-mode-map [M-mouse-1] #'xref-find-definitions)
   (define-key eglot-mode-map [M-mouse-3] #'xref-go-back))
-
-
-;;; ULTRA SCROLL
-;; https://github.com/jdtsmith/ultra-scroll
-;; Scroll Emacs like lightning (macOS).
-;; Based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
 
 
 ;;; TEX and LATEX
@@ -720,7 +723,8 @@ Operate on selected region or whole buffer."
 ;; https://github.com/swift-emacs/swift-mode
 (use-package swift-mode
   :ensure t
-  :mode "\\.swift\\'")
+  :mode "\\.swift\\'"
+  :interpreter "swift")
 
 ;;; JSON MODe
 ;; https://elpa.gnu.org/packages/json-mode.html
