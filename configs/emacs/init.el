@@ -311,6 +311,15 @@ Operate on selected region or whole buffer."
   (doc-view-resolution 300)
   (doc-view-continuous t))
 
+;;; EDITORCONFIG
+;; https://github.com/editorconfig/editorconfig-emacs
+;; EditorConfig plugin for Emacs
+;; If you're using Emacs≥30, then support for EditorConfig is bundled directly with Emacs and all you need to do is:
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 ;;; ELDOC
 ;; Eldoc provides helpful inline documentation for functions and variables
 ;; in the minibuffer, enhancing the development experience. It can be
