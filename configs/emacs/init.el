@@ -417,6 +417,17 @@ Operate on selected region or whole buffer."
 
 ;;; NONGNU / MELPA PACKAGES
 
+(use-package denote
+  :ensure t
+  :bind ("C-c C-d n" . nnotes/denote-create-note-in-project)
+  :custom
+  (defun nnotes/denote-create-note-in-project ()
+    "Create a denote note in the current project dir path."
+    (interactive)
+    (let ((denote-directory (project-root (project-current t))))
+      (call-interactively #'denote)))
+  (denote-directory (expand-file-name nnotes/denote-create-note-in-project)))
+
 ;; org-transclusion
 ;; https://github.com/nobiot/org-transclusion
 ;;
