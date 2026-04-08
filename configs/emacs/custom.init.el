@@ -9,7 +9,7 @@
      default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(auctex cape cmake-mode consult corfu denote diff-hl
+   '(auctex cape cmake-mode consult corfu denote diff-hl eglot
             eglot-inactive-regions exec-path-from-shell expand-region
             ghostel git-auto-commit-mode gruber-darker-theme js2-mode
             json-mode kotlin-mode latex-mode latex-unicode-math-mode

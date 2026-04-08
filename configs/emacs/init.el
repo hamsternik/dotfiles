@@ -629,7 +629,7 @@ Operate on selected region or whole buffer."
 ;; a client for Language Server Protocol servers.
 ;; https://github.com/joaotavora/eglot
 (use-package eglot
-  :ensure nil
+  :ensure t
   :bind
   (:map eglot-mode-map
 	    ("C-." . 'xref-find-definitions)
@@ -641,12 +641,15 @@ Operate on selected region or whole buffer."
   :hook ((python-mode . eglot-ensure)
          (typescript-mode . eglot-ensure)
          (js2-mode . eglot-ensure)
+         (swift-mode . eglot-ensure)
          (web-mode . eglot-ensure))
   
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
+
+  ;; configure Eglot to link w/ sourcekit-lsp binary for both macOS/Linux
   (add-to-list 'eglot-server-programs
-               '((swift-mode) . hamsternik/sourcekit-lsp-command))
+               '(swift-mode . dotfiles/sourcekit-lsp-command))
 
   ;; install to execute with Eglot
   ;; npm install -g typescript-language-server typescript
@@ -719,6 +722,40 @@ Operate on selected region or whole buffer."
 (use-package kotlin-mode
   :ensure t)
 
+;; swiftlang/sourcekit-lsp: language protocol impl. for Swift and C-based lang.
+;; based on https://www.swift.org/documentation/articles/zero-to-swift-emacs.htmlx
+;; Fixme: no code completion in .swift file
+;; (defun hamsternik/sourcekit-lsp-executable ()
+;;   (setq hamsternik/sourcekit-lsp-executable
+;; 	    (cond ((executable-find "sourcekit-lsp"))
+;; 	          ((equal system-type 'darwin)
+;; 	           (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
+;; 	          ((equal system-type 'gnu/linux)
+;; 	           (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
+;; 	          (t
+;; 	           ("sourcekit-lsp")))))
+;; (defun hamsternik/sourcekit-lsp-command (interactive)
+;;   (append (list (hamsternik/sourcekit-lsp-executable))))
+
+;; sourcekit-lsp works /only/ with SPM defining the project having Package.swift manifest.
+;; more described in the comment, https://github.com/joaotavora/eglot/issues/825#issuecomment-1086708510
+;; btw it's fine the function returns e.g. "/usr/bin/sourcekit-lsp" in macOS. As Emacs evaluates clauses left to right,
+;; the first found sourcekit-lsp by Emacs's exec-path located in /usr/bin/... which is a /shim/. It delegates
+;; to the active Xcode toolchain's sourcekit-lsp. So it would work correctly.
+;;
+;; TODO to configure sourcekit-lsp within Xcode-based projects check out Josh Caswell's config:
+;; https://codeberg.org/woolsweater/.emacs.d/src/branch/main/modules/my-swift-mode.el
+(defun dotfiles/find-sourcekit-lsp ()
+  (or (executable-find "sourcekit-lsp")
+      (and (eq system-type 'darwin)
+           (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp")))
+      "usr/local/swift/usr/bin/sourcekit-lsp"))
+
+;; as dotfiles/find-sourcekit-lsp func /is the finder/ (locates the binary),
+;; it still needs a command builder that wraps it in `(list ...)`.
+(defun dotfiles/sourcekit-lsp-command (&rest _)
+  (list (dotfiles/find-sourcekit-lsp)))
+
 ;;; SWIFT MODE
 ;; https://github.com/swift-emacs/swift-mode
 (use-package swift-mode
@@ -745,21 +782,6 @@ Operate on selected region or whole buffer."
 (use-package cmake-mode
   :ensure t
   :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
-
-;; swiftlang/sourcekit-lsp: language protocol impl. for Swift and C-based lang.
-;; https://github.com/joaotavora/eglot/issues/825#issuecomment-1024267560
-;; FIXME: no code completion in .swift file
-(defun hamsternik/sourcekit-lsp-executable ()
-  (setq hamsternik/sourcekit-lsp-executable
-	    (cond ((executable-find "sourcekit-lsp"))
-	          ((equal system-type 'darwin)
-	           (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
-	          ((equal system-type 'gnu/linux)
-	           (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
-	          (t
-	           ("sourcekit-lsp")))))
-(defun hamsternik/sourcekit-lsp-command (interactive)
-  (append (list (hamsternik/sourcekit-lsp-executable))))
 
 ;; Web templates editing mode for emacs.
 ;; https://github.com/fxbois/web-mode
