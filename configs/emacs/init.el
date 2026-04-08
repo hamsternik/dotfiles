@@ -413,7 +413,14 @@ Operate on selected region or whole buffer."
   (require 'org-tempo))
 
 (use-package project
-  :ensure nil)
+  :ensure nil
+  :custom
+  (project-switch-commands
+   '((project-find-file "Find file" ?f)
+     (project-find-regexp "Find regexp" ?g)
+     (project-find-dir "Find directory" ?d)
+     (project-eshell "Eshell" ?s)
+     (project-multi-vterm "Vterm" ?t))))
 
 ;;; NONGNU / MELPA PACKAGES
 
