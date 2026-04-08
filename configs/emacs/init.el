@@ -722,20 +722,12 @@ Operate on selected region or whole buffer."
 (use-package kotlin-mode
   :ensure t)
 
-;; swiftlang/sourcekit-lsp: language protocol impl. for Swift and C-based lang.
-;; based on https://www.swift.org/documentation/articles/zero-to-swift-emacs.htmlx
-;; Fixme: no code completion in .swift file
-;; (defun hamsternik/sourcekit-lsp-executable ()
-;;   (setq hamsternik/sourcekit-lsp-executable
-;; 	    (cond ((executable-find "sourcekit-lsp"))
-;; 	          ((equal system-type 'darwin)
-;; 	           (cond ((executable-find "/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp"))))
-;; 	          ((equal system-type 'gnu/linux)
-;; 	           (cond ((executable-find "/home/linuxbrew/.linuxbrew/bin/sourcekit-lsp"))))
-;; 	          (t
-;; 	           ("sourcekit-lsp")))))
-;; (defun hamsternik/sourcekit-lsp-command (interactive)
-;;   (append (list (hamsternik/sourcekit-lsp-executable))))
+;;; SWIFT MODE
+;; https://github.com/swift-emacs/swift-mode
+(use-package swift-mode
+  :ensure t
+  :mode "\\.swift\\'"
+  :interpreter "swift")
 
 ;; sourcekit-lsp works /only/ with SPM defining the project having Package.swift manifest.
 ;; more described in the comment, https://github.com/joaotavora/eglot/issues/825#issuecomment-1086708510
@@ -756,12 +748,6 @@ Operate on selected region or whole buffer."
 (defun dotfiles/sourcekit-lsp-command (&rest _)
   (list (dotfiles/find-sourcekit-lsp)))
 
-;;; SWIFT MODE
-;; https://github.com/swift-emacs/swift-mode
-(use-package swift-mode
-  :ensure t
-  :mode "\\.swift\\'"
-  :interpreter "swift")
 
 ;;; JSON MODe
 ;; https://elpa.gnu.org/packages/json-mode.html
