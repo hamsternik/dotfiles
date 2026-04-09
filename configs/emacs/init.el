@@ -560,6 +560,14 @@ Operate on selected region or whole buffer."
 ;; a core Emacs abstraction: Completion-At-Point-Functions (CAPF).
 ;; It enhances the editing experience by offering context-aware suggestions as you
 ;; type. Highly customizable and can be integrated with various modes and languages.
+;;
+;; TODO:
+;; To diagnose whether corfu is actually the culprit:
+;; M-x toggle-debug-on-quit
+;; Then when Emacs feels slow, hit C-g to get a backtrace showing what was running.
+;; If corfu/cape frames dominate, that confirms it.
+;; Alternatively, temporary disable corfu globally:
+;; M-x global-corfu-mode RET, then see if the slowness disappear.
 (use-package corfu
   :ensure t
   :demand t
