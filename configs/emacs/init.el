@@ -431,7 +431,13 @@ Operate on selected region or whole buffer."
      (project-eshell "Eshell" ?s)
      (project-multi-vterm "Vterm" ?t))))
 
-;;; NONGNU / MELPA PACKAGES
+;;; --- NONGNU / MELPA configuration.
+
+;; EXPAND REGION
+;; https://github.com/magnars/expand-region.el
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
 
 (use-package denote
   :ensure t
@@ -444,6 +450,38 @@ Operate on selected region or whole buffer."
       (call-interactively #'denote)))
   (denote-directory (expand-file-name nnotes/denote-create-note-in-project)))
 
+
+;; https://github.com/dgutov/diff-hl
+;; Emacs package for highlighting uncommited changes.
+(use-package diff-hl
+  :ensure t
+  :config
+  (setq diff-hl-draw-borders nil)
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
+
+;; Refresh VC state after M-! shell commands so diff-hl updates.
+;; Without this, diff-hl fringe indicators remain stale after
+;; git operations (add/commit/push) run via shell-command.
+;; 
+;; TODO: not working yet - need to investigate further.
+(advice-add 'shell-command :around
+            (lambda (orig-fun &rest args)
+              (let ((buf (current-buffer)))
+                (apply orig-fun args)
+                (with-current-buffer buf
+                  (when buffer-file-name
+                    (vc-refresh-state)
+                    (when (fboundp 'diff-hl-update)
+                      (diff-hl-update)))))))
+
+(use-package git-auto-commit-mode
+  :ensure t
+  :defer t
+  :config
+  (setq gac-automatically-push-p t))
+
 ;; org-transclusion
 ;; https://github.com/nobiot/org-transclusion
 ;;
@@ -453,12 +491,6 @@ Operate on selected region or whole buffer."
   :ensure t
   :after org)
 
-;;; MODE-LINE
-;; https://github.com/dbordak/telephone-line
-(use-package telephone-line
-  :ensure t
-  :config
-  (telephone-line-mode 1))
 
 ;; EXEC-PATH-FROM-SHELL
 ;; https://github.com/purcell/exec-path-from-shell
@@ -481,6 +513,13 @@ Operate on selected region or whole buffer."
 
 (use-package ghostel
   :vc (:url "https://github.com/dakra/ghostel" :rev :newest))
+
+;;; MODE-LINE
+;; https://github.com/dbordak/telephone-line
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
 
 ;;; VERTICO
 ;; https://github.com/minad/vertico
@@ -583,38 +622,6 @@ Operate on selected region or whole buffer."
 ;; TODO: @prot sample configuration including `orderless` package
 ;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages
 
-(use-package expand-region
-  :ensure t
-  :bind ("C-=" . er/expand-region))
-
-(use-package diff-hl
-  :ensure t
-  :config
-  (setq diff-hl-draw-borders nil)
-  (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
-
-;; Refresh VC state after M-! shell commands so diff-hl updates.
-;; Without this, diff-hl fringe indicators remain stale after
-;; git operations (add/commit/push) run via shell-command.
-;; TODO: not working yet - need to investigate further.
-(advice-add 'shell-command :around
-            (lambda (orig-fun &rest args)
-              (let ((buf (current-buffer)))
-                (apply orig-fun args)
-                (with-current-buffer buf
-                  (when buffer-file-name
-                    (vc-refresh-state)
-                    (when (fboundp 'diff-hl-update)
-                      (diff-hl-update)))))))
-
-(use-package git-auto-commit-mode
-  :ensure t
-  :defer t
-  :config
-  (setq gac-automatically-push-p t))
-
 (use-package rainbow-delimiters
   :ensure t
   :hook ((prog-mode . rainbow-delimiters-mode)))
@@ -624,7 +631,7 @@ Operate on selected region or whole buffer."
 ;; Scroll Emacs like lightning (macOS).
 ;; Based on https://maximzuriel.nl/physics-and-code/emacs-mac-smooth-scroll/article
 
-;;; --- MELPA / LSP's configuration
+;;; --- MELPA / LSP, Tree-Sitter configuration.
 
 ;; a client for Language Server Protocol servers.
 ;; https://github.com/joaotavora/eglot
@@ -673,25 +680,43 @@ Operate on selected region or whole buffer."
   (define-key eglot-mode-map [M-mouse-1] #'xref-find-definitions)
   (define-key eglot-mode-map [M-mouse-3] #'xref-go-back))
 
+;; TREE-SITTER (ts)
+;;; GitHub: https://github.com/tree-sitter/tree-sitter
 
-;;; TEX and LATEX
-;; !NOTE: to automatically compile and update PDF preview use:
-;; https://www.reddit.com/r/emacs/comments/k7sx2n/latexpreviewpane_and_latexmk/
-(use-package tex
-  :ensure auctex
+;;; TBD to read about how to get started w/ Tree-Sitter
+;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+
+;; FIXME: Too complicated installation and deployment process in WSL within Emacs. Use LSP with Eglot package instead.
+(when (treesit-available-p)
+  (use-package treesit
+    :config
+    (setq treesit-language-source-alist
+          '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+            (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+            (swift "https://github.com/alex-pinkus/tree-sitter-swift")))))
+
+
+
+;;; --- MELPA / Language Mode Packages.
+
+;;; CMAKE MODE
+(use-package cmake-mode
+  :ensure t
+  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
+
+;; JS2 MODE
+;; Improved JavaScript editing mode for GNU Emacs.
+;; https://github.com/mooz/js2-mode
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'"
   :custom
-  (font-latex-script-display nil)
-  (font-latex-fontify-script nil)
-  (font-latex-fontify-sectioning 'color)
-  (TeX-auto-save t)
-  (Tex-parse-self t)
-  (TeX-PDF-mode t) ; PDF mode by default
-  :hook
-  (LaTeX-mode . auto-fill-mode)
-  (LaTeX-mode . flyspell-mode)
-  (LaTeX-mode . LaTeX-math-mode)  ; easy math input
-  (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
-  (LaTeX-mode . (lambda () (setq show-trailing-whitespace t))))
+  (js2-basic-offset 4))
+
+;;; JSON MODE
+;; https://elpa.gnu.org/packages/json-mode.html
+(use-package json-mode
+  :ensure t)
 
 ;;; MARKDOWN
 ;; https://github.com/jrblevin/markdown-mode
@@ -722,6 +747,18 @@ Operate on selected region or whole buffer."
 (use-package kotlin-mode
   :ensure t)
 
+
+;;; PRISM
+;; https://github.com/alphapapa/prism.el
+(use-package prism
+  :ensure t
+  :defer t
+  :hook
+  ;; activate prism for C-based major modes
+  ((json-mode) . prism-mode)
+  ((python-mode python-ts-mode haskell-mode) . prism-whitespace-mode))
+
+
 ;;; SWIFT MODE
 ;; https://github.com/swift-emacs/swift-mode
 (use-package swift-mode
@@ -749,26 +786,6 @@ Operate on selected region or whole buffer."
   (list (dotfiles/find-sourcekit-lsp)))
 
 
-;;; JSON MODe
-;; https://elpa.gnu.org/packages/json-mode.html
-(use-package json-mode
-  :ensure t)
-
-;;; PRISM
-;; https://github.com/alphapapa/prism.el
-(use-package prism
-  :ensure t
-  :defer t
-  :hook
-  ;; activate prism for C-based major modes
-  ((json-mode) . prism-mode)
-  ((python-mode python-ts-mode haskell-mode) . prism-whitespace-mode))
-
-;;; CMAKE MODE
-(use-package cmake-mode
-  :ensure t
-  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
-
 ;; Web templates editing mode for emacs.
 ;; https://github.com/fxbois/web-mode
 (use-package web-mode
@@ -785,6 +802,26 @@ Operate on selected region or whole buffer."
   (web-mode-enable-auto-pairing t)
   (web-mode-enable-css-colorization t))
 
+
+;;; TEX and LATEX
+;; !NOTE: to automatically compile and update PDF preview use:
+;; https://www.reddit.com/r/emacs/comments/k7sx2n/latexpreviewpane_and_latexmk/
+(use-package tex
+  :ensure auctex
+  :custom
+  (font-latex-script-display nil)
+  (font-latex-fontify-script nil)
+  (font-latex-fontify-sectioning 'color)
+  (TeX-auto-save t)
+  (Tex-parse-self t)
+  (TeX-PDF-mode t) ; PDF mode by default
+  :hook
+  (LaTeX-mode . auto-fill-mode)
+  (LaTeX-mode . flyspell-mode)
+  (LaTeX-mode . LaTeX-math-mode)  ; easy math input
+  (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
+  (LaTeX-mode . (lambda () (setq show-trailing-whitespace t))))
+
 ;; TypeScript-support for Emacs.
 ;; https://github.com/emacs-typescript/typescript.el
 ;; [!WARNING]: the repo is on development HALT. Use Emacs 29+ with
@@ -794,30 +831,6 @@ Operate on selected region or whole buffer."
   :mode "\\.ts\\'"
   :custom
   (typescript-indent-level 4))
-
-;; Improved JavaScript editing mode for GNU Emacs.
-;; https://github.com/mooz/js2-mode
-(use-package js2-mode
-  :ensure t
-  :mode "\\.js\\'"
-  :custom
-  (js2-basic-offset 4))
-
-
-;; TREE-SITTER (ts)
-;;; GitHub: https://github.com/tree-sitter/tree-sitter
-
-;;; TBD to read about how to get started w/ Tree-Sitter
-;;; URL: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
-
-;; FIXME: Too complicated installation and deployment process in WSL within Emacs. Use LSP with Eglot package instead.
-(when (treesit-available-p)
-  (use-package treesit
-    :config
-    (setq treesit-language-source-alist
-          '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-            (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-            (swift "https://github.com/alex-pinkus/tree-sitter-swift")))))
 
 (provide 'init)
 ;;; init.el ends here
