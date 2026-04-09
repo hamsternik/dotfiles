@@ -165,5 +165,5 @@
     file-style = bold yellow ul
     file-decoration-style = none
 
-[includeIf "gitdir:~/Developer/@work/"]
+[includeIf "gitdir:~/Developer/_work/"]
   path = ~/.gitconfig.work
