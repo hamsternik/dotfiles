@@ -108,5 +108,8 @@ fish_add_path /opt/homebrew/opt/libpq/bin
 set -gx PATH $PATH /Users/hamsternik/.lmstudio/bin
 # End of LM Studio CLI section
 
+# WSL/Windows 11 Homebrew
+fish_add_path /home/linuxbrew/.linuxbrew/bin
+
 # opencode
 fish_add_path /home/hamsternik/.opencode/bin
