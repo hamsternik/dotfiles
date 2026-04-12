@@ -215,7 +215,7 @@
   ;; /ask/ - prompt every time (set by default)
   ;; /t/ - always follow silently
   ;; /nil/ - never follow, open the symlink as-is
-  (setq vc-follow-symlinks nil))
+  (setq vc-follow-symlinks t))
 
 ;; EMACS POST-CONFIG
 
@@ -453,6 +453,16 @@ Operate on selected region or whole buffer."
 
 ;; https://github.com/dgutov/diff-hl
 ;; Emacs package for highlighting uncommited changes.
+;;
+;; KNOWN ISSUE: bogus full-file diff for symlinked buffers (e.g. jjournal.org → README.txt).
+;; Root cause: diff-hl resolves the VC baseline via `buffer-file-name`, which for a symlink
+;; is the symlink path. `vc-find-revision` (or equivalent) calls `git show HEAD:<symlink>`,
+;; which returns the symlink blob content (the 10-byte target string "README.txt"), NOT the
+;; actual file content. diff-hl then diffs that 1-line blob against the full buffer → marks
+;; every line as changed. Combined with `diff-hl-flydiff-mode` (0.3s idle timer), this
+;; produces 87% CPU usage on every keystroke in the affected buffer.
+;; The entry point to investigate is `diff-hl-diff-against-head` (diff-hl.el) and how it
+;; calls into VC to retrieve the HEAD revision content for a symlinked file path.
 (use-package diff-hl
   :ensure t
   :config
