@@ -403,7 +403,7 @@ Operate on selected region or whole buffer."
   :ensure nil
   :custom
   (org-todo-keywords
-   '((sequence "TODO(t)" "IN-PROGRESS(p)" "CANCELED(c)" "|" "DONE(d)")))
+   '((sequence "TODO(t)" "IN-PROGRESS(p)" "|" "CANCELED(c) DONE(d)")))
 
   ;; Format: (INACTIVE-FORMAT . ACTIVE FORMAT)
   ;; %a abbreviated day name
