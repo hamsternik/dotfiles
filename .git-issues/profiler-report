@@ -1,0 +1,5 @@
+        3193  87% + timer-event-handler
+         181   4% + redisplay_internal (C function)
+         147   4% + command-execute
+          77   2% + ...
+          44   1%   Automatic GC

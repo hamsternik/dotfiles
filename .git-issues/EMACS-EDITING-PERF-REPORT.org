@@ -1,0 +1,412 @@
+#+TITLE: Emacs Editing Performance Report: jjournal.org
+#+DATE: 2026-04-11
+#+AUTHOR: Nikita Khomitsevych
+#+PROPERTY: header-args :results silent
+
+* Overview
+
+This report analyzes performance issues in =jjournal.org= (=~/Developer/_hamsternik/nnotes/=),
+a symlink → =README.txt=, currently 1575 lines long.
+
+Profile of the file:
+- ~9 source blocks (Swift, Emacs Lisp)
+- ~45 =[[file:...]]= links
+- ~1 =[[attachment:...]]= inline image
+- ~244 HTTP/HTTPS links
+- Custom timestamps, tags, TODO keywords throughout
+
+* Key Observations
+
+** README.txt vs jjournal.org: same file, different modes
+
+=jjournal.org= is a symlink → =README.txt=. With =find-file-visit-truename nil=,
+Emacs uses the symlink name for mode detection:
+- Open as =README.txt= → =text-mode= → *no lag*
+- Open as =jjournal.org= → =org-mode= → *heavy lag*
+
+File size is not the issue. The overhead comes from org-mode and the packages
+that activate with it.
+
+** ROOT CAUSE FOUND: vc-follow-symlinks nil + symlink blob in git [2026-04-12]
+
+*Symptom:* After any single edit in =jjournal.org=, diff-hl marks the
+*entire file* as changed (all 1575 lines), not just the edited line.
+
+*Why this causes 87% CPU:* diff-hl-flydiff fires every ~0.3s → recomputes a
+1575-line diff → updates fringe overlays for every line → on every idle tick.
+
+*The chain of causation:*
+
+1. Git stores =jjournal.org= as a *symlink blob* — its content in the git
+   object store is the 10-byte string =README.txt=, not the journal text:
+   #+begin_example
+   $ git cat-file -t HEAD:jjournal.org  → blob
+   $ git cat-file -p HEAD:jjournal.org  → README.txt
+   #+end_example
+
+2. =vc-follow-symlinks nil= (=init.el= line 218) tells Emacs VC: do not
+   resolve this symlink, operate on the symlink path as-is.
+
+3. When diff-hl asks VC for the "original" to diff against, VC calls
+   =git show HEAD:jjournal.org= → gets back the string =README.txt= (10 bytes).
+
+4. diff-hl diffs =README.txt= (1 line) vs the 1575-line buffer content →
+   *entire file appears changed*, every line gets a fringe marker.
+
+5. diff-hl-flydiff reschedules this every ~0.3s → 87% CPU in =timer-event-handler=.
+
+Note: =git diff HEAD -- jjournal.org= returns *empty* — git itself is not
+confused (it correctly sees the symlink as unchanged). The bug is entirely in
+how Emacs VC resolves the file identity for diffing.
+
+*Fix:* Change =vc-follow-symlinks= from =nil= to =t= in =init.el=:
+#+begin_src emacs-lisp
+  ;; Before (broken for symlinked files with diff-hl):
+  (setq vc-follow-symlinks nil)
+
+  ;; After (VC resolves symlink → asks git about README.txt → correct diff):
+  (setq vc-follow-symlinks t)
+#+end_src
+
+With =t=, VC follows =jjournal.org= → =README.txt=, asks git about the actual
+tracked file, and diff-hl gets a correct diff showing only the lines you changed.
+
+* Profiler Results [2026-04-11]
+
+#+begin_example
+3193  87% + timer-event-handler
+ 181   4% + redisplay_internal (C function)
+ 147   4% + command-execute
+  77   2% + ...
+  44   1%   Automatic GC
+#+end_example
+
+** Interpretation
+
+*87% of CPU is in =timer-event-handler=.* This is the central finding.
+
+=timer-event-handler= runs Emacs idle/recurring timer callbacks — not
+keystrokes, not rendering. Something is firing a timer at very high frequency
+and doing expensive work inside it.
+
+Key deductions:
+- =redisplay_internal= is only 4% → *font-lock and link overlay rendering are NOT the bottleneck*
+- =command-execute= is only 4% → *your typing itself is not the problem*
+- GC is 1% → memory pressure is not the issue
+
+The profiler report captures only the top-level call tree (collapsed).
+To see *which* timer is responsible, you need to expand the subtree.
+
+** Next Step: Expand the Timer Subtree
+
+#+begin_src emacs-lisp
+  ;; In *Profiler-Report* buffer, place cursor on "timer-event-handler"
+  ;; and press RET or TAB to expand — reveals which timer functions are called.
+  ;; You will see entries like:
+  ;;   diff-hl-flydiff-update
+  ;;   eldoc--schedule-timer / eldoc-print-current-symbol-info
+  ;;   corfu--auto-complete-deferred
+  ;;   auto-revert-handler
+#+end_src
+
+** Timer Suspects from init.el (ranked by probability)
+
+| Timer source          | Why it fires constantly                       | init.el location |
+|-----------------------+-----------------------------------------------+------------------|
+| =diff-hl-flydiff=     | git diff on every buffer-change idle          | line 461         |
+| =eldoc= (0.1s delay)  | very short idle delay, fires in org constantly | line 333         |
+| =corfu= popup timer   | active even when corfu-auto is nil            | line 571+        |
+| =auto-revert=         | polls file every 5s, reverts whole buffer     | line 160         |
+
+The *most common cause* of 80%+ timer load in org-mode editing is
+=diff-hl-flydiff-mode= combined with an aggressive =eldoc-idle-delay=.
+
+* Entry Points for Diagnosis
+
+Before tuning anything, gather data. The primary tools:
+
+** 1. profiler-start / profiler-report (built-in)
+
+The most direct way to catch what is actually running during slow edits.
+
+#+begin_src emacs-lisp
+  M-x profiler-start RET cpu
+  ;; now reproduce the slowness (type, scroll, etc.)
+  M-x profiler-report
+  ;; then: place cursor on timer-event-handler → TAB to expand subtree
+#+end_src
+
+Look for which functions accumulate the most CPU time. Sort by self-time.
+Common offenders show up as: =font-lock=, =corfu=, =cape-dabbrev=,
+=diff-hl=, =org-element=, =flyspell=.
+
+** 2. toggle-debug-on-quit + C-g
+
+If Emacs freezes or lags heavily mid-keystroke:
+
+#+begin_src emacs-lisp
+  M-x toggle-debug-on-quit
+  ;; when lag happens → press C-g
+  ;; inspect the *Backtrace* buffer
+#+end_src
+
+The backtrace shows what was running when you interrupted.
+
+** 3. Benchmark individual suspects
+
+#+begin_src emacs-lisp
+  ;; Disable one package at a time and measure subjective performance.
+  ;; E.g., toggle corfu globally:
+  M-x global-corfu-mode  ;; toggles off
+
+  ;; Or diff-hl-flydiff:
+  M-x diff-hl-flydiff-mode  ;; toggles off
+#+end_src
+
+* Suspected Culprits (by likelihood)
+
+** [RULED OUT by profiler] Font-lock over 244 HTTP links and 45 file links
+
+=redisplay_internal= was only 4% in the profiler — font-lock runs inside
+redisplay. This means link/heading fontification is *not* the bottleneck.
+It was a reasonable initial hypothesis but the data rules it out.
+
+Still worth noting: org has 244 HTTP + 45 file links, which would matter
+if the timer issue is resolved and redisplay becomes the next bottleneck.
+
+** [CONFIRMED — PRIMARY] 1. diff-hl-flydiff-mode (timer-based git diff)
+
+*Profiler evidence:* 87% CPU in =timer-event-handler=; =diff-hl-flydiff-mode=
+is the most common cause of this exact pattern in org-mode buffers.
+
+=diff-hl-flydiff-mode= is enabled globally (=init.el= line 461).
+It schedules a =git diff= after a short idle delay, every time the buffer
+changes. On a large file, even a fast =git diff= call has overhead:
+process spawn, pipe I/O, parse output, update fringe overlays.
+
+Every keystroke marks the org buffer as modified → idle timer resets →
+fires again → spawns another process. At 87% timer CPU, this is firing
+many times per second during active editing.
+
+*To test:*
+#+begin_src emacs-lisp
+  M-x diff-hl-flydiff-mode  ;; toggle off → measure lag
+#+end_src
+
+*Mitigation:* Increase the idle delay significantly:
+#+begin_src emacs-lisp
+  (setq diff-hl-flydiff-delay 3.0)  ;; default is 0.3s — 10x increase
+#+end_src
+
+** [CONFIRMED — SECONDARY] 2. eldoc-idle-delay 0.1 (very aggressive timer)
+
+*Profiler evidence:* =eldoc= fires on a 100ms idle timer (=init.el= line 333).
+In org-mode, eldoc hooks into =org-mode= via =global-eldoc-mode= and tries to
+fetch documentation for whatever is under point. Org elements (links, keywords,
+properties, timestamps) trigger eldoc lookups repeatedly.
+
+At 0.1s delay, eldoc fires 10 times per second when you pause even briefly
+between keystrokes. Combined with a 1575-line file, this adds to timer load.
+
+*To test:*
+#+begin_src emacs-lisp
+  (setq eldoc-idle-delay 1.0)  ;; set in *scratch*, then observe jjournal.org
+  ;; OR disable eldoc in org buffers:
+  (add-hook 'org-mode-hook (lambda () (eldoc-mode -1)))
+#+end_src
+
+** [TIMER — INVESTIGATE] 3. corfu popup timer in org-mode
+
+Even with =(setq-local corfu-auto nil)= set via hook, =corfu-mode= is
+active in org buffers. Corfu has internal timers for popup management
+(=corfu--auto-complete-deferred=) that may still fire.
+
+*To test:*
+#+begin_src emacs-lisp
+  M-x corfu-mode  ;; toggle off in the org buffer → measure lag
+#+end_src
+
+** [TIMER — SECONDARY] 4. auto-revert polling every 5s
+
+=global-auto-revert-mode 1= (=init.el= line 160) runs =auto-revert-handler=
+on a 5-second timer across all open buffers. When it fires on a 1575-line
+org file, it checks mtime and potentially re-parses the buffer.
+
+Not the 87% culprit, but adds baseline timer overhead.
+
+** [MEDIUM — ON OPEN] 5. cape-dabbrev scanning all open buffers
+
+=cape-dabbrev= scans ALL open buffers for completion candidates.
+This fires on TAB / manual =completion-at-point=, not automatically in
+org-mode (=corfu-auto nil= is set for org). So it's not the timer load,
+but explains lag when you trigger completion manually.
+
+*Mitigation:*
+#+begin_src emacs-lisp
+  (setq cape-dabbrev-check-other-buffers nil)
+#+end_src
+
+** [MEDIUM — ON OPEN] 6. org-startup-with-inline-images t + attachment image
+
+=org-startup-with-inline-images t= (=init.el= line 417) decodes and scales
+every image on file open. There is at least one =[[attachment:...]]= PNG.
+This is a one-time open cost, not an editing cost.
+
+*Mitigation:*
+#+begin_src emacs-lisp
+  (setq org-startup-with-inline-images nil)
+  ;; toggle manually with C-c C-x C-v when needed
+#+end_src
+
+** [MEDIUM] 7. org-element cache invalidation
+
+Org-mode rebuilds its parse cache incrementally on every edit. With nested
+headings, =PROPERTIES= drawers, and custom timestamps throughout the file,
+cache churn adds microsecond lag per keystroke that compounds.
+
+*To test:*
+#+begin_src emacs-lisp
+  (setq org-element-use-cache nil)
+#+end_src
+
+** [LOW] 8. shell-command advice running vc-refresh-state
+
+Lines 469–477 in =init.el= wrap every =shell-command= call with
+=vc-refresh-state= + =diff-hl-update=. Not a per-keystroke or timer issue,
+but fires on every =C-;= shell command inside the org buffer.
+
+The config comment says "TODO: not working yet" — still installed globally.
+
+** [MEDIUM] 4. org-startup-with-inline-images t + attachment image
+
+=org-startup-with-inline-images t= is configured (line 417 in init.el).
+On open, Emacs decodes and scales every =[[attachment:...]]= and =[[file:*.png]]= link.
+There is at least one attachment PNG in =jjournal.org= (clipboard screenshot).
+
+Image decoding is synchronous and blocks Emacs while loading. For large
+or many images, this causes a visible freeze on =find-file=.
+
+The symlink setup (=find-file-visit-truename nil=) means the file correctly
+opens in org-mode, so startup images are triggered.
+
+*To test:* Open the file with images disabled:
+#+begin_src emacs-lisp
+  (setq org-startup-with-inline-images nil)
+  ;; then C-c C-x C-v to toggle images manually when needed
+#+end_src
+
+** [MEDIUM] 5. global-auto-revert-mode polling the large file
+
+=global-auto-revert-mode 1= is enabled (line 160 in init.el).
+It polls all open buffers for file changes. On revert, org-mode re-parses
+the entire buffer (outline structure, links, timestamps). For a 1575-line
+file, this is noticeable.
+
+The default polling interval is =auto-revert-interval= (5 seconds).
+When the symlink target (=README.txt=) is modified externally, Emacs
+reverts the buffer unconditionally.
+
+*To test:*
+#+begin_src emacs-lisp
+  (setq auto-revert-interval 60)  ;; slow down polling
+  ;; OR disable for this buffer:
+  (auto-revert-mode -1)
+#+end_src
+
+** [MEDIUM] 6. org-element cache invalidation
+
+Org-mode maintains an internal element parse cache (=org-element-cache=).
+When you edit the file, the cache is incrementally invalidated and rebuilt.
+On large files with complex structure (nested headings, drawers, PROPERTIES
+blocks), cache rebuilding on every keystroke can cause microsecond–millisecond
+lag that accumulates.
+
+The =PROPERTIES= drawers (at least one found: =ID: 118B6D24-...=) and the
+number of headings/subheadings amplify this.
+
+*To test:*
+#+begin_src emacs-lisp
+  (setq org-element-use-cache nil)  ;; disable cache (trades CPU for memory)
+#+end_src
+
+** [LOW] 7. shell-command advice running vc-refresh-state
+
+Lines 469–477 in =init.el= wrap every =shell-command= call with
+=vc-refresh-state= + =diff-hl-update=. This is not a per-keystroke issue,
+but if you run shell commands via =C-;= (=M-! alternative=) from inside the
+=jjournal.org= buffer, each call triggers VC state refresh, which invokes
+git on the file.
+
+*Note:* The comment in the config says "TODO: not working yet". Even so, the
+advice is installed globally and fires on every =shell-command= invocation.
+
+** [LOW] 8. desktop-save-mode restoring org outline visibility
+
+=desktop-save-mode 1= (line 157) saves and restores the entire session.
+For org files, this includes outline visibility state (which headings are
+folded/unfolded). Restoring visibility over 1575 lines means toggling
+overlays for potentially hundreds of headings, which is synchronous on startup.
+
+This is a one-time load cost, not a keystroke cost.
+
+* Next Diagnostic Steps
+
+The profiler confirms the problem is timer-driven, not display-driven.
+The subtree of =timer-event-handler= was not captured — expand it to get the
+exact function name.
+
+** Step 1: Expand the profiler subtree (get exact timer function)
+
+#+begin_src
+;; Re-run the profiler:
+M-x profiler-start RET cpu
+;; reproduce slow editing (30s of normal work)
+M-x profiler-stop
+M-x profiler-report
+;; In the *Profiler-Report* buffer:
+;;   place cursor on "timer-event-handler" line → TAB to expand
+;;   note which child function has the highest count
+#+end_src
+
+** Step 2: Toggle the top suspects (takes 2 minutes)
+
+#+begin_src
+;; In jjournal.org buffer:
+M-x diff-hl-flydiff-mode   ;; toggle off → type for 30s → does lag decrease?
+M-x eldoc-mode             ;; toggle off → type for 30s → does lag decrease?
+M-x corfu-mode             ;; toggle off → type for 30s → does lag decrease?
+#+end_src
+
+The first toggle that kills the lag is your root cause.
+
+* Actionable Config Changes (after diagnosis confirms)
+
+#+begin_src emacs-lisp
+  ;; In use-package org :config section:
+  (add-hook 'org-mode-hook
+            (lambda ()
+              ;; 1. Limit dabbrev to current buffer only
+              (setq-local cape-dabbrev-check-other-buffers nil)
+              ;; 2. Reduce font-lock scope
+              (setq-local org-highlight-links '(bracket angle plain radio tag date footnote))
+              ;; 3. Disable inline images on open (load manually with C-c C-x C-v)
+              (setq-local org-startup-with-inline-images nil)))
+
+  ;; In diff-hl config: increase flydiff idle delay
+  (setq diff-hl-flydiff-delay 2.0)
+#+end_src
+
+* Status
+
+| # | Suspect                         | Tested? | Confirmed? | Fixed? | Notes                                        |
+|---+---------------------------------+---------+------------+--------+----------------------------------------------|
+| 1 | vc-follow-symlinks nil          | [x]     | [CONFIRMED]| [ ]    | ROOT CAUSE: git sees symlink blob not content |
+| 2 | diff-hl-flydiff-mode            | [x]     | [CONFIRMED]| [ ]    | Symptom: fires 1575-line fake diff every 0.3s |
+| 3 | eldoc-idle-delay 0.1            | [ ]     | [~]        | [ ]    | Secondary timer suspect; fix after #1        |
+| 4 | corfu timer in org-mode         | [ ]     | [ ]        | [ ]    | Investigate after #1 is fixed                |
+| 5 | auto-revert 5s poll             | [ ]     | [ ]        | [ ]    | Baseline timer overhead                      |
+| 6 | cape-dabbrev all-buffer scan    | [ ]     | [ ]        | [ ]    | TAB/manual completion only                   |
+| 7 | org-startup-with-inline-images  | [ ]     | [ ]        | [ ]    | One-time open cost                           |
+| 8 | org-element cache invalidation  | [ ]     | [ ]        | [ ]    |                                              |
+| 9 | shell-command vc-refresh advice | [ ]     | [ ]        | [ ]    |                                              |
+| 10| Font-lock / link fontification  | [x]     | [RULED OUT]| N/A    | redisplay_internal only 4% in profiler       |

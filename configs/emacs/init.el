@@ -463,13 +463,20 @@ Operate on selected region or whole buffer."
 ;; produces 87% CPU usage on every keystroke in the affected buffer.
 ;; The entry point to investigate is `diff-hl-diff-against-head` (diff-hl.el) and how it
 ;; calls into VC to retrieve the HEAD revision content for a symlinked file path.
+;; NOTE: the fix site is either in `diff-hl-diff-against-head` itself (resolve the symlink
+;; before passing the path to VC) or deeper in the VC layer (how VC resolves file identity).
 (use-package diff-hl
   :ensure t
   :config
   (setq diff-hl-draw-borders nil)
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t)
+  (add-hook 'find-file-hook
+            (lambda ()
+              (when (and buffer-file-name
+                         (file-symlink-p buffer-file-name))
+                (diff-hl-mode -1)))))
 
 ;; Refresh VC state after M-! shell commands so diff-hl updates.
 ;; Without this, diff-hl fringe indicators remain stale after
