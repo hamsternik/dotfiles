@@ -19,6 +19,10 @@ Host work.github.com
   HostName github.com
   IdentityFile ~/.ssh/github.work
 
+Host gitlab.com
+     HostName gitlab.com
+     IdentityFile ~/.ssh/gitlab.hamsternik
+
 Host codeberg.org
     HostName codeberg.org
     IdentityFile ~/.ssh/codeberg.hamsternik
