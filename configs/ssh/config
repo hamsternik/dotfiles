@@ -1,3 +1,5 @@
+Include ~/.ssh/config.local
+
 Host *
   IgnoreUnknown UseKeychain
   AddKeysToAgent yes
@@ -8,11 +10,15 @@ Host *
 # NOTE: `ssh-add ~/.ssh/hamsterik.github.com`
 Host hamsternik.github.com
   HostName github.com
-  IdentityFile ~/.ssh/hamsternik.github.com
+  IdentityFile ~/.ssh/github.hamsternik
 
 # NOTE: work account (GitHub). when need to manage 2 more accounts, eg. personal and work accounts
 # NOTE: to add private key to the ssh-agent manually:
 # NOTE: `ssh-add ~/.ssh/work.github.com`
 Host work.github.com
   HostName github.com
-  IdentityFile ~/.ssh/work.github.com
+  IdentityFile ~/.ssh/github.work
+
+Host codeberg.org
+    HostName codeberg.org
+    IdentityFile ~/.ssh/codeberg.hamsternik
