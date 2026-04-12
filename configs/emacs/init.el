@@ -403,7 +403,9 @@ Operate on selected region or whole buffer."
   :ensure nil
   :custom
   (org-todo-keywords
-   '((sequence "TODO(t)" "IN-PROGRESS(p)" "|" "CANCELED(c) DONE(d)")))
+   '((sequence "TODO(t)" "IN-PROGRESS(p)" "|" "CANCELED(c)" "DONE(d)")))
+  (org-todo-keyword-faces
+   '(("CANCELED" . (:foreground "yellow" :weight bold :underline nil))))
 
   ;; Format: (INACTIVE-FORMAT . ACTIVE FORMAT)
   ;; %a abbreviated day name
@@ -419,7 +421,9 @@ Operate on selected region or whole buffer."
   :config
   ;; TODO Review orgmode doc 17.2 Structure Templates
   ;; to insert empty structural blocks or to wrap existing text in such a block.
-  (require 'org-tempo))
+  (require 'org-tempo)
+  (font-lock-add-keywords
+   'org-mode '(("^*+ CANCELED \\(.*\\)" (1 (:foreground "gray70") t)))))
 
 (use-package project
   :ensure nil
