@@ -406,7 +406,6 @@ Operate on selected region or whole buffer."
    '((sequence "TODO(t)" "IN-PROGRESS(p)" "|" "CANCELED(c)" "DONE(d)")))
   (org-todo-keyword-faces
    '(("CANCELED" . (:foreground "yellow" :weight bold :underline nil))))
-
   ;; Format: (INACTIVE-FORMAT . ACTIVE FORMAT)
   ;; %a abbreviated day name
   ;; %b abbreviated month name
@@ -418,12 +417,16 @@ Operate on selected region or whole buffer."
   (browse-url-browser-function 'browse-url-default-browser)
   (org-startup-with-inline-images t) ;; Auto-display images on file open.
   (org-image-actual-width nil) ;; Use #+ATTR_ORG :width to control size.
+  
+  :custom-face
+  (org-headline-done
+   ;; To see available colors run M-x list-colors-display RET.
+   ((t (:foreground "gray60"))))
+  
   :config
   ;; TODO Review orgmode doc 17.2 Structure Templates
   ;; to insert empty structural blocks or to wrap existing text in such a block.
-  (require 'org-tempo)
-  (font-lock-add-keywords
-   'org-mode '(("^*+ CANCELED \\(.*\\)" (1 (:foreground "gray70") t)))))
+  (require 'org-tempo))
 
 (use-package project
   :ensure nil
