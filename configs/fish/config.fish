@@ -104,6 +104,12 @@ fish_add_path "$HOME/go/bin"
 fish_add_path /opt/homebrew/opt/libpq/bin
 # libpq end
 
+# rust
+## rustup toolchain in RUSTUP_HOME env located in /Users/hamsternik/.rustup
+## cargo home dir, in CARGO_HOME env located in /Users/hamsternik/.cargo
+## The cargo, rustc, rustup and other commands will be added to Cargo's bin directory are in /Users/hamsternik/.cargo/bin
+source "$HOME/.cargo/env.fish"  # For fish
+
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/hamsternik/.lmstudio/bin
 # End of LM Studio CLI section

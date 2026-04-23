@@ -94,3 +94,4 @@ vim()
 export PATH="$PATH:/Users/hamsternik/.lmstudio/bin"
 # End of LM Studio CLI section
 
+. "$HOME/.cargo/env"
