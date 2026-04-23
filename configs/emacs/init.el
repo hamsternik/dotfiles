@@ -121,7 +121,7 @@
   (visible-bell t)
 
   ;; M-! alternative to C-;
-  :bind (("C-;" . shell-command)
+  :bind (("C-;" . async-shell-command)
          ;;; C-x KEYBINDS
          ("C-x r" . undo-redo)
          ("C-x C-/" . 'comment-or-uncomment-region)
@@ -430,6 +430,7 @@ Operate on selected region or whole buffer."
 
 (use-package project
   :ensure nil
+  :bind ("C-x p ;" . project-async-shell-command)
   :custom
   (project-switch-commands
    '((project-find-file "Find file" ?f)
