@@ -1,17 +1,16 @@
 [alias]
-    cl          = clone --recursive
     a           = add
     ai          = add -p
     au          = add -u
+    br          = branch
+    brd         = branch -D
+    cl          = clone --recursive 
     c           = commit -m
     ca          = commit --amend
     co          = checkout
 #    cb          = checkout -b
-    sw          = switch
-    swc         = switch -c
-    sh          = show
-    br          = branch
-    brd         = branch -D
+    df          = diff
+    dfc         = diff --cached
     f           = fetch
     fa          = fetch --all
     fpr         = fetch --prune
@@ -20,10 +19,11 @@
     pf          = !git push origin +`git symbolic-ref HEAD`
     pt		      = !git push --tag
     pl          = !git pull origin `git symbolic-ref HEAD`
-    #prune      = !git pull origin --prune ### This command doesn't work
-    df          = diff
-    dfc         = diff --cached
     patch       = !git --no-pager diff --no-color
+    #prune      = !git pull origin --prune ### This command doesn't work
+    sh          = show
+    sw          = switch
+    swc         = switch -c
 #[rebase]
     rb          = rebase
     rba         = rebase --abort
@@ -45,17 +45,14 @@
     ss          = stash show
     sd          = stash drop
 #[log]
-    st            = status # --short
-    lg            = log --abbrev-commit --left-right --name-only
-    his           = log --oneline
     hist          = log --pretty=format:\"%h %ad (%ar) | %s%d [author: %an]\" --graph --date=short
-    hist5	      = !git hist | head -n 5
-    hist15	      = !git hist | head -n 15
+    lo	          = !git hist | head -n 10
+    loo           = !git hist | head -n 20
+    log-files     = log --graph --abbrev-commit --left-right --name-only
+#    show-last     = show --pretty="format:" --name-only # `git describe --always`
+#    show-prev     = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
+    st            = status # --short
     tree          = log --all --decorate --oneline --graph
-    show-last     = show --pretty="format:" --name-only # `git describe --always`
-    show-prev     = diff-tree --no-commit-id --name-only -r `git rev-parse --short HEAD`
-    files-commited = log --graph --name-only --oneline
-    history-for   = log --follow -p --
 # Show git commands
     commands      = help -a
 # Show current repo's name
