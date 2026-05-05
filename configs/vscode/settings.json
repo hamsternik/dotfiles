@@ -53,5 +53,9 @@
     "editor.showFoldingControls": "always",
     "makefile.configureOnOpen": true,
     "editor.unicodeHighlight.ambiguousCharacters": false,
-    "github.copilot.nextEditSuggestions.enabled": true
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+    "swift.disableSwiftlyInstallPrompt": true,
+    "update.showReleaseNotes": false
 }
