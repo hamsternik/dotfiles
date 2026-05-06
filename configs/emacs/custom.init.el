@@ -11,13 +11,15 @@
  '(package-selected-packages
    '(auctex cape cmake-mode consult corfu denote diff-hl eglot
             eglot-inactive-regions exec-path-from-shell expand-region
-            ghostel git-auto-commit-mode gruber-darker-theme js2-mode
+            git-auto-commit-mode gruber-darker-theme js2-mode
             json-mode kotlin-mode latex-mode latex-unicode-math-mode
             magit marginalia markdown-mode modus-themes multi-vterm
             orderless org-transclusion pdf-tools prism
             rainbow-delimiters swift-mode telephone-line
             typescript-mode use-package vertico vterm web-mode
             xterm-color))
+ '(package-vc-selected-packages
+   '((ghostel :url "https://github.com/dakra/ghostel" :lisp-dir "lisp")))
  '(safe-local-variable-directories '("/Users/hamsternik/Developer/@hamsternik/nnotes/"))
  '(safe-local-variable-values
    '((eval progn

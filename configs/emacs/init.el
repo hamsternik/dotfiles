@@ -536,8 +536,19 @@ Operate on selected region or whole buffer."
   :bind (:map project-prefix-map
               ("t" . project-multi-vterm)))
 
+;; https://github.com/dakra/ghostel
+;; Terminal emulator powered by libghostty
 (use-package ghostel
-  :vc (:url "https://github.com/dakra/ghostel" :rev :newest))
+  :vc (:url "https://github.com/dakra/ghostel"
+            ;; NOTE: `':lisp-dir "lisp"`' is only required on Emacs <31.1
+            :lisp-dir "lisp"
+            :rev :newest))
+
+;; TODO: latest ghostel is installed via `package-vc-selected-packages' in custom.init.el config file, but `C-h P ghostel RET' returns error.
+;; Error: Opening input file: No such file or directory, ~/.config/emacs/elpa/ghostel/ghostel.el file.
+;; Why? `C-h P` documentation is a separate cosmetic issue. 'describe-package' tries to open ghostel.el at the package root for the "soure" link,
+;; but with `:lisp-dir "lisp"` the actual file is at lisp/ghostel.el. The autoloads and pkg descriptor were generated at the root, do 'describe-package'
+;; does not know to look in 'lisp/' dir. It's a known limitation of 'package-vc' and ':lisp-dir'.
 
 ;;; MODE-LINE
 ;; https://github.com/dbordak/telephone-line
