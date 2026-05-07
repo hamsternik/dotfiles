@@ -436,8 +436,10 @@ Operate on selected region or whole buffer."
    '((project-find-file "Find file" ?f)
      (project-find-regexp "Find regexp" ?g)
      (project-find-dir "Find directory" ?d)
-     (project-eshell "Eshell" ?s)
-     (project-multi-vterm "Vterm" ?t))))
+;;     (project-eshell "Eshell" ?s)
+     (project-multi-vterm "Vterm" ?t)
+     ;; FIXME: does not work in opened project as =C-x p y= for unknown reason.
+     (ghostel-project "Ghostel" ?y))))
 
 ;;; --- NONGNU / MELPA configuration.
 
