@@ -864,7 +864,7 @@ Operate on selected region or whole buffer."
   (Tex-parse-self t)
   (TeX-PDF-mode t) ; PDF mode by default
   :hook
-  (LaTeX-mode . auto-fill-mode)
+;;  (LaTeX-mode . auto-fill-mode)
   (LaTeX-mode . flyspell-mode)
   (LaTeX-mode . LaTeX-math-mode)  ; easy math input
   (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
