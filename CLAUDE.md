@@ -278,3 +278,29 @@ Both batch targets list every tool explicitly via `$(MAKE) install-X-conf` calls
 
 - Emacs: 4-space indentation, no tabs
 - General: Follow existing patterns in each config file
+
+### Elisp Comment Style
+
+Put comments **above** the expression on their own line, never trailing after a closing paren.
+
+```elisp
+;; Set package upgrade behavior.
+(setq package-install-upgrade-built-in nil)
+```
+
+**Why:** `C-x C-e` (`eval-last-sexp`) evaluates the sexp immediately before point. If the cursor lands anywhere inside a trailing comment, Emacs scans back and picks up the last word in the comment as a symbol — causing a `void-variable` error instead of evaluating the intended form.
+
+**Exception:** Short value annotations trailing a *value* (not a closing paren) are fine, since the cursor naturally lands on the value or its closing paren:
+
+```elisp
+;; These are safe — comment trails a value, not a closing paren of the whole form.
+(corfu-auto-delay 0.2)    ;; delay before popup
+(corfu-auto-prefix 2)     ;; trigger after N chars
+```
+
+**Risky pattern to avoid:**
+
+```elisp
+(setq foo nil) ;; some note ending in a word.
+               ;;                            ^ C-x C-e lands here → void-variable error
+```

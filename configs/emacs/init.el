@@ -31,6 +31,10 @@
 (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
 (package-initialize)
 
+;; The solution to auto-update Emacs built-in packages while
+;; I am sitting on Emacs stable release, not building Emacs from source.
+(setq package-install-upgrade-built-in t)
+
 (defun delete-to-start-of-line ()
   "Delete all content from the cursor to the start of the line."
   (interactive)
@@ -570,9 +574,13 @@ Operate on selected region or whole buffer."
 ;; macking it easier to browse and select from multiple options.
 ;; (use-package vertico
 ;;   :ensure t
-;;   :hook
-;;   ;; enable vertico after Emacs has initialized
-;;   (after-init . vertico-mode))
+;;   :custom
+;;   ;; (vertico-scroll-margin 0) ;; Different scroll margin.
+;;   ;; (vertico-count 20) ;; Show more candidates.
+;;   (vertico-resize t) ;; Grow and shrink minibuffer size.
+;;   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'.
+;;   :init
+;;   (vertico-mode))
 
 ;;; CAPE
 ;; https://github.com/minad/cape
