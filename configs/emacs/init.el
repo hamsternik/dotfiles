@@ -674,6 +674,12 @@ Operate on selected region or whole buffer."
   :ensure t
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
+;;; Perpectives for Emacs (perspective.el)
+;;; https://github.com/nex3/perspective-el
+;; (use-package perspective ... )
+;; TBD to review before integrate in my workflow:
+;; https://www.youtube.com/watch?v=OvyP3eQyRFo
+
 ;;; ULTRA SCROLL
 ;; https://github.com/jdtsmith/ultra-scroll
 ;; Scroll Emacs like lightning (macOS).
