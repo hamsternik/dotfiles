@@ -565,23 +565,6 @@ Operate on selected region or whole buffer."
   :config
   (telephone-line-mode 1))
 
-;;; VERTICO
-;; https://github.com/minad/vertico
-;; Vertico enhances the completion experience in Emacs by providing a
-;; vertical selection interface for both buffer and minibuffers completions.
-;; Unlike traditional minibuffer completion, which displays candidates
-;; in a horizontal format, Vertico presents candidates in a vertical list,
-;; macking it easier to browse and select from multiple options.
-;; (use-package vertico
-;;   :ensure t
-;;   :custom
-;;   ;; (vertico-scroll-margin 0) ;; Different scroll margin.
-;;   ;; (vertico-count 20) ;; Show more candidates.
-;;   (vertico-resize t) ;; Grow and shrink minibuffer size.
-;;   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'.
-;;   :init
-;;   (vertico-mode))
-
 ;;; CAPE
 ;; https://github.com/minad/cape
 ;; Completion at point extension. Cape provides Completion At Point Extensions which
@@ -661,13 +644,10 @@ Operate on selected region or whole buffer."
   ;; marginalia must be activated in the :init section of use-package
   ;; such that the mode gets enabled right away. Note that this
   ;; forces loading the package.
-  (marginalia-mode)
+  (marginalia-mode))
 
-  :config
-  (fido-vertical-mode 1))
-
-;;; Orderless
-;; https://github.com/oantolin/orderless
+;;;; Emacs completion style that matches multiple regexps in any order (orderless).
+;;;; https://github.com/oantolin/orderless
 (use-package orderless
   :ensure t
   :custom
@@ -675,8 +655,22 @@ Operate on selected region or whole buffer."
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
-;; TODO: @prot sample configuration including `orderless` package
-;; https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages
+;;; VERTICO
+;; https://github.com/minad/vertico
+;; Vertico enhances the completion experience in Emacs by providing a
+;; vertical selection interface for both buffer and minibuffers completions.
+;; Unlike traditional minibuffer completion, which displays candidates
+;; in a horizontal format, Vertico presents candidates in a vertical list,
+;; macking it easier to browse and select from multiple options.
+(use-package vertico
+  :ensure t
+  :custom
+  ;; (vertico-scroll-margin 0) ;; Different scroll margin.
+  ;; (vertico-count 20) ;; Show more candidates.
+  (vertico-resize t) ;; Grow and shrink minibuffer size.
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'.
+  :init
+  (vertico-mode))
 
 (use-package rainbow-delimiters
   :ensure t
