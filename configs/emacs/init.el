@@ -1,4 +1,4 @@
-;;  -*- coding: utf-8; lexical-binding: t -*- 
+;;;  -*- coding: utf-8; lexical-binding: t -*- 
 
 ;;; Intro:
 ;;; See https://github.com/patrickt/emacs for inspiration.
@@ -43,7 +43,7 @@
 
 ;; reload emacs config
 (defun reload-emacs-config ()
-  "Reload emacs.el Emacs configuration file"
+  "Reload emacs.el Emacs configuration file."
   (interactive)
   (load-file user-init-file))
 
@@ -646,22 +646,20 @@ Operate on selected region or whole buffer."
   ;; forces loading the package.
   (marginalia-mode))
 
-;;;; Emacs completion style that matches multiple regexps in any order (orderless).
-;;;; https://github.com/oantolin/orderless
+;;; Emacs completion style that matches multiple regexps in any order (orderless).
+;;; https://github.com/oantolin/orderless
 (use-package orderless
   :ensure t
   :custom
-  (completion-styles '(orderless basic))
+  (orderless-matching-styles '(orderless-prefixes orderless-regexp))
+  (completion-styles '(basic substring initials partial-completion orderless))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
-;;; VERTICO
-;; https://github.com/minad/vertico
-;; Vertico enhances the completion experience in Emacs by providing a
-;; vertical selection interface for both buffer and minibuffers completions.
-;; Unlike traditional minibuffer completion, which displays candidates
-;; in a horizontal format, Vertico presents candidates in a vertical list,
-;; macking it easier to browse and select from multiple options.
+;;; Vertical interactive completion (vertico).
+;;; https://github.com/minad/vertico
+;;; Vertico enhances the completion experience in Emacs by providing a
+;;; vertical selection interface for both buffer and minibuffers completions.
 (use-package vertico
   :ensure t
   :custom
