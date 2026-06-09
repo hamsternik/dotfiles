@@ -445,6 +445,11 @@ Operate on selected region or whole buffer."
      ;; FIXME: does not work in opened project as =C-x p y= for unknown reason.
      (ghostel-project "Ghostel" ?y))))
 
+(use-package xref
+  :ensure nil
+  :custom
+  (xref-search-program 'ripgrep))
+
 ;;; --- NONGNU / MELPA configuration.
 
 ;; https://github.com/magnars/expand-region.el
