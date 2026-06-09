@@ -27,3 +27,8 @@ font-family = Fira Code
 
 #theme = zenwritten_dark
 keybind = shift+enter=text:\n
+
+# Custom
+
+# use only left Option key as Meta, leaving the right Option free for ¥ and other Unicode chars.
+macos-option-as-alt = left
