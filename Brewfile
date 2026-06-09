@@ -103,6 +103,9 @@ brew "procs"
 # Reattach -- macOS wrapper, needs for tmux
 brew "reattach-to-user-namespace"
 
+# search tool like grep and The Silver Searcher
+brew "ripgrep"
+
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
 
