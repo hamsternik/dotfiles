@@ -350,9 +350,12 @@ Operate on selected region or whole buffer."
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode))
 
-;; FLYCHECK
+;; FLYCHECK, https://github.com/flycheck/flycheck
+;; On the fly syntax checking for GNU Emacs.
 (use-package flycheck
   :ensure t
+  ;; flycheck + tidy -- spec-level HTML validation, catches attributes/tag typo
+  ;; `sudo apt install tidy` on Linux, then `tidy -e index.html` to lint.
   :hook (mhtml-mode . flycheck-mode))
 
 ;; FLYMAKE
