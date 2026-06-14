@@ -350,6 +350,11 @@ Operate on selected region or whole buffer."
   :ensure nil
   :hook (prog-mode . electric-pair-local-mode))
 
+;; FLYCHECK
+(use-package flycheck
+  :ensure t
+  :hook (mhtml-mode . flycheck-mode))
+
 ;; FLYMAKE
 ;; Flymake is an on-the-fly syntax checking extension that provides
 ;; real-time feedback about erros and warnings in your code as you write.
