@@ -568,6 +568,9 @@ Operate on selected region or whole buffer."
 (use-package telephone-line
   :ensure t
   :config
+  (setq telephone-line-lhs
+        '((accent . (telephone-line-vc-segment))
+          (nil . (telephone-line-buffer-segment))))
   (telephone-line-mode 1))
 
 ;;; CAPE
@@ -692,6 +695,11 @@ Operate on selected region or whole buffer."
 
 ;;; --- MELPA / LSP, Tree-Sitter configuration.
 
+;; Emacs has 'mhtml-mode' available since Emacs 26 which is specifically
+;; designed to support HTML syntax structure within embedded sub-languages,
+;; embedding CSS and JS syntax highlighting without needing 'web-mode'.
+(add-to-list 'auto-mode-alist '("\\.html\\'" . mhtml-mode))
+
 ;; a client for Language Server Protocol servers.
 ;; https://github.com/joaotavora/eglot
 (use-package eglot
@@ -708,7 +716,8 @@ Operate on selected region or whole buffer."
          (typescript-mode . eglot-ensure)
          (js2-mode . eglot-ensure)
          (swift-mode . eglot-ensure)
-         (web-mode . eglot-ensure))
+         (web-mode . eglot-ensure)
+         (mhtml-mode . eglot-ensure))
   
   :config
   ;; (fset #'jsonrpc--log-event #'ignore)
@@ -727,7 +736,7 @@ Operate on selected region or whole buffer."
   ;; install to execute with Eglot
   ;; npm install -g vscode-langservers-extracted
   (add-to-list 'eglot-server-programs
-               '(html-mode . ("vscode-html-language-server" "--stdio")))
+               '(mhtml-mode . ("vscode-html-language-server" "--stdio")))
   
   ;; install to execute with Eglot
   ;; npm install -g vscode-langservers-extracted
