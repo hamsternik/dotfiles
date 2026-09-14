@@ -9,7 +9,14 @@
 {
     // Automatically update Zed. This setting may be ignored on Linux if
     // installed through a package manager.
+    "outline_panel": {
+        "dock": "left"
+    },
+    "collaboration_panel": {
+        "dock": "left"
+    },
     "agent": {
+        "dock": "right",
         "default_model": {
             "provider": "openai",
             "model": "gpt-4.1-mini"
