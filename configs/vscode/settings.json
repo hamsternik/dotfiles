@@ -57,5 +57,9 @@
     "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
     "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
     "swift.disableSwiftlyInstallPrompt": true,
-    "update.showReleaseNotes": false
+    "update.showReleaseNotes": false,
+    "intellij.region": "europe",
+    "intellij.dataSharing": "anonymous",
+    "claudeCode.preferredLocation": "panel",
+    "terminal.integrated.initialHint": false
 }
