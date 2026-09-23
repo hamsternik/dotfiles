@@ -291,6 +291,9 @@ cask "slack"
 # Text editor for code, markup and prose
 cask "sublime-text"
 
+# Free and open source database client built natively for developers, https://tablepro.app/
+cask "tablepro"
+
 # Messaging app with a focus on speed and security
 cask "telegram"
 
