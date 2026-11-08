@@ -28,8 +28,8 @@ install-brew:
 EMACS_SOURCE := $(CURDIR)/configs/emacs
 EMACS_DEST := $(HOME)/.config/emacs
 install-emacs-conf: uninstall-emacs-conf
-	@if [ ! -d "$(EMACS_DEST)" ]; then echo "❌ ~/.config/emacs dir does not exist. Exit."; exit 1; fi
 	@echo "\nInstalling Emacs configuration 🚀"
+	mkdir -p $(EMACS_DEST)
 	ln -s -f $(EMACS_SOURCE)/init.el $(EMACS_DEST)/init.el
 	ln -s -f $(EMACS_SOURCE)/custom.init.el $(EMACS_DEST)/custom.init.el
 
@@ -122,12 +122,11 @@ install-fish-plugins:
 FISH_SOURCE := $(CURDIR)/configs/fish
 FISH_DEST := $(HOME)/.config/fish
 install-fish-conf: uninstall-fish-conf
-	@if [ ! -d "$(FISH_DEST)" ]; then echo "❌ ~/.config/fish dir does not exist. Exit"; exit 1; fi
 	@echo "\nInstalling fish shell configuration 🚀"
+	mkdir -p $(FISH_DEST)/functions $(FISH_DEST)/conf.d
 	ln -s -f $(FISH_SOURCE)/config.fish $(FISH_DEST)/config.fish
 	ln -s -f $(FISH_SOURCE)/fish_plugins $(FISH_DEST)/fish_plugins
 	ln -s -f $(FISH_SOURCE)/functions/fish_prompt.fish $(FISH_DEST)/functions/fish_prompt.fish
-	@if [ ! -d "$(FISH_DEST)/conf.d" ]; then echo "~/.config/fish/conf.d dir does not exist. Exit"; exit 1; fi
 	ln -s -f $(FISH_SOURCE)/conf.d/fnm.fish $(FISH_DEST)/conf.d/fnm.fish
 
 uninstall-fish-conf:
@@ -178,6 +177,7 @@ KARABINER_SOURCE := $(CURDIR)/configs/karabiner
 KARABINER_DEST := $(HOME)/.config/karabiner
 install-karabiner-conf: uninstall-karabiner-conf
 	@echo "\nInstalling Karabiner configuration 🚀"
+	mkdir -p $(KARABINER_DEST)/assets/complex_modifications
 	ln -s -f $(KARABINER_SOURCE)/karabiner.json $(KARABINER_DEST)/karabiner.json
 	ln -s -f $(KARABINER_SOURCE)/change-lang-one-key.json $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json
 
@@ -191,8 +191,8 @@ uninstall-karabiner-conf:
 NVIM_SOURCE := $(CURDIR)/configs/nvim
 NVIM_DEST := $(HOME)/.config/nvim
 install-nvim-conf: uninstall-nvim-conf
-	@if [ ! -d "$(NVIM_DEST)" ]; then echo "❌ ~/.config/nvim dir does not exist. Exit."; exit 1; fi
 	@echo "\nInstalling NeoVim configuration 🚀"
+	mkdir -p $(NVIM_DEST)
 	ln -s -f $(NVIM_SOURCE)/init.lua $(NVIM_DEST)/init.lua
 	ln -s -n $(NVIM_SOURCE)/lua $(NVIM_DEST)/lua
 
@@ -225,6 +225,7 @@ SSH_SOURCE := $(CURDIR)/configs/ssh
 SSH_DEST := $(HOME)/.ssh
 install-ssh-conf: uninstall-ssh-conf
 	@echo "\nInstalling SSH configuration 🚀"
+	mkdir -p -m 700 $(SSH_DEST)
 	ln -s -f $(SSH_SOURCE)/config $(SSH_DEST)/config
 	@echo "\nChecking out SSH private keys for the 'ssh-agent:"
 	ssh-add -l
@@ -267,8 +268,8 @@ uninstall-tmux-conf:
 VIM_SOURCE := $(CURDIR)/configs/vim
 VIM_DEST := $(HOME)/.vim
 install-vim-conf: uninstall-vim-conf
-	@if [ ! -d "$(VIM_DEST)" ]; then echo "❌ ~/.vim dir does not exist. Exit."; exit 1; fi
 	@echo "\nInstalling Vim configuration 🚀"
+	mkdir -p $(VIM_DEST)
 	ln -s -f $(VIM_SOURCE)/vimrc $(VIM_DEST)/.vimrc
 
 uninstall-vim-conf:
@@ -280,8 +281,8 @@ uninstall-vim-conf:
 VSCODE_SOURCE := $(CURDIR)/configs/vscode
 VSCODE_DEST := $(HOME)/Library/Application\ Support/Code/User
 install-vscode-conf: uninstall-vscode-conf
-	@if [ ! -d $(VSCODE_DEST) ]; then echo "❌ VSCode is not installed. Exit."; exit 1; fi
 	@echo "\nInstalling VSCode configuration 🚀"
+	mkdir -p $(VSCODE_DEST)
 	ln -s -f $(VSCODE_SOURCE)/keybindings.json $(VSCODE_DEST)/keybindings.json
 	ln -s -f $(VSCODE_SOURCE)/settings.json $(VSCODE_DEST)/settings.json
 
@@ -307,8 +308,8 @@ uninstall-xcode-keybinds:
 ZED_SOURCE := $(CURDIR)/configs/zed
 ZED_DEST := $(HOME)/.config/zed
 install-zed-conf: uninstall-zed-conf
-	@if [ ! -d $(ZED_DEST) ]; then echo "❌ ~/.config/zed dir does not exist. Exit."; exit 1; fi
 	@echo "\nInstalling Zed editor configuration 🚀"
+	mkdir -p $(ZED_DEST)
 	ln -s -f $(ZED_SOURCE)/settings.json $(ZED_DEST)/settings.json
 	ln -s -f $(ZED_SOURCE)/keymap.json $(ZED_DEST)/keymap.json
 
@@ -322,8 +323,8 @@ uninstall-zed-conf:
 ZELLIJ_SOURCE := $(CURDIR)/configs/zellij
 ZELLIJ_DEST := $(HOME)/.config/zellij
 install-zellij-conf: uninstall-zellij-conf
-	@if [ ! -d "$(ZELLIJ_DEST)" ]; then echo "❌ ~/.config/zellij dir does not exist. Exit."; exit 1; fi
 	@echo "\nInstalling zellij configuration 🚀"
+	mkdir -p $(ZELLIJ_DEST)
 	ln -s -f $(ZELLIJ_SOURCE)/config.kdl $(ZELLIJ_DEST)/config.kdl
 
 uninstall-zellij-conf:
