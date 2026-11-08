@@ -143,13 +143,11 @@ install-git-conf: uninstall-git-conf
 	@echo "\nInstalling git configuration 🚀"
 	ln -s -f $(GIT_SOURCE)/gitattributes $(GIT_DEST)/.gitattributes
 	ln -s -f $(GIT_SOURCE)/gitconfig $(GIT_DEST)/.gitconfig
-	ln -s -f $(GIT_SOURCE)/gitconfig.work $(GIT_DEST)/.gitconfig.work
 	ln -s -f $(GIT_SOURCE)/gitignore_global $(GIT_DEST)/.gitignore_global
 
 uninstall-git-conf:
 	rm ~/.gitattributes || true
 	rm ~/.gitconfig || true
-	rm ~/.gitconfig.work || true
 	rm ~/.gitignore_global || true
 
 # https://github.com/gpg/gnupg
