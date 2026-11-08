@@ -240,7 +240,7 @@ uninstall-ssh-conf:
 
 ## Sublime Text 4 configs
 SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURDIR)/configs/sublime-text
-SUBLIME_TEXT_CONF_DIR := "$(HOME)/Library/Application\ Support/Sublime\ Text/Packages/User"
+SUBLIME_TEXT_CONF_DIR := $(HOME)/Library/Application Support/Sublime Text/Packages/User
 install-sublime-text-conf:
 	@$(MAKE) uninstall-sublime-text-conf
 	@echo "\n✨ Installing Sublime Text 4 config files."
@@ -284,16 +284,16 @@ uninstall-vim-conf:
 # VSCODE CONFIGURATION
 
 VSCODE_SOURCE := $(CURDIR)/configs/vscode
-VSCODE_DEST := $(HOME)/Library/Application\ Support/Code/User
+VSCODE_DEST := $(HOME)/Library/Application Support/Code/User
 install-vscode-conf: uninstall-vscode-conf
 	@echo "\nInstalling VSCode configuration 🚀"
-	mkdir -p $(VSCODE_DEST)
-	ln -s -f $(VSCODE_SOURCE)/keybindings.json $(VSCODE_DEST)/keybindings.json
-	ln -s -f $(VSCODE_SOURCE)/settings.json $(VSCODE_DEST)/settings.json
+	mkdir -p "$(VSCODE_DEST)"
+	ln -s -f $(VSCODE_SOURCE)/keybindings.json "$(VSCODE_DEST)/keybindings.json"
+	ln -s -f $(VSCODE_SOURCE)/settings.json "$(VSCODE_DEST)/settings.json"
 
 uninstall-vscode-conf:
-	rm $(VSCODE_DEST)/keybindings.json || true
-	rm $(VSCODE_DEST)/settings.json || true
+	rm "$(VSCODE_DEST)/keybindings.json" || true
+	rm "$(VSCODE_DEST)/settings.json" || true
 
 ## Xcode keybindings
 XCODE_DIR := $(CURDIR)/configs/xcode
