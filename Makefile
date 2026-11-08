@@ -228,7 +228,7 @@ install-ssh-conf: uninstall-ssh-conf
 	mkdir -p -m 700 $(SSH_DEST)
 	ln -s -f $(SSH_SOURCE)/config $(SSH_DEST)/config
 	@echo "\nChecking out SSH private keys for the 'ssh-agent:"
-	ssh-add -l
+	ssh-add -l || true
 
 uninstall-ssh-conf:
 	rm ~/.ssh/config || true
