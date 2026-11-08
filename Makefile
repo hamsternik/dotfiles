@@ -133,6 +133,7 @@ uninstall-fish-conf:
 	rm $(FISH_DEST)/config.fish || true
 	rm $(FISH_DEST)/fish_plugins || true
 	rm $(FISH_DEST)/functions/fish_prompt.fish || true
+	rm $(FISH_DEST)/conf.d/fnm.fish || true
 
 # https://github.com/git/git
 # git configuration 
