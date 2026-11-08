@@ -22,7 +22,22 @@
    '((ghostel :url "https://github.com/dakra/ghostel" :lisp-dir "lisp")))
  '(safe-local-variable-directories '("/Users/hamsternik/Developer/@hamsternik/nnotes/"))
  '(safe-local-variable-values
-   '((eval progn
+   '((eval let*
+           ((x (dir-locals-find-file default-directory))
+            (this-directory
+             (if (listp x) (car x) (file-name-directory x))))
+           (unless
+               (or (featurep 'swift-project-settings)
+                   (and (fboundp 'tramp-tramp-file-p)
+                        (tramp-tramp-file-p this-directory)))
+             (add-to-list 'load-path (concat this-directory "utils")
+                          :append)
+             (defvar swift-project-directory)
+             (let ((swift-project-directory this-directory))
+               (require 'swift-project-settings)))
+           (set (make-local-variable 'swift-project-directory)
+                this-directory))
+     (eval progn
            (defun nnotes/gac-add-readme nil
              (when (and git-auto-commit-mode)
                (string-match-p "jjournal\\.org$" (buffer-file-name)))
