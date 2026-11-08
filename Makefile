@@ -27,6 +27,8 @@ install-brew:
 
 EMACS_SOURCE := $(CURDIR)/configs/emacs
 EMACS_DEST := $(HOME)/.config/emacs
+# Emacs only reads $(EMACS_DEST) when none of these exist; an empty ~/.emacs.d is enough to shadow it.
+EMACS_LEGACY_PATHS := $(HOME)/.emacs $(HOME)/.emacs.el $(HOME)/.emacs.d
 install-emacs-conf: uninstall-emacs-conf
 	@echo "\nInstalling Emacs configuration 🚀"
 	mkdir -p $(EMACS_DEST)
@@ -34,6 +36,12 @@ install-emacs-conf: uninstall-emacs-conf
 	ln -s -f $(EMACS_SOURCE)/custom.init.el $(EMACS_DEST)/custom.init.el
 
 uninstall-emacs-conf:
+	@for f in $(EMACS_LEGACY_PATHS); do \
+		if [ -e "$$f" ] || [ -L "$$f" ]; then \
+			echo "Removing $$f (it shadows $(EMACS_DEST))"; \
+			rm -rf "$$f"; \
+		fi; \
+	done
 	rm -f $(EMACS_DEST)/init.el
 	rm -f $(EMACS_DEST)/custom.init.el
 
