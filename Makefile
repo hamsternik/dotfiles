@@ -34,8 +34,8 @@ install-emacs-conf: uninstall-emacs-conf
 	ln -s -f $(EMACS_SOURCE)/custom.init.el $(EMACS_DEST)/custom.init.el
 
 uninstall-emacs-conf:
-	rm $(EMACS_DEST)/init.el || true
-	rm $(EMACS_DEST)/custom.init.el || true
+	rm -f $(EMACS_DEST)/init.el
+	rm -f $(EMACS_DEST)/custom.init.el
 
 ## Batch mode - test if config loads without errors.
 emacs-lint:
@@ -102,7 +102,7 @@ install-finicky-conf: uninstall-finicky-conf
 	ln -s -f $(FINICKY_SOURCE)/finicky.js $(FINICKY_DEST)/.finicky.js
 
 uninstall-finicky-conf:
-	rm ~/.finicky.js || true
+	rm -f $(HOME)/.finicky.js
 
 # https://github.com/fish-shell/fish-shell
 # FISH SHELL CONFIGURATION
@@ -130,10 +130,10 @@ install-fish-conf: uninstall-fish-conf
 	ln -s -f $(FISH_SOURCE)/conf.d/fnm.fish $(FISH_DEST)/conf.d/fnm.fish
 
 uninstall-fish-conf:
-	rm $(FISH_DEST)/config.fish || true
-	rm $(FISH_DEST)/fish_plugins || true
-	rm $(FISH_DEST)/functions/fish_prompt.fish || true
-	rm $(FISH_DEST)/conf.d/fnm.fish || true
+	rm -f $(FISH_DEST)/config.fish
+	rm -f $(FISH_DEST)/fish_plugins
+	rm -f $(FISH_DEST)/functions/fish_prompt.fish
+	rm -f $(FISH_DEST)/conf.d/fnm.fish
 
 # https://github.com/git/git
 # git configuration 
@@ -147,9 +147,9 @@ install-git-conf: uninstall-git-conf
 	ln -s -f $(GIT_SOURCE)/gitignore_global $(GIT_DEST)/.gitignore_global
 
 uninstall-git-conf:
-	rm ~/.gitattributes || true
-	rm ~/.gitconfig || true
-	rm ~/.gitignore_global || true
+	rm -f $(HOME)/.gitattributes
+	rm -f $(HOME)/.gitconfig
+	rm -f $(HOME)/.gitignore_global
 
 # https://github.com/gpg/gnupg
 # gnupg configuration 
@@ -181,8 +181,8 @@ install-karabiner-conf: uninstall-karabiner-conf
 	ln -s -f $(KARABINER_SOURCE)/change-lang-one-key.json $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json
 
 uninstall-karabiner-conf:
-	rm $(KARABINER_DEST)/karabiner.json || true
-	rm $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json || true
+	rm -f $(KARABINER_DEST)/karabiner.json
+	rm -f $(KARABINER_DEST)/assets/complex_modifications/change-lang-one-key.json
 
 # https://github.com/neovim/neovim
 # NEOVIM CONFIGURATION 
@@ -196,14 +196,9 @@ install-nvim-conf: uninstall-nvim-conf
 	ln -s -n $(NVIM_SOURCE)/lua $(NVIM_DEST)/lua
 
 uninstall-nvim-conf:
-	rm $(NVIM_DEST)/init.lua || true
-	@if [ -L "$(NVIM_DEST)/lua" ]; then \
-		rm "$(NVIM_DEST)/lua"; \
-	elif [ -d "$(NVIM_DEST)/lua" ]; then \
-		backup="$(NVIM_DEST)/lua.backup-$$(date +%Y%m%d-%H%M%S)"; \
-		echo "\n$(NVIM_DEST)/lua is a real dir, not a symlink. Move it to $$backup"; \
-		mv "$(NVIM_DEST)/lua" "$$backup"; \
-	fi
+	rm -f $(NVIM_DEST)/init.lua
+# No trailing slash: removes the lua symlink itself (or a real dir), never the repo files.
+	rm -rf $(NVIM_DEST)/lua
 
 
 # https://github.com/gitGNU/gnu_bash
@@ -219,9 +214,9 @@ install-shell-conf: uninstall-shell-conf
 	ln -s -f $(SHELL_SOURCE)/profile $(SHELL_DEST)/.profile
 
 uninstall-shell-conf:
-	rm ~/.aliases || true
-	rm ~/.bashrc || true
-	rm ~/.profile || true
+	rm -f $(HOME)/.aliases
+	rm -f $(HOME)/.bashrc
+	rm -f $(HOME)/.profile
 
 # https://github.com/openssh/openssh-portable
 # SSH CONFIGURATION
@@ -236,7 +231,7 @@ install-ssh-conf: uninstall-ssh-conf
 	ssh-add -l || true
 
 uninstall-ssh-conf:
-	rm ~/.ssh/config || true
+	rm -f $(HOME)/.ssh/config
 
 ## Sublime Text 4 configs
 SUBLIME_TEXT_DOTFILES_CONF_DIR := $(CURDIR)/configs/sublime-text
@@ -250,9 +245,9 @@ install-sublime-text-conf:
 	ln -s -n "$(SUBLIME_TEXT_DOTFILES_CONF_DIR)/Preferences.sublime-settings" "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
 
 uninstall-sublime-text-conf:
-	rm "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap" || true
-	rm "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings" || true
-	rm "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings" || true
+	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Default (OSX).sublime-keymap"
+	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Package Control.sublime-settings"
+	rm -f "$(SUBLIME_TEXT_CONF_DIR)/Preferences.sublime-settings"
 
 # https://github.com/tmux/tmux
 # TMUX CONFIGURATION (Terminal multiplexer)
@@ -265,7 +260,7 @@ install-tmux-conf: uninstall-tmux-conf
 	ln -s -f $(TMUX_SOURCE)/tmux.conf $(TMUX_DEST)/tmux.conf
 
 uninstall-tmux-conf:
-	rm $(TMUX_DEST)/tmux.conf || true
+	rm -f $(TMUX_DEST)/tmux.conf
 
 # https://github.com/vim/vim
 # VIM CONFIGURATION
@@ -278,7 +273,7 @@ install-vim-conf: uninstall-vim-conf
 	ln -s -f $(VIM_SOURCE)/vimrc $(VIM_DEST)/.vimrc
 
 uninstall-vim-conf:
-	rm $(VIM_DEST)/.vimrc || true
+	rm -f $(VIM_DEST)/.vimrc
 
 # https://github.com/microsoft/vscode
 # VSCODE CONFIGURATION
@@ -292,8 +287,8 @@ install-vscode-conf: uninstall-vscode-conf
 	ln -s -f $(VSCODE_SOURCE)/settings.json "$(VSCODE_DEST)/settings.json"
 
 uninstall-vscode-conf:
-	rm "$(VSCODE_DEST)/keybindings.json" || true
-	rm "$(VSCODE_DEST)/settings.json" || true
+	rm -f "$(VSCODE_DEST)/keybindings.json"
+	rm -f "$(VSCODE_DEST)/settings.json"
 
 ## Xcode keybindings
 XCODE_DIR := $(CURDIR)/configs/xcode
@@ -305,7 +300,7 @@ install-xcode-keybinds:
 	ln -s -n $(XCODE_DIR)/custom.idekeybindings $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings
 
 uninstall-xcode-keybinds:
-	rm $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings || true
+	rm -f $(XCODE_KEYBINDINGS_DESTINATION)/custom.idekeybindings
 
 # https://github.com/zed-industries/zed
 # ZED EDITOR CONFIGURATION
@@ -319,8 +314,8 @@ install-zed-conf: uninstall-zed-conf
 	ln -s -f $(ZED_SOURCE)/keymap.json $(ZED_DEST)/keymap.json
 
 uninstall-zed-conf:
-	rm $(ZED_DEST)/settings.json || true
-	rm $(ZED_DEST)/keymap.json || true
+	rm -f $(ZED_DEST)/settings.json
+	rm -f $(ZED_DEST)/keymap.json
 
 # https://github.com/zellij-org/zellij
 # ZELLIJ CONFIGURATION (Pluggable terminal workspace)
@@ -333,7 +328,7 @@ install-zellij-conf: uninstall-zellij-conf
 	ln -s -f $(ZELLIJ_SOURCE)/config.kdl $(ZELLIJ_DEST)/config.kdl
 
 uninstall-zellij-conf:
-	rm $(ZELLIJ_DEST)/config.kdl || true
+	rm -f $(ZELLIJ_DEST)/config.kdl
 
 doc-zellij:
 	@echo "There are 2 config files available, config.kdl and default.config.kdl in the repo."
@@ -350,8 +345,8 @@ install-zsh-conf: uninstall-zsh-conf
 	ln -s -f $(ZSH_SOURCE)/zshrc $(ZSH_DEST)/.zshrc
 
 uninstall-zsh-conf:
-	rm $(ZSH_DEST)/.zshenv || true
-	rm $(ZSH_DEST)/.zshrc || true
+	rm -f $(ZSH_DEST)/.zshenv
+	rm -f $(ZSH_DEST)/.zshrc
 
 # Misc Targets:
 
