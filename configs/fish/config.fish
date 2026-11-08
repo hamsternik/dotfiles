@@ -119,3 +119,10 @@ fish_add_path /home/linuxbrew/.linuxbrew/bin
 
 # opencode
 fish_add_path /home/hamsternik/.opencode/bin
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+fish_add_path "$HOME/.local/bin"
