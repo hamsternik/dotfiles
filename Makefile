@@ -198,7 +198,13 @@ install-nvim-conf: uninstall-nvim-conf
 
 uninstall-nvim-conf:
 	rm $(NVIM_DEST)/init.lua || true
-	rm $(NVIM_DEST)/lua || true
+	@if [ -L "$(NVIM_DEST)/lua" ]; then \
+		rm "$(NVIM_DEST)/lua"; \
+	elif [ -d "$(NVIM_DEST)/lua" ]; then \
+		backup="$(NVIM_DEST)/lua.backup-$$(date +%Y%m%d-%H%M%S)"; \
+		echo "\n$(NVIM_DEST)/lua is a real dir, not a symlink. Move it to $$backup"; \
+		mv "$(NVIM_DEST)/lua" "$$backup"; \
+	fi
 
 
 # https://github.com/gitGNU/gnu_bash
