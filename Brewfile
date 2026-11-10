@@ -5,6 +5,7 @@
 tap "homebrew/bundle"
 tap "mongodb/brew"
 tap "dart-lang/dart"
+tap "gantoreno/macfetch"
 
 # --- CLI Applications
 # --- https://github.com/Homebrew/brew/
@@ -75,8 +76,8 @@ brew "mas"
 # Turn marked-up plain text into well-formatted documents
 brew "multimarkdown"
 
-# Fast, highly customisable system info script
-brew "neofetch"
+# neofetch-like system info tool for macOS, https://github.com/gantoreno/macfetch
+brew "macfetch"
 
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
