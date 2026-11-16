@@ -67,6 +67,9 @@ brew "htop"
 # Terminal file manager
 brew "lf"
 
+# Generic library support script; no `glibtool` distributed with macOS/Darwin.
+brew "libtool"
+
 # libpq, Postgres C API library
 brew "libpq"
 
