@@ -91,7 +91,7 @@ make emacs-lint               # Validate Emacs config (batch load, reports error
 |----------|----------|
 | Completion | corfu, cape, orderless, marginalia |
 | UI | modus-themes, telephone-line |
-| Terminal | multi-vterm |
+| Terminal | ghostel |
 | Languages | swift-mode, kotlin-mode, json-mode, markdown-mode, cmake-mode, auctex |
 | LSP | eglot (built-in), tree-sitter |
 | Utilities | exec-path-from-shell, prism |

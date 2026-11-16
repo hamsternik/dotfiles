@@ -17,10 +17,10 @@
             gruber-darker-theme js2-mode json-mode kotlin-mode
             latex-mode latex-unicode-math-mode lua-mode magit
             marginalia markdown-mode markdown-ts-mode modus-themes
-            multi-vterm orderless org-transclusion pdf-tools prism
+            orderless org-transclusion pdf-tools prism
             rainbow-delimiters swift-mode telephone-line timeout
-            transient typescript-mode use-package vertico vterm
-            web-mode xterm-color))
+            transient typescript-mode use-package vertico web-mode
+            xterm-color))
  '(package-vc-selected-packages
    '((ghostel :url "https://github.com/dakra/ghostel" :lisp-dir "lisp")))
  '(safe-local-variable-directories '("/Users/hamsternik/Developer/@hamsternik/nnotes/"))

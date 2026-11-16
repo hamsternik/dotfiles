@@ -207,9 +207,7 @@
   (add-hook 'kill-emacs-hook 'hn/save-scratch)
   (add-hook 'after-init-hook 'hn/restore-scratch)
 
-  ;; Using claude-code in *vterm* build-in Emacs terminal.
-  ;; The most reliable workflow I found is: `C-c C-t` (enter copy mode), then
-  ;; navigate/select -> `M-w` -> `C-c C-t` to exit copy mode.
+  ;; Share the kill ring with the macOS clipboard.
   (setq select-enable-clipboard t)
   ;; By default symlink extension is irrelevant, Emacs uses the target file's extension.
   ;; This tells Emacs to use the /symlink's name/ for mode detection instead of resolving
@@ -459,7 +457,6 @@ Operate on selected region or whole buffer."
      (project-find-regexp "Find regexp" ?g)
      (project-find-dir "Find directory" ?d)
 ;;     (project-eshell "Eshell" ?s)
-     (project-multi-vterm "Vterm" ?t)
      ;; FIXME: does not work in opened project as =C-x p y= for unknown reason.
      (ghostel-project "Ghostel" ?y))))
 
@@ -553,19 +550,6 @@ Operate on selected region or whole buffer."
   :ensure t
   :if (memq window-system '(mac ns x))
   :config (exec-path-from-shell-initialize))
-
-(defun project-multi-vterm ()
-  "Open multi-vterm in project root."
-  (interactive)
-  (let ((default-directory (project-root (project-current t))))
-    (multi-vterm)))
-
-;;; https://github.com/suonlight/multi-vterm
-;; Managing multiple vterm buffers in Emacs
-(use-package multi-vterm
-  :ensure t
-  :bind (:map project-prefix-map
-              ("t" . project-multi-vterm)))
 
 ;; https://github.com/dakra/ghostel
 ;; Terminal emulator powered by libghostty
