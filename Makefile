@@ -32,6 +32,7 @@ EMACS_LEGACY_PATHS := $(HOME)/.emacs $(HOME)/.emacs.el $(HOME)/.emacs.d
 install-emacs-conf: uninstall-emacs-conf
 	@echo "\nInstalling Emacs configuration 🚀"
 	mkdir -p $(EMACS_DEST)
+	ln -s -f $(EMACS_SOURCE)/early-init.el $(EMACS_DEST)/early-init.el
 	ln -s -f $(EMACS_SOURCE)/init.el $(EMACS_DEST)/init.el
 	ln -s -f $(EMACS_SOURCE)/custom.init.el $(EMACS_DEST)/custom.init.el
 
@@ -42,6 +43,7 @@ uninstall-emacs-conf:
 			rm -rf "$$f"; \
 		fi; \
 	done
+	rm -f $(EMACS_DEST)/early-init.el
 	rm -f $(EMACS_DEST)/init.el
 	rm -f $(EMACS_DEST)/custom.init.el
 

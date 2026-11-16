@@ -21,7 +21,7 @@ dotfiles/
 │   └── antibody/                 # Zsh plugin manager setup
 │
 ├── configs/                      # All configuration files
-│   ├── emacs/                    # Emacs (init.el, custom.init.el)
+│   ├── emacs/                    # Emacs (early-init.el, init.el, custom.init.el)
 │   ├── nvim/                     # NeoVim (Lua-based config)
 │   ├── vim/                      # Vim (vimrc)
 │   ├── vscode/                   # VS Code settings, keybindings, extensions
