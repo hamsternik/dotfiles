@@ -236,8 +236,10 @@
   (setq mac-allow-anti-aliasing t)
   ;; (set-face-attribute 'default nil :font "Fira Code-14")
   (set-face-attribute 'default nil :font "Roboto Mono")
-  (set-fontset-font t 'latin "Fira Code" nil 'append)
-  (set-fontset-font t 'latin "Iosevka" nil 'append))
+  ;; Fontsets only exist with a window system; skip in `emacs --batch'.
+  (when (fboundp 'set-fontset-font)
+    (set-fontset-font t 'latin "Fira Code" nil 'append)
+    (set-fontset-font t 'latin "Iosevka" nil 'append)))
  (t ;; on Windows/WSL/Linux: use Fira Code, and fallback to monospace 
   (if (find-font (font-spec :name "Fira Code"))
       (set-face-attribute 'default nil :font "Fira Code-14")
@@ -384,6 +386,10 @@ Operate on selected region or whole buffer."
 (use-package modus-themes
   :ensure nil
   :demand t
+  :init
+  ;; Built-in modus-themes.el lives in etc/themes, outside `load-path',
+  ;; so plain `require' fails unless the GNU ELPA package is installed.
+  (require-theme 'modus-themes t)
   :config
   (setq mode-line-compact nil)
   (setq modus-themes-common-palette-overrides

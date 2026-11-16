@@ -1,3 +1,4 @@
+;;; custom.init.el --- Custom-managed settings -*- lexical-binding: t -*-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -5,19 +6,21 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(gruber-darker))
  '(custom-safe-themes
-   '("e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7"
+   '("01a9797244146bbae39b18ef37e6f2ca5bebded90d9fe3a2f342a9e863aaa4fd"
+     "e13beeb34b932f309fb2c360a04a460821ca99fe58f69e65557d6c1b10ba18c7"
      default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(auctex cape cmake-mode consult corfu denote diff-hl eglot
-            eglot-inactive-regions exec-path-from-shell expand-region
-            flycheck git-auto-commit-mode gruber-darker-theme js2-mode
-            json-mode kotlin-mode latex-mode latex-unicode-math-mode
-            magit marginalia markdown-mode modus-themes multi-vterm
-            orderless org-transclusion pdf-tools prism
-            rainbow-delimiters swift-mode telephone-line
-            typescript-mode use-package vertico vterm web-mode
-            xterm-color))
+   '(auctex cape cmake-mode consult corfu denote diff-hl editorconfig
+            eglot eglot-inactive-regions exec-path-from-shell
+            expand-region faceup flycheck git-auto-commit-mode
+            gruber-darker-theme js2-mode json-mode kotlin-mode
+            latex-mode latex-unicode-math-mode lua-mode magit
+            marginalia markdown-mode markdown-ts-mode modus-themes
+            multi-vterm orderless org-transclusion pdf-tools prism
+            rainbow-delimiters swift-mode telephone-line timeout
+            transient typescript-mode use-package vertico vterm
+            web-mode xterm-color))
  '(package-vc-selected-packages
    '((ghostel :url "https://github.com/dakra/ghostel" :lisp-dir "lisp")))
  '(safe-local-variable-directories '("/Users/hamsternik/Developer/@hamsternik/nnotes/"))
