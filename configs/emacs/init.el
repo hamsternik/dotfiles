@@ -234,12 +234,16 @@
  ;; macOS: use preferred fonts: Fira Code, Iosevka, Roboto Mono
  ((eq system-type 'darwin)
   (setq mac-allow-anti-aliasing t)
-  ;; (set-face-attribute 'default nil :font "Fira Code-14")
-  (set-face-attribute 'default nil :font "Roboto Mono")
-  ;; Fontsets only exist with a window system; skip in `emacs --batch'.
-  (when (fboundp 'set-fontset-font)
-    (set-fontset-font t 'latin "Fira Code" nil 'append)
-    (set-fontset-font t 'latin "Iosevka" nil 'append)))
+  ;; Use only installed fonts: the first one becomes the default face,
+  ;; the rest are Latin fallbacks. Missing fonts are skipped, not errors.
+  (let ((fonts (seq-filter (lambda (name) (find-font (font-spec :name name)))
+                           '("Roboto Mono" "Fira Code" "Iosevka"))))
+      (when fonts
+          (set-face-attribute 'default nil :font (car fonts))
+          ;; Fontsets only exist with a window system; skip in `emacs --batch'.
+          (when (fboundp 'set-fontset-font)
+              (dolist (name (cdr fonts))
+                  (set-fontset-font t 'latin name nil 'append))))))
  (t ;; on Windows/WSL/Linux: use Fira Code, and fallback to monospace 
   (if (find-font (font-spec :name "Fira Code"))
       (set-face-attribute 'default nil :font "Fira Code-14")
