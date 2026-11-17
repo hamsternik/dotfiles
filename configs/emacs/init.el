@@ -166,6 +166,15 @@
   ;; Word wrapping settings.
   (setq-default word-wrap t) ;; wrap at word boundaries.
   (setq-default truncate-lines nil) ;; do not truncate long lines (only visually).
+
+  ;; `load-theme' evaluates theme files in a temp buffer, and Emacs 31 warns
+  ;; when one lacks a `lexical-binding' cookie (gruber-darker-theme does).
+  ;; Suppress only the buffer variant; files loaded by name still warn.
+  ;; TODO: drop this once https://github.com/rexim/gruber-darker-theme/pull/28
+  ;; (adds the cookie) is merged and the theme is upgraded.
+  (with-eval-after-load 'warnings
+    (add-to-list 'warning-suppress-log-types
+                 '(files missing-lexbind-cookie eval-buffer)))
   
   ;; Set custom filepath to keep all nongnu/melpa plugins.
   ;; macOS/Darwin: ~/.config/emacs/custom.init.el
