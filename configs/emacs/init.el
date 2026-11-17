@@ -245,12 +245,12 @@
   ;; the rest are Latin fallbacks. Missing fonts are skipped, not errors.
   (let ((fonts (seq-filter (lambda (name) (find-font (font-spec :name name)))
                            '("Roboto Mono" "Fira Code" "Iosevka"))))
-      (when fonts
-          (set-face-attribute 'default nil :font (car fonts))
-          ;; Fontsets only exist with a window system; skip in `emacs --batch'.
-          (when (fboundp 'set-fontset-font)
-              (dolist (name (cdr fonts))
-                  (set-fontset-font t 'latin name nil 'append))))))
+    (when fonts
+      (set-face-attribute 'default nil :font (car fonts))
+      ;; Fontsets only exist with a window system; skip in `emacs --batch'.
+      (when (fboundp 'set-fontset-font)
+        (dolist (name (cdr fonts))
+          (set-fontset-font t 'latin name nil 'append))))))
  (t ;; on Windows/WSL/Linux: use Fira Code, and fallback to monospace 
   (if (find-font (font-spec :name "Fira Code"))
       (set-face-attribute 'default nil :font "Fira Code-14")
@@ -465,7 +465,7 @@ Operate on selected region or whole buffer."
    '((project-find-file "Find file" ?f)
      (project-find-regexp "Find regexp" ?g)
      (project-find-dir "Find directory" ?d)
-;;     (project-eshell "Eshell" ?s)
+     ;;     (project-eshell "Eshell" ?s)
      ;; FIXME: does not work in opened project as =C-x p y= for unknown reason.
      (ghostel-project "Ghostel" ?y))))
 
@@ -895,7 +895,7 @@ Operate on selected region or whole buffer."
   (Tex-parse-self t)
   (TeX-PDF-mode t) ; PDF mode by default
   :hook
-;;  (LaTeX-mode . auto-fill-mode)
+  ;;  (LaTeX-mode . auto-fill-mode)
   (LaTeX-mode . flyspell-mode)
   (LaTeX-mode . LaTeX-math-mode)  ; easy math input
   (LaTeX-mode . turn-on-reftex)  ; RefTeX integration
