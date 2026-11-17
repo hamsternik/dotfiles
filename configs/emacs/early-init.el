@@ -17,3 +17,8 @@
             (setq native-comp-driver-options
                   (list "-Wl,-w"
                         (concat "-mmacosx-version-min=" macos-major))))))
+
+;; Don't pop up *Warnings* for packages' own compiler warnings (e.g. optional
+;; integrations they call but don't depend on). They are still logged in
+;; the *Async-native-compile-log* buffer.
+(setq native-comp-async-report-warnings-errors 'silent)
