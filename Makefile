@@ -19,38 +19,6 @@
 help:
 	@cat Makefile
 
-install-brew:
-	brew bundle install --file=Brewfile
-
-# https://github.com/emacs-mirror/emacs
-# EMACS CONFIGURATION
-
-EMACS_SOURCE := $(CURDIR)/configs/emacs
-EMACS_DEST := $(HOME)/.config/emacs
-# Emacs only reads $(EMACS_DEST) when none of these exist; an empty ~/.emacs.d is enough to shadow it.
-EMACS_LEGACY_PATHS := $(HOME)/.emacs $(HOME)/.emacs.el $(HOME)/.emacs.d
-install-emacs-conf: uninstall-emacs-conf
-	@echo "\nInstalling Emacs configuration 🚀"
-	mkdir -p $(EMACS_DEST)
-	ln -s -f $(EMACS_SOURCE)/early-init.el $(EMACS_DEST)/early-init.el
-	ln -s -f $(EMACS_SOURCE)/init.el $(EMACS_DEST)/init.el
-	ln -s -f $(EMACS_SOURCE)/custom.init.el $(EMACS_DEST)/custom.init.el
-
-uninstall-emacs-conf:
-	@for f in $(EMACS_LEGACY_PATHS); do \
-		if [ -e "$$f" ] || [ -L "$$f" ]; then \
-			echo "Removing $$f (it shadows $(EMACS_DEST))"; \
-			rm -rf "$$f"; \
-		fi; \
-	done
-	rm -f $(EMACS_DEST)/early-init.el
-	rm -f $(EMACS_DEST)/init.el
-	rm -f $(EMACS_DEST)/custom.init.el
-
-## Batch mode - test if config loads without errors.
-emacs-lint:
-	emacs --batch -l configs/emacs/init.el
-
 ## mas 
 ### 📦 Mac App Store command line interface
 mas-list-apps:
@@ -101,6 +69,37 @@ uninstall-all:
 	$(MAKE) uninstall-zed-conf
 	$(MAKE) uninstall-zellij-conf
 	$(MAKE) uninstall-zsh-conf
+
+# https://brew.sh/ -- to install run in terminal:
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+install-brew:
+	brew bundle install --file=Brewfile
+
+# https://github.com/emacs-mirror/emacs
+# EMACS CONFIGURATION
+
+EMACS_SOURCE := $(CURDIR)/configs/emacs
+EMACS_DEST := $(HOME)/.config/emacs
+# Emacs only reads $(EMACS_DEST) when none of these exist; an empty ~/.emacs.d is enough to shadow it.
+EMACS_LEGACY_PATHS := $(HOME)/.emacs $(HOME)/.emacs.el $(HOME)/.emacs.d
+install-emacs-conf: uninstall-emacs-conf
+	@echo "\nInstalling Emacs configuration 🚀"
+	mkdir -p $(EMACS_DEST)
+	ln -s -f $(EMACS_SOURCE)/early-init.el $(EMACS_DEST)/early-init.el
+	ln -s -f $(EMACS_SOURCE)/init.el $(EMACS_DEST)/init.el
+	ln -s -f $(EMACS_SOURCE)/custom.init.el $(EMACS_DEST)/custom.init.el
+
+uninstall-emacs-conf:
+	@for f in $(EMACS_LEGACY_PATHS); do \
+		if [ -e "$$f" ] || [ -L "$$f" ]; then \
+			echo "Removing $$f (it shadows $(EMACS_DEST))"; \
+			rm -rf "$$f"; \
+		fi; \
+	done
+	rm -f $(EMACS_DEST)/early-init.el
+	rm -f $(EMACS_DEST)/init.el
+	rm -f $(EMACS_DEST)/custom.init.el
 
 # https://github.com/johnste/finicky
 # A macOS app for customizing which browser to start
@@ -363,6 +362,10 @@ uninstall-zsh-conf:
 colorcheck:
 	pastel colorcheck
 .PHONY: colorcheck
+
+## Batch mode - test if config loads without errors.
+emacs-lint:
+	emacs --batch -l configs/emacs/init.el
 
 vscode-install-extensions:
 	./bin/vscode/vscode-extensions-install

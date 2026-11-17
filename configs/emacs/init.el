@@ -158,7 +158,12 @@
 
   :config
   ;;(auto-save-default nil) ;; disable automatic saving on buffers.
-  (desktop-save-mode 1) ;; restore the last emacs session, including *scratch* buffer latest changes.
+  ;; Restore the last session (open files, window layout) on startup.
+  ;; *scratch* contents are not saved, see the note in :custom above.
+  (desktop-save-mode 1)
+  ;; Always save the session on quit, without the "Save desktop?" prompt
+  ;; (the default `ask-if-new' asks until a desktop file exists).
+  (setq desktop-save t)
   (delete-selection-mode 1)
   ;; enables `auto-revert-mode` globally, makes emacs automatically reload files if they are modified outside of emacs
   (global-auto-revert-mode 1)
