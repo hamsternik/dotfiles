@@ -44,7 +44,7 @@ stty -ixon
 
 setopt autocd
 setopt prompt_subst
-setopt correctall
+setopt correct  # commands only; correctall also "corrected" arguments (claude -> .claude)
 setopt prompt_subst
 setopt sharehistory
 setopt histignorealldups
